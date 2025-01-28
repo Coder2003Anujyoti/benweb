@@ -28,7 +28,7 @@ const Players = () => {
 }
 {load==false && <>
   <div className="flex justify-center items-center py-4">
-  <h1 className="text-slate-400 text-2xl font-bold">Batsmans</h1>
+  <h1 className="text-slate-400 text-2xl font-bold">Batsmen</h1>
   </div>
   <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-2 border-b-slate-400 p-2 border-t-transparent border-l-transparent border-r-transparent">
     {items.map((i)=>{

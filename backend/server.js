@@ -48,6 +48,19 @@ app.get('/players',
         res.status(500).send("Internal Server Error");
     }
     });
+    app.get('/stats',
+    async(req, res) => {
+            try {
+  const teamname=req.query.team;
+        const datas = await GFGCollection.find({team:teamname});
+        console.log(datas)
+       return res.json(datas);
+   }
+   catch (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+    }
+    });
   app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
     });

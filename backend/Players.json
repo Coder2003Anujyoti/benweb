@@ -159,90 +159,90 @@
     "wickets":0
   },
   {
-    "name":"Pathirana",
-    "image":"Csk/Pathirana.webp",
-    "role":"Bowler",
-    "team":"Csk",
-    "captain":false,
-    "runs":0,
-    "wickets":0
-  },{
-    "name":"Conway",
-    "image":"Csk/Conway.webp",
-    "role":"Batsman",
-    "team":"Csk",
-    "captain":false,
-    "runs":0,
-    "wickets":0
-  },{
-    "name":"Rizvi",
-    "image":"Csk/Rizvi.webp",
-    "role":"Batsman",
-    "team":"Csk",
-    "captain":false,
-    "runs":0,
-    "wickets":0
-  },{
-    "name":"Moeen",
-    "image":"Csk/Moeen.webp",
+    "name":"M.Marsh",
+    "image":"Dc/M.Marsh.webp",
     "role":"All-rounder",
-    "team":"Csk",
+    "team":"Dc",
     "captain":false,
     "runs":0,
     "wickets":0
   },{
-    "name":"Theekshana",
-    "image":"Csk/Theekshana.webp",
+    "name":"Nortje",
+    "image":"Dc/Nortje.webp",
     "role":"Bowler",
-    "team":"Csk",
+    "team":"Dc",
     "captain":false,
     "runs":0,
     "wickets":0
   },{
-    "name":"D.Chahar",
-    "image":"Csk/D.Chahar.webp",
+    "name":"Kuldeep",
+    "image":"Dc/Kuldeep.webp",
     "role":"Bowler",
-    "team":"Csk",
+    "team":"Dc",
     "captain":false,
     "runs":0,
     "wickets":0
   },{
-    "name":"Deshpande",
-    "image":"Csk/Deshpande.webp",
+    "name":"Khaleel",
+    "image":"Dc/Khaleel.webp",
     "role":"Bowler",
-    "team":"Csk",
+    "team":"Dc",
     "captain":false,
     "runs":0,
     "wickets":0
   },{
-    "name":"D.Mitchell",
-    "image":"Csk/D.Mitchell.webp",
+    "name":"Mukesh",
+    "image":"Dc/Mukesh.webp",
+    "role":"Bowler",
+    "team":"Dc",
+    "captain":false,
+    "runs":0,
+    "wickets":0
+  },{
+    "name":"A.Porel",
+    "image":"Dc/A.Porel.webp",
     "role":"Batsman",
-    "team":"Csk",
+    "team":"Dc",
     "captain":false,
     "runs":0,
     "wickets":0
   },{
-    "name":"Santner",
-    "image":"Csk/Santner.webp",
+    "name":"Prithvi",
+    "image":"Dc/Prithvi.webp",
+    "role":"Batsman",
+    "team":"Dc",
+    "captain":false,
+    "runs":0,
+    "wickets":0
+  },{
+    "name":"Lalit",
+    "image":"Dc/Lalit.webp",
     "role":"All-rounder",
-    "team":"Csk",
+    "team":"Dc",
     "captain":false,
     "runs":0,
     "wickets":0
   },{
-    "name":"Shardul",
-    "image":"Csk/Shardul.webp",
+    "name":"Ostwal",
+    "image":"Dc/Ostwal.webp",
+    "role":"All-rounder",
+    "team":"Dc",
+    "captain":false,
+    "runs":0,
+    "wickets":0
+  },{
+    "name":"Ishant",
+    "image":"Dc/Ishant.webp",
     "role":"Bowler",
-    "team":"Csk",
+    "team":"Dc",
     "captain":false,
     "runs":0,
     "wickets":0
   },{
-     "name":"Rachin",
-    "image":"Csk/Rachin.webp",
-    "role":"Batsman",
-    "team":"Csk",
+     "name":"J.Freaser",
+    "image":"Dc/J.Freaser.webp",
+    "role":"All-rounder",
+    "team":"Dc",
     "captain":false,
     "runs":0,
     "wickets":0

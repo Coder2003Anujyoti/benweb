@@ -35,10 +35,19 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}))
+app.get('/',async(req,res)=>{
+  try{
+    const data=await GFGCollection.find();
+    return res.json(data);
+  }
+  catch (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+    }
+})
 app.post('/players',async(req,res)=>{
    try{
      const data=req.body.data;
-     console.log(data)
    const val= data.map(async(i)=>{
       await GFGCollection.updateMany({name:i.name},
       [{

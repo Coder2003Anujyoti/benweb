@@ -35,6 +35,27 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}))
+app.post('/players',async(req,res)=>{
+   try{
+     const data=req.body.data;
+     console.log(data)
+   const val= data.map(async(i)=>{
+      await GFGCollection.updateMany({name:i.name},
+      [{
+        $set:{
+          runs:{ $sum:["$runs",i.runs] },
+          wickets:{ $sum:["$wickets",i.wickets]}
+          }}])
+        
+    });
+     
+        return res.json({status:"Ok"})
+   }
+  catch (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+    }
+})
 app.get('/players',
     async(req, res) => {
             try {

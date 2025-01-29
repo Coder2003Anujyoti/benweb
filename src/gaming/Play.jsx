@@ -24,9 +24,10 @@ const Play = () => {
   const get_Opposition_Players=async()=>{
     const res=await fetch(`http://localhost:8000/players?team=${oppositionteam}`)
     const data=await res.json();
-    setOppositionplayers(data.slice(0,11));
+    setOppositionplayers(data.slice(0,10));
   }
   const add_Players=(i)=>{
+  
     setPlayers([...players,i]);
     setId([...id,i.name]);
   }
@@ -39,6 +40,7 @@ const Play = () => {
   },[oppositionteam])
   const get_Toss=()=>{
     let options=Math.floor(Math.random()*2);
+  
     if(options==0){
       let computer_options=Math.floor(Math.random()*2);
       if(computer_options===0){
@@ -78,9 +80,9 @@ const Play = () => {
 </div>
   </>
 }
-{load==false && id.length<11 && <>
+{load==false && id.length<10 && <>
   <div className="w-full py-8 flex justify-center">
-    <h1 className="text-green-400 text-2xl font-bold shadow-green-400">Choose Your Playing XI</h1>
+    <h1 className="text-green-400 text-2xl font-bold shadow-green-400">Choose Your Playing X</h1>
   </div>
   <div className="flex justify-center flex-row flex-wrap gap-4">
     {items.map((i)=>{
@@ -100,7 +102,7 @@ const Play = () => {
   </>
   
 }
-{ id.length==11 && playerfirst===false && computerfirst===false && <>
+{ id.length==10 && playerfirst===false && computerfirst===false && <>
   
   {
     toss==='' && <>

@@ -39,11 +39,13 @@ const Stats = () => {
       {i.role!=="Bowler" ? <img className="w-6 h-6" src={`Icons/${i.role}.png`} />:<img className="w-5 h-5" src={`Icons/${i.role}.png`} />}
     </div>
   <img className="w-36 h-36"src={i.image} />
-   {i.captain===false &&  <p className=" my-2 text-sm font-bold text-slate-400">{i.name}</p>}
+    <div className="my-2 w-full flex justify-center flex-col">
+   {i.captain===false &&  <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
-      <p className=" my-2 text-sm font-bold text-slate-400">{i.name} (C)</p>
+      <p className=" text-sm font-bold text-slate-400">{i.name} (C)</p>
     }
         <p className="text-sm font-bold text-slate-400">Runs-: {i.runs}</p>
+        </div>
         </div>
       </>)
     })}
@@ -60,11 +62,12 @@ const Stats = () => {
       {i.role!=="Bowler" ? <img className="w-6 h-6" src={`Icons/${i.role}.png`} />:<img className="w-5 h-5" src={`Icons/${i.role}.png`} />}
     </div>
   <img className="w-36 h-36"src={i.image} />
-   {i.captain===false &&  <p className=" my-2 text-sm font-bold text-slate-400">{i.name}</p>}
+  <div className="my-2 w-full flex justify-center flex-col">
+   {i.captain===false && 
+   <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
-      <p className=" my-2 text-sm font-bold text-slate-400">{i.name} (C)</p>
-    }
-    <p className="text-sm font-bold text-slate-400">Wickets-: {i.wickets}</p>
+      <p className="text-sm font-bold text-slate-400">{i.name} (C)</p>}
+<p className="text-sm font-bold text-slate-400">Wickets-: {i.wickets}</p></div>
         </div>
       </>)
     })}
@@ -76,4 +79,3 @@ const Stats = () => {
 
 
 export default Stats;
-

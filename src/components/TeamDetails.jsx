@@ -9,10 +9,12 @@ const TeamDetails = () => {
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
 </div>
 <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row">
+    <Link to={`/play?team=${teamId}`} >
     <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/cricket.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Play</h4>
     </div>
+  </Link>
   <Link to={`/players?team=${teamId}`} >
     <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/player.png" className="w-24 h-24"></img>

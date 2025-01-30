@@ -47,6 +47,75 @@ const PlayerFirst = ({players,oppositionplayers}) => {
   const check=(i)=>{
   let value=Math.floor(Math.random()*6)+1;
    if(turn=="Player"){
+     if(overs%6==5 && number==19){
+       if(i!=value){
+         const updated=playerstats.map((item)=>{
+    if(item.name==image.name){
+    item.runs+=(playerrun+i)
+    }
+    return {...item}
+  });
+  const a=yourteam.map((item)=>{
+    if(item.name==image.name){
+    item.runs+=(playerrun+i)
+    }
+    return {...item}})
+    setPlayerstats(updated);
+     setYourteam(a);
+    setTurn("Computer");
+    setShow(true);
+    setIndex(0);
+    setPlayerrun(0);
+    setTarget(runs+i+1);
+    setRuns(0);
+    setWickets(0);
+    setOvers(0);
+    setNumber(0)
+    setImage([])
+    setId([]);
+       }
+    if(i===value){
+      const updated=playerstats.map((i)=>{
+    if(i.name==image.name){
+    i.runs+=playerrun
+    }
+    return {...i}
+  });
+  const up=oppositionstats.map((i,ind)=>{
+    if(ind==index){
+      i.wickets+=1;
+    }
+    return {...i}
+  })
+  const b=opposteam.map((i,ind)=>{
+    if(ind==index){
+      i.wickets+=1;
+    }
+    return {...i}
+  })
+  const a=yourteam.map((i)=>{
+    if(i.name==image.name){
+    i.runs+=playerrun
+    }
+    return {...i}})
+    setPlayerstats(updated);
+     setOppositionstats(up);
+     setYourteam(a);
+     setOpposteam(b);
+    setTurn("Computer");
+    setShow(true);
+    setIndex(0);
+    setPlayerrun(0);
+    setTarget(runs+1);
+    setRuns(0);
+    setWickets(0);
+    setOvers(0);
+    setNumber(0)
+    setImage([])
+    setId([]);
+    }
+     }
+  else{
    if(i!=value){
      if(overs%6!=5){
      setPlayerrun(playerrun+i)
@@ -183,7 +252,132 @@ const PlayerFirst = ({players,oppositionplayers}) => {
    }
    }
    }
+   }
    if(turn=="Computer"){
+     if(number==19 && overs%6==5){
+       if(runs+value>=target && value!=i){
+         const up=oppositionstats.map((i,ind)=>{
+    if(ind==index){
+      i.runs+=(playerrun+value);
+    }
+    return {...i}
+  })
+  const b=opposteam.map((i,ind)=>{
+    if(ind==index){
+      i.runs+=(playerrun+value);
+    }
+    return {...i}
+  })
+  setOpposteam(b);
+  setOppositionstats(up)
+  setPlayerrun(playerrun+value)
+  setRuns(runs+value);
+       setWinner(oppositionplayers[0].team)
+       }
+    if(runs+value===target-1 && i!=value){
+      const up=oppositionstats.map((i,ind)=>{
+    if(ind==index){
+      i.runs+=(playerrun+value);
+    }
+    return {...i}
+  })
+  const b=opposteam.map((i,ind)=>{
+    if(ind==index){
+      i.runs+=(playerrun+value);
+    }
+    return {...i}
+  })
+  setOpposteam(b);
+  setOppositionstats(up)
+  setPlayerrun(playerrun+value)
+  setRuns(runs+value);
+       setWinner("Draw");
+    }
+  if(runs+value<target-1 && i!=value){
+    const up=oppositionstats.map((i,ind)=>{
+    if(ind==index){
+      i.runs+=(playerrun+value);
+    }
+    return {...i}
+  })
+  const b=opposteam.map((i,ind)=>{
+    if(ind==index){
+      i.runs+=(playerrun+value);
+    }
+    return {...i}
+  })
+  setOpposteam(b);
+  setOppositionstats(up)
+  setPlayerrun(playerrun+value)
+  setRuns(runs+value);
+ setWinner(players[0].team)
+  }
+  if(i==value){
+        if(runs===target-1){
+      const updated=playerstats.map((i)=>{
+    if(i.name==image.name){
+    i.wickets+=1
+    }
+    return {...i}
+  });
+  const up=oppositionstats.map((i,ind)=>{
+    if(ind==index){
+      i.runs+=playerrun;
+    }
+    return {...i}
+  })
+  const b=opposteam.map((i,ind)=>{
+    if(ind==index){
+      i.runs+=playerrun;
+    }
+    return {...i}
+  })
+  const a=yourteam.map((i)=>{
+    if(i.name==image.name){
+    i.wickets+=1;
+    }
+    return {...i}})
+  setYourteam(a);
+     setOpposteam(b);
+  setPlayerstats(updated);
+     setOppositionstats(up)
+     setWinner("Draw")
+     setWickets(wickets+1)
+    }
+    else{
+    const updated=playerstats.map((i)=>{
+    if(i.name==image.name){
+    i.wickets+=1
+    }
+    return {...i}
+  });
+  const up=oppositionstats.map((i,ind)=>{
+    if(ind==index){
+      i.runs+=playerrun;
+    }
+    return {...i}
+  })
+  const b=opposteam.map((i,ind)=>{
+    if(ind==index){
+      i.runs+=playerrun;
+    }
+    return {...i}
+  })
+  const a=yourteam.map((i)=>{
+    if(i.name==image.name){
+    i.wickets+=1;
+    }
+    return {...i}})
+  setYourteam(a);
+     setOpposteam(b);
+  setPlayerstats(updated);
+     setOppositionstats(up)
+     setWinner(players[0].team)
+     setWickets(wickets+1)
+    }
+  }
+     }
+    else{
      if(runs+value>=target && value!=i){
        const up=oppositionstats.map((i,ind)=>{
     if(ind==index){
@@ -366,7 +560,7 @@ const PlayerFirst = ({players,oppositionplayers}) => {
      }
    }
   }
-   
+  }
   
   return (
 <>

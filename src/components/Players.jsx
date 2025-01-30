@@ -37,7 +37,7 @@ const Players = () => {
         <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
     <div className="flex w-full justify-end"><img className="w-6 h-6" src={`Icons/${i.role}.png`} />
     </div>
-  <img className="w-36 h-36"src={i.image} />
+    <div className="flex justify-center items-center"> <img className="w-36 h-36"src={i.image} /></div>
    {i.captain===false &&  <p className=" my-2 text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
       <p className=" my-2 text-sm font-bold text-slate-400">{i.name} (C)</p>
@@ -56,7 +56,7 @@ const Players = () => {
         <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
     <div className="flex w-full justify-end"><img className="w-6 h-6" src={`Icons/${i.role}.png`} />
     </div>
-  <img className="w-36 h-36"src={i.image} />
+     <div className="flex justify-center items-center"> <img className="w-36 h-36"src={i.image} /></div>
    {i.captain===false &&  <p className=" my-2 text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
       <p className=" my-2 text-sm font-bold text-slate-400">{i.name} (C)</p>
@@ -75,7 +75,7 @@ const Players = () => {
         <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
     <div className="flex w-full justify-end"><img className="w-5 h-5" src={`Icons/${i.role}.png`} />
     </div>
-  <img className="w-36 h-36"src={i.image} />
+     <div className="flex justify-center items-center"> <img className="w-36 h-36"src={i.image} /></div>
    {i.captain===false &&  <p className=" my-2 text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
       <p className=" my-2 text-sm font-bold text-slate-400">{i.name} (C)</p>

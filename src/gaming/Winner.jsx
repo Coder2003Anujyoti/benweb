@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from "react";
-
+import {Link} from 'react-router-dom'
 
 const Winner = ({winner,yourteam,opposteam}) => {
   const [load,setLoad]=useState(true);
   const array=yourteam.concat(opposteam);
   const send_data=async()=>{
-    const response=await fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/players", {
+    const response=await fetch("http://localhost:8000/players", {
     method: "POST",
     body: JSON.stringify({data:array}),
     headers: {
@@ -47,6 +47,11 @@ const Winner = ({winner,yourteam,opposteam}) => {
     </div>
     </>
   }
+    <div className="w-full py-4 flex justify-center">
+  <Link to={`/summary?player=${encodeURIComponent(JSON.stringify(yourteam))}&computer=${encodeURIComponent(JSON.stringify(opposteam))}`} >
+      <button className="p-4 rounded-lg text-lg text-slate-400 font-bold bg-slate-800">Match Summary</button>
+    </Link>
+      </div>
   <div className="w-full py-4 flex justify-center">
     <h1 className="text-xl font-extrabold text-slate-400">Top Batters</h1>
   </div>

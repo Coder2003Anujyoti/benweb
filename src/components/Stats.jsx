@@ -38,7 +38,7 @@ const Stats = () => {
     <div className="flex w-full justify-end">
       {i.role!=="Bowler" ? <img className="w-6 h-6" src={`Icons/${i.role}.png`} />:<img className="w-5 h-5" src={`Icons/${i.role}.png`} />}
     </div>
-  <img className="w-36 h-36"src={i.image} />
+      <div className="flex justify-center items-center"><img className="w-36 h-36"src={i.image} /></div>
     <div className="my-2 w-full flex justify-center flex-col">
    {i.captain===false &&  <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
@@ -61,7 +61,7 @@ const Stats = () => {
     <div className="flex w-full justify-end">
       {i.role!=="Bowler" ? <img className="w-6 h-6" src={`Icons/${i.role}.png`} />:<img className="w-5 h-5" src={`Icons/${i.role}.png`} />}
     </div>
-  <img className="w-36 h-36"src={i.image} />
+     <div className="flex justify-center items-center"> <img className="w-36 h-36"src={i.image} /></div>
   <div className="my-2 w-full flex justify-center flex-col">
    {i.captain===false && 
    <p className="text-sm font-bold text-slate-400">{i.name}</p>}

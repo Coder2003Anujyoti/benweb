@@ -576,7 +576,7 @@ const ComputerFirst = ({players,oppositionplayers}) => {
       return(
       <>
         <div className="text-center rounded-md bg-black  transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105" onClick={()=>add_Player(i)}>
-        <img className="w-16 h-16" src={i.image} />
+       <div className="flex justify-center items-center">  <img className="w-16 h-16" src={i.image} /></div>
         <p className="text-xs font-bold text-slate-400">{i.name}</p>
         </div>
       </>

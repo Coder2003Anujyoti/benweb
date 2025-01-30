@@ -21,7 +21,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
   return total;
 },0)
   const send_data=async()=>{
-    const response=await fetch("http://localhost:8000/players", {
+    const response=await fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/players", {
     method: "POST",
     body: JSON.stringify({data:array}),
     headers: {

@@ -38,8 +38,6 @@ const PlayerFirst = ({players,oppositionplayers}) => {
   const add_Player=(i)=>{
     setImage(i);
     setId([...id,i.name])
-    setPlayeroption(0);
-    setComputeroption(0)
     setPlayerstats(players);
     setOppositionstats(oppositionplayers)
     setShow(false);

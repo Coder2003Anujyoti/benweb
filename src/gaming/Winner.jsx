@@ -20,28 +20,35 @@ const computerwickets=playerdata.reduce((total,i)=>{
   total+=(i.wickets);
   return total;
 },0)
-  const send_data=async(datas)=>{
-    const response=await fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/players", {
+  const send_data=async(datas,gatas)=>{
+    const [res,ress]=await Promise.all([fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/players", {
     method: "POST",
     body: JSON.stringify(datas),
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
-})
- const value=await response.json();
- if(value.status==="Ok"){
+}),fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/records", {
+    method: "POST",
+    body: JSON.stringify(gatas),
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+})]) ;
+ const value=await res.json();
+ const values=await ress.json();
+ if(value.status==="Ok" && values.status==="Ok"){
  setLoad(false);
  }
   }
   useEffect(()=>{
   if(winner===yourteam[0].team){
-   send_data({data:array,winner:yourteam,loser:opposteam,draw:false})
+   send_data({data:array},{winner:yourteam,loser:opposteam,draw:false})
   }
  else if(winner===opposteam[0].team){
-   send_data({data:array,winner:opposteam,loser:yourteam,draw:false})
+   send_data({data:array},{winner:opposteam,loser:yourteam,draw:false})
   }
   else{
-    send_data({data:array,winner:yourteam,loser:opposteam,draw:true})
+    send_data({data:array},{winner:yourteam,loser:opposteam,draw:true})
   }
   
   },[])

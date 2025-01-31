@@ -79,9 +79,6 @@ app.get('/details',async(req,res)=>{
 app.post('/players',async(req,res)=>{
    try{
      const data=req.body.data;
-     const winner=req.body.winner;
-     const loser=req.body.loser;
-     const draw=req.body.draw;
    const val= data.map(async(i)=>{
       await GFGCollection.updateMany({name:i.name},
       [{
@@ -91,14 +88,27 @@ app.post('/players',async(req,res)=>{
           }}])
         
     });
-  if(draw==false){
-   const q=  await Collection.updateOne({teamid:winner[0].team},
+     
+        return res.json({status:"Ok"})
+   }
+  catch (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+    }
+})
+app.post('/records',async(req,res)=>{
+   try{
+     const winner=req.body.winner;
+     const loser=req.body.loser;
+     const draw=req.body.draw;
+     if(draw==false){
+   const q=  await Collection.updateMany({teamid:winner[0].team},
       [{
         $set:{
           matches:{ $sum:["$matches",1] },
           win:{ $sum:["$win",1]}
           }}])
-      const r=  await Collection.updateOne({teamid:loser[0].team},
+      const r=  await Collection.updateMany({teamid:loser[0].team},
       [{
         $set:{
           matches:{ $sum:["$matches",1] },
@@ -106,12 +116,12 @@ app.post('/players',async(req,res)=>{
           }}])  
   }
   if(draw==true){
-  const m=  await Collection.updateOne({teamid:winner[0].team},
+  const m=  await Collection.updateMany({teamid:winner[0].team},
       [{
         $set:{
           matches:{ $sum:["$matches",1] }
           }}])
-        const v= await Collection.updateOne({teamid:loser[0].team},
+        const v= await Collection.updateMany({teamid:loser[0].team},
       [{
         $set:{
           matches:{ $sum:["$matches",1] }

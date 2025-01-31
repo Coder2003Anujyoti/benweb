@@ -105,17 +105,17 @@ app.post('/players',async(req,res)=>{
           lose:{ $sum:["$lose",1]}
           }}])  
   }
-  else{
+  if(draw==true){
   const m=  await Collection.updateOne({teamid:winner[0].team},
-      {
+      [{
         $set:{
           matches:{ $sum:["$matches",1] }
-          }})
+          }}])
         const v= await Collection.updateOne({teamid:loser[0].team},
-      {
+      [{
         $set:{
           matches:{ $sum:["$matches",1] }
-          }})  
+          }}])  
   }
      
         return res.json({status:"Ok"})

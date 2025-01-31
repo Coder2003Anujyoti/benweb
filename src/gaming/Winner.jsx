@@ -36,17 +36,19 @@ const computerwickets=playerdata.reduce((total,i)=>{
 })]) ;
  const value=await res.json();
  const values=await ress.json();
- setLoad(false);
   }
   useEffect(()=>{
   if(winner===yourteam[0].team){
    send_data({data:array},{winner:yourteam,loser:opposteam,draw:false})
+   setLoad(false)
   }
  else if(winner===opposteam[0].team){
    send_data({data:array},{winner:opposteam,loser:yourteam,draw:false})
+   setLoad(false)
   }
   else{
     send_data({data:array},{winner:yourteam,loser:opposteam,draw:true})
+    setLoad(false)
   }
   
   },[])

@@ -41,7 +41,7 @@ const History = () => {
    <div className="border-2 border-b-slate-400 w-full border-l-transparent border-r-transparent border-t-transparent py-2 flex-col items-center flex-wrap flex gap-2  justify-center"><p className="text-sm text-slate-400 font-bold">Matches-: {items[0].matches}</p>
    <p className="text-sm text-slate-400 font-bold">Win-: {items[0].win}</p>
       <p className="text-sm text-slate-400 font-bold">Lose-: {items[0].lose}</p>
-    {items[0].win>0 &&   <p className="text-sm text-slate-400 font-bold">Win-Ratio-: {(items[0].win/items[0].matches).toFixed(2)*100}%</p>}
+    {items[0].win>0 &&   <p className="text-sm text-slate-400 font-bold">Win-Ratio-: {Math.round((items[0].win/items[0].matches).toFixed(2)*100)}%</p>}
     {items[0].win==0 &&   <p className="text-sm text-slate-400 font-bold">Win-Ratio-: 0%</p>}
    </div>
   <div className="w-full py-2 flex-col flex justify-center border-2 border-b-slate-400

@@ -43,7 +43,7 @@ const Standings = () => {
 
       <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.teamid}.webp`} className="w-12 h-12" /></div>
   <div className="flex w-16 justify-center items-center"> <p className="text-sm font-bold text-slate-400">{i.teamid.toUpperCase()}</p></div>
-   {i.win>0 && <div className="flex w-20 justify-center items-center"> <p className="text-sm font-bold text-slate-400">{(i.win/i.matches).toFixed(2)*100}%</p></div>}
+   {i.win>0 && <div className="flex w-20 justify-center items-center"> <p className="text-sm font-bold text-slate-400">{Math.round((i.win/i.matches).toFixed(2)*100)}%</p></div>}
       {i.win==0 && <div className="flex w-16 justify-center items-center"> <p className="text-sm font-bold text-slate-400">0%</p></div>}
       </div>
       </>)

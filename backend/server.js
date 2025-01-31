@@ -64,6 +64,16 @@ app.get('/',async(req,res)=>{
         res.status(500).send("Internal Server Error");
     }
 })
+app.get('/standings',async(req,res)=>{
+  try{
+    const details=await Collection.find();
+    return res.json(details);
+  }
+  catch (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+    }
+})
 app.get('/details',async(req,res)=>{
   try {
   const teamname=req.query.team;

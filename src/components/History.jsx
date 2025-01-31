@@ -31,25 +31,26 @@ const History = () => {
   <div className="w-full flex flex-col">
     <div className="w-full py-8 flex-col flex justify-center items-center text-center"><img src={`Logos/${teamId}.webp`} 
     className="w-36 h-36"/>
-  <div className="w-full  flex-row flex justify-center"><p className="text-xl text-slate-400 font-bold">{items[0].team}</p></div>
+  <div className="w-full  flex-row flex justify-center"><p className="text-lg text-slate-400 font-bold">{items[0].team}</p></div>
   {items[0].trophies>0 && <div className="w-full  flex-row flex justify-center gap-2 p-2">{new Array(items[0].trophies).fill(1).map((i)=>{
       return(<>
-        <img src="Icons/trophy.png" className="w-8 h-8" />
+        <img src="Icons/trophy.png" className="w-6 h-6" />
       </>)
     })}
     </div>}
-   <div className="w-full py-2 flex-col items-center flex-wrap flex gap-2  justify-center"><p className="text-xl text-slate-400 font-bold">Matches-: {items[0].matches}</p>
-   <p className="text-xl text-slate-400 font-bold">Win-: {items[0].win}</p>
-      <p className="text-xl text-slate-400 font-bold">Lose-: {items[0].lose}</p>
-    {items[0].win>0 &&   <p className="text-xl text-slate-400 font-bold">Win-Ratio-: {(items[0].win/items[0].matches).toFixed(2)*100}%</p>}
-    {items[0].win==0 &&   <p className="text-xl text-slate-400 font-bold">Win-Ratio-: 0%</p>}
+   <div className="border-2 border-b-slate-400 w-full border-l-transparent border-r-transparent border-t-transparent py-2 flex-col items-center flex-wrap flex gap-2  justify-center"><p className="text-sm text-slate-400 font-bold">Matches-: {items[0].matches}</p>
+   <p className="text-sm text-slate-400 font-bold">Win-: {items[0].win}</p>
+      <p className="text-sm text-slate-400 font-bold">Lose-: {items[0].lose}</p>
+    {items[0].win>0 &&   <p className="text-sm text-slate-400 font-bold">Win-Ratio-: {parseInt(items[0].win/items[0].matches)*100}%</p>}
+    {items[0].win==0 &&   <p className="text-sm text-slate-400 font-bold">Win-Ratio-: 0%</p>}
    </div>
-  <div className="w-full py-2 flex-col flex justify-center items-center text-center">
-    <h3 className="text-2xl text-slate-400 font-bold">About</h3>
-    <div className="w-full py-2 flex-row items-center flex-wrap flex text-center  justify-center"> <p className="text-sm text-slate-400 font-bold">{items[0].about}</p></div>
+  <div className="w-full py-2 flex-col flex justify-center border-2 border-b-slate-400
+  border-l-transparent border-r-transparent border-t-transparent items-center text-center">
+    <h3 className="text-lg text-slate-400 font-bold">About</h3>
+    <div className="w-full py-2 flex-row items-center flex-wrap flex text-center  justify-center"> <p className="text-xs text-slate-400 font-bold">{items[0].about}</p></div>
   </div>
     <div className="w-full py-2 flex-col flex justify-center items-center text-center">
-    <div className="w-full py-2 flex-col items-center flex-wrap flex  justify-center"> <a href={items[0].site} target="_blank"><button className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-md">Official Site</button></a></div>
+    <div className="w-full py-4 flex-col items-center flex-wrap flex  justify-center"> <a href={items[0].site} target="_blank"><button className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Official Site</button></a></div>
   </div>
   
         </div>

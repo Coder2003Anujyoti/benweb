@@ -28,7 +28,7 @@ const Players = () => {
 }
 {load==false && <>
   <div className="flex justify-center items-center py-4">
-  <h1 className="text-slate-400 text-2xl font-bold">Batsmen</h1>
+  <h1 className="text-slate-400 text-2xl font-bold">Batters</h1>
   </div>
   <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-2 border-b-slate-400 p-2 border-t-transparent border-l-transparent border-r-transparent">
     {items.map((i)=>{
@@ -38,10 +38,14 @@ const Players = () => {
     <div className="flex w-full justify-end"><img className="w-6 h-6" src={`Icons/${i.role}.png`} />
     </div>
     <div className="flex justify-center items-center"> <img className="w-36 h-36"src={i.image} /></div>
-   {i.captain===false &&  <p className=" my-2 text-sm font-bold text-slate-400">{i.name}</p>}
+   <div className="flex flex-col text-center my-2">
+   {i.captain===false &&  <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
-      <p className=" my-2 text-sm font-bold text-slate-400">{i.name} (C)</p>
+      <p className="text-sm font-bold text-slate-400">{i.name} (C)</p>
     }
+   <p className="text-sm font-bold text-slate-400">Runs-: {i.runs}</p>
+  <p className="text-sm font-bold text-slate-400">Wickets-: {i.wickets}</p>
+  </div>
         </div>
       </>)
     })}
@@ -57,10 +61,14 @@ const Players = () => {
     <div className="flex w-full justify-end"><img className="w-6 h-6" src={`Icons/${i.role}.png`} />
     </div>
      <div className="flex justify-center items-center"> <img className="w-36 h-36"src={i.image} /></div>
-   {i.captain===false &&  <p className=" my-2 text-sm font-bold text-slate-400">{i.name}</p>}
+   <div className="flex flex-col text-center my-2">
+   {i.captain===false &&  <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
-      <p className=" my-2 text-sm font-bold text-slate-400">{i.name} (C)</p>
+      <p className="text-sm font-bold text-slate-400">{i.name} (C)</p>
     }
+    <p className="text-sm font-bold text-slate-400">Runs-: {i.runs}</p>
+       <p className="text-sm font-bold text-slate-400">Wickets-: {i.wickets}</p>
+        </div>
         </div>
       </>)
     })}
@@ -76,10 +84,14 @@ const Players = () => {
     <div className="flex w-full justify-end"><img className="w-5 h-5" src={`Icons/${i.role}.png`} />
     </div>
      <div className="flex justify-center items-center"> <img className="w-36 h-36"src={i.image} /></div>
-   {i.captain===false &&  <p className=" my-2 text-sm font-bold text-slate-400">{i.name}</p>}
+   <div className="flex flex-col text-center my-2">
+   {i.captain===false &&  <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
-      <p className=" my-2 text-sm font-bold text-slate-400">{i.name} (C)</p>
+      <p className="text-sm font-bold text-slate-400">{i.name} (C)</p>
     }
+       <p className="text-sm font-bold text-slate-400">Runs-: {i.runs}</p>
+       <p className="text-sm font-bold text-slate-400">Wickets-: {i.wickets}</p>
+        </div>
         </div>
       </>)
     })}

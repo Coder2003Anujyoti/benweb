@@ -81,6 +81,7 @@ app.post('/players',async(req,res)=>{
      const data=req.body.data;
      const winner=req.body.winner;
      const loser=req.body.loser;
+     const draw=req.body.draw;
    const val= data.map(async(i)=>{
       await GFGCollection.updateMany({name:i.name},
       [{
@@ -90,7 +91,7 @@ app.post('/players',async(req,res)=>{
           }}])
         
     });
-  if(winner!='Draw'){
+  if(draw==false){
    const q=  await Collection.updateOne({teamid:winner[0].team},
       [{
         $set:{

@@ -35,13 +35,13 @@ const computerwickets=playerdata.reduce((total,i)=>{
   }
   useEffect(()=>{
   if(winner===yourteam[0].team){
-   send_data({data:array,winner:yourteam,loser:opposteam})
+   send_data({data:array,winner:yourteam,loser:opposteam,draw:false})
   }
  else if(winner===opposteam[0].team){
-   send_data({data:array,winner:opposteam,loser:yourteam})
+   send_data({data:array,winner:opposteam,loser:yourteam,draw:false})
   }
   else{
-    send_data({data:array,winner:"Draw",loser:"Draw"})
+    send_data({data:array,winner:yourteam,loser:opposteam,draw:true})
   }
   
   },[])

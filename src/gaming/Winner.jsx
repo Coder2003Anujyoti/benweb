@@ -108,9 +108,9 @@ const computerwickets=playerdata.reduce((total,i)=>{
          return(<>
            <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
     <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-sm font-bold">{i.name}</p>
-  <p className="text-slate-400 text-sm font-bold">Runs-:{i.runs}</p>
-  <p className="text-slate-400 text-sm font-bold">Wickets-:{i.wickets}</p>
+    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
+  <p className="text-slate-400 text-xs font-bold">Runs-:{i.runs}</p>
+  <p className="text-slate-400 text-xs font-bold">Wickets-:{i.wickets}</p>
            </div>
          </>)
        })
@@ -126,9 +126,9 @@ const computerwickets=playerdata.reduce((total,i)=>{
          return(<>
            <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
     <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-sm font-bold">{i.name}</p>
-  <p className="text-slate-400 text-sm font-bold">Runs-:{i.runs}</p>
-  <p className="text-slate-400 text-sm font-bold">Wickets-:{i.wickets}</p>
+    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
+  <p className="text-slate-400 text-xs font-bold">Runs-:{i.runs}</p>
+  <p className="text-slate-400 text-xs font-bold">Wickets-:{i.wickets}</p>
            </div>
          </>)
        })
@@ -145,8 +145,8 @@ const computerwickets=playerdata.reduce((total,i)=>{
         return(<>
  <div className="w-full flex flex-row flex-wrap justify-evenly border-2 p-4 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent">
    <img src={i.image} className="w-20 h-20"/>
-  <div className="flex justify-center items-center"><h2 className="text-lg font-extrabold text-slate-400 ">{i.name}</h2></div>
-    <div className="flex justify-center items-center"> <h2 className="text-lg font-extrabold text-slate-400 ">Runs-:{i.runs}</h2></div>
+  <div className="flex justify-center items-center"><h2 className="text-sm font-extrabold text-slate-400 ">{i.name}</h2></div>
+    <div className="flex justify-center items-center"> <h2 className="text-sm font-extrabold text-slate-400 ">Runs-:{i.runs}</h2></div>
    </div>
         </>)
       })
@@ -162,8 +162,8 @@ const computerwickets=playerdata.reduce((total,i)=>{
         return(<>
  <div className="w-full flex flex-row flex-wrap justify-evenly border-2 p-4 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent">
    <img src={i.image} className="w-20 h-20"/>
-  <div className="flex justify-center items-center"><h2 className="text-lg font-extrabold text-slate-400 ">{i.name}</h2></div>
-    <div className="flex justify-center items-center"> <h2 className="text-lg font-extrabold text-slate-400 ">Wickets-:{i.wickets}</h2></div>
+  <div className="flex justify-center items-center"><h2 className="text-sm font-extrabold text-slate-400 ">{i.name}</h2></div>
+    <div className="flex justify-center items-center"> <h2 className="text-sm font-extrabold text-slate-400 ">Wickets-:{i.wickets}</h2></div>
    </div>
         </>)
       })

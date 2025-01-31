@@ -37,7 +37,7 @@ const Standings = () => {
    </div>
    </div>
   <div className="w-full flex flex-row flex-wrap justify-center gap-y-8">
-    {items.sort((a,b)=>b.wins-a.wins).map((i,ind)=>{
+    {items.sort((a,b)=>b.win-a.win).map((i,ind)=>{
       return(<>
     <div className="w-full  flex flex-row flex-wrap justify-center p-2 gap-x-16 border-b-2 border-b-slate-400">
 

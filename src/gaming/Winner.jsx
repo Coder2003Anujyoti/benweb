@@ -36,9 +36,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
 })]) ;
  const value=await res.json();
  const values=await ress.json();
- if(value.status==="Ok" && values.status==="Ok"){
  setLoad(false);
- }
   }
   useEffect(()=>{
   if(winner===yourteam[0].team){

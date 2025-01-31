@@ -20,10 +20,10 @@ const computerwickets=playerdata.reduce((total,i)=>{
   total+=(i.wickets);
   return total;
 },0)
-  const send_data=async()=>{
+  const send_data=async(datas)=>{
     const response=await fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/players", {
     method: "POST",
-    body: JSON.stringify({data:array}),
+    body: JSON.stringify(datas),
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
@@ -34,7 +34,16 @@ const computerwickets=playerdata.reduce((total,i)=>{
  }
   }
   useEffect(()=>{
-   send_data()
+  if(winner===yourteam[0].team){
+   send_data({data:array,winner:yourteam,loser:opposteam})
+  }
+ else if(winner===opposteam[0].team){
+   send_data({data:array,winner:opposteam,loser:yourteam})
+  }
+  else{
+    send_data({data:array,winner:"Draw",loser:"Draw"})
+  }
+  
   },[])
   return (
     <>

@@ -1,5 +1,6 @@
 const express = require('express');
 const data= require('./Players.json');
+const history=require('./Details.json');
 const app = express();
 const port = process.env.PORT || 8000;
 const cors=require('cors');
@@ -16,6 +17,10 @@ mongoose.connect(URL,connectionParams)
         .deleteMany();
     await GFGCollection
         .insertMany(data);
+   await Collection
+        .deleteMany();
+    await Collection
+        .insertMany(history);  
     console.log("Data added to MongoDB");
 }
 const gfgSchema = new mongoose
@@ -30,6 +35,19 @@ const gfgSchema = new mongoose
     });
     const GFGCollection = mongoose
     .model("Players", gfgSchema);
+const detailSchema = new mongoose
+    .Schema({
+       teamid: {type:String,required:true},
+       team: { type: String, required: true },
+       matches: { type:Number, required: true },
+       win:{ type:Number, required: true },
+       lose:{ type:Number, required: true },
+       trophies:{ type:Number, required: true },
+       site: { type:String, required:true },
+       about:{ type:String, required: true },
+    });
+    const Collection = mongoose
+    .model("Teams", detailSchema);
 app.use(cors({
   origin:"*"
 }));
@@ -38,9 +56,22 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.get('/',async(req,res)=>{
   try{
     const data=await GFGCollection.find();
-    return res.json(data);
+    const details=await Collection.find();
+    return res.json({data,details});
   }
   catch (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+    }
+})
+app.get('/details',async(req,res)=>{
+  try {
+  const teamname=req.query.team;
+        const datas = await Collection.find({teamid:teamname});
+        
+       return res.json(datas);
+   }
+   catch (err) {
         console.log(err);
         res.status(500).send("Internal Server Error");
     }
@@ -48,6 +79,8 @@ app.get('/',async(req,res)=>{
 app.post('/players',async(req,res)=>{
    try{
      const data=req.body.data;
+     const winner=req.body.winner;
+     const loser=req.body.loser;
    const val= data.map(async(i)=>{
       await GFGCollection.updateMany({name:i.name},
       [{
@@ -57,6 +90,32 @@ app.post('/players',async(req,res)=>{
           }}])
         
     });
+  if(winner!='Draw'){
+   const q=  await Collection.updateOne({teamid:winner[0].team},
+      [{
+        $set:{
+          matches:{ $sum:["$matches",1] },
+          win:{ $sum:["$win",1]}
+          }}])
+      const r=  await Collection.updateOne({teamid:loser[0].team},
+      [{
+        $set:{
+          matches:{ $sum:["$matches",1] },
+          lose:{ $sum:["$lose",1]}
+          }}])  
+  }
+  else{
+  const m=  await Collection.updateOne({teamid:winner[0].team},
+      {
+        $set:{
+          matches:{ $sum:["$matches",1] }
+          }})
+        const v= await Collection.updateOne({teamid:loser[0].team},
+      {
+        $set:{
+          matches:{ $sum:["$matches",1] }
+          }})  
+  }
      
         return res.json({status:"Ok"})
    }
@@ -70,7 +129,6 @@ app.get('/players',
             try {
   const teamname=req.query.team;
         const datas = await GFGCollection.find({team:teamname});
-        console.log(datas)
        return res.json(datas);
    }
    catch (err) {
@@ -83,7 +141,6 @@ app.get('/players',
             try {
   const teamname=req.query.team;
         const datas = await GFGCollection.find({team:teamname});
-        console.log(datas)
        return res.json(datas);
    }
    catch (err) {

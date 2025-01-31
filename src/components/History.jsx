@@ -6,7 +6,7 @@ const History = () => {
   const [load,setLoad]=useState(true);
   const teamId = searchParams.get("team"); 
   const get_Details=async()=>{
-    const res=await fetch(`http://localhost:8000/details?team=${teamId}`)
+    const res=await fetch(`https://prepared-josy-handcricket-0e7a326f.koyeb.app/details?team=${teamId}`)
     var data=await res.json();
     setItems(data);
     setLoad(false);

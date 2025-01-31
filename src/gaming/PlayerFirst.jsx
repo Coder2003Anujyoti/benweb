@@ -65,6 +65,8 @@ const PlayerFirst = ({players,oppositionplayers}) => {
     setIndex(0);
     setPlayerrun(0);
     setTarget(runs+i+1);
+    setPlayeroption(0)
+    setComputeroption(0)
     setRuns(0);
     setWickets(0);
     setOvers(0);
@@ -105,6 +107,8 @@ const PlayerFirst = ({players,oppositionplayers}) => {
     setIndex(0);
     setPlayerrun(0);
     setTarget(runs+1);
+    setPlayeroption(0)
+    setComputeroption(0)
     setRuns(0);
     setWickets(0);
     setOvers(0);
@@ -165,6 +169,8 @@ const PlayerFirst = ({players,oppositionplayers}) => {
     setIndex(0);
     setPlayerrun(0);
     setTarget(runs+1);
+    setPlayeroption(0)
+  setComputeroption(0)
     setRuns(0);
     setWickets(0);
     setOvers(0);

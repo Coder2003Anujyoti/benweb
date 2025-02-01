@@ -1,6 +1,7 @@
 const express = require('express');
 const data= require('./Players.json');
 const history=require('./Details.json');
+const result=require('./Results.json')
 const app = express();
 const port = process.env.PORT || 8000;
 const cors=require('cors');
@@ -13,14 +14,12 @@ mongoose.connect(URL,connectionParams)
     addDataToMongodb();
     }).catch((err)=>{console.log(err)})
     async function addDataToMongodb() {
-    await GFGCollection
-        .deleteMany();
-    await GFGCollection
-        .insertMany(data);
-   await Collection
-        .deleteMany();
-    await Collection
-        .insertMany(history);  
+    await GFGCollection.deleteMany();
+    await GFGCollection.insertMany(data);
+   await Collection.deleteMany();
+    await Collection.insertMany(history);
+   await ResultCollection.deleteMany();
+    await ResultCollection.insertMany(result);  
     console.log("Data added to MongoDB");
 }
 const gfgSchema = new mongoose
@@ -48,6 +47,14 @@ const detailSchema = new mongoose
     });
     const Collection = mongoose
     .model("Teams", detailSchema);
+    const resultSchema = new mongoose
+    .Schema({
+       teamid: {type:String,required:true},
+       team: { type: String, required: true },
+       results: { type: Array, required: true}
+    });
+    const ResultCollection = mongoose
+    .model("Results",resultSchema);
 app.use(cors({
   origin:"*"
 }));
@@ -74,12 +81,60 @@ app.get('/standings',async(req,res)=>{
         res.status(500).send("Internal Server Error");
     }
 })
+
 app.get('/details',async(req,res)=>{
   try {
   const teamname=req.query.team;
         const datas = await Collection.find({teamid:teamname});
         
        return res.json(datas);
+   }
+   catch (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+    }
+})
+app.post('/results',async(req,res)=>{
+  try{
+    const teamId=req.body.team;
+    const yourstatus=req.body.yourstatus;
+    const oppstatus=req.body.oppstatus;
+    const opposteam=req.body.opposteam;
+    const info={name:opposteam,status:yourstatus}
+    const infos={name:teamId,status:oppstatus};
+      await ResultCollection.updateOne({teamid:teamId},
+      {
+        $push:{
+          results:info
+          }})
+  await ResultCollection.updateOne({teamid:opposteam},
+      {
+        $push:{
+          results:infos
+          }})
+  }
+  catch(err){
+    console.log(err);
+     res.status(500).send("Internal Server Error");
+  }
+})
+app.get('/results',async(req,res)=>{
+  try {
+  const teamname=req.query.team;
+ const limit = parseInt(req.query.limit)||result.length;
+  const offset = parseInt(req.query.offset)||0;  
+if(isNaN(limit) && limit<=0){
+  return res.status(400).json({error:"Limit must be a positive number."})
+}
+if(isNaN(offset) && offset<0){
+  return res.status(400).json({error:"Offset must be a non-negative number."})
+}
+        const datas = await ResultCollection.find({teamid:teamname});;
+      
+       return res.json({
+         data:datas[0].results.slice(offset,limit+offset),
+         length:datas[0].results.length
+         });
    }
    catch (err) {
         console.log(err);

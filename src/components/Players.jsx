@@ -22,13 +22,13 @@ const Players = () => {
 {
   load==true && <>
       <div className="flex justify-center items-center py-60">
-  <h1 className="text-slate-400 text-2xl font-bold">Loading...</h1>
+  <h1 className="text-slate-400 text-xl font-bold">Loading...</h1>
 </div>
   </>
 }
 {load==false && <>
   <div className="flex justify-center items-center py-4">
-  <h1 className="text-slate-400 text-2xl font-bold">Batters</h1>
+  <h1 className="text-slate-400 text-xl font-bold">Batters</h1>
   </div>
   <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-2 border-b-slate-400 p-2 border-t-transparent border-l-transparent border-r-transparent">
     {items.map((i)=>{
@@ -51,7 +51,7 @@ const Players = () => {
     })}
   </div>
     <div className="flex justify-center items-center py-4">
-  <h1 className="text-slate-400 text-2xl font-bold">All-Rounders</h1>
+  <h1 className="text-slate-400 text-xl font-bold">All-Rounders</h1>
   </div>
   <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-2 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex p-2 ">
     {items.map((i)=>{
@@ -74,7 +74,7 @@ const Players = () => {
     })}
   </div>
     <div className="flex justify-center items-center py-4">
-  <h1 className="text-slate-400 text-2xl font-bold">Bowlers</h1>
+  <h1 className="text-slate-400 text-xl font-bold">Bowlers</h1>
   </div>
   <div className="flex justify-center items-center flex-row flex-wrap gap-12">
     {items.map((i)=>{

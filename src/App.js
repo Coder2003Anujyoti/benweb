@@ -5,6 +5,7 @@ import TeamDetails from "./components/TeamDetails";
 import Players from "./components/Players.jsx";
 import Stats from "./components/Stats.jsx";
 import Play from "./gaming/Play.jsx";
+import Results from "./components/Results";
 import History from "./components/History";
 import Standings from "./components/Standings"
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
   <Route path="/play" element={<Play  />} /> 
 <Route path="/history" element={<History />}/>
   <Route path="/standings" element={<Standings />}/>
+   <Route path="/results" element={<Results />}/>
       </Routes>
     </Router>
   );

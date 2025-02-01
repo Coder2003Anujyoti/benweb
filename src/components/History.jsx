@@ -22,7 +22,7 @@ const History = () => {
 {
   load==true && <>
       <div className="flex justify-center items-center py-60">
-  <h1 className="text-slate-400 text-2xl font-bold">Loading...</h1>
+  <h1 className="text-slate-400 text-xl font-bold">Loading...</h1>
 </div>
   </>
 }

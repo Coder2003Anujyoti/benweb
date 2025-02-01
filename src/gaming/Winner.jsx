@@ -21,7 +21,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
   return total;
 },0)
   const send_data=async(datas,gatas)=>{
-    const [res,ress]=await Promise.all([fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/players", {
+    const [res,ress,gess]=await Promise.all([fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/players", {
     method: "POST",
     body: JSON.stringify(datas),
     headers: {
@@ -33,21 +33,28 @@ const computerwickets=playerdata.reduce((total,i)=>{
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
+}),fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/results", {
+    method: "POST",
+    body: JSON.stringify(rat),
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
 })]) ;
  const value=await res.json();
  const values=await ress.json();
+ const vals = await gess.json();
   }
   useEffect(()=>{
   if(winner===yourteam[0].team){
-   send_data({data:array},{winner:yourteam,loser:opposteam,draw:false})
+   send_data({data:array},{winner:yourteam,loser:opposteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Winner",oppstatus:"Loser"})
    setLoad(false)
   }
  else if(winner===opposteam[0].team){
-   send_data({data:array},{winner:opposteam,loser:yourteam,draw:false})
+   send_data({data:array},{winner:opposteam,loser:yourteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Loser",oppstatus:"Winner"})
    setLoad(false)
   }
   else{
-    send_data({data:array},{winner:yourteam,loser:opposteam,draw:true})
+    send_data({data:array},{winner:yourteam,loser:opposteam,draw:true},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Draw",oppstatus:"Draw"})
     setLoad(false)
   }
   
@@ -57,7 +64,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
    {
   load==true && <>
       <div className="flex justify-center items-center py-60">
-  <h1 className="text-slate-400 text-2xl font-bold">Loading...</h1>
+  <h1 className="text-slate-400 text-xl font-bold">Loading...</h1>
 </div>
   </>
 }
@@ -75,7 +82,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
   {
     winner==="Draw" && <>
         <div className="w-full py-20 flex justify-center">
-     <h1 className="text-2xl font-extrabold text-yellow-400">Draw</h1> 
+     <h1 className="text-xl font-extrabold text-yellow-400">Draw</h1> 
     </div>
     </>
   }

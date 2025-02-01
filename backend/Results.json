@@ -1,0 +1,35 @@
+[
+  {"teamid":"Csk",
+  "team":"Chennai Supper Kings",
+  "results":[]
+  }, {"teamid":"Dc",
+  "team":"Delhi Capitals",
+ "results":[]
+  }, {"teamid":"Kkr",
+  "team":"Kolkata Knight Riders",
+  "results":[]
+  }, {"teamid":"Mi",
+  "team":"Mumbai Indians",
+  "results":[]
+  }, {"teamid":"Rcb",
+  "team":"Royal Challengers Bangalore",
+  "results":[]
+  }, {"teamid":"Pbks",
+  "team":"Punjab Kings",
+  "results":[]
+  }, {"teamid":"Srh",
+  "team":"Sunrisers Hyderabad",
+   "results":[]
+  }, {"teamid":"Rr",
+  "team":"Rajasthan Royals",
+  "results":[]
+  },
+   {"teamid":"Lsg",
+  "team":"Lucknow Super Giants",
+  "results":[]
+  }, {"teamid":"Gt",
+  "team":"Gujarat Titans",
+  "results":[]
+  }
+  
+  ]

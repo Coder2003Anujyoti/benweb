@@ -22,13 +22,13 @@ const Stats = () => {
 {
   load==true && <>
       <div className="flex justify-center items-center py-60">
-  <h1 className="text-slate-400 text-2xl font-bold">Loading...</h1>
+  <h1 className="text-slate-400 text-xl font-bold">Loading...</h1>
 </div>
   </>
 }
 {load==false && <>
   <div className="flex justify-center items-center py-4">
-  <h1 className="text-slate-400 text-2xl font-bold">Top Batters</h1>
+  <h1 className="text-slate-400 text-xl font-bold">Top Batters</h1>
   </div>
   <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-2 border-b-slate-400 p-2 border-t-transparent border-l-transparent border-r-transparent">
     {items.sort((a,b)=>b.runs-a.runs).map((i,ind)=>{
@@ -51,7 +51,7 @@ const Stats = () => {
     })}
   </div>
     <div className="flex justify-center items-center py-4">
-  <h1 className="text-slate-400 text-2xl font-bold">Top Bowlers</h1>
+  <h1 className="text-slate-400 text-xl font-bold">Top Bowlers</h1>
   </div>
   <div className="flex justify-center items-center flex-row flex-wrap gap-12  flex p-2 ">
     {items.sort((a,b)=>b.wickets-a.wickets).map((i,ind)=>{

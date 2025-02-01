@@ -39,6 +39,12 @@ const TeamDetails = () => {
     <h4 className="text-lg text-slate-400 font-bold">Standings</h4>
     </div>
     </Link>
+      <Link to={`/results?team=${teamId}`} >
+        <div className="text-center p-4 rounded-lg  bg-slate-800">
+    <img src="Icons/results.png" className="w-24 h-24"></img>
+    <h4 className="text-lg text-slate-400 font-bold">Results</h4>
+    </div>
+    </Link>
 </div>
 </>
   );

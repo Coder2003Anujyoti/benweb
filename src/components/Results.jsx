@@ -52,7 +52,7 @@ const Results = () => {
         {item.map((i)=>{return(<>
   <div className="w-full flex flex-row justify-center gap-16 py-2 border-b-2 border-b-slate-400">
     <img src={`Logos/${teamId}.webp`} className="w-16 h-16"/>
-    <div className="flex justify-center items-center"><h1 className="text-base text-yellow-600 font-bold">{i.status}</h1></div>
+    <div className="flex justify-center items-center"><h1 className="text-base text-yellow-400 font-bold">{i.status}</h1></div>
    <img src={`Logos/${i.name}.webp`} className="w-16 h-16" />
          </div>
         </>)})}

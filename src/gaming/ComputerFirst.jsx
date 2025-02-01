@@ -596,14 +596,14 @@ const ComputerFirst = ({players,oppositionplayers}) => {
     <h1 className="text-slate-400 text-2xl font-bold shadow-slate-400">{oppositionplayers[0].team.toUpperCase()}</h1>
     </div>
     <div className="w-full flex flex-row justify-center gap-12">
-      <div className="text-center rounded-md bg-black  transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+      <div className="text-center rounded-md bg-black  transition duration-300 ease-in-out transform hover:bg-black hover:scale-105">
         <img src={image.image} className="w-36 h-36" />
         <p className="my-2 text-xs font-bold text-slate-400">{image.name}</p>
                 <div className="p-4 rounded-b-sm bg-black">
         <p className="text-slate-400 text-2xl font-bold shadow-slate-400">{playeroption}</p> 
         </div>
       </div>
-            <div className="text-center rounded-md bg-black  transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+            <div className="text-center rounded-md bg-black  transition duration-300 ease-in-out transform hover:bg-black hover:scale-105">
         <img src={oppositionstats[index].image} className="w-36 h-36" />
         <p className="my-2 text-xs font-bold text-slate-400">{oppositionstats[index].name}</p>
         <div className="p-4 rounded-b-sm bg-black">

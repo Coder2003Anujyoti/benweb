@@ -20,7 +20,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
   total+=(i.wickets);
   return total;
 },0)
-  const send_data=async(datas,gatas)=>{
+  const send_data=async(datas,gatas,rat)=>{
     const [res,ress,gess]=await Promise.all([fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/players", {
     method: "POST",
     body: JSON.stringify(datas),

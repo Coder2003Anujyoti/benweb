@@ -132,7 +132,7 @@ if(isNaN(offset) && offset<0){
         const datas = await ResultCollection.find({teamid:teamname});;
       
        return res.json({
-         data:datas[0].results.slice(offset,limit+offset),
+         data:datas[0].results.reverse().slice(offset,limit+offset),
          length:datas[0].results.length
          });
    }

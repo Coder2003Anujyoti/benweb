@@ -11,7 +11,7 @@ const TeamDetails = () => {
 <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row">
     <Link to={`/play?team=${teamId}`} >
     <div className="text-center p-4 rounded-lg  bg-slate-800">
-    <img src="Icons/cricket.png" className="w-24 h-24"></img>
+    <img src="Icons/crickets.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Play</h4>
     </div>
   </Link>
@@ -23,7 +23,7 @@ const TeamDetails = () => {
     </Link>
       <Link to={`/stats?team=${teamId}`} >
         <div className="text-center p-4 rounded-lg  bg-slate-800">
-    <img src="Icons/analytics.png" className="w-24 h-24"></img>
+    <img src="Icons/analysis.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Stats</h4>
     </div>
     </Link>

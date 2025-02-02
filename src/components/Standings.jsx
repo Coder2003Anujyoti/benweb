@@ -40,8 +40,9 @@ const Standings = () => {
     {items.sort((a,b)=>b.win-a.win).map((i,ind)=>{
       return(<>
     <div className="w-full  flex flex-row flex-wrap justify-center p-2 gap-x-16 border-b-2 border-b-slate-400">
-
+    <Link to={`/history?team=${i.teamid}`}>
       <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.teamid}.webp`} className="w-12 h-12" /></div>
+      </Link>
   <div className="flex w-16 justify-center items-center"> <p className="text-sm font-bold text-slate-400">{i.teamid.toUpperCase()}</p></div>
    {i.win>0 && <div className="flex w-20 justify-center items-center"> <p className="text-sm font-bold text-slate-400">{Math.round((i.win/i.matches).toFixed(2)*100)}%</p></div>}
       {i.win==0 && <div className="flex w-16 justify-center items-center"> <p className="text-sm font-bold text-slate-400">0%</p></div>}

@@ -40,7 +40,6 @@ const Play = () => {
   },[oppositionteam])
   const get_Toss=()=>{
     let options=Math.floor(Math.random()*2);
-  
     if(options==0){
       let computer_options=Math.floor(Math.random()*2);
       if(computer_options===0){

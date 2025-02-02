@@ -62,7 +62,7 @@ const Results = () => {
         <div className="w-full flex justify-center">
         <button className="p-4 font-bold text-sm text-slate-400 bg-slate-800 rounded-lg" onClick={go}>More Items</button>
       </div>}
-     {loads==true && <div className="flex items-center justify-center text-center text-slate-400 text-base font-bold"><p>Items are loading...</p></div> }
+     {loads==true && ind===items.length-1 && <div className="flex items-center justify-center text-center text-slate-400 text-base font-bold"><p>Items are loading...</p></div> }
       </>)
     })}
   </div>

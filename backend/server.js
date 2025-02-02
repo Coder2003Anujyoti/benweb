@@ -19,7 +19,7 @@ mongoose.connect(URL,connectionParams)
    await Collection.deleteMany();
     await Collection.insertMany(history);
    await ResultCollection.deleteMany();
-    await ResultCollection.insertMany(result);  
+    await ResultCollection.insertMany(result);
     console.log("Data added to MongoDB");
 }
 const gfgSchema = new mongoose
@@ -55,6 +55,7 @@ const detailSchema = new mongoose
     });
     const ResultCollection = mongoose
     .model("Results",resultSchema);
+    
 app.use(cors({
   origin:"*"
 }));

@@ -580,7 +580,7 @@ const PlayerFirst = ({players,oppositionplayers}) => {
     if((!id.includes(i.name) && turn==="Player") || (turn==="Computer" && image.name!=i.name))
       return(
       <>
-        <div className="text-center rounded-md bg-black  transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105" onClick={()=>add_Player(i)}>
+        <div className="text-center rounded-md bg-black  transition duration-300 ease-in-out transform hover:bg-black hover:scale-105" onClick={()=>add_Player(i)}>
       <div className="flex justify-center items-center">  <img className="w-16 h-16" src={i.image} /></div>
         <p className="text-xs font-bold text-slate-400">{i.name}</p>
         </div>

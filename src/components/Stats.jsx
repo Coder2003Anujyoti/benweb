@@ -34,7 +34,7 @@ const Stats = () => {
     {items.sort((a,b)=>b.runs-a.runs).map((i,ind)=>{
     if(ind<=4)
       return(<>
-        <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+        <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black hover:scale-105">
     <div className="flex w-full justify-end">
       {i.role!=="Bowler" ? <img className="w-6 h-6" src={`Icons/${i.role}.png`} />:<img className="w-5 h-5" src={`Icons/${i.role}.png`} />}
     </div>
@@ -57,7 +57,7 @@ const Stats = () => {
     {items.sort((a,b)=>b.wickets-a.wickets).map((i,ind)=>{
     if(ind<=4)
       return(<>
-        <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+        <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black  hover:scale-105">
     <div className="flex w-full justify-end">
       {i.role!=="Bowler" ? <img className="w-6 h-6" src={`Icons/${i.role}.png`} />:<img className="w-5 h-5" src={`Icons/${i.role}.png`} />}
     </div>

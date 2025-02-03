@@ -75,10 +75,7 @@ const Stats = () => {
     })}
   </div>
       <footer className="bg-black mt-2 text-white">
-      <div className="w-full flex justify-around text-center flex-row flex-wrap">
-        <p className="mt-2 ml-2 mr-2 text-gray-400">Explore team rosters, player stats, and dive deep into the rich history of IPL.Thank you for being part of the IPL family—let the game begin!</p>
-      </div>
-      <div className="w-full flex justify-center  text-center flex-col mt-4">
+      <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>
         <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-12">
     <HashLink smooth to='/#about'> <li className="text-gray-400">
@@ -87,7 +84,7 @@ const Stats = () => {
      <HashLink smooth to='/#gallery'><li className="text-gray-400">Gallery</li></HashLink>
         </ul>
      </div>
-      <div className="w-full flex justify-center  text-center flex-col mt-4">
+      <div className="w-full flex justify-center  text-center flex-col  mt-4">
         <h2 className="text-xl font-semibold">Teams</h2>
         <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-6 gap-y-4">
         {teams.map((i)=>{
@@ -97,6 +94,18 @@ const Stats = () => {
         })}
         </ul>
       </div>
+              <div className="w-full flex justify-center gap-y-2  text-center flex-col p-4 mt-4">
+    <h2 className="text-xl font-semibold">Sponsors</h2>
+    <div className="mt-4 flex flex-row flex-wrap justify-center gap-x-6 gap-y-4 ">
+  {new Array(4).fill("").map((i,ind)=>{
+  return(
+  <div className="text-center">
+    <img src={`sponsor/sponsor${ind+1}.png`} className="w-22 h-12"></img>
+    </div>
+    )
+  })}
+</div>
+    </div>
     <div class="border-t border-gray-700 mt-4 p-2 text-center text-gray-400">
       © 2025 Coder2003Anujyoti All rights reserved.
     </div>

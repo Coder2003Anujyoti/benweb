@@ -1,10 +1,34 @@
-import React,{useEffect} from "react";
+import React,{useState,useEffect} from "react";
 import {Link} from 'react-router-dom'
 import {HashLink} from 'react-router-hash-link'
 const TeamList = () => {
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+  const [load,setLoad]=useState(true);
+  useEffect(()=>{
+    setTimeout(function() {
+      setLoad(false)
+    },1000);
+  },[])
   return (
     <>
+  {load==true && <>
+     <div className="w-full flex flex-col items-center justify-center py-40">
+    <img src="Logos/Logo.webp" className="w-30 h-24" />
+   <div className="w-full flex justify-center gap-y-2  text-center flex-col p-4 mt-4">
+
+    <div className="mt-4 flex flex-row flex-wrap justify-center gap-x-12 gap-y-12 ">
+  {new Array(4).fill("").map((i,ind)=>{
+  return(
+  <div className="text-center">
+    <img src={`sponsor/sponsor${ind+1}.png`} className="w-22 h-14"></img>
+    </div>
+    )
+  })}
+</div>
+    </div>
+    </div>
+  </>}
+{ load===false && <>
   <div className="w-full bg-slate-800 border-2 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
   <img className="w-28 h-16" src={`Logos/Logo.webp`} />
 </div>
@@ -74,8 +98,8 @@ This version focuses purely on the display of player names, ideal for an app whe
     <div class="border-t border-gray-700 mt-4 p-2 text-center text-gray-400">
       © 2025 Coder2003Anujyoti All rights reserved.
     </div>
-
 </footer>
+</>}
 </>
   );
 };

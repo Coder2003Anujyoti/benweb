@@ -115,7 +115,7 @@ const Play = () => {
   }
   {
     toss=="Computer Bat" && <>
-      <div className="w-full py-20 flex justify-center text-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">
+      <div className="w-full py-20 flex justify-center text-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400 ml-2 mr-2">
       {oppositionteam.toUpperCase()} won toss and elected to Bat first 
       </h1></div>
     <div className="w-full flex justify-center items-center">
@@ -125,7 +125,7 @@ const Play = () => {
   }
     {
     toss=="Computer Ball" && <>
-      <div className="w-full py-20 flex justify-center text-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">
+      <div className="w-full py-20 flex justify-center text-center"><h1 className="text-green-400 ml-2 mr-2 text-2xl font-bold shadow-green-400">
       {oppositionteam.toUpperCase()} won toss and elected to Bowl first 
       </h1></div>
     <div className="w-full flex justify-center items-center">

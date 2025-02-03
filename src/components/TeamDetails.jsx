@@ -1,13 +1,16 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import {HashLink} from 'react-router-hash-link'
 import {useSearchParams,Link} from "react-router-dom"
 const TeamDetails = () => {
   const [searchParams] = useSearchParams();
   const teamId = searchParams.get("team"); 
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+  useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },[])
   return (
     <>
-<div className="w-full bg-slate-800 border-2 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+    <div className="w-full bg-slate-800 border-2 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
 </div>
 <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row">

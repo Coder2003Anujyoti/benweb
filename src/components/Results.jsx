@@ -23,6 +23,9 @@ const Results = () => {
     setLoads(true)
   }
   useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },[])
+  useEffect(()=>{
     get_Details();
   },[offset])
   return (

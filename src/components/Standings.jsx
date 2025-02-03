@@ -14,6 +14,9 @@ const Standings = () => {
     setLoad(false);
   }
   useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },[])
+  useEffect(()=>{
     get_Details();
   },[])
   return (

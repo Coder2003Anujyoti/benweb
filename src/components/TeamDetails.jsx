@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {HashLink} from 'react-router-hash-link'
 import {useSearchParams,Link} from "react-router-dom"
 const TeamDetails = () => {

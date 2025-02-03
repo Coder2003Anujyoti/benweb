@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {useSearchParams,Link} from "react-router-dom"
+import {HashLink} from 'react-router-hash-link'
 const Results = () => {
   const [searchParams] = useSearchParams();
   const [items,setItems]=useState([]);
@@ -8,6 +9,7 @@ const Results = () => {
   const [length,setLength]=useState(0);
   const [offset,setOffset]=useState(0);
   const teamId = searchParams.get("team"); 
+  const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const get_Details=async()=>{
     const res=await fetch(`https://prepared-josy-handcricket-0e7a326f.koyeb.app/results?team=${teamId}&offset=${offset}&limit=5`)
     const data=await res.json();
@@ -40,6 +42,34 @@ const Results = () => {
       <div className="flex justify-center items-center py-60">
   <h1 className="text-slate-400 text-xl font-bold">No Matches</h1>
 </div>
+    <footer className="bg-black mt-4 text-white">
+      <div className="w-full flex justify-around text-center flex-row flex-wrap">
+        <p className="mt-2 ml-2 mr-2 text-gray-400">Explore team rosters, player stats, and dive deep into the rich history of IPL.Thank you for being part of the IPL family—let the game begin!</p>
+      </div>
+      <div className="w-full flex justify-center  text-center flex-col mt-4">
+        <h2 className="text-xl font-semibold">Quick Links</h2>
+        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-12">
+    <HashLink smooth to='/#about'> <li className="text-gray-400 hover:text-white">
+       About Us</li></HashLink>
+     <HashLink smooth to='/#services'> <li className="text-gray-400 hover:text-white">Services</li></HashLink>
+     <HashLink smooth to='/#gallery'><li className="text-gray-400 hover:text-white">Gallery</li></HashLink>
+        </ul>
+     </div>
+      <div className="w-full flex justify-center  text-center flex-col mt-4">
+        <h2 className="text-xl font-semibold">Teams</h2>
+        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-6 gap-y-4">
+        {teams.map((i)=>{
+          return(<>
+         <Link to={`/history?team=${i}`}><li><img className="w-12 h-12" src={`Logos/${i}.webp`}/></li></Link>
+          </>)
+        })}
+        </ul>
+      </div>
+    <div class="border-t border-gray-700 mt-4 p-2 text-center text-gray-400">
+      © 2025 Coder2003Anujyoti All rights reserved.
+    </div>
+
+</footer>
   </>
 }
 {
@@ -67,6 +97,34 @@ const Results = () => {
     })}
   </div>
   </div>
+      <footer className="bg-black mt-4 text-white">
+      <div className="w-full flex justify-around text-center flex-row flex-wrap">
+        <p className="mt-2 ml-2  mr-2 text-gray-400">Explore team rosters, player stats, and dive deep into the rich history of IPL.Thank you for being part of the IPL family—let the game begin!</p>
+      </div>
+      <div className="w-full flex justify-center  text-center flex-col mt-4">
+        <h2 className="text-xl font-semibold">Quick Links</h2>
+        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-12">
+    <HashLink smooth to='/#about'> <li className="text-gray-400 hover:text-white">
+       About Us</li></HashLink>
+     <HashLink smooth to='/#services'> <li className="text-gray-400 hover:text-white">Services</li></HashLink>
+     <HashLink smooth to='/#gallery'><li className="text-gray-400 hover:text-white">Gallery</li></HashLink>
+        </ul>
+     </div>
+      <div className="w-full flex justify-center  text-center flex-col mt-4">
+        <h2 className="text-xl font-semibold">Teams</h2>
+        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-6 gap-y-4">
+        {teams.map((i)=>{
+          return(<>
+         <Link to={`/history?team=${i}`}><li><img className="w-12 h-12" src={`Logos/${i}.webp`}/></li></Link>
+          </>)
+        })}
+        </ul>
+      </div>
+    <div class="border-t border-gray-700 mt-4 p-2 text-center text-gray-400">
+      © 2025 Coder2003Anujyoti All rights reserved.
+    </div>
+
+</footer>
     </>
 }
 

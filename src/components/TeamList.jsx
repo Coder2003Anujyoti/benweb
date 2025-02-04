@@ -4,10 +4,15 @@ import {HashLink} from 'react-router-hash-link'
 const TeamList = () => {
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const [load,setLoad]=useState(true);
+ const [value,setValue]=useState([]);
+const get_data=async()=>{
+  const response=await fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/");
+  const item= await response.json();
+  setValue(item.data)
+  setLoad(false)
+}
   useEffect(()=>{
-    setTimeout(function() {
-      setLoad(false)
-    },1000);
+    get_data();
   },[])
   return (
     <>
@@ -29,17 +34,53 @@ const TeamList = () => {
     </div>
   </>}
 { load===false && <>
-  <div className="w-full bg-slate-800 border-2 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+  <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
   <img className="w-28 h-16" src={`Logos/Logo.webp`} />
 </div>
-  <div id='about' className="w-full py-2 my-4 flex-col flex justify-center border-2 border-b-slate-400
+  <div id='about' className="w-full py-2 my-4 flex-col flex justify-center border-b border-b-slate-400
   border-l-transparent border-r-transparent border-t-transparent items-center text-center">
     <h3 className="text-lg text-slate-400 font-bold">About</h3>
     <div className="w-full py-2 flex-row items-center flex-wrap flex text-center  justify-center"> <p className="text-xs text-slate-400 ml-2 mr-2 font-bold">The official IPL app is your go-to platform for tracking all the players in the Indian Premier League. This app offers an extensive list of all the players participating in the tournament, allowing fans to quickly find and explore their favorite stars.Whether you are looking for a specific player or just want to explore the talent in the IPL, the IPL app provides a simple and intuitive way to stay up-to-date with player information.
 This version focuses purely on the display of player names, ideal for an app where the primary purpose is to showcase players.</p></div>
+  <div className="w-full mt-4 flex justify-center">
+ <h1 className="text-slate-400 text-sm font-bold ">Top Performers</h1></div>
+ <div className="w-full mt-4 flex flex-row flex-wrap gap-x-12 gap-y-4 items-center justify-center  p-2 flex-row">
+   {value.sort((a,b)=>b.runs-a.runs).map((i,ind)=>{
+   if(ind<1)
+  return(
+  <div className="text-center p-2 rounded-lg  bg-slate-800 transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+   <div className="flex justify-center items-center"><img src={i.image} className="w-24 h-24"></img></div>
+   <div className="flex flex-col text-center my-2">
+   {i.captain===false &&  <p className="text-xs font-bold text-slate-400">{i.name}</p>}
+    {i.captain===true &&
+      <p className="text-xs font-bold text-slate-400">{i.name} (C)</p>
+    }
+     <p className="text-xs font-bold text-slate-400">Runs-: {i.runs}</p>
+        </div>
+    </div>
+    )
+  })}
+    {value.sort((a,b)=>b.wickets-a.wickets).map((i,ind)=>{
+   if(ind<1)
+  return(
+  <div className="text-center p-2 rounded-lg  bg-slate-800 transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+   <div className="flex justify-center items-center"><img src={i.image} className="w-24 h-24"></img></div>
+   <div className="flex flex-col text-center my-2">
+   {i.captain===false &&  <p className="text-xs font-bold text-slate-400">{i.name}</p>}
+    {i.captain===true &&
+      <p className="text-xs font-bold text-slate-400">{i.name} (C)</p>
+    }
+     <p className="text-xs font-bold text-slate-400">Wickets-: {i.wickets}</p>
+        </div>
+    </div>
+    )
+  })}
+ </div>
 </div>
-<div id="services" className="w-full mt-2 flex justify-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select your Team</h1></div>
-<div className="w-full mt-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center border-b-2 border-b-slate-400 p-2 flex-row ">
+<div id="services" className="w-full mt-2 flex justify-center flex-col text-center">
+     <h3 className="text-lg text-slate-400 font-bold">Services</h3>
+    <div className="w-full mt-4 flex justify-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select your Team</h1></div>
+<div className="w-full mt-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center border-b border-b-slate-400 p-2 flex-row ">
   {teams.map((i)=>{
   return(
   <div className="text-center rounded-lg  bg-slate-800">
@@ -50,6 +91,7 @@ This version focuses purely on the display of player names, ideal for an app whe
     </div>
     )
   })}
+</div>
 </div>
   <div id="gallery" className="w-full py-2 my-4 flex-col flex justify-center  items-center text-center p-2 gap-2">
     <h3 className="text-lg text-slate-400 font-bold">Gallery</h3>

@@ -21,7 +21,7 @@ const Standings = () => {
   },[])
   return (
     <>
-      <div className="w-full bg-slate-800 border-2 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+      <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
 </div>
 {
@@ -36,15 +36,15 @@ const Standings = () => {
   <div className="w-full flex flex-row py-6 justify-center gap-12">
    <div className="w-full flex  justify-center  gap-12" >
 
-       <div className="flex w-16 justify-center items-center border-b-2 border-b-slate-400"> <p className="text-sm font-bold text-slate-400"> Logo </p></div>
-      <div className="flex w-24  justify-center items-center border-b-2 border-b-slate-400 "><p className="text-sm font-bold text-slate-400">Name</p></div>
-    <div className="flex w-16 justify-center items-center border-b-2 border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Win-ratio </p></div>
+       <div className="flex w-16 justify-center items-center border-b border-b-slate-400"> <p className="text-sm font-bold text-slate-400"> Logo </p></div>
+      <div className="flex w-24  justify-center items-center border-b  border-b-slate-400 "><p className="text-sm font-bold text-slate-400">Name</p></div>
+    <div className="flex w-16 justify-center items-center border-b border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Win-ratio </p></div>
    </div>
    </div>
   <div className="w-full flex flex-row flex-wrap justify-center gap-y-8">
     {items.sort((a,b)=>b.win-a.win).map((i,ind)=>{
       return(<>
-    <div className="w-full  flex flex-row flex-wrap justify-center p-2 gap-x-16 border-b-2 border-b-slate-400">
+    <div className="w-full  flex flex-row flex-wrap justify-center p-2 gap-x-16 border-b border-b-slate-400">
     <Link to={`/history?team=${i.teamid}`}>
       <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.teamid}.webp`} className="w-12 h-12" /></div>
       </Link>

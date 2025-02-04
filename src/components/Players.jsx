@@ -21,7 +21,7 @@ const Players = () => {
   },[])
   return (
     <>
-      <div className="w-full bg-slate-800 border-2 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+      <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
 </div>
 {
@@ -35,7 +35,7 @@ const Players = () => {
   <div className="flex justify-center items-center py-4">
   <h1 className="text-slate-400 text-xl font-bold">Batters</h1>
   </div>
-  <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-2 border-b-slate-400 p-2 border-t-transparent border-l-transparent border-r-transparent">
+  <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-b border-b-slate-400 p-2 border-t-transparent border-l-transparent border-r-transparent">
     {items.map((i)=>{
     if(i.role=="Batsman" || i.role=="Wicket-Keeper")
       return(<>
@@ -56,7 +56,7 @@ const Players = () => {
     <div className="flex justify-center items-center py-4">
   <h1 className="text-slate-400 text-xl font-bold">All-Rounders</h1>
   </div>
-  <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-2 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex p-2 ">
+  <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex p-2 ">
     {items.map((i)=>{
     if(i.role=="All-rounder")
       return(<>

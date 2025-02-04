@@ -30,7 +30,7 @@ const Results = () => {
   },[offset])
   return (
     <>
-      <div className="w-full bg-slate-800 border-2 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+      <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
 </div>
 {
@@ -92,7 +92,7 @@ const Results = () => {
     {items.map((item,ind)=>{
       return(<>
         {item.map((i)=>{return(<>
-  <div className="w-full flex flex-row justify-center gap-16 py-2 border-b-2 border-b-slate-400">
+  <div className="w-full flex flex-row justify-center gap-16 py-2 border-b border-b-slate-400">
     <Link to={`/history?team=${teamId}`} >  <img src={`Logos/${teamId}.webp`} className="w-16 h-16"/>
     </Link>
     <div className="flex justify-center items-center"><h1 className="text-base text-yellow-400 font-bold">{i.status}</h1></div>

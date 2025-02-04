@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import {HashLink} from 'react-router-hash-link'
 import {useSearchParams,Link} from "react-router-dom"
 const Card = () => {
   const [searchParams] = useSearchParams();
@@ -6,6 +7,7 @@ const Card = () => {
   const [items,setItems]=useState([]);
   const teamId = searchParams.get("team"); 
   const team = searchParams.get("name");
+  const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const get_Player=async()=>{
     const res=await fetch(`https://prepared-josy-handcricket-0e7a326f.koyeb.app/names?team=${team}`)
     const data=await res.json();
@@ -73,6 +75,43 @@ const Card = () => {
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
   </div>
   </div>
+              <footer className="bg-black text-white">
+      <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
+        <h2 className="text-xl font-semibold">Quick Links</h2>
+        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-12">
+    <HashLink smooth to='/#about'> <li className="text-gray-400">
+       About Us</li></HashLink>
+     <HashLink smooth to='/#services'> <li className="text-gray-400">Services</li></HashLink>
+     <HashLink smooth to='/#gallery'><li className="text-gray-400">Gallery</li></HashLink>
+        </ul>
+     </div>
+      <div className="w-full flex justify-center  text-center flex-col mt-4">
+        <h2 className="text-xl font-semibold">Teams</h2>
+        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-6 gap-y-4">
+        {teams.map((i)=>{
+          return(<>
+         <HashLink smooth to={`/history?team=${i}`}><li><img className="w-12 h-12" src={`Logos/${i}.webp`}/></li></HashLink>
+          </>)
+        })}
+        </ul>
+      </div>
+              <div className="w-full flex justify-center gap-y-2  text-center flex-col p-4 mt-4">
+    <h2 className="text-xl font-semibold">Sponsors</h2>
+    <div className="mt-4 flex flex-row flex-wrap justify-center gap-x-6 gap-y-4 ">
+  {new Array(4).fill("").map((i,ind)=>{
+  return(
+  <div className="text-center">
+    <img src={`sponsor/sponsor${ind+1}.png`} className="w-22 h-12"></img>
+    </div>
+    )
+  })}
+</div>
+    </div>
+    <div class="border-t border-gray-700 mt-4 p-2 text-center text-gray-400">
+      © 2025 Coder2003Anujyoti All rights reserved.
+    </div>
+
+</footer>
   </>
 }
 </>

@@ -124,7 +124,7 @@ const Results = () => {
     })}
   </div>
   </div>
-      <footer className="bg-black mt-4 text-white">
+      <footer className="bg-black mt-8 text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>
         <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-12">

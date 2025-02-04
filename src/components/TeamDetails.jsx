@@ -90,7 +90,9 @@ const TeamDetails = () => {
       if(ind<=2)
         return(<>
  <div className="w-full flex flex-row flex-wrap justify-evenly border-b p-4 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent">
+ <Link to={`/profile?name=${i.name}&team=${i.team}`}>
    <img src={i.image} className="w-20 h-20"/>
+   </Link>
   <div className="flex justify-center items-center"><h2 className="text-sm font-extrabold text-slate-400 ">{i.name}</h2></div>
     <div className="flex justify-center items-center"> <h2 className="text-sm font-extrabold text-slate-400 ">Runs-:{i.runs}</h2></div>
    </div>
@@ -107,7 +109,9 @@ const TeamDetails = () => {
       if(ind<=2)
         return(<>
  <div className="w-full flex flex-row flex-wrap justify-evenly border-b p-4 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent">
+      <Link to={`/profile?name=${i.name}&team=${i.team}`}>
    <img src={i.image} className="w-20 h-20"/>
+   </Link>
   <div className="flex justify-center items-center"><h2 className="text-sm font-extrabold text-slate-400 ">{i.name}</h2></div>
     <div className="flex justify-center items-center"> <h2 className="text-sm font-extrabold text-slate-400 ">Wickets-:{i.wickets}</h2></div>
    </div>

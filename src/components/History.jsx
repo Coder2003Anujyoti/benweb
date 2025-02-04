@@ -15,6 +15,7 @@ const History = () => {
   }
   useEffect(()=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setLoad(true)
     get_Details();
   },[teamId])
   return (

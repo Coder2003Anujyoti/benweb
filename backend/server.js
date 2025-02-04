@@ -29,6 +29,7 @@ const gfgSchema = new mongoose
        role: { type: String, required: true },
        team:{ type: String, required: true },
        captain:{ type:Boolean, required: true },
+     matches:{ type:Number, required: true },
        runs:{ type:Number, required: true },
        wickets:{ type:Number, required: true },
     });
@@ -149,6 +150,7 @@ app.post('/players',async(req,res)=>{
       await GFGCollection.updateMany({name:i.name},
       [{
         $set:{
+          matches:{ $sum:["$matches",1] },
           runs:{ $sum:["$runs",i.runs] },
           wickets:{ $sum:["$wickets",i.wickets]}
           }}])
@@ -206,6 +208,18 @@ app.get('/players',
             try {
   const teamname=req.query.team;
         const datas = await GFGCollection.find({team:teamname});
+       return res.json(datas);
+   }
+   catch (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+    }
+    });
+app.get('/names',
+    async(req, res) => {
+            try {
+  const teamname=req.query.team;
+        const datas = await GFGCollection.find({name:teamname});
        return res.json(datas);
    }
    catch (err) {

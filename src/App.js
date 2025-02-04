@@ -7,7 +7,8 @@ import Stats from "./components/Stats.jsx";
 import Play from "./gaming/Play.jsx";
 import Results from "./components/Results";
 import History from "./components/History";
-import Standings from "./components/Standings"
+import Standings from "./components/Standings";
+import Card from "./components/Card.jsx"
 const App = () => {
   useEffect(()=>{
     document.body.className="bg-gray-900"
@@ -22,7 +23,8 @@ const App = () => {
   <Route path="/play" element={<Play  />} /> 
 <Route path="/history" element={<History />}/>
   <Route path="/standings" element={<Standings />}/>
-   <Route path="/results" element={<Results />}/>
+<Route path="/results" element={<Results />}/>
+<Route path="/profile" element={<Card />}/>
       </Routes>
     </Router>
   );

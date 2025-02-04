@@ -39,6 +39,7 @@ const Players = () => {
     {items.map((i)=>{
     if(i.role=="Batsman" || i.role=="Wicket-Keeper")
       return(<>
+    <Link to={`/profile?name=${i.name}&team=${teamId}`}>
         <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black  hover:scale-105">
     <div className="flex w-full justify-end"><img className="w-6 h-6" src={`Icons/${i.role}.png`} />
     </div>
@@ -50,6 +51,7 @@ const Players = () => {
     }
   </div>
         </div>
+      </Link>
       </>)
     })}
   </div>
@@ -60,6 +62,7 @@ const Players = () => {
     {items.map((i)=>{
     if(i.role=="All-rounder")
       return(<>
+     <Link to={`/profile?name=${i.name}&team=${teamId}`}>
         <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black  hover:scale-105">
     <div className="flex w-full justify-end"><img className="w-6 h-6" src={`Icons/${i.role}.png`} />
     </div>
@@ -71,6 +74,7 @@ const Players = () => {
     }
         </div>
         </div>
+        </Link>
       </>)
     })}
   </div>
@@ -81,6 +85,7 @@ const Players = () => {
     {items.map((i)=>{
     if(i.role=="Bowler")
       return(<>
+   <Link to={`/profile?name=${i.name}&team=${teamId}`}>
         <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black  hover:scale-105">
     <div className="flex w-full justify-end"><img className="w-5 h-5" src={`Icons/${i.role}.png`} />
     </div>
@@ -93,6 +98,7 @@ const Players = () => {
 
         </div>
         </div>
+        </Link>
       </>)
     })}
   </div>

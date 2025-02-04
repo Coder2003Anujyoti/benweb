@@ -21,17 +21,29 @@ const Stats = () => {
   },[])
   return (
   <>
-          <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
-  <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
-</div>
 {
   load==true && <>
-      <div className="flex justify-center items-center py-60">
-  <h1 className="text-slate-400 text-xl font-bold">Loading...</h1>
+    <div className="w-full flex flex-col items-center justify-center py-40">
+    <img src="Logos/Logo.webp" className="w-30 h-24" />
+   <div className="w-full flex justify-center gap-y-2  text-center flex-col p-4 mt-4">
+
+    <div className="mt-4 flex flex-row flex-wrap justify-center gap-x-12 gap-y-12 ">
+  {new Array(4).fill("").map((i,ind)=>{
+  return(
+  <div className="text-center">
+    <img src={`sponsor/sponsor${ind+1}.png`} className="w-22 h-14"></img>
+    </div>
+    )
+  })}
 </div>
+    </div>
+    </div>
   </>
 }
 {load==false && <>
+   <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+  <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
+</div>
   <div className="flex justify-center items-center py-4">
   <h1 className="text-slate-400 text-xl font-bold">Top Batters</h1>
   </div>
@@ -39,7 +51,7 @@ const Stats = () => {
     {items.sort((a,b)=>b.runs-a.runs).map((i,ind)=>{
     if(ind<=4)
       return(<>
-      <Link to={`/profile?name=${i.name}&team=${teamId}`}>
+      <Link to={`/profile?name=${i.name}&team=${i.team}`}>
         <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black hover:scale-105">
     <div className="flex w-full justify-end">
       {i.role!=="Bowler" ? <img className="w-6 h-6" src={`Icons/${i.role}.png`} />:<img className="w-5 h-5" src={`Icons/${i.role}.png`} />}
@@ -50,7 +62,6 @@ const Stats = () => {
     {i.captain===true &&
       <p className=" text-sm font-bold text-slate-400">{i.name} (C)</p>
     }
-        <p className="text-sm font-bold text-slate-400">Runs-: {i.runs}</p>
         </div>
         </div>
         </Link>
@@ -64,7 +75,7 @@ const Stats = () => {
     {items.sort((a,b)=>b.wickets-a.wickets).map((i,ind)=>{
     if(ind<=4)
       return(<>
-   <Link to={`/profile?name=${i.name}&team=${teamId}`}>
+   <Link to={`/profile?name=${i.name}&team=${i.team}`}>
         <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black  hover:scale-105">
     <div className="flex w-full justify-end">
       {i.role!=="Bowler" ? <img className="w-6 h-6" src={`Icons/${i.role}.png`} />:<img className="w-5 h-5" src={`Icons/${i.role}.png`} />}
@@ -75,7 +86,7 @@ const Stats = () => {
    <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
       <p className="text-sm font-bold text-slate-400">{i.name} (C)</p>}
-<p className="text-sm font-bold text-slate-400">Wickets-: {i.wickets}</p></div>
+   </div>
         </div>
         </Link>
       </>)

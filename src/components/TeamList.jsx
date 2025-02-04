@@ -42,40 +42,6 @@ const get_data=async()=>{
     <h3 className="text-lg text-slate-400 font-bold">About</h3>
     <div className="w-full py-2 flex-row items-center flex-wrap flex text-center  justify-center"> <p className="text-xs text-slate-400 ml-2 mr-2 font-bold">The official IPL app is your go-to platform for tracking all the players in the Indian Premier League. This app offers an extensive list of all the players participating in the tournament, allowing fans to quickly find and explore their favorite stars.Whether you are looking for a specific player or just want to explore the talent in the IPL, the IPL app provides a simple and intuitive way to stay up-to-date with player information.
 This version focuses purely on the display of player names, ideal for an app where the primary purpose is to showcase players.</p></div>
-  <div className="w-full mt-4 flex justify-center">
- <h1 className="text-slate-400 text-sm font-bold ">Top Performers</h1></div>
- <div className="w-full mt-4 flex flex-row flex-wrap gap-x-12 gap-y-4 items-center justify-center  p-2 flex-row">
-   {value.sort((a,b)=>b.runs-a.runs).map((i,ind)=>{
-   if(ind<1)
-  return(
-  <div className="text-center p-2 rounded-lg  bg-slate-800 transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
-   <div className="flex justify-center items-center"><img src={i.image} className="w-24 h-24"></img></div>
-   <div className="flex flex-col text-center my-2">
-   {i.captain===false &&  <p className="text-xs font-bold text-slate-400">{i.name}</p>}
-    {i.captain===true &&
-      <p className="text-xs font-bold text-slate-400">{i.name} (C)</p>
-    }
-     <p className="text-xs font-bold text-slate-400">Runs-: {i.runs}</p>
-        </div>
-    </div>
-    )
-  })}
-    {value.sort((a,b)=>b.wickets-a.wickets).map((i,ind)=>{
-   if(ind<1)
-  return(
-  <div className="text-center p-2 rounded-lg  bg-slate-800 transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
-   <div className="flex justify-center items-center"><img src={i.image} className="w-24 h-24"></img></div>
-   <div className="flex flex-col text-center my-2">
-   {i.captain===false &&  <p className="text-xs font-bold text-slate-400">{i.name}</p>}
-    {i.captain===true &&
-      <p className="text-xs font-bold text-slate-400">{i.name} (C)</p>
-    }
-     <p className="text-xs font-bold text-slate-400">Wickets-: {i.wickets}</p>
-        </div>
-    </div>
-    )
-  })}
- </div>
 </div>
 <div id="services" className="w-full mt-2 flex justify-center flex-col text-center">
      <h3 className="text-lg text-slate-400 font-bold">Services</h3>

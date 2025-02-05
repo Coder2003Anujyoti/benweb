@@ -77,8 +77,9 @@ const History = () => {
   })}
 </div>
     </div>
-    <div className="w-full py-2 flex-col flex justify-center items-center text-center">
-    <div className="w-full py-4 flex-col items-center flex-wrap flex  justify-center"> <a href={items[0].site} target="_blank"><button className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Official Site</button></a></div>
+    <div className="w-full py-2 flex-col flex justify-center items-center  text-center">
+    <div className="w-full py-4 flex-col items-center flex-wrap flex  justify-center"> <a href={items[0].site} target="_blank"><button className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg ">Official Site
+    </button></a></div>
   </div>
   
         </div>

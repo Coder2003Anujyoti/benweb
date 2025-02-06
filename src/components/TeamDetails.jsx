@@ -101,7 +101,7 @@ const TeamDetails = () => {
       })
     }
     </div>
-    <div className="w-full py-8 flex justify-center">
+    <div className="w-full py-4 flex justify-center">
     <h1 className="text-xl font-extrabold text-slate-400">Top Bowlers</h1>
   </div>
   <div className="w-full flex flex-col justify-center gap-4 ">

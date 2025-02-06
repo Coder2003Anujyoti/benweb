@@ -42,7 +42,9 @@ const Players = () => {
 }
 {load==false && <>
         <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+        <Link  to={`/details?team=${teamId}`}>
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
+  </Link>
 </div>
   <div className="flex justify-center items-center py-4">
   <h1 className="text-slate-400 text-xl font-bold">Batters</h1>

@@ -52,7 +52,9 @@ const Results = () => {
 {
     load==false && length===0 && <>
       <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+      <Link  to={`/details?team=${teamId}`}>
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
+  </Link>
 </div>
       <div className="flex justify-center items-center py-60">
   <h1 className="text-slate-400 text-xl font-bold">No Matches</h1>
@@ -99,7 +101,9 @@ const Results = () => {
 {
   load==false && length>0 && <>
    <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+    <Link  to={`/details?team=${teamId}`}>
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
+  </Link>
 </div>
   <div className="w-full flex flex-col justify-center">
      <div className="flex justify-center items-center py-8"><h1 className="text-lg text-slate-400 font-bold">Match Results</h1></div>

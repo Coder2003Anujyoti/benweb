@@ -14,6 +14,7 @@ const TeamDetails = () => {
     setLoad(false);
   }
   useEffect(()=>{
+    setLoad(true);
     get_data();
   },[])
   useEffect(()=>{
@@ -40,7 +41,9 @@ const TeamDetails = () => {
   </>}
 {load==false && <>
     <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+      <Link  to={`/details?team=${teamId}`}>
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
+    </Link>
 </div>
 <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row">
     <Link to={`/play?team=${teamId}`} >

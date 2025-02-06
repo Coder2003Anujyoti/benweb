@@ -12,6 +12,7 @@ const get_data=async()=>{
   setLoad(false)
 }
   useEffect(()=>{
+    setLoad(true)
     get_data();
   },[])
   return (
@@ -35,7 +36,9 @@ const get_data=async()=>{
   </>}
 { load===false && <>
   <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+  <Link  to={`/`}>
   <img className="w-28 h-16" src={`Logos/Logo.webp`} />
+  </Link>
 </div>
 <div className="w-full  flex flex-col justify-center">
    <div className="w-full flex justify-start">

@@ -45,9 +45,7 @@ const Card = () => {
   load==false &&
   <>
    <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
-   <Link  to={`/details?team=${teamId}`}>
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
-  </Link>
 </div>
   <div className="w-full flex flex-col justify-center items-center gap-y-4">
   <div className="w-full flex flex-row justify-center items-center">
@@ -74,9 +72,7 @@ const Card = () => {
   </div>
   </div>
   <div className="text-center flex flex-row justify-center items-center">
-  <Link to={`/history?team=${teamId}`} >
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
-  </Link>
   </div>
   </div>
               <footer className="bg-black text-white">

@@ -5,6 +5,12 @@ const Toss = ({player,computer,playerteam,computerteam}) => {
     const [toss,setToss]=useState("");
   const [playerfirst,setPlayerfirst]=useState(false);
   const [computerfirst,setComputerfirst]=useState(false);
+  const [players,setPlayers]=useState([]);
+  const [id,setId]=useState([]);
+  const add_Players=(i)=>{
+    setPlayers([...players,i]);
+    setId([...id,i.name]);
+  }
   const get_Toss=()=>{
    let options=Math.floor(Math.random()*2);
     if(options==0){
@@ -22,7 +28,26 @@ const Toss = ({player,computer,playerteam,computerteam}) => {
   }
   return (
     <>
-{ playerfirst===false && computerfirst===false && <>
+      {id.length<10 && <>
+  <div className="w-full py-8 flex justify-center">
+    <h1 className="text-green-400 text-2xl font-bold shadow-green-400">Choose Your Playing X</h1>
+  </div>
+  <div className="flex justify-center flex-row flex-wrap gap-4">
+    {player.map((i)=>{
+    if(!id.includes(i.name))
+      return(
+      <>
+        <div className="text-center rounded-md bg-black  transition duration-300 ease-in-out transform hover:bg-black  hover:scale-105" onClick={()=>add_Players(i)}>
+         <div className="flex justify-center items-center">   <img className="w-16 h-16" src={i.image} /></div>
+        <p className="text-xs font-bold text-slate-400">{i.name}</p>
+        </div>
+      </>
+      )
+    })}
+  </div>
+</>
+}
+{ id.length===10 && playerfirst===false && computerfirst===false && <>
   {
     toss==='' &&  <>
     <div className="w-full py-8 flex justify-center">
@@ -66,10 +91,10 @@ const Toss = ({player,computer,playerteam,computerteam}) => {
   }
 </>}
   {
-  playerfirst===true && <PlayerFirst players={player} oppositionplayers={computer} />
+  playerfirst===true && <PlayerFirst players={players} oppositionplayers={computer} />
 }
 {
-  computerfirst===true && <ComputerFirst players={player} oppositionplayers={computer} />
+  computerfirst===true && <ComputerFirst players={players} oppositionplayers={computer} />
 }
 
 </>

@@ -37,6 +37,11 @@ const get_data=async()=>{
 { load===false && <>
   <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
   <img className="w-28 h-16" src={`Logos/Logo.webp`} />
+  <div className="w-full flex items-center justify-end">
+<HashLink to='/auction'>
+  <img src="Icons/auction.png" className="w-10 h-10" />
+</HashLink>
+</div>
 </div>
 <div className="w-full  flex flex-col justify-center">
    <div className="w-full flex justify-start">

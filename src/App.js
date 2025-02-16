@@ -9,6 +9,7 @@ import Results from "./components/Results";
 import History from "./components/History";
 import Standings from "./components/Standings";
 import Card from "./components/Card.jsx"
+import Auction from "./auction/Auction.jsx";
 const App = () => {
   useEffect(()=>{
     document.body.className="bg-gray-900"
@@ -25,6 +26,7 @@ const App = () => {
   <Route path="/standings" element={<Standings />}/>
 <Route path="/results" element={<Results />}/>
 <Route path="/profile" element={<Card />}/>
+<Route path="/auction" element={<Auction />}/>
       </Routes>
     </Router>
   );

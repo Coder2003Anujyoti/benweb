@@ -25,7 +25,6 @@ const Auction = () => {
   let rand_team=teams[Math.floor(Math.random()*10)]
   setValue(item.data)
   setLoad(false)
-  setComputerteam(rand_team);
   setAmount(Math.floor(Math.random()*100)+1)
   setIndex(Math.floor(Math.random()*150))
 }
@@ -85,6 +84,11 @@ const Auction = () => {
    else{
      setPlaying(true);
    }
+ }
+ const select=(i)=>{
+   const str=teams.filter((item)=>item!=i)
+   setPlayerteam(i);
+   setComputerteam(str[Math.floor(Math.random()*9)]);
  }
  useEffect(()=>{
   if(turn!=''){
@@ -152,7 +156,7 @@ const Auction = () => {
   {teams.map((i)=>{
   if(i!=computerteam)
   return(
-  <div className="text-center rounded-lg  bg-slate-800" onClick={()=>setPlayerteam(i)}>
+  <div className="text-center rounded-lg  bg-slate-800" onClick={()=>select(i)}>
     <img src={`Logos/${i}.webp`} className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">{i.toUpperCase()}</h4>
     </div>
@@ -227,8 +231,8 @@ const Auction = () => {
          return(<>
       <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
     <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
-  <p className="text-slate-400 text-xs font-bold">Bid-:{i.bid} lakhs</p>
+    <p className="text-slate-400 text-sm font-bold">{i.name}</p>
+  <p className="text-slate-400 text-sm font-bold">Bid-:{i.bid} lakhs</p>
            </div>
          </>)
        })
@@ -246,8 +250,8 @@ const Auction = () => {
          return(<>
       <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
     <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
-  <p className="text-slate-400 text-xs font-bold">Bid-:{i.bid} lakhs</p>
+    <p className="text-slate-400 text-sm font-bold">{i.name}</p>
+  <p className="text-slate-400 text-sm font-bold">Bid-:{i.bid} lakhs</p>
            </div>
          </>)
        })

@@ -263,7 +263,7 @@ const Auction = () => {
 }
 {
   load===false && playing===true && <>
-    <Toss player={players} computer={computers} playerteam={playerteam} computerteam={computerteam}/>
+    <Toss player={players} computer={computers} playerteam={playerteam} computerteam={computerteam} />
   </>
 }
   </>

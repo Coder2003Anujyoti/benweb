@@ -170,13 +170,16 @@ const Auction = () => {
    <img src="Icons/digital-money.png" className="w-10 h-10"/>
      <p className="text-base font-bold text-slate-300">{purse}</p>
   </div>
+{value.length>0 && value[index] &&
+<>
 <div className="w-full flex flex-col items-center gap-y-2 justify-center">
- <img src={value[index].image} className="w-64 h-64"/>
+<img src={value[index].image} className="w-64 h-64"/>
  <div className="w-full flex flex-col items-center justify-center">
      <p className="text-base font-bold text-slate-300">{value[index].name}</p>
   <p className="text-base font-bold text-slate-300">Price-:{amount} lakhs</p>
    </div>
 </div>
+</>}
 {turn!='' && <>
 <div className="w-full flex flex-row items-center gap-x-2 my-6 justify-center">
    <img src={`Logos/${turn}.webp`} className="w-16 h-16"/>

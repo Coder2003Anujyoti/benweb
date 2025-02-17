@@ -49,6 +49,14 @@ const get_data=async()=>{
     <h3 className="text-lg text-slate-400 font-bold">About</h3>
     <div className="w-full py-2 flex-row items-center flex-wrap flex text-center  justify-center"> <p className="text-xs text-slate-400 ml-2 mr-2 font-bold">The official IPL app is your go-to platform for tracking all the players in the Indian Premier League. This app offers an extensive list of all the players participating in the tournament, allowing fans to quickly find and explore their favourite stars.Whether you are looking for a specific player or just want to explore the talent in the IPL, the IPL app provides a simple and intuitive way to stay up-to-date with player information.
 This version focuses purely on the display of player names, ideal for an app where the primary purpose is to showcase players.</p></div>
+    <div className="w-full py-2 flex-col items-center flex-wrap flex gap-y-2  justify-center">
+      <h1 className="font-bold text-slate-400 text-xs">Visit our Collections</h1>
+    <HashLink smooth to="/home">
+      <button className="w-24 flex justify-center text-sm text-white font-extrabold p-3 bg-white rounded-bl-lg rounded-tl-lg rounded-tr-lg">
+      <img src='Logos/Logo.svg' className="w-12 h-6"/>
+    </button>
+    </HashLink>
+    </div>
 </div>
 </div>
 <div id="services" className="w-full mt-2 flex justify-center flex-col text-center">

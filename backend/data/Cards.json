@@ -1,0 +1,1075 @@
+[
+  {
+    "team":"CSK",
+    "name":"A.Morkel",
+    "image":"Players/Albie.jpg",
+    "bat":60,
+    "ball":82,
+    "runs":15
+  }, {
+    "team":"CSK",
+    "name":"R.Ashwin",
+    "image":"Players/Ashwin.jpg",
+    "bat":49,
+    "ball":83,
+    "runs":6
+  }, {
+    "team":"CSK",
+    "name":"Badrinath",
+    "image":"Players/Badrinath.jpg",
+    "bat":77,
+    "ball":13,
+    "runs":28
+  }, {
+    "team":"CSK",
+    "name":"Hilfenhaus",
+    "image":"Players/Ben.jpg",
+    "bat":11,
+    "ball":80,
+    "runs":1
+  }, {
+    "team":"CSK",
+    "name":"DJ Bravo",
+    "image":"Players/Bravo.jpg",
+    "bat":79,
+    "ball":80,
+    "runs":46
+  }, {
+    "team":"CSK",
+    "name":"MS Dhoni",
+    "image":"Players/Dhoni.jpg",
+    "bat":86,
+    "ball":8,
+    "runs":29
+  }, {
+    "team":"CSK",
+    "name":"Duplesis",
+    "image":"Players/Faf.jpg",
+    "bat":72,
+    "ball":33,
+    "runs":33
+  }, {
+    "team":"CSK",
+    "name":"J.Holder",
+    "image":"Players/Holder.jpg",
+    "bat":36,
+    "ball":59,
+    "runs":8
+  }, {
+    "team":"CSK",
+    "name":"M.Hussey",
+    "image":"Players/Hussey.jpg",
+    "bat":82,
+    "ball":14,
+    "runs":32
+  }, {
+    "team":"CSK",
+    "name":"Jadeja",
+    "image":"Players/Jadeja.jpg",
+    "bat":70,
+    "ball":74,
+    "runs":15
+  }, {
+    "team":"CSK",
+    "name":"Jakati",
+    "image":"Players/Jakati.jpg",
+    "bat":30,
+    "ball":70,
+    "runs":7
+  }, {
+    "team":"CSK",
+    "name":"D.Nannes",
+    "image":"Players/Nannes.jpg",
+    "bat":11,
+    "ball":77,
+    "runs":4
+  }, {
+    "team":"CSK",
+    "name":"N.Kulasekara",
+    "image":"Players/Nuwan.jpg",
+    "bat":30,
+    "ball":64,
+    "runs":5
+  }, {
+    "team":"CSK",
+    "name":"S.Raina",
+    "image":"Players/Raina.jpg",
+    "bat":88,
+    "ball":51,
+    "runs":25
+  }, {
+    "team":"CSK",
+    "name":"W.Saha",
+    "image":"Players/Saha.jpg",
+    "bat":55,
+    "ball":5,
+    "runs":6
+  }, {
+    "team":"CSK",
+    "name":"A.Srikanth",
+    "image":"Players/Srikanth.jpg",
+    "bat":58,
+    "ball":13,
+    "runs":19
+  }, {
+    "team":"CSK",
+    "name":"M.Vijay",
+    "image":"Players/Vijay.jpg",
+    "bat":84,
+    "ball":12,
+    "runs":25
+  },{
+    "team":"DD",
+    "name":"D.Warner",
+    "image":"Players/Warner.jpg",
+    "bat":80,
+    "ball":7,
+    "runs":36
+  }, {
+    "team":"DD",
+    "name":"V.Aaron",
+    "image":"Players/Aaron.jpg",
+    "bat":21,
+    "ball":70,
+    "runs":1
+  }, {
+    "team":"DD",
+    "name":"A.Agarkar",
+    "image":"Players/Agarkar.jpg",
+    "bat":37,
+    "ball":72,
+    "runs":1
+  }, {
+    "team":"DD",
+    "name":"I.Pathan",
+    "image":"Players/Irfan.jpg",
+    "bat":67,
+    "ball":70,
+    "runs":25
+  }, {
+    "team":"DD",
+    "name":"K.Pietersen",
+    "image":"Players/Kevin.jpg",
+    "bat":86,
+    "ball":42,
+    "runs":61
+  }, {
+    "team":"DD",
+    "name":"M.Jayawardene",
+    "image":"Players/Mahela.jpg",
+    "bat":87,
+    "ball":12,
+    "runs":27
+  }, {
+    "team":"DD",
+    "name":"M.Morkel",
+    "image":"Players/Morkel.jpg",
+    "bat":18,
+    "ball":90,
+    "runs":3
+  }, {
+    "team":"DD",
+    "name":"S.Nadeem",
+    "image":"Players/Nadeem.jpg",
+    "bat":8,
+    "ball":65,
+    "runs":1
+  }, {
+    "team":"DD",
+    "name":"Y.Nagar",
+    "image":"Players/Nagar.jpg",
+    "bat":64,
+    "ball":34,
+    "runs":21
+  }, {
+    "team":"DD",
+    "name":"P.Negi",
+    "image":"Players/Negi.jpg",
+    "bat":55,
+    "ball":69,
+    "runs":18
+  }, {
+    "team":"DD",
+    "name":"N.Ojha",
+    "image":"Players/Ojha.jpg",
+    "bat":73,
+    "ball":6,
+    "runs":23
+  }, {
+    "team":"DD",
+    "name":"R.V.Merwe",
+    "image":"Players/Roelof.jpg",
+    "bat":24,
+    "ball":63,
+    "runs":1
+  }, {
+    "team":"DD",
+    "name":"R.Taylor",
+    "image":"Players/Ross.jpg",
+    "bat":75,
+    "ball":20,
+    "runs":19
+  }, {
+    "team":"DD",
+    "name":"A.Russell",
+    "image":"Players/Russell.jpg",
+    "bat":56,
+    "ball":52,
+    "runs":23
+  }, {
+    "team":"DD",
+    "name":"V.Sehwag",
+    "image":"Players/Sehwag.jpg",
+    "bat":84,
+    "ball":19,
+    "runs":33
+  }, {
+    "team":"DD",
+    "name":"Umesh",
+    "image":"Players/Umesh.jpg",
+    "bat":17,
+    "ball":74,
+    "runs":1
+  }, {
+    "team":"DD",
+    "name":"Unmukt Chand",
+    "image":"Players/Unmukt.jpg",
+    "bat":51,
+    "ball":8,
+    "runs":18
+  },{
+    "team":"MI",
+    "name":"Abu Nechim",
+    "image":"Players/Abu.jpg",
+    "bat":14,
+    "ball":51,
+    "runs":1
+  }, {
+    "team":"MI",
+    "name":"D.Smith",
+    "image":"Players/D.Smith.jpg",
+    "bat":72,
+    "ball":66,
+    "runs":39
+  }, {
+    "team":"MI",
+    "name":"D.Karthik",
+    "image":"Players/DK.jpg",
+    "bat":74,
+    "ball":6,
+    "runs":18
+  }, {
+    "team":"MI",
+    "name":"J.Franklin",
+    "image":"Players/Franklin.jpg",
+    "bat":77,
+    "ball":66,
+    "runs":4
+  }, {
+    "team":"MI",
+    "name":"Harbhajan",
+    "image":"Players/Harbhajan.jpg",
+    "bat":55,
+    "ball":72,
+    "runs":12
+  }, {
+    "team":"MI",
+    "name":"Jacob Oram",
+    "image":"Players/Jacob.jpg",
+    "bat":56,
+    "ball":68,
+    "runs":21
+  }, {
+    "team":"MI",
+    "name":"D.Kulkarni",
+    "image":"Players/Kulkarni.jpg",
+    "bat":33,
+    "ball":74,
+    "runs":10
+  }, {
+    "team":"MI",
+    "name":"L.Malinga",
+    "image":"Players/Malinga.jpg",
+    "bat":31,
+    "ball":89,
+    "runs":9
+  }, {
+    "team":"MI",
+    "name":"Munaf",
+    "image":"Players/Munaf.jpg",
+    "bat":13,
+    "ball":84,
+    "runs":2
+  }, {
+    "team":"MI",
+    "name":"R.Peterson",
+    "image":"Players/Peterson.jpg",
+    "bat":60,
+    "ball":62,
+    "runs":10
+  }, {
+    "team":"MI",
+    "name":"K.Pollard",
+    "image":"Players/Pollard.jpg",
+    "bat":78,
+    "ball":80,
+    "runs":24
+  }, {
+    "team":"MI",
+    "name":"R.Ponting",
+    "image":"Players/Ponting.jpg",
+    "bat":81,
+    "ball":12,
+    "runs":29
+  }, {
+    "team":"MI",
+    "name":"P.Ojha",
+    "image":"Players/Pragyan.jpg",
+    "bat":12,
+    "ball":75,
+    "runs":2
+  }, {
+    "team":"MI",
+    "name":"A.Rayudu",
+    "image":"Players/Rayudu.jpg",
+    "bat":85,
+    "ball":37,
+    "runs":12
+  }, {
+    "team":"MI",
+    "name":"Rohit Sharma",
+    "image":"Players/Rohit.jpg",
+    "bat":85,
+    "ball":20,
+    "runs":30
+  }, {
+    "team":"MI",
+    "name":"Sachin Tendulkar",
+    "image":"Players/Sachin.jpg",
+    "bat":88,
+    "ball":15,
+    "runs":29
+  }, {
+    "team":"MI",
+    "name":"Suryakumar",
+    "image":"Players/Surya.jpg",
+    "bat":55,
+    "ball":33,
+    "runs":1
+  },{
+    "team":"KKR",
+    "name":"I.Abdulla",
+    "image":"Players/Abdulla.jpg",
+    "bat":11,
+    "ball":75,
+    "runs":4
+  }, {
+    "team":"KKR",
+    "name":"L.Balaji",
+    "image":"Players/Balaji.jpg",
+    "bat":12,
+    "ball":78,
+    "runs":1
+  }, {
+    "team":"KKR",
+    "name":"R.Bhatia",
+    "image":"Players/Bhatia.jpg",
+    "bat":33,
+    "ball":72,
+    "runs":11
+  }, {
+    "team":"KKR",
+    "name":"M.Bisla",
+    "image":"Players/Bisla.jpg",
+    "bat":70,
+    "ball":6,
+    "runs":30
+  }, {
+    "team":"KKR",
+    "name":"Debabrata",
+    "image":"Players/Debabrata.jpg",
+    "bat":66,
+    "ball":18,
+    "runs":48
+  }, {
+    "team":"KKR",
+    "name":"G.Gambhir",
+    "image":"Players/Gambhir.jpg",
+    "bat":88,
+    "ball":8,
+    "runs":39
+  }, {
+    "team":"KKR",
+    "name":"J.Kallis",
+    "image":"Players/Kallis.jpg",
+    "bat":85,
+    "ball":81,
+    "runs":25
+  }, {
+    "team":"KKR",
+    "name":"M.Lange",
+    "image":"Players/Lange.jpg",
+    "bat":12,
+    "ball":60,
+    "runs":2
+  }, {
+    "team":"KKR",
+    "name":"Brett Lee",
+    "image":"Players/Lee.jpg",
+    "bat":35,
+    "ball":71,
+    "runs":21
+  }, {
+    "team":"KKR",
+    "name":"L.R.Shukla",
+    "image":"Players/Laxmi.jpg",
+    "bat":58,
+    "ball":53,
+    "runs":12
+  }, {
+    "team":"KKR",
+    "name":"Manoj Tiwary",
+    "image":"Players/Manoj.jpg",
+    "bat":76,
+    "ball":21,
+    "runs":26
+  }, {
+    "team":"KKR",
+    "name":"B.Mccullum",
+    "image":"Players/Mccullum.jpg",
+    "bat":80,
+    "ball":6,
+    "runs":24
+  }, {
+    "team":"KKR",
+    "name":"E.Morgan",
+    "image":"Players/Morgan.jpg",
+    "bat":70,
+    "ball":10,
+    "runs":14
+  }, {
+    "team":"KKR",
+    "name":"S.Narine",
+    "image":"Players/Narine.jpg",
+    "bat":14,
+    "ball":90,
+    "runs":9
+  }, {
+    "team":"KKR",
+    "name":"P.Sangwan",
+    "image":"Players/Sangwan.jpg",
+    "bat":18,
+    "ball":63,
+    "runs":1
+  }, {
+    "team":"KKR",
+    "name":"Shakib",
+    "image":"Players/Shakib.jpg",
+    "bat":60,
+    "ball":82,
+    "runs":15
+  }, {
+    "team":"KKR",
+    "name":"Y.Pathan",
+    "image":"Players/Yusuf.jpg",
+    "bat":70,
+    "ball":72,
+    "runs":19
+  },{
+    "team":"RCB",
+    "name":"AB Devilliers",
+    "image":"Players/ABD.jpg",
+    "bat":86,
+    "ball":6,
+    "runs":39
+  }, {
+    "team":"RCB",
+    "name":"Abhimanyu",
+    "image":"Players/Abhimanyu.jpg",
+    "bat":17,
+    "ball":52,
+    "runs":1
+  }, {
+    "team":"RCB",
+    "name":"A.McDonald",
+    "image":"Players/Andrew.jpg",
+    "bat":65,
+    "ball":69,
+    "runs":23
+  }, {
+    "team":"RCB",
+    "name":"K.Appanna",
+    "image":"Players/Appanna.jpg",
+    "bat":8,
+    "ball":66,
+    "runs":1
+  }, {
+    "team":"RCB",
+    "name":"S.Aravind",
+    "image":"Players/Aravind.jpg",
+    "bat":41,
+    "ball":75,
+    "runs":14
+  }, {
+    "team":"RCB",
+    "name":"TM Dilshan",
+    "image":"Players/Dilshan.jpg",
+    "bat":83,
+    "ball":59,
+    "runs":35
+  }, {
+    "team":"RCB",
+    "name":"C.Gayle",
+    "image":"Players/Gayle.jpg",
+    "bat":90,
+    "ball":56,
+    "runs":61
+  }, {
+    "team":"RCB",
+    "name":"Harshal",
+    "image":"Players/Harshal.jpg",
+    "bat":25,
+    "ball":68,
+    "runs":7
+  }, {
+    "team":"RCB",
+    "name":"V.Kohli",
+    "image":"Players/Kohli.jpg",
+    "bat":84,
+    "ball":29,
+    "runs":28
+  }, {
+    "team":"RCB",
+    "name":"M.Agarwal",
+    "image":"Players/Mayank.jpg",
+    "bat":70,
+    "ball":10,
+    "runs":20
+  }, {
+    "team":"RCB",
+    "name":"M.Muralitharan",
+    "image":"Players/Muttiah.jpg",
+    "bat":13,
+    "ball":80,
+    "runs":3
+  }, {
+    "team":"RCB",
+    "name":"C.Pujara",
+    "image":"Players/Pujara.jpg",
+    "bat":70,
+    "ball":9,
+    "runs":5
+  }, {
+    "team":"RCB",
+    "name":"S.Tiwary",
+    "image":"Players/Saurabh.jpg",
+    "bat":73,
+    "ball":12,
+    "runs":23
+  }, {
+    "team":"RCB",
+    "name":"S.Mohammad",
+    "image":"Players/Syed.jpg",
+    "bat":26,
+    "ball":56,
+    "runs":4
+  }, {
+    "team":"RCB",
+    "name":"D.Vettori",
+    "image":"Players/Vettori.jpg",
+    "bat":38,
+    "ball":71,
+    "runs":7
+  }, {
+    "team":"RCB",
+    "name":"V.Kumar",
+    "image":"Players/Vinay.jpg",
+    "bat":27,
+    "ball":85,
+    "runs":13
+  }, {
+    "team":"RCB",
+    "name":"Zaheer",
+    "image":"Players/Zaheer.jpg",
+    "bat":15,
+    "ball":82,
+    "runs":6
+  },{
+    "team":"SRH",
+    "name":"Akshath",
+    "image":"Players/Akshath.jpg",
+    "bat":56,
+    "ball":13,
+    "runs":24
+  }, {
+    "team":"SRH",
+    "name":"A.Mishra",
+    "image":"Players/Amit.jpg",
+    "bat":35,
+    "ball":87,
+    "runs":5
+  }, {
+    "team":"SRH",
+    "name":"Ashish",
+    "image":"Players/Ashish.jpg",
+    "bat":55,
+    "ball":76,
+    "runs":8
+  }, {
+    "team":"SRH",
+    "name":"Biplab",
+    "image":"Players/Biplab.jpg",
+    "bat":53,
+    "ball":40,
+    "runs":2
+  }, {
+    "team":"SRH",
+    "name":"B.Chipli",
+    "image":"Players/Chipli.jpg",
+    "bat":61,
+    "ball":33,
+    "runs":12
+  }, {
+    "team":"SRH",
+    "name":"S.Dhawan",
+    "image":"Players/Dhawan.jpg",
+    "bat":85,
+    "ball":23,
+    "runs":40
+  }, {
+    "team":"SRH",
+    "name":"JP Duminy",
+    "image":"Players/Duminy.jpg",
+    "bat":70,
+    "ball":15,
+    "runs":81
+  }, {
+    "team":"SRH",
+    "name":"Dwaraka",
+    "image":"Players/Dwaraka.jpg",
+    "bat":66,
+    "ball":21,
+    "runs":2
+  }, {
+    "team":"SRH",
+    "name":"Ishant",
+    "image":"Players/Ishant.jpg",
+    "bat":20,
+    "ball":72,
+    "runs":4
+  }, {
+    "team":"SRH",
+    "name":"A.Jhunjhunwala",
+    "image":"Players/Jhunjhunwala.jpg",
+    "bat":60,
+    "ball":22,
+    "runs":12
+  }, {
+    "team":"SRH",
+    "name":"C.Lynn",
+    "image":"Players/Lynn.jpg",
+    "bat":61,
+    "ball":26,
+    "runs":6
+  }, {
+    "team":"SRH",
+    "name":"Parthiv",
+    "image":"Players/Parthiv.jpg",
+    "bat":65,
+    "ball":3,
+    "runs":17
+  }, {
+    "team":"SRH",
+    "name":"A.Rajan",
+    "image":"Players/Rajan.jpg",
+    "bat":22,
+    "ball":61,
+    "runs":1
+  }, {
+    "team":"SRH",
+    "name":"K.Sangakkara",
+    "image":"Players/Sanga.jpg",
+    "bat":79,
+    "ball":5,
+    "runs":18
+  }, {
+    "team":"SRH",
+    "name":"D.Steyn",
+    "image":"Players/Steyn.jpg",
+    "bat":22,
+    "ball":80,
+    "runs":3
+  }, {
+    "team":"SRH",
+    "name":"J.Theron",
+    "image":"Players/Theron.jpg",
+    "bat":18,
+    "ball":66,
+    "runs":5
+  }, {
+    "team":"SRH",
+    "name":"C.White",
+    "image":"Players/White.jpg",
+    "bat":77,
+    "ball":15,
+    "runs":43
+  },{
+    "team":"RR",
+    "name":"A.Menaria",
+    "image":"Players/Ashok.jpg",
+    "bat":66,
+    "ball":39,
+    "runs":20
+  }, {
+    "team":"RR",
+    "name":"S.Badree",
+    "image":"Players/Badree.jpg",
+    "bat":19,
+    "ball":66,
+    "runs":6
+  }, {
+    "team":"RR",
+    "name":"S.Binny",
+    "image":"Players/Binny.jpg",
+    "bat":62,
+    "ball":50,
+    "runs":22
+  }, {
+    "team":"RR",
+    "name":"A.Chandila",
+    "image":"Players/Chandila.jpg",
+    "bat":41,
+    "ball":72,
+    "runs":10
+  }, {
+    "team":"RR",
+    "name":"A.Chavan",
+    "image":"Players/Chavan.jpg",
+    "bat":55,
+    "ball":52,
+    "runs":11
+  }, {
+    "team":"RR",
+    "name":"K.Cooper",
+    "image":"Players/Cooper.jpg",
+    "bat":60,
+    "ball":78,
+    "runs":19
+  }, {
+    "team":"RR",
+    "name":"R.Dravid",
+    "image":"Players/Dravid.jpg",
+    "bat":86,
+    "ball":8,
+    "runs":28
+  }, {
+    "team":"RR",
+    "name":"B.Hodge",
+    "image":"Players/Hodge.jpg",
+    "bat":79,
+    "ball":42,
+    "runs":30
+  }, {
+    "team":"RR",
+    "name":"B.Hogg",
+    "image":"Players/Hogg.jpg",
+    "bat":49,
+    "ball":77,
+    "runs":7
+  }, {
+    "team":"RR",
+    "name":"A.Rahane",
+    "image":"Players/Rahane.jpg",
+    "bat":86,
+    "ball":11,
+    "runs":40
+  }, {
+    "team":"RR",
+    "name":"O.Shah",
+    "image":"Players/Shah.jpg",
+    "bat":76,
+    "ball":13,
+    "runs":37
+  }, {
+    "team":"RR",
+    "name":"Shreevats",
+    "image":"Players/Shreevats.jpg",
+    "bat":57,
+    "ball":6,
+    "runs":13
+  }, {
+    "team":"RR",
+    "name":"Sreesanth",
+    "image":"Players/Sreesanth.jpg",
+    "bat":12,
+    "ball":76,
+    "runs":11
+  }, {
+    "team":"RR",
+    "name":"S.Tait",
+    "image":"Players/Tait.jpg",
+    "bat":22,
+    "ball":72,
+    "runs":1
+  }, {
+    "team":"RR",
+    "name":"S.Trivedi",
+    "image":"Players/Trivedi.jpg",
+    "bat":15,
+    "ball":78,
+    "runs":5
+  }, {
+    "team":"RR",
+    "name":"S.Watson",
+    "image":"Players/Watson.jpg",
+    "bat":80,
+    "ball":72,
+    "runs":42
+  }, {
+    "team":"RR",
+    "name":"D.Yagnik",
+    "image":"Players/Yagnik.jpg",
+    "bat":50,
+    "ball":5,
+    "runs":25
+  },{
+    "team":"KXIP",
+    "name":"A.Gilchrist",
+    "image":"Players/Adam.jpg",
+    "bat":83,
+    "ball":6,
+    "runs":34
+  }, {
+    "team":"KXIP",
+    "name":"P.Awana",
+    "image":"Players/Awana.jpg",
+    "bat":10,
+    "ball":79,
+    "runs":4
+  }, {
+    "team":"KXIP",
+    "name":"A.Mahmood",
+    "image":"Players/Azhar.jpg",
+    "bat":66,
+    "ball":83,
+    "runs":23
+  }, {
+    "team":"KXIP",
+    "name":"B.Bhatt",
+    "image":"Players/Bhargav.jpg",
+    "bat":13,
+    "ball":55,
+    "runs":6
+  }, {
+    "team":"KXIP",
+    "name":"Bipul",
+    "image":"Players/Bipul.jpg",
+    "bat":57,
+    "ball":47,
+    "runs":24
+  }, {
+    "team":"KXIP",
+    "name":"P.Chawla",
+    "image":"Players/Chawla.jpg",
+    "bat":58,
+    "ball":80,
+    "runs":13
+  }, {
+    "team":"KXIP",
+    "name":"S.Chitnis",
+    "image":"Players/Chitnis.jpg",
+    "bat":55,
+    "ball":48,
+    "runs":22
+  }, {
+    "team":"KXIP",
+    "name":"D.Hussey",
+    "image":"Players/David.jpg",
+    "bat":77,
+    "ball":39,
+    "runs":33
+  }, {
+    "team":"KXIP",
+    "name":"Gurkeerat",
+    "image":"Players/Gurkeerat.jpg",
+    "bat":66,
+    "ball":8,
+    "runs":29
+  }, {
+    "team":"KXIP",
+    "name":"Harmeet",
+    "image":"Players/Harmeet.jpg",
+    "bat":20,
+    "ball":69,
+    "runs":3
+  }, {
+    "team":"KXIP",
+    "name":"R.Harris",
+    "image":"Players/Harris.jpg",
+    "bat":35,
+    "ball":86,
+    "runs":18
+  }, {
+    "team":"KXIP",
+    "name":"Mandeep",
+    "image":"Players/Mandeep.jpg",
+    "bat":79,
+    "ball":37,
+    "runs":27
+  }, {
+    "team":"KXIP",
+    "name":"S.Marsh",
+    "image":"Players/Marsh.jpg",
+    "bat":84,
+    "ball":8,
+    "runs":30
+  }, {
+    "team":"KXIP",
+    "name":"D.Miller",
+    "image":"Players/Miller.jpg",
+    "bat":66,
+    "ball":6,
+    "runs":32
+  }, {
+    "team":"KXIP",
+    "name":"P.Valthaty",
+    "image":"Players/Paul.jpg",
+    "bat":69,
+    "ball":23,
+    "runs":5
+  }, {
+    "team":"KXIP",
+    "name":"Praveen",
+    "image":"Players/Praveen.jpg",
+    "bat":25,
+    "ball":75,
+    "runs":11
+  }, {
+    "team":"KXIP",
+    "name":"N.Saini",
+    "image":"Players/Saini.jpg",
+    "bat":60,
+    "ball":7,
+    "runs":14
+  },{
+    "team":"PWI",
+    "name":"Anustup",
+    "image":"Players/Anustup.jpg",
+    "bat":59,
+    "ball":14,
+    "runs":21
+  }, {
+    "team":"PWI",
+    "name":"Bhuvneshwar",
+    "image":"Players/Bhuvneshwar.jpg",
+    "bat":35,
+    "ball":69,
+    "runs":13
+  }, {
+    "team":"PWI",
+    "name":"M.Clarke",
+    "image":"Players/Clarke.jpg",
+    "bat":86,
+    "ball":57,
+    "runs":16
+  }, {
+    "team":"PWI",
+    "name":"A.Dinda",
+    "image":"Players/Dinda.jpg",
+    "bat":11,
+    "ball":72,
+    "runs":2
+  }, {
+    "team":"PWI",
+    "name":"M.Manhas",
+    "image":"Players/Manhas.jpg",
+    "bat":68,
+    "ball":25,
+    "runs":30
+  }, {
+    "team":"PWI",
+    "name":"M.Pandey",
+    "image":"Players/Manish.jpg",
+    "bat":68,
+    "ball":14,
+    "runs":20
+  }, {
+    "team":"PWI",
+    "name":"A.Mathews",
+    "image":"Players/Mathews.jpg",
+    "bat":64,
+    "ball":65,
+    "runs":18
+  }, {
+    "team":"PWI",
+    "name":"M.Kartik",
+    "image":"Players/Murali.jpg",
+    "bat":29,
+    "ball":56,
+    "runs":26
+  }, {
+    "team":"PWI",
+    "name":"A.Murtaza",
+    "image":"Players/Murtaza.jpg",
+    "bat":13,
+    "ball":60,
+    "runs":3
+  }, {
+    "team":"PWI",
+    "name":"L.Wright",
+    "image":"Players/Wright.jpg",
+    "bat":60,
+    "ball":59,
+    "runs":1
+  }, {
+    "team":"PWI",
+    "name":"A.Nehra",
+    "image":"Players/Nehra.jpg",
+    "bat":16,
+    "ball":80,
+    "runs":11
+  }, {
+    "team":"PWI",
+    "name":"W.Parnell",
+    "image":"Players/Parnell.jpg",
+    "bat":30,
+    "ball":67,
+    "runs":4
+  }, {
+    "team":"PWI",
+    "name":"Rahul Sharma",
+    "image":"Players/Rahul.jpg",
+    "bat":21,
+    "ball":81,
+    "runs":1
+  }, {
+    "team":"PWI",
+    "name":"M.Samuels",
+    "image":"Players/Samuels.jpg",
+    "bat":70,
+    "ball":73,
+    "runs":17
+  }, {
+    "team":"PWI",
+    "name":"A.Thomas",
+    "image":"Players/Thomas.jpg",
+    "bat":31,
+    "ball":70,
+    "runs":9
+  }, {
+    "team":"PWI",
+    "name":"R.Uthappa",
+    "image":"Players/Uthappa.jpg",
+    "bat":84,
+    "ball":6,
+    "runs":27
+  }, {
+    "team":"PWI",
+    "name":"Yuvraj",
+    "image":"Players/Yuvraj.jpg",
+    "bat":80,
+    "ball":71,
+    "runs":27
+  }
+
+]

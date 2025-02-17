@@ -16,7 +16,7 @@ const Cardsplayers = () => {
   useEffect(()=>{
   window.scrollTo({ top: 0, behavior: "smooth" });
     get_data()
-  },[])
+  },[teamId])
   return (
    <>
       {
@@ -70,7 +70,7 @@ const Cardsplayers = () => {
         <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-6 gap-y-4">
         {teams.map((i)=>{
           return(<>
-<li><img className="w-auto h-10" src={`Logos/${i}.png`}/></li>
+<li> <HashLink smooth to={`/cardsplayers?team=${i}`}><img className="w-auto h-10" src={`Logos/${i}.png`}/></HashLink></li>
           </>)
         })}
         </ul>

@@ -49,7 +49,7 @@ return (
   <div className="flex gap-6 w-full flex-row flex-wrap justify-center"> 
   {teams.map((i)=>{
     return(<>
-    <HashLink to={`/cardsplayers?team=${i}`}>
+    <HashLink smooth to={`/cardsplayers?team=${i}`}>
       <div className="p-2  rounded-lg bg-white text-center transition duration-300 ease-in-out transform  hover:scale-105">
         <img src={`Logos/${i}.png`} className="w-auto h-14" />
       <p className="text-xs font-bold text-black">{i}</p>
@@ -91,7 +91,11 @@ return (
         <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-6 gap-y-4">
         {teams.map((i)=>{
           return(<>
-<li><img className="w-auto h-10" src={`Logos/${i}.png`}/></li>
+<li>
+ <HashLink smooth to={`/cardsplayers?team=${i}`}>
+  <img className="w-auto h-10" src={`Logos/${i}.png`}/>
+  </HashLink>
+  </li>
           </>)
         })}
         </ul>

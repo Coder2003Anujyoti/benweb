@@ -45,7 +45,7 @@ const Cardsplayers = () => {
    <div className="w-full bg-white p-2 flex flex-wrap gap-x-2 gap-y-2 items-center justify-center flex-row">
  {items.map((i)=>{
    return(<>
-     <div className="flex p-2 flex-col text-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+     <div className="flex p-2 flex-col text-center transition duration-300 ease-in-out transform  hover:scale-105">
     <div className="w-full flex text-center justify-center"><img src={i.image} className="w-36 h-auto" /></div>
        <p className="w-full bg-slate-600 text-xs font-bold text-white">{i.name}</p>
      </div>

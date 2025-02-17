@@ -91,10 +91,10 @@ const Toss = ({player,computer,playerteam,computerteam}) => {
   }
 </>}
   {
-  playerfirst===true && <PlayerFirst players={players} oppositionplayers={computer} />
+  playerfirst===true && <PlayerFirst players={players} oppositionplayers={computer.slice(0,10)} />
 }
 {
-  computerfirst===true && <ComputerFirst players={players} oppositionplayers={computer} />
+  computerfirst===true && <ComputerFirst players={players} oppositionplayers={computer.slice(0,10)} />
 }
 
 </>

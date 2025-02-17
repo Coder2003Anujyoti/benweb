@@ -44,9 +44,6 @@ const get_data=async()=>{
 </div>
 </div>
 <div className="w-full  flex flex-col justify-center">
-   <div className="w-full flex justify-start">
-    <img className="w-full h-42" src="Icons/slide1.jpg"/>
-  </div>
   <div id='about' className="w-full py-2 my-4 flex-col flex justify-center border-b border-b-slate-400
   border-l-transparent border-r-transparent border-t-transparent items-center text-center">
     <h3 className="text-lg text-slate-400 font-bold">About</h3>

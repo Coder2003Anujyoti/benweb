@@ -37,6 +37,9 @@ return (
 <div className="w-full p-2 flex justify-start bg-white border-b border-b-black">
   <img src='Logos/Logo.svg' className="w-18 h-18"/>
 </div>
+ <div className="w-full p-0 m-0 justify-start flex">
+    <img src="slide/slide12.jpg" className="w-full h-full" />
+  </div>
 <div id="about" className="flex w-full bg-white flex-col text-center">
  <div className="flex w-full items-center justify-center"> <h1 className="my-2 text-lg font-bold">About</h1></div>
   <div className="flex w-full justify-center">

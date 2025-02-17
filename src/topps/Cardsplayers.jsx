@@ -39,19 +39,13 @@ const Cardsplayers = () => {
     </>
   }
   {load==false && <>
-     <div className="w-full bg-white border-b border-b-slate-800 flex justify-center">
+     <div className="w-full bg-white border-b border-b-slate-800 flex items-center justify-center">
     <img src={`Logos/${teamId}.png`} className="w-auto h-16"/>
      </div>
-     <div className="w-full bg-white flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row p-4 border-b border-slate-600">
-    <div className="text-center p-4 rounded-lg  bg-slate-300">
-    <img src="Logos/cricket-bat.png" className="w-24 h-24"></img>
-    <h4 className="text-lg text-slate-800 font-bold">Play</h4>
-    </div>
-    </div>
    <div className="w-full bg-white p-2 flex flex-wrap gap-x-2 gap-y-2 items-center justify-center flex-row">
  {items.map((i)=>{
    return(<>
-     <div className="flex p-2 flex-col text-center">
+     <div className="flex p-2 flex-col text-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
     <div className="w-full flex text-center justify-center"><img src={i.image} className="w-36 h-auto" /></div>
        <p className="w-full bg-slate-600 text-xs font-bold text-white">{i.name}</p>
      </div>

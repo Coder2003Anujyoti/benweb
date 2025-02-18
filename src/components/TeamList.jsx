@@ -47,10 +47,10 @@ const get_data=async()=>{
    <div className="w-full p-0 m-0 justify-start flex">
     <img src="silde/slide1.jpg" className="w-full h-full" />
   </div>
-  <div id='about' className="w-full py-2 my-4 flex-col flex justify-center border-b border-b-slate-400
+  <div id='about' className="w-full py-2 flex-col flex justify-center border-b border-b-slate-400
   border-l-transparent border-r-transparent border-t-transparent items-center text-center">
     <h3 className="text-lg text-slate-400 font-bold">About</h3>
-    <div className="w-full py-2 flex-row items-center flex-wrap flex text-center  justify-center"> <p className="text-xs text-slate-400 ml-2 mr-2 font-bold">The official IPL app is your go-to platform for tracking all the players in the Indian Premier League. This app offers an extensive list of all the players participating in the tournament, allowing fans to quickly find and explore their favourite stars.Whether you are looking for a specific player or just want to explore the talent in the IPL, the IPL app provides a simple and intuitive way to stay up-to-date with player information.
+    <div className="w-full flex-row items-center flex-wrap flex text-center  justify-center"> <p className="text-xs text-slate-400 ml-2 mr-2 font-bold">The official IPL app is your go-to platform for tracking all the players in the Indian Premier League. This app offers an extensive list of all the players participating in the tournament, allowing fans to quickly find and explore their favourite stars.Whether you are looking for a specific player or just want to explore the talent in the IPL, the IPL app provides a simple and intuitive way to stay up-to-date with player information.
 This version focuses purely on the display of player names, ideal for an app where the primary purpose is to showcase players.</p>
     <div className="w-full py-2 flex-col items-center flex-wrap flex gap-y-2  justify-center">
       <h1 className="font-bold text-slate-400 text-xs">Visit our Collections</h1>

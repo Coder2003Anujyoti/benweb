@@ -1,2 +1,3 @@
 const CardsCollection=require('./cards.js');
-module.exports= { CardsCollection };
+const Cardteams=require('./cardteams.js');
+module.exports= { CardsCollection,Cardteams };

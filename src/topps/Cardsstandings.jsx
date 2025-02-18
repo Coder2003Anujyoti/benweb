@@ -1,14 +1,14 @@
 import React,{useState,useEffect} from "react";
 import {HashLink} from 'react-router-hash-link'
 import {useSearchParams,Link} from "react-router-dom"
-const Cardsplayers = () => {
+const Cardsstandings = () => {
   const [searchParams] = useSearchParams();
   const [load,setLoad]=useState(true);
   const [items,setItems]=useState([]);
   const teamId = searchParams.get("team"); 
   const teams=["CSK","DD","KKR","MI","RCB","SRH","RR","KXIP","PWI"];
   const get_data=async()=>{
-    const response=await fetch(`https://prepared-josy-handcricket-0e7a326f.koyeb.app/card?team=${teamId}`);
+    const response=await fetch(`https://prepared-josy-handcricket-0e7a326f.koyeb.app/team`);
     const data=await response.json();
     setLoad(false);
     setItems(data);
@@ -16,9 +16,9 @@ const Cardsplayers = () => {
   useEffect(()=>{
   window.scrollTo({ top: 0, behavior: "smooth" });
     get_data()
-  },[teamId])
+  },[])
   return (
-   <>
+    <>
       {
     load===true && <>
            <div className="w-full flex flex-col items-center justify-center py-40">
@@ -39,32 +39,30 @@ const Cardsplayers = () => {
     </>
   }
   {load==false && <>
-     <div className="w-full bg-white border-b border-b-slate-800 flex items-center justify-center">
+     <div className="w-full bg-white border-b border-b-slate-800 items-center flex justify-center">
     <img src={`Logos/${teamId}.png`} className="w-auto h-16"/>
      </div>
-  <div className="w-full bg-white flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row p-4 border-b border-b-black">
-    <div className="text-center p-4 rounded-lg  bg-slate-300">
-    <img src="Logos/cricket-bat.png" className="w-24 h-24"></img>
-    <h4 className="text-lg text-slate-800 font-bold">Play</h4>
-    </div>
-      <HashLink to={`/cardsstandings?team=${teamId}`} >
-    <div className="text-center p-4 rounded-lg  bg-slate-300">
-    <img src="Logos/evaluation.png" className="w-24 h-24"></img>
-    <h4 className="text-lg text-slate-800 font-bold">Standings</h4>
-    </div>
-    </HashLink>
-    </div>
-   <div className="w-full bg-white p-2 flex flex-wrap gap-x-2 gap-y-2 items-center justify-center flex-row">
- {items.map((i)=>{
-   return(<>
-     <div className="flex p-2 flex-col text-center transition duration-300 ease-in-out transform  hover:scale-105">
-    <div className="w-full flex text-center justify-center"><img src={i.image} className="w-36 h-auto" /></div>
-       <p className="w-full bg-slate-600 text-xs font-bold text-white">{i.name}</p>
-     </div>
-   </>)
- })}
-</div>
-  <footer className="bg-slate-200 p-2 text-black">
+      <div className="w-full bg-white flex flex-row py-6 justify-center gap-12">
+   <div className="w-full flex  justify-center  gap-12" >
+       <div className="flex w-16 justify-center items-center border-b-2 border-b-black"> <p className="text-sm font-bold text-black"> Logo </p></div>
+      <div className="flex w-24  justify-center items-center border-b-2 border-b-black"><p className="text-sm font-bold text-black">Name</p></div>
+    <div className="flex w-16 justify-center items-center border-b-2 border-b-black"> <p className="text-sm font-bold text-black">Win-ratio </p></div>
+   </div>
+   </div>
+  <div className="w-full  bg-white flex flex-row flex-wrap justify-center gap-y-8">
+    {items.sort((a,b)=>b.wins-a.wins).map((i,ind)=>{
+      return(<>
+    <div className="w-full  flex flex-row flex-wrap justify-center p-2 gap-x-16 border-b border-b-black">
+
+      <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.team}.png`} className="w-auto h-10" /></div>
+  <div className="flex w-16 justify-center items-center"> <p className="text-sm font-bold text-black">{i.team.toUpperCase()}</p></div>
+   {i.win>0 && <div className="flex w-20 justify-center items-center"> <p className="text-sm font-bold text-black">{Math.round((i.win/i.matches).toFixed(2)*100)}%</p></div>}
+      {i.win==0 && <div className="flex w-16 justify-center items-center"> <p className="text-sm font-bold text-black">0%</p></div>}
+      </div>
+      </>)
+    })}
+  </div>
+   <footer className="bg-slate-200 p-2 text-black">
       <div className="w-full flex justify-around text-center flex-row flex-wrap">
         <p className="mt-2 ml-2 mr-2 text-slate-800 text-sm font-bold">Cricket Attax 2013, a Topps trading card game, featured real cricketers, player stats, and competitive gameplay for fans.</p>
       </div>
@@ -82,7 +80,7 @@ const Cardsplayers = () => {
         <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-6 gap-y-4">
         {teams.map((i)=>{
           return(<>
-<li> <HashLink smooth to={`/cardsplayers?team=${i}`}><img className="w-auto h-10" src={`Logos/${i}.png`}/></HashLink></li>
+<li>    <HashLink smooth to={`/cardsplayers?team=${i}`}><img className="w-auto h-10" src={`Logos/${i}.png`}/></HashLink></li>
           </>)
         })}
         </ul>
@@ -91,8 +89,10 @@ const Cardsplayers = () => {
       © 2025 Coder2003Anujyoti All rights reserved.
     </div>
 </footer>
-     </>}
-   </>
+     </>
+  }
+  </>
   );
 };
-export default Cardsplayers;
+
+export default Cardsstandings;

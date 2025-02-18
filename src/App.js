@@ -12,6 +12,7 @@ import Card from "./components/Card.jsx"
 import Auction from "./auction/Auction.jsx";
 import Home  from "./topps/Home.jsx";
 import Cardsplayers from "./topps/Cardsplayers.jsx";
+import Cardsstandings from "./topps/Cardsstandings.jsx";
 const App = () => {
   useEffect(()=>{
     document.body.className="bg-gray-900"
@@ -31,6 +32,7 @@ const App = () => {
 <Route path="/auction" element={<Auction />}/>
   <Route path="/home" element={<Home  />} />
  <Route path="/cardsplayers" element={<Cardsplayers />} />
+ <Route path="/cardsstandings" element={<Cardsstandings />} />
       </Routes>
     </Router>
   );

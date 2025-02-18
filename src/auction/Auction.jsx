@@ -55,6 +55,7 @@ const Auction = () => {
  }
  const go=()=>{
    if(bid!==0){
+     if(computers.length<18){
        const store=value.find((i,ind)=>{
          return ind==index
        });
@@ -63,6 +64,13 @@ const Auction = () => {
       setSold(computerteam)
       setOff(true)
       setDisplay(false)
+     }
+     else{
+    setComputers(computers);
+     setSold("Unsold")
+      setOff(true)
+      setDisplay(false)
+     }
    }
    if(bid===0){
     let rand_int=Math.floor(Math.random()*100);

@@ -8,7 +8,7 @@ const TeamDetails = () => {
   const [load,setLoad]=useState(true);
     const [item,setItem]=useState([]);
   const get_data=async()=>{
-    const response=await fetch('https://prepared-josy-handcricket-0e7a326f.koyeb.app/');
+    const response=await fetch('https://sudden-nadean-handcricket-92bb9ebb.koyeb.app/');
     const data=await response.json();
     setItem(data.data);
     setLoad(false);

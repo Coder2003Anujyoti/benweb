@@ -16,13 +16,13 @@ const Play = () => {
   const teamId = searchParams.get("team"); 
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const get_Players=async()=>{
-    const res=await fetch(`https://prepared-josy-handcricket-0e7a326f.koyeb.app/players?team=${teamId}`)
+    const res=await fetch(`https://sudden-nadean-handcricket-92bb9ebb.koyeb.app/players?team=${teamId}`)
     const data=await res.json();
     setItems(data);
     setLoad(false);
   }
   const get_Opposition_Players=async()=>{
-    const res=await fetch(`https://prepared-josy-handcricket-0e7a326f.koyeb.app/players?team=${oppositionteam}`)
+    const res=await fetch(`https://sudden-nadean-handcricket-92bb9ebb.koyeb.app/players?team=${oppositionteam}`)
     const data=await res.json();
     setOppositionplayers(data.slice(0,10));
   }

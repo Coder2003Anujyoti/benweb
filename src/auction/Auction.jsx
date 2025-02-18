@@ -20,7 +20,7 @@ const Auction = () => {
   const [computers,setComputers]=useState([])
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const get_data=async()=>{
-  const response=await fetch("https://prepared-josy-handcricket-0e7a326f.koyeb.app/");
+  const response=await fetch("https://sudden-nadean-handcricket-92bb9ebb.koyeb.app/");
   const item= await response.json();
   setValue(item.data)
   setLoad(false)

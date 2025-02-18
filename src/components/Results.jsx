@@ -11,7 +11,7 @@ const Results = () => {
   const teamId = searchParams.get("team"); 
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const get_Details=async()=>{
-    const res=await fetch(`https://prepared-josy-handcricket-0e7a326f.koyeb.app/results?team=${teamId}&offset=${offset}&limit=5`)
+    const res=await fetch(`https://sudden-nadean-handcricket-92bb9ebb.koyeb.app/results?team=${teamId}&offset=${offset}&limit=5`)
     const data=await res.json();
     setItems([...items,data.data]);
     setLoad(false);

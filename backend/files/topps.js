@@ -47,4 +47,43 @@ router.get('/team',async(req,res)=>{
         res.status(500).send("Internal Server Error");
     }
 })
+router.post('/team',async(req,res)=>{
+   try{
+     const winner=req.body.winner;
+     const loser=req.body.loser;
+     const draw=req.body.draw;
+     if(draw==false){
+   const q=  await Cardteams.updateMany({teamid:winner[0].team},
+      [{
+        $set:{
+          matches:{ $sum:["$matches",1] },
+          win:{ $sum:["$win",1]}
+          }}])
+      const r=  await Cardteams.updateMany({teamid:loser[0].team},
+      [{
+        $set:{
+          matches:{ $sum:["$matches",1] },
+          lose:{ $sum:["$lose",1]}
+          }}])  
+  }
+  if(draw==true){
+  const m=  await Cardteams.updateMany({teamid:winner[0].team},
+      [{
+        $set:{
+          matches:{ $sum:["$matches",1] }
+          }}])
+        const v= await Cardteams.updateMany({teamid:loser[0].team},
+      [{
+        $set:{
+          matches:{ $sum:["$matches",1] }
+          }}])  
+  }
+     
+        return res.json({status:"Ok"})
+   }
+  catch (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+    }
+})
 module.exports = router;

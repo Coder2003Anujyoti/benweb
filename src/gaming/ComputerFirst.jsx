@@ -628,7 +628,7 @@ const ComputerFirst = ({players,oppositionplayers}) => {
       </>
       }
       {turn=="Computer" && <>
-     :<img src={`Logos/${oppositionplayers[0].team}.webp`} className="w-24 h-24" />
+     <img src={`Logos/${oppositionplayers[0].team}.webp`} className="w-24 h-24" />
       <div className="flex flex-row text-center items-center justify-center"><p className="text-slate-400 text-2xl font-bold shadow-slate-400">{runs}/{wickets} ({number}.{overs})</p></div>
       </>}
       </div>

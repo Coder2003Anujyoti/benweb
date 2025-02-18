@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const players=require('../data/Cards.json');
-const teams=require('../data/Teams.json');
 const mongoose = require('mongoose');
 const  connectDB = require('../db/config.js');
-const { CardsCollection }= require('../schemas/server.js');
+const CardsCollection = require('../schemas/server.js');
 const cors=require('cors');
 const app = express();
  const addDataToMongodb = async() => {

@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/benweb/static/css/main.44e7c483.css",
-    "main.js": "/benweb/static/js/main.227a3c77.js",
+    "main.js": "/benweb/static/js/main.928e6b5c.js",
     "static/js/453.b8aa0778.chunk.js": "/benweb/static/js/453.b8aa0778.chunk.js",
     "index.html": "/benweb/index.html",
     "main.44e7c483.css.map": "/benweb/static/css/main.44e7c483.css.map",
-    "main.227a3c77.js.map": "/benweb/static/js/main.227a3c77.js.map",
+    "main.928e6b5c.js.map": "/benweb/static/js/main.928e6b5c.js.map",
     "453.b8aa0778.chunk.js.map": "/benweb/static/js/453.b8aa0778.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.44e7c483.css",
-    "static/js/main.227a3c77.js"
+    "static/js/main.928e6b5c.js"
   ]
 }

@@ -60,7 +60,7 @@ const Toss = ({player,computer,playerteam,computerteam}) => {
   }
   {
     toss=="Computer Bat" && <>
-      <div className="w-full py-20 flex justify-center text-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">
+      <div className="w-full py-20 flex justify-center text-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400 ml-2 mr-2">
       {computerteam.toUpperCase()} won toss and elected to Bat first 
       </h1></div>
     <div className="w-full flex justify-center items-center">
@@ -70,7 +70,7 @@ const Toss = ({player,computer,playerteam,computerteam}) => {
   }
     {
     toss=="Computer Ball" && <>
-      <div className="w-full py-20 flex justify-center text-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">
+      <div className="w-full py-20 flex justify-center text-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400 ml-2 mr-2">
       {computerteam.toUpperCase()} won toss and elected to Bowl first 
       </h1></div>
     <div className="w-full flex justify-center items-center">

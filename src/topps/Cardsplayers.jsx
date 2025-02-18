@@ -42,18 +42,6 @@ const Cardsplayers = () => {
      <div className="w-full bg-white border-b border-b-slate-800 flex items-center justify-center">
     <img src={`Logos/${teamId}.png`} className="w-auto h-16"/>
      </div>
-  <div className="w-full bg-white flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row p-4 border-b border-b-black">
-    <div className="text-center p-4 rounded-lg  bg-slate-300">
-    <img src="Logos/cricket-bat.png" className="w-24 h-24"></img>
-    <h4 className="text-lg text-slate-800 font-bold">Play</h4>
-    </div>
-      <HashLink to={`/cardsstandings?team=${teamId}`} >
-    <div className="text-center p-4 rounded-lg  bg-slate-300">
-    <img src="Logos/evaluation.png" className="w-24 h-24"></img>
-    <h4 className="text-lg text-slate-800 font-bold">Standings</h4>
-    </div>
-    </HashLink>
-    </div>
    <div className="w-full bg-white p-2 flex flex-wrap gap-x-2 gap-y-2 items-center justify-center flex-row">
  {items.map((i)=>{
    return(<>

@@ -67,7 +67,6 @@ const Auction = () => {
      }
      else{
     setComputers(computers);
-     setSold("Unsold")
       setOff(true)
       setDisplay(false)
      }
@@ -128,7 +127,7 @@ const Auction = () => {
  }
  
  useEffect(()=>{
-  if(turn!=''){
+  if(turn!='' && computers.length<18){
   if(turn===playerteam){
     setTimeout(function() {
    let rand=Math.floor(Math.random()*100);
@@ -159,7 +158,22 @@ const Auction = () => {
       setShow(true);
     },1000);
   }
- }},[turn])
+ }
+   if(turn!='' && computers.length===18){
+  if(turn===playerteam){
+    setTimeout(function() {
+    const store=value.find((i,ind)=>{
+      return ind==index});
+    setPlayers([...players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:playerteam}])
+    setNames([...names,store.name])
+      setSold(playerteam);
+      setPurse(purse-bid);
+      setDisplay(false);
+      setOff(true)
+    },1000);
+  }
+   }
+ },[turn])
   useEffect(()=>{
     get_data();
   },[])

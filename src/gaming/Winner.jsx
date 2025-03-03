@@ -21,19 +21,19 @@ const computerwickets=playerdata.reduce((total,i)=>{
   return total;
 },0)
   const send_data=async(datas,gatas,rat)=>{
-    const [res,ress,gess]=await Promise.all([fetch("https://sudden-nadean-handcricket-92bb9ebb.koyeb.app/players", {
+    const [res,ress,gess]=await Promise.all([fetch("https://intelligent-ailyn-handcricket-e8842259.koyeb.app/players", {
     method: "POST",
     body: JSON.stringify(datas),
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
-}),fetch("https://sudden-nadean-handcricket-92bb9ebb.koyeb.app/records", {
+}),fetch("https://intelligent-ailyn-handcricket-e8842259.koyeb.app/records", {
     method: "POST",
     body: JSON.stringify(gatas),
     headers: {
         "Content-type": "application/json; charset=UTF-8"
     }
-}),fetch("https://sudden-nadean-handcricket-92bb9ebb.koyeb.app/results", {
+}),fetch("https://intelligent-ailyn-handcricket-e8842259.koyeb.app/results", {
     method: "POST",
     body: JSON.stringify(rat),
     headers: {

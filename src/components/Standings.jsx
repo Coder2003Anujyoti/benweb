@@ -8,7 +8,7 @@ const Standings = () => {
   const teamId = searchParams.get("team"); 
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const get_Details=async()=>{
-    const res=await fetch(`https://sudden-nadean-handcricket-92bb9ebb.koyeb.app/standings`)
+    const res=await fetch(`https://intelligent-ailyn-handcricket-e8842259.koyeb.app/standings`)
     const data=await res.json();
     setItems(data);
     setLoad(false);
@@ -42,7 +42,7 @@ const Standings = () => {
 }
 {
   load===false && <>
-          <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+          <div className="w-full bg-slate-800 p-1 flex ">
   <img className="w-24 h-24" src={`Logos/${teamId}.webp`} />
 </div>
   <div className="w-full flex flex-row py-6 justify-center gap-12">
@@ -70,10 +70,11 @@ const Standings = () => {
         <footer className="bg-black mt-4 text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>
-        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-12">
+        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-7">
     <HashLink smooth to='/#about'> <li className="text-gray-400">
        About Us</li></HashLink>
      <HashLink smooth to='/#services'> <li className="text-gray-400">Services</li></HashLink>
+       <HashLink smooth to='/#modes'> <li className="text-gray-400">Modes</li></HashLink>
      <HashLink smooth to='/#gallery'><li className="text-gray-400">Gallery</li></HashLink>
         </ul>
      </div>

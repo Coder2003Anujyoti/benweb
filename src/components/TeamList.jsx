@@ -6,7 +6,7 @@ const TeamList = () => {
   const [load,setLoad]=useState(true);
  const [value,setValue]=useState([]);
 const get_data=async()=>{
-  const response=await fetch("https://sudden-nadean-handcricket-92bb9ebb.koyeb.app/");
+  const response=await fetch("https://intelligent-ailyn-handcricket-e8842259.koyeb.app/");
   const item= await response.json();
   setValue(item.data)
   setLoad(false)
@@ -35,13 +35,8 @@ const get_data=async()=>{
     </div>
   </>}
 { load===false && <>
-  <div className="w-full bg-slate-800 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex ">
+  <div className="w-full bg-slate-800 flex p-1 ">
   <img className="w-28 h-16" src={`Logos/Logo.webp`} />
-  <div className="w-full flex items-center justify-end">
-<HashLink to='/auction'>
-  <img src="Icons/auction.png" className="w-10 h-10" />
-</HashLink>
-</div>
 </div>
 <div className="w-full  flex flex-col justify-center">
   <div id='about' className="w-full py-2 flex-col flex justify-center border-b border-b-slate-400
@@ -68,6 +63,24 @@ This version focuses purely on the display of player names, ideal for an app whe
   })}
 </div>
 </div>
+<div id="modes" className="w-full mt-2 flex justify-center flex-col text-center">
+     <h3 className="text-lg text-slate-400 font-bold">Modes</h3>
+    <div className="w-full mt-2 flex justify-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select your Mode</h1></div>
+<div className="w-full mt-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center border-b border-b-slate-400 p-2 flex-row ">
+     <div className="text-center rounded-lg  bg-slate-800 p-4 flex  gap-y-6">
+     <HashLink to='/auction'>
+   <div className="w-full p-2 flex justify-center"><img src="Icons/auction.png" className="w-16 h-16"></img></div>
+    <h4 className="text-lg text-slate-400 font-bold">Auction</h4>
+    </HashLink>
+    </div>
+   <div className="text-center rounded-lg  bg-slate-800 p-4 flex  gap-y-6">
+   <HashLink to='/bid'>
+   <div className="w-full p-2 flex justify-center"><img src="Icons/stadium.png" className="w-16 h-16"></img></div>
+    <h4 className="text-lg text-slate-400 font-bold">Tournament</h4>
+    </HashLink>
+    </div>
+    </div>
+    </div>
   <div id="gallery" className="w-full py-2 my-4 flex-col flex justify-center  items-center text-center p-2 gap-2">
     <h3 className="text-lg text-slate-400 font-bold">Gallery</h3>
     <div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center  p-2 flex-row ">
@@ -83,10 +96,11 @@ This version focuses purely on the display of player names, ideal for an app whe
     <footer className="bg-black text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>
-        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-12">
+        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-7">
     <HashLink smooth to='#about'> <li className="text-gray-400">
        About Us</li></HashLink>
      <HashLink smooth to='#services'> <li className="text-gray-400">Services</li></HashLink>
+    <HashLink smooth to='#modes'><li className="text-gray-400">Modes</li></HashLink>
      <HashLink smooth to='#gallery'><li className="text-gray-400">Gallery</li></HashLink>
         </ul>
      </div>

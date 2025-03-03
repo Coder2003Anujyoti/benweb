@@ -2,10 +2,11 @@ import React,{useState,useEffect} from "react";
 import {useSearchParams} from "react-router-dom"
 import PlayerFirst from './PlayerFirst.jsx';
 import ComputerFirst from './ComputerFirst.jsx';
-const Play = () => {
+import { useLocation } from "react-router-dom";
+const Game = () => {
   const [searchParams] = useSearchParams();
   const [oppositionteam,setOppositionteam]=useState("")
-  const [load,setLoad]=useState(true);
+  const [load,setLoad]=useState(false);
   const [items,setItems]=useState([]);
   const [oppositionplayers,setOppositionplayers]=useState([])
   const [players,setPlayers]=useState([]);
@@ -15,31 +16,18 @@ const Play = () => {
   const [computerfirst,setComputerfirst]=useState(false);
   const teamId = searchParams.get("team"); 
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
-  const get_Players=async()=>{
-    const res=await fetch(`https://intelligent-ailyn-handcricket-e8842259.koyeb.app/players?team=${teamId}`)
-    const data=await res.json();
-    setItems(data);
-    setLoad(false);
-  }
-  const get_Opposition_Players=async()=>{
-    const res=await fetch(`https://intelligent-ailyn-handcricket-e8842259.koyeb.app/players?team=${oppositionteam}`)
-    const data=await res.json();
-    setOppositionplayers(data.slice(0,10));
-  }
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];
+  const team=JSON.parse(decodeURIComponent(queryParams.get("team"))) || "";
+  const playerteam=data.filter((i)=>i.team===team);
+  const computerteam=data.filter((i)=>i.team===oppositionteam)
   const add_Players=(i)=>{
-  
     setPlayers([...players,i]);
     setId([...id,i.name]);
   }
-  useEffect(()=>{
-    get_Players();
-  },[])
-  useEffect(()=>{
-    if(oppositionteam!='')
-    get_Opposition_Players();
-  },[oppositionteam])
   const get_Toss=()=>{
-    let options=Math.floor(Math.random()*2);
+   let options=Math.floor(Math.random()*2);
     if(options==0){
       let computer_options=Math.floor(Math.random()*2);
       if(computer_options===0){
@@ -60,7 +48,7 @@ const Play = () => {
 <div className="w-full py-8 flex justify-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select Opposition Team</h1></div>
 <div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center flex-row ">
   {teams.map((i)=>{
-  if(i!=teamId)
+  if(i!=team)
   return(
   <div className="text-center rounded-lg  bg-slate-800" onClick={()=>setOppositionteam(i)}>
     <img src={`Logos/${i}.webp`} className="w-24 h-24"></img>
@@ -72,36 +60,17 @@ const Play = () => {
 </>
 }
 { oppositionteam!=''&&<>
-  {
-  load==true && <>
-    <div className="w-full flex flex-col items-center justify-center py-40">
-    <img src="Logos/Logo.webp" className="w-30 h-24" />
-   <div className="w-full flex justify-center gap-y-2  text-center flex-col p-4 mt-4">
-
-    <div className="mt-4 flex flex-row flex-wrap justify-center gap-x-12 gap-y-12 ">
-  {new Array(4).fill("").map((i,ind)=>{
-  return(
-  <div className="text-center">
-    <img src={`sponsor/sponsor${ind+1}.png`} className="w-22 h-14"></img>
-    </div>
-    )
-  })}
-</div>
-    </div>
-    </div>
-  </>
-}
 {load==false && id.length<10 && <>
   <div className="w-full py-8 flex justify-center">
     <h1 className="text-green-400 text-2xl font-bold shadow-green-400">Choose Your Playing X</h1>
   </div>
   <div className="flex justify-center flex-row flex-wrap gap-4">
-    {items.map((i)=>{
+    {playerteam[0].players.map((i)=>{
     if(!id.includes(i.name))
       return(
       <>
-        <div className="text-center rounded-md bg-black  transition duration-300 ease-in-out transform hover:bg-black  hover:scale-105" onClick={()=>add_Players(i)}>
-         <div className="flex justify-center items-center">   <img className="w-16 h-16" src={i.image} /></div>
+        <div className="text-center rounded-md bg-black  transition duration-300 ease-in-out transform   hover:scale-105" onClick={()=>add_Players(i)}>
+       <div className="flex justify-center items-center"> <img className="w-16 h-16" src={i.image} /></div>
         <p className="text-xs font-bold text-slate-400">{i.name}</p>
         </div>
       </>
@@ -137,7 +106,7 @@ const Play = () => {
   }
     {
     toss=="Computer Ball" && <>
-      <div className="w-full py-20 flex justify-center text-center"><h1 className="text-green-400 ml-2 mr-2 text-2xl font-bold shadow-green-400">
+      <div className="w-full py-20 flex justify-center text-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400 ml-2 mr-2">
       {oppositionteam.toUpperCase()} won toss and elected to Bowl first 
       </h1></div>
     <div className="w-full flex justify-center items-center">
@@ -148,26 +117,27 @@ const Play = () => {
   {
     toss=="Player" && <>
             <div className="w-full py-20 flex justify-center text-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">
-      {teamId.toUpperCase()} won toss 
+      {team.toUpperCase()} won toss 
       </h1></div>
       <div className="w-full flex justify-center items-center flex-row gap-28">
   <div className="text-center p-4 rounded-lg bg-slate-800  transition duration-300 ease-in-out transform  hover:scale-105" onClick={()=>setPlayerfirst(true)}> <img className="w-16 h-16" src="Icons/Batsman.png" /></div>
-  <div className="text-center p-4 rounded-lg bg-slate-800  transition duration-300 ease-in-out transform  hover:scale-105" onClick={()=>setComputerfirst(true)}> <img className="w-16 h-16" src="Icons/Bowler.png" /></div>
+  <div className="text-center p-4 rounded-lg bg-slate-800  transition duration-300 ease-in-out transform   hover:scale-105" onClick={()=>setComputerfirst(true)}> <img className="w-16 h-16" src="Icons/Bowler.png" /></div>
       </div>
     </>
   }
 </>
 }
 {
-  playerfirst===true && <PlayerFirst players={players} oppositionplayers={oppositionplayers} />
+  playerfirst===true && <PlayerFirst players={players} oppositionplayers={computerteam[0].players.slice(0,10)} />
 }
 {
-  computerfirst===true && <ComputerFirst players={players} oppositionplayers={oppositionplayers} />
+  computerfirst===true && <ComputerFirst players={players} oppositionplayers={computerteam[0].players.slice(0,10)} />
 }
+
 </>
   );
 };
 
 
 
-export default Play;
+export default Game;

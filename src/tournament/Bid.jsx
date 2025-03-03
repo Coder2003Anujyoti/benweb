@@ -1,9 +1,27 @@
 import React,{useState,useEffect} from "react";
-import Toss from "./Toss.jsx";
-const Auction = () => {
+import Site from './Site.jsx'
+const LocalData=()=>{
+  const lists=localStorage.getItem('user');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
+const Localget=()=>{
+  const lists=localStorage.getItem('team');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return "";
+}
+}
+const Bid= () => {
   const [load,setLoad]=useState(true);
   const [value,setValue]=useState([]);
-  const [playerteam,setPlayerteam]=useState("");
+  const [playerteam,setPlayerteam]=useState(()=>Localget()||"");
   const [computerteam,setComputerteam]=useState("");
   const [names,setNames]=useState([])
   const [show,setShow]=useState(true)
@@ -17,8 +35,11 @@ const Auction = () => {
   const [purse,setPurse]=useState(50000)
   const [players,setPlayers]=useState([]);
   const [playing,setPlaying]=useState(false);
-  const [computers,setComputers]=useState([])
-  const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+  const [team,setTeam]=useState("");
+  const [store,setStore]=useState(()=>LocalData()||[]);
+  const [computers,setComputers]=useState([{team:"Mi",players:[]},{team:"Csk",players:[]},{team:"Rr",players:[]},{team:"Kkr",players:[]},{team:"Gt",players:[]},{team:"Pbks",players:[]},{team:"Rcb",players:[]},{team:"Lsg",players:[]},{team:"Dc",players:[]},{team:"Srh",players:[]}])
+  var teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+  var details=[{team:"Mi",players:[]},{team:"Csk",players:[]},{team:"Rr",players:[]},{team:"Kkr",players:[]},{team:"Gt",players:[]},{team:"Pbks",players:[]},{team:"Rcb",players:[]},{team:"Lsg",players:[]},{team:"Dc",players:[]},{team:"Srh",players:[]}]
   const get_data=async()=>{
   const response=await fetch("https://intelligent-ailyn-handcricket-e8842259.koyeb.app/");
   const item= await response.json();
@@ -27,6 +48,14 @@ const Auction = () => {
   setAmount(Math.floor(Math.random()*100)+1)
   setIndex(Math.floor(Math.random()*150))
 }
+useEffect(()=>{
+  if(store.length===0){
+    setPlaying(false)
+  }
+  else{
+    setPlaying(true)
+  }
+},[store])
  const add=()=>{
    if(bid==0){
   if(purse>=amount){
@@ -53,52 +82,67 @@ const Auction = () => {
   }
    }
  }
+ const localremove=()=>{
+   localStorage.removeItem('user');
+   localStorage.removeItem('team');
+   window.location.reload();
+   setPlaying(false)
+   setStore([]);
+   setLoad(true);
+ }
  const go=()=>{
    if(bid!==0){
-     if(computers.length<18){
        const store=value.find((i,ind)=>{
          return ind==index
        });
-    setComputers([...computers,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:computerteam}])
+     setComputers((prevTeams) =>
+      prevTeams.map((team) =>
+        team.team === computerteam
+          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:computerteam}] }
+          : team
+      )
+    );
       setNames([...names,store.name])
       setSold(computerteam)
       setOff(true)
       setDisplay(false)
-     }
-     else{
-    setComputers(computers);
-      setOff(true)
-      setDisplay(false)
-     }
    }
    if(bid===0){
-    if(computers.length<18){
+     const empty=computers.every((i)=>i.players.length===15 && i.team!=playerteam);
+    if(empty===false){
     let rand_int=Math.floor(Math.random()*100);
     if(rand_int%2===0){
       const store=value.find((i,ind)=>{
       return ind==index
       });
-    setComputers([...computers,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:computerteam}])
+    const m=computers.filter((i)=>i.players.length<15 && i.team!=playerteam);
+    const k=m[Math.floor(Math.random()*m.length)].team;
+      setComputers((prevTeams) =>
+      prevTeams.map((team) =>
+        team.team === k
+          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:k}] }
+          : team
+      )
+    );
       setNames([...names,store.name])
-      setSold(computerteam)
+      setSold(k)
       setOff(true)
       setDisplay(false)
     }
     else{
-     setComputers(computers);
      setSold("Unsold")
       setOff(true)
       setDisplay(false)
     }
     }
     else{
-     setComputers(computers);
      setSold("Unsold")
       setOff(true)
       setDisplay(false)
     }
    }
  }
+ 
  const next=()=>{
    const val=value.filter((i,ind)=>{
    return ind!=index
@@ -115,35 +159,80 @@ const Auction = () => {
   setSold("")
  }
  const play=()=>{
-   if(computers.length<10){
-   let r= value.map((i)=>{
-         setComputers((prev)=>prev.length<10 && !names.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:amount,runs:0,wickets:0,team:computerteam}]:prev); 
+   const empty=computers.every((i)=>i.players.length===15 && i.team!==playerteam);
+   if(empty===false){
+    setComputers((prevTeams) => {
+  let assigned = []; // Keep track of assigned players globally
+
+  let updatedTeams = prevTeams.map((team) => {
+    if (team.team === playerteam) return team; // Skip player's team
+
+    let newPlayers = [...team.players];
+
+    value.forEach((player) => {
+      if (!names.includes(player.name) && !assigned.includes(player.name) && newPlayers.length < 15) {
+        newPlayers.push({
+          name: player.name,
+          image: player.image,
+          bid: amount,
+          runs: 0,
+          wickets: 0,
+          team: team.team,
+        });
+        assigned.push(player.name); // Track assigned players globally
+      }
     });
+
+    return { ...team, players: newPlayers };
+  });
+
+  // Remove assigned players **after** teams are updated
+  setValue(value.filter((player) => !assigned.includes(player.name)));
+
+  return updatedTeams;
+});
     setPlaying(true)
+    setStore([...store,computers]);
    }
    else{
+     setComputers(computers)
      setPlaying(true);
+     setStore([...store,computers]);
    }
  }
- 
+ const sets=(i)=>{
+  teams=teams.filter((it)=>it!=i);
+   setPlayerteam(i);
+ }
  useEffect(()=>{
-  if(turn!='' && computers.length<18){
+  const empty=computers.every((i)=>i.players.length===15);
+  if(turn!='' && empty==false){
   if(turn===playerteam){
     setTimeout(function() {
-   let rand=Math.floor(Math.random()*100);
+  let rand=Math.floor(Math.random()*100);
     if(rand%7==0){
     const store=value.find((i,ind)=>{
       return ind==index});
-    setPlayers([...players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:playerteam}])
+      setComputers((prevTeams) =>
+      prevTeams.map((team) =>
+        team.team === playerteam
+          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:playerteam}] }
+          : team
+      )
+    );
     setNames([...names,store.name])
+    setPlayers([...players,store.name])
       setSold(playerteam);
       setPurse(purse-bid);
       setDisplay(false);
       setOff(true)
     }
     else{
+    const m=computers.filter((i)=>i.players.length<15 && i.team!=playerteam);
+    const k=m[Math.floor(Math.random()*m.length)].team;
       setBid(bid+5);
-      setTurn(computerteam);
+      setComputerteam(k);
+      setTurn(k);
       setOff(false)
       setTimeout(()=>{
       setDisplay(true)},1000);
@@ -159,12 +248,19 @@ const Auction = () => {
     },1000);
   }
  }
-   if(turn!='' && computers.length===18){
+   if(turn!='' && empty===true){
   if(turn===playerteam){
     setTimeout(function() {
     const store=value.find((i,ind)=>{
       return ind==index});
-    setPlayers([...players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:playerteam}])
+       setComputers((prevTeams) =>
+      prevTeams.map((team) =>
+        team.team === playerteam
+          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:playerteam}] }
+          : team
+      )
+    );
+      setPlayers([...players,store.name])
     setNames([...names,store.name])
       setSold(playerteam);
       setPurse(purse-bid);
@@ -177,6 +273,14 @@ const Auction = () => {
   useEffect(()=>{
     get_data();
   },[])
+  useEffect(()=>{
+    const empty=computers.every((i)=>i.players.length===15);
+    if(empty===true){
+      localStorage.setItem('user', 
+      JSON.stringify(computers));
+      localStorage.setItem('team',JSON.stringify(playerteam));
+    }
+  },[computers])
   return (
   <>
       {load==true && <>
@@ -198,16 +302,17 @@ const Auction = () => {
     </div>
     </div>
   </>}
+
 {
-  load===false && playing==false && <>
-    {playerteam==='' && computerteam=='' && <>
+  load===false && playing==false && store.length===0 && <>
+    {playerteam===''  && <>
     <div className="w-full flex-col mt-2 flex text-center justify-center">
   <div className="w-full mt-2 flex justify-center">
  <h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select your Team</h1></div>
 <div className="w-full mt-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center  p-2 flex-row">
   {teams.map((i)=>{
   return(
-  <div className="text-center rounded-lg  bg-slate-800" onClick={()=>setPlayerteam(i)}>
+  <div className="text-center rounded-lg  bg-slate-800" onClick={()=>sets(i)}>
     <img src={`Logos/${i}.webp`} className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">{i.toUpperCase()}</h4>
     </div>
@@ -216,24 +321,7 @@ const Auction = () => {
 </div>
 </div>
 </>}
-{playerteam!=='' && computerteam=='' && <>
-    <div className="w-full flex-col mt-2 flex text-center justify-center">
-  <div className="w-full mt-2 flex justify-center">
- <h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select Computer Team</h1></div>
-<div className="w-full mt-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center  p-2 flex-row">
-  {teams.map((i)=>{
-  if(i!=playerteam)
-  return(
-  <div className="text-center rounded-lg  bg-slate-800" onClick={()=>setComputerteam(i)}>
-    <img src={`Logos/${i}.webp`} className="w-24 h-24"></img>
-    <h4 className="text-lg text-slate-400 font-bold">{i.toUpperCase()}</h4>
-    </div>
-    )
-  })}
-</div>
-</div>
-</>}
-{ playerteam!=='' && computerteam!='' && <>
+{ playerteam!==''  && <>
 <div className="w-full flex flex-row items-center gap-y-2 justify-end">
    <img src="Icons/digital-money.png" className="w-10 h-10"/>
      <p className="text-base font-bold text-slate-300">{purse+""+"L"}</p>
@@ -288,7 +376,8 @@ const Auction = () => {
 }
 {off===true && <>
   <div className="w-full my-4 flex flex-row gap-x-8 items-center justify-center">
-  {players.length<18 && <>
+  {players.length<15
+  && <>
    <div className="rounded-lg p-2 w-24 bg-slate-800 flex items-center justify-center" onClick={next}>
   <button className="font-bold text-base text-slate-400">
     Next</button>
@@ -302,52 +391,56 @@ const Auction = () => {
     </div>
 </>
 }
-{ players.length>0 && <>
-     <div className="flex p-4 flex-row justify-center border-t border-slate-600 gap-4">
-       <img src={`Logos/${playerteam}.webp`} className="w-16 h-16" />
-     </div>
-   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2">
-     {
-       players.map((i)=>{
-         return(<>
-      <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
-    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
-           </div>
-         </>)
-       })
-     }
-     </div>
+{playerteam!='' && <>
+<div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center py-10 flex-row">
+  {teams.map((i)=>{
+  return(
+  <div className="text-center w-30 bg-slate-800 rounded-full" onClick={()=>setTeam(i)}>
+    <div className="w-full p-2 flex justify-center">
+    <img src={`Logos/${i}.webp`} className="w-14 h-14"></img>
+    </div>
+    </div>
+    )
+  })}
+</div>
 </>
 }
-{ computers.length>0 && <>
-     <div className="flex p-4 flex-row justify-center border-t border-slate-600 gap-4">
-       <img src={`Logos/${computerteam}.webp`} className="w-16 h-16" />
+{
+  team!='' && <>
+       <div className="flex p-4 flex-row justify-center border-t border-slate-600 gap-4">
+       <img src={`Logos/${team}.webp`} className="w-16 h-16" />
      </div>
    <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2">
      {
-       computers.map((i)=>{
+       computers.map((it)=>{
+       if(it.team===team)
          return(<>
-      <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+      {it.players.map((i)=>{
+        return(<>
+    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
     <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
     <p className="text-slate-400 text-xs font-bold">{i.name}</p>
            </div>
+          
+        </>)
+      })}
          </>)
        })
      }
      </div>
-</>
+  </>
 }
   </>
 }
 {
-  load===false && playing===true && <>
-    <Toss player={players} computer={computers} playerteam={playerteam} computerteam={computerteam} />
-  </>
+  playing==true && load===false && <>{
+    names.length>0 ?     <Site store={computers} localremove={localremove} playerteam={playerteam}/> :    <Site store={store} localremove={localremove} playerteam={playerteam}/>
+  }
+
+    </>
 }
+
   </>
   );
 };
-
-
-export default Auction;
+export default Bid;

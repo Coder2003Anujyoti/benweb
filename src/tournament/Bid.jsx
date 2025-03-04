@@ -149,19 +149,37 @@ useEffect(()=>{
  }
  
  const next=()=>{
+   if(sold!=="Unsold"){
    const val=value.filter((i,ind)=>{
    return ind!=index
    });
    const len=val.length;
+   const ra=Math.floor(Math.random()*len);
+   console.log(len+" "+ra);
    setValue(val);
   setAmount(Math.floor(Math.random()*100)+1)
-  setIndex(Math.floor(Math.random()*len))
+  setIndex(ra);
   setOff(false);
   setShow(true)
   setDisplay(true)
   setBid(0);
   setTurn("")
   setSold("")
+   }
+   else{
+     const len=value.length;
+   const ra=Math.floor(Math.random()*len);
+   console.log(len+" "+ra);
+   setValue(value);
+  setAmount(Math.floor(Math.random()*100)+1)
+  setIndex(ra);
+  setOff(false);
+  setShow(true)
+  setDisplay(true)
+  setBid(0);
+  setTurn("")
+  setSold("")
+   }
  }
  const play=()=>{
    const empty=computers.every((i)=>i.players.length===15 && i.team!==playerteam);
@@ -333,7 +351,6 @@ useEffect(()=>{
   </div>
 
 <div className="w-full flex flex-col items-center gap-y-2 justify-center">
-  {console.log(index)}
   {value.map((i,ind)=>{
     if(ind===index){
       return(<>

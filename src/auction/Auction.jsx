@@ -100,6 +100,7 @@ const Auction = () => {
    }
  }
  const next=()=>{
+   if(sold!="Unsold"){
    const val=value.filter((i,ind)=>{
    return ind!=index
    });
@@ -113,6 +114,19 @@ const Auction = () => {
   setBid(0);
   setTurn("")
   setSold("")
+   }
+   else{
+     const len=value.length;
+   setValue(value);
+  setAmount(Math.floor(Math.random()*100)+1)
+  setIndex(Math.floor(Math.random()*len))
+  setOff(false);
+  setShow(true)
+  setDisplay(true)
+  setBid(0);
+  setTurn("")
+  setSold("")
+   }
  }
  const play=()=>{
    if(computers.length<10){

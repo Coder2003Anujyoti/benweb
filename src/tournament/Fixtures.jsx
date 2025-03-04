@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useLocation } from "react-router-dom";
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link'
@@ -7,6 +7,9 @@ const Fixtures = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];
+    useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },[])
   return (
    <>
     <div className="w-full bg-slate-800 p-1 flex ">

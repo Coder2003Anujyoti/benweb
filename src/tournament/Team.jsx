@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link'
 import { useLocation } from "react-router-dom";
@@ -9,6 +9,9 @@ const Team = () => {
   const queryParams = new URLSearchParams(location.search);
   const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];
   const team=JSON.parse(decodeURIComponent(queryParams.get("team"))) || "";
+    useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },[])
   return (
   <>
   <div className="w-full bg-slate-800 p-1 flex ">

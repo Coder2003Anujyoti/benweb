@@ -35,6 +35,9 @@ const Game = () => {
     setPlayers([...players,i]);
     setId([...id,i.name]);
   }
+    useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },[])
   const get_Toss=()=>{
    let options=Math.floor(Math.random()*2);
     if(options==0){

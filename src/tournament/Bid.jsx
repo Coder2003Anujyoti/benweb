@@ -48,6 +48,9 @@ const Bid= () => {
   setAmount(Math.floor(Math.random()*100)+1)
   setIndex(Math.floor(Math.random()*150))
 }
+  useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },[])
 useEffect(()=>{
   if(store.length===0){
     setPlaying(false)

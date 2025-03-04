@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link'
 const LocalData=()=>{
@@ -16,12 +16,18 @@ const Site = ({playerteam,store,localremove}) => {
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const winners=win.filter((i)=>i.win===playerteam);
   const losers=win.filter((i)=>i.win!==playerteam);
+  useEffect(()=>{
+    alert("You need to win more than 5 matches to become champions.");
+  },[])
   return (
    <>
      <div className="w-full bg-slate-800 p-1 flex ">
   <img className="w-24 h-24" src="Icons/stadium.png"/>
 </div>
 {win.length<9 && <>
+  <div className="w-full text-center my-2">
+  <h3 className="font-bold text-red-400">*Need to win more than 5 matches to become champions.</h3>
+</div>
      <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row  p-2">
      <HashLink to={`/game?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
@@ -45,7 +51,7 @@ const Site = ({playerteam,store,localremove}) => {
     </>}
   {
     win.length===9 && <>
-      {winners.length>=5 && <>
+      {winners.length>5 && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
          <div className="w-full flex justify-center"><img className="w-36 h-36" src="Icons/trophy.png" /></div>
           <h1 className="font-bold text-yellow-500">Champions</h1>
@@ -53,7 +59,7 @@ const Site = ({playerteam,store,localremove}) => {
       </>
       }
       {
-        winners.length<5 && <>
+        winners.length<=5 && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
          <div className="w-full flex justify-center"><img className="w-36 h-36" src="Icons/loser.png" /></div>
           <h1 className="font-bold text-yellow-500">Loser</h1>

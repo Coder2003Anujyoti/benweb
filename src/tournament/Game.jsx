@@ -3,6 +3,15 @@ import {useSearchParams} from "react-router-dom"
 import PlayerFirst from './PlayerFirst.jsx';
 import ComputerFirst from './ComputerFirst.jsx';
 import { useLocation } from "react-router-dom";
+const LocalData=()=>{
+  const lists=localStorage.getItem('oppos');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return ["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+}
+}
 const Game = () => {
   const [searchParams] = useSearchParams();
   const [oppositionteam,setOppositionteam]=useState("")
@@ -15,7 +24,7 @@ const Game = () => {
   const [playerfirst,setPlayerfirst]=useState(false);
   const [computerfirst,setComputerfirst]=useState(false);
   const teamId = searchParams.get("team"); 
-  const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+  const [teams,setTeams]=useState(()=>LocalData()||["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"])
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];

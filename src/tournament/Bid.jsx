@@ -85,6 +85,8 @@ useEffect(()=>{
  const localremove=()=>{
    localStorage.removeItem('user');
    localStorage.removeItem('team');
+   localStorage.removeItem('oppos');
+   localStorage.removeItem('winlist');
    window.location.reload();
    setPlaying(false)
    setStore([]);

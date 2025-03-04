@@ -16,9 +16,6 @@ const Site = ({playerteam,store,localremove}) => {
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const winners=win.filter((i)=>i.win===playerteam);
   const losers=win.filter((i)=>i.win!==playerteam);
-  useEffect(()=>{
-    alert("You need to win more than 5 matches to become champions.");
-  },[])
   return (
    <>
      <div className="w-full bg-slate-800 p-1 flex ">

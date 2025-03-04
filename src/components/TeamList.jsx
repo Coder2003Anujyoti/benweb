@@ -50,7 +50,7 @@ This version focuses purely on the display of player names, ideal for an app whe
 <div id="services" className="w-full mt-2 flex justify-center flex-col text-center">
      <h3 className="text-lg text-slate-400 font-bold">Services</h3>
     <div className="w-full mt-2 flex justify-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select your Team</h1></div>
-<div className="w-full mt-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center border-b border-b-slate-400 p-2 flex-row ">
+<div className="w-full mt-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center p-2 flex-row ">
   {teams.map((i)=>{
   return(
   <div className="text-center rounded-lg  bg-slate-800">
@@ -67,13 +67,13 @@ This version focuses purely on the display of player names, ideal for an app whe
      <h3 className="text-lg text-slate-400 font-bold">Modes</h3>
     <div className="w-full mt-2 flex justify-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select your Mode</h1></div>
 <div className="w-full mt-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center border-b border-b-slate-400 p-2 flex-row ">
-     <div className="text-center rounded-lg  bg-slate-800 p-4 flex  gap-y-6">
+     <div className="text-center rounded-lg  bg-slate-800 p-2 flex  gap-y-6">
      <HashLink to='/auction'>
    <div className="w-full p-2 flex justify-center"><img src="Icons/auction.png" className="w-16 h-16"></img></div>
     <h4 className="text-lg text-slate-400 font-bold">Auction</h4>
     </HashLink>
     </div>
-   <div className="text-center rounded-lg  bg-slate-800 p-4 flex  gap-y-6">
+   <div className="text-center rounded-lg  bg-slate-800 p-2 flex  gap-y-6">
    <HashLink to='/bid'>
    <div className="w-full p-2 flex justify-center"><img src="Icons/stadium.png" className="w-16 h-16"></img></div>
     <h4 className="text-lg text-slate-400 font-bold">Tournament</h4>

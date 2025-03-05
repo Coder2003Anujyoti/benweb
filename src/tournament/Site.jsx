@@ -26,7 +26,7 @@ const Site = ({playerteam,store,localremove}) => {
 </div>
 {win.length<9 && <>
   <div className="w-full text-center my-2">
-  <h3 className="font-bold text-red-400">*Need to win more than 5 matches to become champions.</h3>
+  <h3 className="font-bold text-sm text-red-400">*Need to win more than 5 matches to become champions.</h3>
 </div>
      <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row  p-2">
      <HashLink to={`/game?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>

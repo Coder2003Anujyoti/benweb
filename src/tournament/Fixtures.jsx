@@ -18,9 +18,9 @@ const Fixtures = () => {
 <div className="w-full flex flex-row py-6 justify-center gap-12">
    <div className="w-full flex  justify-center  gap-12" >
 
-       <div className="flex w-16 justify-center items-center border-b-2 border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Player</p></div>
-      <div className="flex w-24  justify-center items-center border-b-2 border-b-slate-400 "><p className="text-sm font-bold text-slate-400">Computer</p></div>
-    <div className="flex w-16 justify-center items-center border-b-2 border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Winner</p></div>
+       <div className="flex w-16 justify-center items-center border-b border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Player</p></div>
+      <div className="flex w-24  justify-center items-center border-b border-b-slate-400 "><p className="text-sm font-bold text-slate-400">Computer</p></div>
+    <div className="flex w-16 justify-center items-center border-b border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Winner</p></div>
    </div>
    </div>
   <div className="w-full flex flex-row flex-wrap justify-center items-center my-4 gap-y-8">

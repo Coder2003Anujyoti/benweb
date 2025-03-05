@@ -113,7 +113,8 @@ useEffect(()=>{
       setDisplay(false)
    }
    if(bid===0){
-     const empty=computers.every((i)=>i.players.length===15 && i.team!=playerteam);
+     const k=computers.filter((i)=>i.team!==playerteam)
+     const empty=k.every((i)=>i.players.length===15);
     if(empty===false){
     let rand_int=Math.floor(Math.random()*100);
     if(rand_int%2===0){
@@ -182,7 +183,8 @@ useEffect(()=>{
    }
  }
  const play=()=>{
-   const empty=computers.every((i)=>i.players.length===15 && i.team!==playerteam);
+ const k=computers.filter((i)=>i.team!==playerteam)
+   const empty=k.every((i)=>i.players.length===15);
    if(empty===false){
     setComputers((prevTeams) => {
   let assigned = []; // Keep track of assigned players globally
@@ -228,7 +230,8 @@ useEffect(()=>{
    setPlayerteam(i);
  }
  useEffect(()=>{
-  const empty=computers.every((i)=>i.players.length===15);
+  const k=computers.filter((i)=>i.team!==playerteam)
+     const empty=k.every((i)=>i.players.length===15);
   if(turn!='' && empty==false){
   if(turn===playerteam){
     setTimeout(function() {

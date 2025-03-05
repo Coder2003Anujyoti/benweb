@@ -132,8 +132,8 @@ const Game = () => {
       {team.toUpperCase()} won toss 
       </h1></div>
       <div className="w-full flex justify-center items-center flex-row gap-28">
-  <div className="text-center p-4 rounded-lg bg-slate-800  transition duration-300 ease-in-out transform  hover:scale-105" onClick={()=>setPlayerfirst(true)}> <img className="w-16 h-16" src="Icons/Batsman.png" /></div>
-  <div className="text-center p-4 rounded-lg bg-slate-800  transition duration-300 ease-in-out transform   hover:scale-105" onClick={()=>setComputerfirst(true)}> <img className="w-16 h-16" src="Icons/Bowler.png" /></div>
+  <div className="text-center p-4 rounded-lg bg-slate-800" onClick={()=>setPlayerfirst(true)}> <img className="w-16 h-16" src="Icons/Batsman.png" /></div>
+  <div className="text-center p-4 rounded-lg bg-slate-800" onClick={()=>setComputerfirst(true)}> <img className="w-16 h-16" src="Icons/Bowler.png" /></div>
       </div>
     </>
   }

@@ -1,10 +1,13 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link'
 const Site = ({player,computer,playerteam,computerteam,remove}) => {
   const [team,setTeam]=useState(playerteam);
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const details=player.concat(computer);
+  useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },[])
   return (
    <>
      <div className="w-full bg-slate-800 p-2 flex ">

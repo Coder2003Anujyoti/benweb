@@ -387,7 +387,7 @@ const localremove=()=>{
 </>
 }
 { playerteam!='' && computerteam!='' && <>
-  <div className="w-full flex my-8 gap-x-12 justify-center">
+  <div className="w-full flex my-16 gap-x-12 justify-center">
    <div className="p-2 w-30 rounded-full bg-slate-800 flex items-center justify-center" onClick={()=>setTeam(playerteam)}>
    <img src={`Logos/${playerteam}.webp`} className="w-14 h-14" />
  </div>

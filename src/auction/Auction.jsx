@@ -1,10 +1,48 @@
 import React,{useState,useEffect} from "react";
-import Toss from "./Toss.jsx";
+import {HashLink} from 'react-router-hash-link'
+import Site from "./Site.jsx";
+const LocalPlayerTeam=()=>{
+  const lists=localStorage.getItem('playerteam');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return "";
+}
+}
+const LocalPlayers=()=>{
+  const lists=localStorage.getItem('players');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
+const LocalComputerTeam=()=>{
+  const lists=localStorage.getItem('computerteam');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return "";
+}
+}
+const LocalComputers=()=>{
+  const lists=localStorage.getItem('computers');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
 const Auction = () => {
+  const [toggle,setToggle]=useState(()=>LocalPlayerTeam()||"")
   const [load,setLoad]=useState(true);
   const [value,setValue]=useState([]);
-  const [playerteam,setPlayerteam]=useState("");
-  const [computerteam,setComputerteam]=useState("");
+  const [playerteam,setPlayerteam]=useState(()=>LocalPlayerTeam()||"");
+  const [computerteam,setComputerteam]=useState(()=>LocalComputerTeam()||"");
   const [names,setNames]=useState([])
   const [show,setShow]=useState(true)
   const [amount,setAmount]=useState(0)
@@ -15,10 +53,32 @@ const Auction = () => {
   const [off,setOff]=useState(false);
   const [index,setIndex]=useState(0);
   const [purse,setPurse]=useState(50000)
-  const [players,setPlayers]=useState([]);
+  const [players,setPlayers]=useState(()=>LocalPlayers()||[]);
   const [playing,setPlaying]=useState(false);
-  const [computers,setComputers]=useState([])
+  const [computers,setComputers]=useState(()=>LocalComputers()||[])
+  const [team,setTeam]=useState("");
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+  useEffect(()=>{
+  if(toggle==='' ){
+    setPlaying(false)
+  }
+  else{
+    setPlaying(true)
+  }
+},[toggle])
+const localremove=()=>{
+   localStorage.removeItem('players');
+   localStorage.removeItem('computers');
+   localStorage.removeItem('playerteam');
+   localStorage.removeItem('computerteam');
+   window.location.reload();
+   setPlaying(false);
+   setPlayerteam("");
+   setComputerteam("");
+   setPlayers([]);
+   setComputers([]);
+   setLoad(true);
+}
   const get_data=async()=>{
   const response=await fetch("https://intelligent-ailyn-handcricket-e8842259.koyeb.app/");
   const item= await response.json();
@@ -55,7 +115,7 @@ const Auction = () => {
  }
  const go=()=>{
    if(bid!==0){
-     if(computers.length<18){
+     if(computers.length<15){
        const store=value.find((i,ind)=>{
          return ind==index
        });
@@ -72,7 +132,7 @@ const Auction = () => {
      }
    }
    if(bid===0){
-    if(computers.length<18){
+    if(computers.length<15){
     let rand_int=Math.floor(Math.random()*100);
     if(rand_int%2===0){
       const store=value.find((i,ind)=>{
@@ -119,7 +179,7 @@ const Auction = () => {
      const len=value.length;
    setValue(value);
   setAmount(Math.floor(Math.random()*100)+1)
-  setIndex(Math.floor(Math.random()*len))
+  setIndex((index+1)%len)
   setOff(false);
   setShow(true)
   setDisplay(true)
@@ -129,9 +189,9 @@ const Auction = () => {
    }
  }
  const play=()=>{
-   if(computers.length<10){
+   if(computers.length<15){
    let r= value.map((i)=>{
-         setComputers((prev)=>prev.length<10 && !names.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:amount,runs:0,wickets:0,team:computerteam}]:prev); 
+         setComputers((prev)=>prev.length<15 && !names.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:amount,runs:0,wickets:0,team:computerteam}]:prev); 
     });
     setPlaying(true)
    }
@@ -141,7 +201,7 @@ const Auction = () => {
  }
  
  useEffect(()=>{
-  if(turn!='' && computers.length<18){
+  if(turn!='' && computers.length<15){
   if(turn===playerteam){
     setTimeout(function() {
    let rand=Math.floor(Math.random()*100);
@@ -173,7 +233,7 @@ const Auction = () => {
     },1000);
   }
  }
-   if(turn!='' && computers.length===18){
+   if(turn!='' && computers.length===15){
   if(turn===playerteam){
     setTimeout(function() {
     const store=value.find((i,ind)=>{
@@ -191,6 +251,16 @@ const Auction = () => {
   useEffect(()=>{
     get_data();
   },[])
+  useEffect(()=>{
+    if(playing===true){
+      localStorage.setItem('players', 
+      JSON.stringify(players));
+      localStorage.setItem('computers',JSON.stringify(computers));
+        localStorage.setItem('playerteam', 
+      JSON.stringify(playerteam));
+      localStorage.setItem('computerteam',JSON.stringify(computerteam));
+    }
+  },[playing])
   return (
   <>
       {load==true && <>
@@ -302,13 +372,13 @@ const Auction = () => {
 }
 {off===true && <>
   <div className="w-full my-4 flex flex-row gap-x-8 items-center justify-center">
-  {players.length<18 && <>
+  {players.length<15 && <>
    <div className="rounded-lg p-2 w-24 bg-slate-800 flex items-center justify-center" onClick={next}>
   <button className="font-bold text-base text-slate-400">
     Next</button>
     </div>
     </>}
-    {players.length>=15 && <> <div className="rounded-lg p-2 w-24 bg-slate-800 flex items-center justify-center" onClick={play}>
+    {players.length===15 && <> <div className="rounded-lg p-2 w-24 bg-slate-800 flex items-center justify-center" onClick={play}>
   <button className="font-bold text-base text-slate-400">
     Play</button>
     </div>
@@ -316,7 +386,17 @@ const Auction = () => {
     </div>
 </>
 }
-{ players.length>0 && <>
+{ playerteam!='' && computerteam!='' && <>
+  <div className="w-full flex my-8 gap-x-12 justify-center">
+   <div className="p-2 w-30 rounded-full bg-slate-800 flex items-center justify-center" onClick={()=>setTeam(playerteam)}>
+   <img src={`Logos/${playerteam}.webp`} className="w-14 h-14" />
+ </div>
+    <div className="p-2 w-30 rounded-full bg-slate-800 flex items-center justify-center" onClick={()=>setTeam(computerteam)}>
+   <img src={`Logos/${computerteam}.webp`} className="w-14 h-14" />
+ </div>
+ </div>
+ </>}
+{ team===playerteam && team!='' && <>
      <div className="flex p-4 flex-row justify-center border-t border-slate-600 gap-4">
        <img src={`Logos/${playerteam}.webp`} className="w-16 h-16" />
      </div>
@@ -334,7 +414,7 @@ const Auction = () => {
      </div>
 </>
 }
-{ computers.length>0 && <>
+{ team===computerteam && team!='' && <>
      <div className="flex p-4 flex-row justify-center border-t border-slate-600 gap-4">
        <img src={`Logos/${computerteam}.webp`} className="w-16 h-16" />
      </div>
@@ -356,7 +436,7 @@ const Auction = () => {
 }
 {
   load===false && playing===true && <>
-    <Toss player={players} computer={computers} playerteam={playerteam} computerteam={computerteam} />
+    <Site player={players} computer={computers} playerteam={playerteam} computerteam={computerteam} remove={localremove} />
   </>
 }
   </>

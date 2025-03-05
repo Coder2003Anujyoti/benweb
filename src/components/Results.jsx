@@ -60,11 +60,10 @@ const Results = () => {
     <footer className="bg-black mt-4 text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>
-        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-7">
+        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-12">
     <HashLink smooth to='/#about'> <li className="text-gray-400">
        About Us</li></HashLink>
      <HashLink smooth to='/#services'> <li className="text-gray-400">Services</li></HashLink>
-   <HashLink smooth to='/#modes'> <li className="text-gray-400">Modes</li></HashLink>
      <HashLink smooth to='/#gallery'><li className="text-gray-400">Gallery</li></HashLink>
         </ul>
      </div>
@@ -128,11 +127,10 @@ const Results = () => {
       <footer className="bg-black mt-8 text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>
-        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-7">
+        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-12">
     <HashLink smooth to='/#about'> <li className="text-gray-400">
        About Us</li></HashLink>
      <HashLink smooth to='/#services'> <li className="text-gray-400">Services</li></HashLink>
-     <HashLink smooth to='/#modes'> <li className="text-gray-400">Modes</li></HashLink>
      <HashLink smooth to='/#gallery'><li className="text-gray-400">Gallery</li></HashLink>
         </ul>
      </div>

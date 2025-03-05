@@ -1,12 +1,19 @@
 import React,{useState,useEffect} from "react";
 import PlayerFirst from './PlayerFirst.jsx';
 import ComputerFirst from './ComputerFirst.jsx';
-const Toss = ({player,computer,playerteam,computerteam}) => {
+import { useLocation } from "react-router-dom";
+const Playgame = () => {
     const [toss,setToss]=useState("");
   const [playerfirst,setPlayerfirst]=useState(false);
   const [computerfirst,setComputerfirst]=useState(false);
   const [players,setPlayers]=useState([]);
   const [id,setId]=useState([]);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const player = JSON.parse(decodeURIComponent(queryParams.get("player"))) || [];
+  const computer=JSON.parse(decodeURIComponent(queryParams.get("computer"))) || [];
+  const playerteam = JSON.parse(decodeURIComponent(queryParams.get("playerteam"))) || "";
+  const computerteam=JSON.parse(decodeURIComponent(queryParams.get("computerteam"))) || "";
   const add_Players=(i)=>{
     setPlayers([...players,i]);
     setId([...id,i.name]);
@@ -100,4 +107,4 @@ const Toss = ({player,computer,playerteam,computerteam}) => {
 </>
   );
 };
-export default Toss;
+export default Playgame;

@@ -169,11 +169,9 @@ useEffect(()=>{
    }
    else{
      const len=value.length;
-   const ra=Math.floor(Math.random()*len);
-   console.log(len+" "+ra);
    setValue(value);
   setAmount(Math.floor(Math.random()*100)+1)
-  setIndex(ra);
+  setIndex((index+1)%len);
   setOff(false);
   setShow(true)
   setDisplay(true)

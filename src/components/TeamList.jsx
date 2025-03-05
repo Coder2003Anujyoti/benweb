@@ -5,6 +5,7 @@ const TeamList = () => {
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const [load,setLoad]=useState(true);
  const [value,setValue]=useState([]);
+ const [toggle,setToggle]=useState(false);
 const get_data=async()=>{
   const response=await fetch("https://intelligent-ailyn-handcricket-e8842259.koyeb.app/");
   const item= await response.json();
@@ -47,36 +48,44 @@ This version focuses purely on the display of player names, ideal for an app whe
 </div>
 </div>
 </div>
-<div id="services" className="w-full mt-2 flex justify-center flex-col text-center">
+<div id="services" className="w-full mt-2 flex justify-center flex-col text-center border-b border-b-slate-400">
      <h3 className="text-lg text-slate-400 font-bold">Services</h3>
-    <div className="w-full mt-2 flex justify-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select your Team</h1></div>
-<div className="w-full mt-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center p-2 flex-row ">
+    <div className="w-full py-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center    flex-col">
+  <div className="flex w-full justify-center gap-x-6 flex-row flex-wrap">
+     <div onClick={()=>setToggle(!toggle)} className="text-center w-36 h-36 flex justify-center rounded-lg  bg-slate-800 p-2 flex flex-col gap-y-2 ">
+   <div className="w-full  flex justify-center"><img src="Icons/partners.png" className="w-20 h-20"></img></div>
+    <h4 className="text-lg text-slate-400 font-bold">Teams</h4>
+    </div>
+    </div>
+    </div>
+{ toggle===true && <> <div className="w-full mt-2 flex justify-center">
+ <h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select your Team</h1></div>
+<div className="w-full mt-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center  p-2 flex-row">
   {teams.map((i)=>{
   return(
+ <Link  to={`/details?team=${i}`}>
   <div className="text-center rounded-lg  bg-slate-800">
-    <Link  to={`/details?team=${i}`}>
     <img src={`Logos/${i}.webp`} className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">{i.toUpperCase()}</h4>
-    </Link>
     </div>
+    </Link>
     )
   })}
 </div>
-</div>
-<div id="modes" className="w-full mt-2 flex justify-center flex-col text-center">
-     <h3 className="text-lg text-slate-400 font-bold">Modes</h3>
-    <div className="w-full mt-2 flex justify-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select your Mode</h1></div>
-<div className="w-full mt-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center border-b border-b-slate-400 p-2 flex-row ">
-     <div className="text-center rounded-lg  bg-slate-800 p-2 flex  gap-y-6">
-     <HashLink to='/auction'>
+</>}
+ <div className="w-full py-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center    flex-col">
+  <div className="flex w-full justify-center gap-x-6 flex-row flex-wrap">
+       <HashLink to='/auction'>
+     <div className="text-center w-36 h-36 flex justify-center rounded-lg  bg-slate-800 p-2 flex flex-col gap-y-2 ">
    <div className="w-full p-2 flex justify-center"><img src="Icons/auction.png" className="w-16 h-16"></img></div>
     <h4 className="text-lg text-slate-400 font-bold">Auction</h4>
-    </HashLink>
     </div>
-   <div className="text-center rounded-lg  bg-slate-800 p-2 flex  gap-y-6">
-   <HashLink to='/bid'>
+    </HashLink>
+       <HashLink to='/bid'>
+   <div className="text-center rounded-lg  bg-slate-800 p-4 flex w-36 h-36 flex flex-col justify-center text-center gap-y-2 ">
    <div className="w-full p-2 flex justify-center"><img src="Icons/stadium.png" className="w-16 h-16"></img></div>
     <h4 className="text-lg text-slate-400 font-bold">Tournament</h4>
+    </div>
     </HashLink>
     </div>
     </div>
@@ -96,11 +105,10 @@ This version focuses purely on the display of player names, ideal for an app whe
     <footer className="bg-black text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>
-        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-7">
+        <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-12">
     <HashLink smooth to='#about'> <li className="text-gray-400">
        About Us</li></HashLink>
      <HashLink smooth to='#services'> <li className="text-gray-400">Services</li></HashLink>
-    <HashLink smooth to='#modes'><li className="text-gray-400">Modes</li></HashLink>
      <HashLink smooth to='#gallery'><li className="text-gray-400">Gallery</li></HashLink>
         </ul>
      </div>

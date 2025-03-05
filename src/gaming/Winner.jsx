@@ -141,6 +141,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
        })
      }
      </div>
+     <div className="w-full flex flex-col gap-4">
   <div className="w-full py-4 flex justify-center">
     <h1 className="text-xl font-extrabold text-slate-400">Top Batters</h1>
   </div>
@@ -176,7 +177,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
       })
     }
     </div>
-    
+    </div>
 </>
 }
   </>

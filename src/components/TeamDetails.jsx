@@ -81,6 +81,7 @@ const TeamDetails = () => {
     </div>
     </Link>
 </div>
+<div className="w-full flex flex-col gap-4">
   <div className="w-full py-4 flex justify-center">
     <h1 className="text-xl font-extrabold text-slate-400">Top Batters</h1>
   </div>
@@ -119,6 +120,7 @@ const TeamDetails = () => {
         </>)
       })
     }
+    </div>
     </div>
     <footer className="bg-black text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">

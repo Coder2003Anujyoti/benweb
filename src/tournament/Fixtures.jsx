@@ -20,7 +20,7 @@ const Fixtures = () => {
 
        <div className="flex w-16 justify-center items-center border-b border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Player</p></div>
       <div className="flex w-24  justify-center items-center border-b border-b-slate-400 "><p className="text-sm font-bold text-slate-400">Computer</p></div>
-    <div className="flex w-16 justify-center items-center border-b border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Winner</p></div>
+    <div className="flex w-16 justify-center items-center border-b border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Result</p></div>
    </div>
    </div>
   <div className="w-full flex flex-row flex-wrap justify-center items-center my-4 gap-y-8">
@@ -30,7 +30,8 @@ const Fixtures = () => {
 
       <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.player}.webp`} className="w-16 h-16" /></div>
       <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.computer}.webp`} className="w-16 h-16" /></div>
-      <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.win}.webp`} className="w-16 h-16" /></div>
+   {i.win!='Draw' && <> <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.win}.webp`} className="w-16 h-16" /></div> </>}
+    {i.win==='Draw' && <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.win}.png`} className="w-16 h-16" /></div>}
       </div>
       </>)
     })}

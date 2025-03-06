@@ -1,4 +1,13 @@
 import React,{useState,useEffect} from "react";
+const LocalUser=()=>{
+  const lists=localStorage.getItem('user');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
 const LocalWin=()=>{
   const lists=localStorage.getItem('winlist');
   if(lists){
@@ -18,6 +27,7 @@ const LocalData=()=>{
 }
 }
 const Winner = ({winner,yourteam,opposteam}) => {
+  const [update,setUpdate]=useState(()=>LocalUser()||[]);
   const [load,setLoad]=useState(true);
   const [winarray,setWinarray]=useState(()=>LocalWin()||[]);
   const [teams,setTeams]=useState(()=>LocalData()|| ["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"]);
@@ -67,6 +77,21 @@ const computerwickets=playerdata.reduce((total,i)=>{
   useEffect(()=>{
   if(winner===yourteam[0].team){
     const m=teams.filter((i)=>i!=opposteam[0].team);
+    const roy=update.map((i)=>{
+    if(i.team===yourteam[0].team || i.team===opposteam[0].team){
+    i.players.map((it)=>{
+      array.map((item)=>{
+    if(item.name===it.name){
+        it.matches+=item.matches;
+        it.runs+=item.runs;
+        it.wickets+=item.wickets;
+    }
+      })
+    })
+    }
+    return {...i}
+  })
+  localStorage.setItem('user',JSON.stringify(roy));
     localStorage.setItem('winlist',JSON.stringify([...winarray,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
     localStorage.setItem('oppos',JSON.stringify(m));
    send_data({data:array},{winner:yourteam,loser:opposteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Winner",oppstatus:"Loser"})
@@ -74,12 +99,45 @@ const computerwickets=playerdata.reduce((total,i)=>{
   }
  else if(winner===opposteam[0].team){
    const m=teams.filter((i)=>i!=opposteam[0].team);
+   const roy=update.map((i)=>{
+    if(i.team===yourteam[0].team || i.team===opposteam[0].team){
+    i.players.map((it)=>{
+      array.map((item)=>{
+    if(item.name===it.name){
+        it.matches+=item.matches;
+        it.runs+=item.runs;
+        it.wickets+=item.wickets;
+    }
+      })
+    })
+    }
+    return {...i}
+  })
+  localStorage.setItem('user',JSON.stringify(roy));
     localStorage.setItem('winlist',JSON.stringify([...winarray,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
     localStorage.setItem('oppos',JSON.stringify(m));
    send_data({data:array},{winner:opposteam,loser:yourteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Loser",oppstatus:"Winner"})
    setLoad(false)
   }
   else{
+    const m=teams.filter((i)=>i!=opposteam[0].team);
+    const roy=update.map((i)=>{
+    if(i.team===yourteam[0].team || i.team===opposteam[0].team){
+    i.players.map((it)=>{
+      array.map((item)=>{
+    if(item.name===it.name){
+        it.matches+=item.matches;
+        it.runs+=item.runs;
+        it.wickets+=item.wickets;
+    }
+      })
+    })
+    }
+    return {...i}
+  })
+  localStorage.setItem('user',JSON.stringify(roy));
+    localStorage.setItem('winlist',JSON.stringify([...winarray,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
+    localStorage.setItem('oppos',JSON.stringify(m));
     send_data({data:array},{winner:yourteam,loser:opposteam,draw:true},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Draw",oppstatus:"Draw"})
     setLoad(false)
   }

@@ -1,6 +1,10 @@
-import React,{useState,useEffect} from "react";
-import {Link} from 'react-router-dom';
+import React,{useState} from "react";
 import {HashLink} from 'react-router-hash-link'
+import {Link} from 'react-router-dom';
+import { Bar, Pie } from "react-chartjs-2";
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement, ChartDataLabels);
 const LocalData=()=>{
   const lists=localStorage.getItem('winlist');
   if(lists){
@@ -13,42 +17,117 @@ const LocalData=()=>{
 const Site = ({playerteam,store,localremove}) => {
   const [stores,setStores]=useState(store);
   const [win,setWin]=useState(()=>LocalData()||[])
-  const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+  const [bar,setBar]=useState({});
+  const [pie,setPie]=useState({});
   const winners=win.filter((i)=>i.win===playerteam);
   const losers=win.filter((i)=>i.win!==playerteam);
-    useEffect(()=>{
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  },[])
+  const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+  const barChartOptions = {
+  plugins: {
+    legend: {
+      labels: {
+        color: "rgb(148, 163, 184)", // Legend text color
+        font: {
+          weight: "bold", // Make legend text bold
+        },
+      },
+    },
+    datalabels: {
+      formatter: (value, context) => {
+        const data = context.dataset.data;
+        if (!data || data.length === 0) return "0%"; // Prevent errors
+
+        const total = data.reduce((acc, val) => acc + (val || 0), 0); // Handle undefined values
+        if (total === 0) return "0%"; // Prevent division by zero
+
+        const percentage = Math.round(((value / total) * 100).toFixed(1)) + "%";
+        return percentage;
+      },
+      color: "white",
+      font: { weight: "bold", size: 14 },
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: "rgb(148, 163, 184)", // X-axis label color
+        font: {
+          weight: "bold", // Make X-axis labels bold
+        },
+      },
+      grid: {
+        color: "rgb(148, 163, 184)", // X-axis grid lines color
+                font: {
+          weight: "bold", // Make Y-axis labels bold
+        },
+      },
+    },
+    y: {
+      ticks: {
+        color: "rgb(148, 163, 184)", // Y-axis label color
+        font: {
+          weight: "bold", // Make Y-axis labels bold
+        },
+      },
+      grid: {
+        color: "rgb(148, 163, 184)", // Y-axis grid lines color
+        font: {
+          weight: "bold", // Make Y-axis labels bold
+        },
+      },
+    },
+  },
+};
+const pieChartOptions = {
+  plugins: {
+    legend: {
+      labels: {
+        color: "rgb(148,163,184)",
+        font: { weight: "bold" },
+      },
+    },
+    datalabels: {
+      formatter: (value, context) => {
+        const data = context.dataset.data;
+        if (!data || data.length === 0) return "0%"; // Prevent errors
+
+        const total = data.reduce((acc, val) => acc + (val || 0), 0); // Handle undefined values
+        if (total === 0) return "0%"; // Prevent division by zero
+
+        const percentage = Math.round(((value / total) * 100).toFixed(1)) + "%";
+        return percentage;
+      },
+      color: "white",
+      font: { weight: "bold", size: 14 },
+    },
+  },
+};
+const barChartData = {
+    labels: ["Matches", "Win", "Lose/Tie"],
+    datasets: [
+      {
+        label: `Stats for ${playerteam.toUpperCase()}`,
+        data: [win.length,winners.length, losers.length],
+        backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
+      },
+    ],
+  };
+
+  const pieChartData = {
+    labels: ["Matches", "Win", "Lose/Tie"],
+    datasets: [
+      {
+        data: [win.length,winners.length, losers.length],
+        backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
+        borderWidth: 0,
+      },
+    ],
+  };
   return (
    <>
      <div className="w-full bg-slate-800 p-1 flex ">
   <img className="w-24 h-24" src="Icons/stadium.png"/>
 </div>
-{win.length<9 && <>
-  <div className="w-full text-center my-2">
-  <h3 className="font-bold text-sm text-red-400">*Need to win more than 5 matches to become champions.</h3>
-</div>
-     <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row  p-2">
-     <HashLink to={`/game?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
-     <div className="text-center p-4 rounded-lg  bg-slate-800">
-    <img src="Icons/crickets.png" className="w-24 h-24"></img>
-    <h4 className="text-lg text-slate-400 font-bold">Play</h4>
-    </div>
-    </HashLink>
-         <HashLink to={`/team?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
-     <div className="text-center p-4 rounded-lg  bg-slate-800">
-    <img src="Icons/team.png" className="w-24 h-24"></img>
-    <h4 className="text-lg text-slate-400 font-bold">Teams</h4>
-    </div>
-    </HashLink>
-         <HashLink to={`/fixtures?data=${encodeURIComponent(JSON.stringify(win))}`}>
-     <div className="text-center p-4 rounded-lg  bg-slate-800">
-    <img src="Icons/tournament.png" className="w-24 h-24"></img>
-    <h4 className="text-lg text-slate-400 font-bold">Fixtures</h4>
-    </div>
-    </HashLink>
-    </div>
-    </>}
   {
     win.length===9 && <>
       {winners.length>5 && <>
@@ -68,31 +147,54 @@ const Site = ({playerteam,store,localremove}) => {
       }
     </>
   }
+  { win.length<9 && <>
+ <div className="w-full text-center my-2">
+  <h3 className="font-bold text-sm text-red-400">*Need to win more than 5 matches to become champions.</h3>
+</div>
+</>}
+     <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row  p-2">
+  {win.length<9 && <>
+     <HashLink to={`/game?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
+     <div className="text-center p-4 rounded-lg  bg-slate-800">
+    <img src="Icons/crickets.png" className="w-24 h-24"></img>
+    <h4 className="text-lg text-slate-400 font-bold">Play</h4>
+    </div>
+    </HashLink>
+    </>}
+         <HashLink to={`/team?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
+     <div className="text-center p-4 rounded-lg  bg-slate-800">
+    <img src="Icons/team.png" className="w-24 h-24"></img>
+    <h4 className="text-lg text-slate-400 font-bold">Teams</h4>
+    </div>
+    </HashLink>
+         <HashLink to={`/fixtures?data=${encodeURIComponent(JSON.stringify(win))}`}>
+     <div className="text-center p-4 rounded-lg  bg-slate-800">
+    <img src="Icons/tournament.png" className="w-24 h-24"></img>
+    <h4 className="text-lg text-slate-400 font-bold">Fixtures</h4>
+    </div>
+    </HashLink>
+         <HashLink to={`/playerstats?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
+     <div className="text-center p-4 rounded-lg  bg-slate-800">
+    <img src="Icons/stats.png" className="w-24 h-24"></img>
+    <h4 className="text-lg text-slate-400 font-bold">Stats</h4>
+    </div>
+    </HashLink>
+    </div>
       <div className="flex p-4 flex-row justify-center border-t border-slate-600 gap-4">
-       <img src={`Logos/${playerteam}.webp`} className="w-24 h-24" />
+       <img src={`Logos/${playerteam}.webp`} className="w-28 h-28" />
      </div>
-   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2">
-     {
-       stores.map((it)=>{
-       if(it.team===playerteam)
-         return(<>
-      {it.players.map((i)=>{
-        return(<>
-    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
-    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
-           </div>
-          
-        </>)
-      })}
-         </>)
-       })
-     }
-     </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 my-4  gap-6">
+        <div className="text-black  font-bold p-4 rounded ">
+          <Bar data={barChartData} options={barChartOptions} />
+        </div>
+        <div className=" p-4 rounded ">
+          <Pie data={pieChartData} options={pieChartOptions} />
+        </div>
+      </div>
        <div className="w-full py-2 flex-col flex justify-center items-center text-center">
     <div className="w-full py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={localremove} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">New Tournament</button></div>
   </div>
-    <footer className="bg-black text-white">
+        <footer className="bg-black text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>
         <ul className="mt-4 flex flex-row flex-wrap justify-center gap-x-12">

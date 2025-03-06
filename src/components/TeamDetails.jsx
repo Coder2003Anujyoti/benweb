@@ -1,15 +1,125 @@
 import React,{useEffect,useState} from "react";
 import {HashLink} from 'react-router-hash-link'
 import {useSearchParams,Link} from "react-router-dom"
+import { Bar, Pie } from "react-chartjs-2";
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement, ChartDataLabels);
 const TeamDetails = () => {
   const [searchParams] = useSearchParams();
+  const [bar,setBar]=useState({});
+  const [pie,setPie]=useState({});
   const teamId = searchParams.get("team"); 
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const [load,setLoad]=useState(true);
     const [item,setItem]=useState([]);
+    const barChartOptions = {
+  plugins: {
+    legend: {
+      labels: {
+        color: "rgb(148, 163, 184)", // Legend text color
+        font: {
+          weight: "bold", // Make legend text bold
+        },
+      },
+    },
+    datalabels: {
+      formatter: (value, context) => {
+        const data = context.dataset.data;
+        if (!data || data.length === 0) return "0%"; // Prevent errors
+
+        const total = data.reduce((acc, val) => acc + (val || 0), 0); // Handle undefined values
+        if (total === 0) return "0%"; // Prevent division by zero
+
+        const percentage = Math.round(((value / total) * 100).toFixed(1)) + "%";
+        return percentage;
+      },
+      color: "white",
+      font: { weight: "bold", size: 14 },
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: "rgb(148, 163, 184)", // X-axis label color
+        font: {
+          weight: "bold", // Make X-axis labels bold
+        },
+      },
+      grid: {
+        color: "rgb(148, 163, 184)", // X-axis grid lines color
+                font: {
+          weight: "bold", // Make Y-axis labels bold
+        },
+      },
+    },
+    y: {
+      ticks: {
+        color: "rgb(148, 163, 184)", // Y-axis label color
+        font: {
+          weight: "bold", // Make Y-axis labels bold
+        },
+      },
+      grid: {
+        color: "rgb(148, 163, 184)", // Y-axis grid lines color
+        font: {
+          weight: "bold", // Make Y-axis labels bold
+        },
+      },
+    },
+  },
+};
+const pieChartOptions = {
+  plugins: {
+    legend: {
+      labels: {
+        color: "rgb(148,163,184)",
+        font: { weight: "bold" },
+      },
+    },
+    datalabels: {
+      formatter: (value, context) => {
+        const data = context.dataset.data;
+        if (!data || data.length === 0) return "0%"; // Prevent errors
+
+        const total = data.reduce((acc, val) => acc + (val || 0), 0); // Handle undefined values
+        if (total === 0) return "0%"; // Prevent division by zero
+
+        const percentage = Math.round(((value / total) * 100).toFixed(1)) + "%";
+        return percentage;
+      },
+      color: "white",
+      font: { weight: "bold", size: 14 },
+    },
+  },
+};
   const get_data=async()=>{
     const response=await fetch('https://intelligent-ailyn-handcricket-e8842259.koyeb.app/');
     const data=await response.json();
+    const pl=data.details.filter((i)=>i.teamid===teamId);
+    const barChartData = {
+    labels: ["Matches", "Win", "Lose/Tie"],
+    datasets: [
+      {
+        label: `Stats for ${teamId.toUpperCase()}`,
+        data: [pl[0].matches,pl[0].win,pl[0].matches-pl[0].win],
+        backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
+      },
+    ],
+  };
+
+  const pieChartData = {
+    labels: ["Matches", "Win", "Lose/Tie"],
+    datasets: [
+      {
+        data: [pl[0].matches,pl[0].win,pl[0].matches-pl[0].win],
+        backgroundColor:  ["#10b981", "Dodgerblue", "#ef4444"],
+        borderWidth: 0,
+      },
+    ],
+  };
+  setBar(barChartData)
+  setPie(pieChartData)
     setItem(data.data);
     setLoad(false);
   }
@@ -81,9 +191,21 @@ const TeamDetails = () => {
     </div>
     </Link>
 </div>
-<div className="w-full flex flex-col gap-4">
+<div className="w-full flex flex-col border-t border-b border-slate-600 p-4">
+      <div className="w-full flex justify-center"><p className="text-xl font-extrabold text-slate-400">Analytics</p></div>
+        <div className="grid  grid-cols-1 md:grid-cols-2 my-4 gap-6 text-center flex flex-row">
+        <div className="text-black font-bold p-4 rounded ">
+          <Bar data={bar} options={barChartOptions} />
+        </div>
+        <div className=" p-4 rounded ">
+          <Pie data={pie} options={pieChartOptions} />
+        </div>
+      </div>
+      </div>
+<div className="w-full flex flex-col text-center gap-4 my-6">
+      <h1 className="text-xl font-extrabold text-green-400">Tournament Stats</h1>
   <div className="w-full py-4 flex justify-center">
-    <h1 className="text-xl font-extrabold text-slate-400">Top Batters</h1>
+    <h1 className="text-lg font-extrabold text-slate-400">Top Batters</h1>
   </div>
   <div className="w-full flex flex-col justify-center gap-4 ">
     
@@ -103,7 +225,7 @@ const TeamDetails = () => {
     }
     </div>
     <div className="w-full py-4 flex justify-center">
-    <h1 className="text-xl font-extrabold text-slate-400">Top Bowlers</h1>
+    <h1 className="text-lg font-extrabold text-slate-400">Top Bowlers</h1>
   </div>
   <div className="w-full flex flex-col justify-center gap-4 ">
     {

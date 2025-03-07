@@ -1,8 +1,18 @@
 import React,{useState,useEffect} from "react";
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link'
+const LocalWinner=()=>{
+  const lists=localStorage.getItem('winarray');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
 const Site = ({player,computer,playerteam,computerteam,remove}) => {
   const [team,setTeam]=useState(playerteam);
+  const [win,setWin]=useState(()=>LocalWinner()||[])
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const details=player.concat(computer);
   useEffect(()=>{
@@ -21,10 +31,16 @@ const Site = ({player,computer,playerteam,computerteam,remove}) => {
     <h4 className="text-lg text-slate-400 font-bold">Play</h4>
     </div>
     </HashLink>
-          <HashLink to={`/tourstats?player=${encodeURIComponent(JSON.stringify(player))}&&computer=${encodeURIComponent(JSON.stringify(computer))}&&playerteam=${encodeURIComponent(JSON.stringify(playerteam))}&&computerteam=${encodeURIComponent(JSON.stringify(computerteam))}`}>
+     <HashLink to={`/tourstats?player=${encodeURIComponent(JSON.stringify(player))}&&computer=${encodeURIComponent(JSON.stringify(computer))}&&playerteam=${encodeURIComponent(JSON.stringify(playerteam))}&&computerteam=${encodeURIComponent(JSON.stringify(computerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/stats.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Stats</h4>
+    </div>
+    </HashLink>
+         <HashLink to={`/analysis?winarray=${encodeURIComponent(JSON.stringify(win))}&&playerteam=${encodeURIComponent(JSON.stringify(playerteam))}&&computerteam=${encodeURIComponent(JSON.stringify(computerteam))}`}>
+     <div className="text-center p-4 rounded-lg  bg-slate-800">
+    <img src="Icons/analysis.png" className="w-24 h-24"></img>
+    <h4 className="text-lg text-slate-400 font-bold">Analysis</h4>
     </div>
     </HashLink>
     </div>

@@ -71,6 +71,7 @@ const localremove=()=>{
    localStorage.removeItem('computers');
    localStorage.removeItem('playerteam');
    localStorage.removeItem('computerteam');
+   localStorage.removeItem('winarray');
    window.location.reload();
    setPlaying(false);
    setPlayerteam("");

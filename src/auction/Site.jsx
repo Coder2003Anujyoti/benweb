@@ -43,6 +43,12 @@ const Site = ({player,computer,playerteam,computerteam,remove}) => {
     <h4 className="text-lg text-slate-400 font-bold">Analysis</h4>
     </div>
     </HashLink>
+             <HashLink to={`/matchfixtures?data=${encodeURIComponent(JSON.stringify(win))}`}>
+     <div className="text-center p-4 rounded-lg  bg-slate-800">
+    <img src="Icons/tournament.png" className="w-24 h-24"></img>
+    <h4 className="text-lg text-slate-400 font-bold">Fixtures</h4>
+    </div>
+    </HashLink>
     </div>
   <div className="w-full flex gap-x-12 justify-center">
    <div className="p-2 w-30 rounded-full bg-slate-800 flex items-center justify-center" onClick={()=>setTeam(playerteam)}>

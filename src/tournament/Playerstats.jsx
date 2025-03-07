@@ -2,13 +2,72 @@ import React,{useState,useEffect} from "react";
 import {HashLink} from 'react-router-hash-link'
 import {Link} from 'react-router-dom';
 import { useLocation } from "react-router-dom";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 const Playerstats = () => {
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const [value,setValue]=useState("")
+  const [histruns,setHistruns]=useState({});
+  const [histwickets,setHistwickets]=useState({});
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];
   const team=JSON.parse(decodeURIComponent(queryParams.get("team"))) || "";
+  const go=(it)=>{
+    const fil=data.filter((i)=>i.team===it);
+    const filterruns=fil[0].players.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<5);
+    const filterwickets=fil[0].players.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<5);
+    const histogramRuns = {
+  labels: filterruns.map((batter)=> batter.name),
+  datasets: [
+    {
+      label: "Runs Scored",
+      data: filterruns.map((batter) => batter.runs),
+      backgroundColor: "#3b82f6", // Blue color
+      borderWidth: 1,
+      borderRadius: 5,
+    },
+  ],
+};
+const histogramWickets = {
+  labels: filterwickets.map((batter) => batter.name),
+  datasets: [
+    {
+      label: "Wickets Scored",
+      data: filterwickets.map((batter) => batter.wickets),
+      backgroundColor: "#3b82f6", // Blue color
+      borderWidth: 1,
+      borderRadius: 5,
+    },
+  ],
+};
+  setHistruns(histogramRuns);
+  setHistwickets(histogramWickets);
+    setValue(it);
+  }
+const histogramOptions = {
+  responsive: true,
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: { color: "rgb(148, 163, 184)", font: { weight: "bold" } },
+      grid: { color: "rgba(255, 255, 255, 0.2)" }, // Light grid lines
+    },
+    x: {
+      ticks: { color: "rgb(148, 163, 184)", font: { weight: "bold" } },
+      grid: { display: false }, // Hide vertical grid lines
+    },
+  },
+  plugins: {
+    legend: { display: false }, 
+        datalabels: {
+          color: "transparent",
+      font: { weight: "bold", size: 14 },
+    },
+          
+  },
+};
   useEffect(()=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
   },[])
@@ -20,7 +79,7 @@ const Playerstats = () => {
 <div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center py-10 flex-row">
   {teams.map((i)=>{
   return(
-  <div className="text-center w-30 bg-slate-800 rounded-full" onClick={()=>setValue(i)}>
+  <div className="text-center w-30 bg-slate-800 rounded-full" onClick={()=>go(i)}>
     <div className="w-full p-2 flex justify-center">
     <img src={`Logos/${i}.webp`} className="w-14 h-14"></img>
     </div>
@@ -57,6 +116,10 @@ const Playerstats = () => {
        })
      }
      </div>
+         <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
+      <h2 className="text-slate-400 text-xl font-bold mb-4 text-center">Top Batters & Their Runs</h2>
+      <Bar data={histruns} options={histogramOptions} />
+    </div>
       <div className="w-full  flex justify-center">
     <h1 className="text-xl font-extrabold text-slate-400">Top Bowlers</h1>
   </div>
@@ -80,6 +143,10 @@ const Playerstats = () => {
        })
      }
      </div>
+     <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
+      <h2 className="text-slate-400 text-xl font-bold mb-4 text-center">Top Bowlers & Their Wickets</h2>
+      <Bar data={histwickets} options={histogramOptions} />
+    </div>
      </>
 }
     <footer className="bg-black text-white">

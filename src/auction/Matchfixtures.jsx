@@ -2,7 +2,7 @@ import React,{useEffect} from "react";
 import { useLocation } from "react-router-dom";
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link'
-const Fixtures = () => {
+const Matchfixtures = () => {
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -12,8 +12,8 @@ const Fixtures = () => {
   },[])
   return (
    <>
-    <div className="w-full bg-slate-800 p-1 flex ">
-  <img className="w-24 h-24" src="Icons/stadium.png"/>
+  <div className="w-full bg-slate-800 p-2 flex ">
+  <img className="w-16 h-16" src="Icons/auction.png"/>
 </div>
 <div className="w-full flex flex-row py-6 justify-center gap-12">
    <div className="w-full flex  justify-center  gap-12" >
@@ -78,4 +78,4 @@ const Fixtures = () => {
 
 
 
-export default Fixtures;
+export default Matchfixtures;

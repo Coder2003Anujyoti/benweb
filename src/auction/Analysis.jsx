@@ -101,8 +101,8 @@ const pieChartOptions = {
   },
 };
   const go=(i)=>{
-    const winners=winarray.filter((item)=>item===i);
-    const losers=winarray.filter((item)=>item!==i);
+    const winners=winarray.filter((item)=>item.win===i);
+    const losers=winarray.filter((item)=>item.win!==i);
     const barChartData = {
     labels: ["Matches", "Win", "Lose/Tie"],
     datasets: [

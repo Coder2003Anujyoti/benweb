@@ -13,6 +13,7 @@ import Auction from "./auction/Auction.jsx";
 import Playgame from "./auction/Playgame.jsx";
 import Tourstats from "./auction/Tourstats.jsx"
 import Analysis from "./auction/Analysis.jsx"
+import Matchfixtures from "./auction/Matchfixtures.jsx"
 import Bid from "./tournament/Bid.jsx";
 import Game from "./tournament/Game.jsx";
 import Team from "./tournament/Team.jsx";
@@ -38,6 +39,7 @@ const App = () => {
 <Route path="/playgame" element={<Playgame />} />
 <Route path="/analysis" element={<Analysis />} />
 <Route path="/tourstats" element={<Tourstats />} />
+<Route path="/matchfixtures" element={<Matchfixtures />} />
 <Route path="/bid" element={<Bid />} />
 <Route path="/game" element={<Game  />} />
 <Route path="/team" element={<Team />} />

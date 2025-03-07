@@ -11,6 +11,7 @@ import Standings from "./components/Standings";
 import Card from "./components/Card.jsx"
 import Auction from "./auction/Auction.jsx";
 import Playgame from "./auction/Playgame.jsx";
+import Tourstats from "./auction/Tourstats.jsx"
 import Bid from "./tournament/Bid.jsx";
 import Game from "./tournament/Game.jsx";
 import Team from "./tournament/Team.jsx";
@@ -34,6 +35,7 @@ const App = () => {
 <Route path="/profile" element={<Card />}/>
 <Route path="/auction" element={<Auction />}/>
 <Route path="/playgame" element={<Playgame />} />
+<Route path="/tourstats" element={<Tourstats />} />
 <Route path="/bid" element={<Bid />} />
 <Route path="/game" element={<Game  />} />
 <Route path="/team" element={<Team />} />

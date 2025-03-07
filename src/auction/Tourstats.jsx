@@ -1,53 +1,81 @@
 import React,{useState,useEffect} from "react";
-import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link'
+import {Link} from 'react-router-dom';
 import { useLocation } from "react-router-dom";
-const Team = () => {
+const Tourstats = () => {
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const [value,setValue]=useState("")
+  const [data,setData]=useState([]);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];
-  const team=JSON.parse(decodeURIComponent(queryParams.get("team"))) || "";
-    useEffect(()=>{
+  const player= JSON.parse(decodeURIComponent(queryParams.get("player"))) || [];
+  const playerteam=JSON.parse(decodeURIComponent(queryParams.get("playerteam"))) || "";
+  const computer= JSON.parse(decodeURIComponent(queryParams.get("computer"))) || [];
+  const computerteam=JSON.parse(decodeURIComponent(queryParams.get("computerteam"))) || "";
+  useEffect(()=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
   },[])
+  const go=(i)=>{
+    if(i===playerteam){
+      setValue(i);
+      setData(player)
+    }
+    else{
+      setValue(i);
+      setData(computer)
+    }
+  }
   return (
   <>
-  <div className="w-full bg-slate-800 p-1 flex ">
-  <img className="w-24 h-24" src="Icons/stadium.png"/>
+  <div className="w-full bg-slate-800 p-2 flex ">
+  <img className="w-16 h-16" src="Icons/auction.png"/>
 </div>
-<div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center py-10 flex-row">
+<div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center py-10 flex-row my-8">
   {teams.map((i)=>{
+  if(i===playerteam||i===computerteam)
   return(
-  <div className="text-center w-30 bg-slate-800 rounded-full" onClick={()=>setValue(i)}>
-    <div className="w-full p-2 flex justify-center">
+  <div className="text-center p-2 w-30 bg-slate-800 rounded-full flex items-center justify-center" onClick={()=>go(i)}>
     <img src={`Logos/${i}.webp`} className="w-14 h-14"></img>
-    </div>
     </div>
     )
   })}
 </div>
 {value!='' && <>
   <div className="flex p-4 flex-col justify-center items-center text-center border-t border-slate-600 gap-4">
-     {value===team && <h1 className="text-lg text-green-400 font-bold">Your Team</h1>}
-         {value!==team && <h1 className="text-lg text-green-400 font-bold">Opposition Team</h1>} 
+     {value===playerteam && <h1 className="text-lg text-green-400 font-bold">Your Team</h1>}
+    {value!==playerteam && <h1 className="text-lg text-green-400 font-bold">Opposition Team</h1>} 
        <img src={`Logos/${value}.webp`} className="w-24 h-24" />
      </div>
-   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2">
+  <div className="w-full  flex justify-center">
+    <h1 className="text-xl font-extrabold text-slate-400">Top Batters</h1>
+  </div>
+   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
      {
-       data.map((it)=>{
-       if(it.team===value)
+       data.sort((a,b)=>b.runs-a.runs).map((it,ind)=>{
+       if(it.team===value && ind<6)
          return(<>
-      {it.players.map((i)=>{
-        return(<>
     <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
-    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
+    <div className="flex justify-center items-center"><img src={it.image} className="w-16 h-16" /></div>
+    <p className="text-slate-400 text-xs font-bold">{it.name}</p>
+        <p className="text-slate-400 text-xs font-bold">Runs-:{it.runs}</p>
            </div>
-          
-        </>)
-      })}
+         </>)
+       })
+     }
+     </div>
+      <div className="w-full  flex justify-center">
+    <h1 className="text-xl font-extrabold text-slate-400">Top Bowlers</h1>
+  </div>
+   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
+     {
+       data.sort((a,b)=>b.wickets-a.wickets).map((it,ind)=>{
+       if(it.team===value && ind<6)
+         return(<>
+    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+    <div className="flex justify-center items-center"><img src={it.image} className="w-16 h-16" /></div>
+    <p className="text-slate-400 text-xs font-bold">{it.name}</p>
+         <p className="text-slate-400 text-xs font-bold">Wickets-:{it.wickets}</p>
+           </div>
          </>)
        })
      }
@@ -96,4 +124,4 @@ const Team = () => {
 
 
 
-export default Team;
+export default Tourstats;

@@ -21,6 +21,12 @@ const Site = ({player,computer,playerteam,computerteam,remove}) => {
     <h4 className="text-lg text-slate-400 font-bold">Play</h4>
     </div>
     </HashLink>
+          <HashLink to={`/tourstats?player=${encodeURIComponent(JSON.stringify(player))}&&computer=${encodeURIComponent(JSON.stringify(computer))}&&playerteam=${encodeURIComponent(JSON.stringify(playerteam))}&&computerteam=${encodeURIComponent(JSON.stringify(computerteam))}`}>
+     <div className="text-center p-4 rounded-lg  bg-slate-800">
+    <img src="Icons/stats.png" className="w-24 h-24"></img>
+    <h4 className="text-lg text-slate-400 font-bold">Stats</h4>
+    </div>
+    </HashLink>
     </div>
   <div className="w-full flex gap-x-12 justify-center">
    <div className="p-2 w-30 rounded-full bg-slate-800 flex items-center justify-center" onClick={()=>setTeam(playerteam)}>

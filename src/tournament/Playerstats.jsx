@@ -29,7 +29,9 @@ const Playerstats = () => {
   })}
 </div>
 {value!='' && <>
-       <div className="flex p-4 flex-row justify-center border-t border-slate-600 gap-4">
+  <div className="flex p-4 flex-col justify-center items-center text-center border-t border-slate-600 gap-4">
+    {value===team && <h1 className="text-lg text-green-400 font-bold">Your Team</h1>}
+   {value!==team && <h1 className="text-lg text-green-400 font-bold">Opposition Team</h1>} 
        <img src={`Logos/${value}.webp`} className="w-24 h-24" />
      </div>
   <div className="w-full  flex justify-center">

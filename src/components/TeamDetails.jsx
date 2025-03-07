@@ -34,7 +34,7 @@ const TeamDetails = () => {
         const percentage = Math.round(((value / total) * 100).toFixed(1)) + "%";
         return percentage;
       },
-      color: "white",
+      color: "transparent",
       font: { weight: "bold", size: 14 },
     },
   },

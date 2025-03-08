@@ -346,7 +346,7 @@ useEffect(()=>{
 </div>
 </>}
 { playerteam!==''  && <>
-<div className="w-full flex flex-row items-center gap-y-2 my-4 justify-end">
+<div className="w-full flex flex-row items-center gap-y-2 my-2 justify-end">
    <img src="Icons/digital-money.png" className="w-10 h-10"/>
      <p className="text-base font-bold text-slate-300">{purse+""+"L"}</p>
   </div>

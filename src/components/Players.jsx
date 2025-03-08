@@ -47,15 +47,13 @@ const Players = () => {
   <div className="flex justify-center items-center py-4">
   <h1 className="text-slate-400 text-xl font-bold">Batters</h1>
   </div>
-  <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-b border-b-slate-400 p-2 border-t-transparent border-l-transparent border-r-transparent">
+  <div className="w-full flex p-2 flex-wrap flex-row justify-center  gap-1">
     {items.map((i)=>{
     if(i.role=="Batsman" || i.role=="Wicket-Keeper")
       return(<>
     <Link to={`/profile?name=${i.name}&team=${i.team}`}>
-        <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black  hover:scale-105">
-    <div className="flex w-full justify-end"><img className="w-6 h-6" src={`Icons/${i.role}.png`} />
-    </div>
-    <div className="flex justify-center items-center"> <img className="w-36 h-36"src={i.image} /></div>
+        <div className="p-1 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+    <div className="flex justify-center items-center"> <img className="w-24 h-24"src={i.image} /></div>
    <div className="flex flex-col text-center my-2">
    {i.captain===false &&  <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
@@ -70,15 +68,13 @@ const Players = () => {
     <div className="flex justify-center items-center py-4">
   <h1 className="text-slate-400 text-xl font-bold">All-Rounders</h1>
   </div>
-  <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-b border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent flex p-2 ">
+  <div className="w-full flex p-2 flex-wrap flex-row justify-center  gap-1">
     {items.map((i)=>{
     if(i.role=="All-rounder")
       return(<>
      <Link to={`/profile?name=${i.name}&team=${i.team}`}>
-        <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black  hover:scale-105">
-    <div className="flex w-full justify-end"><img className="w-6 h-6" src={`Icons/${i.role}.png`} />
-    </div>
-     <div className="flex justify-center items-center"> <img className="w-36 h-36"src={i.image} /></div>
+        <div className="p-1 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+     <div className="flex justify-center items-center"> <img className="w-24 h-24"src={i.image} /></div>
    <div className="flex flex-col text-center my-2">
    {i.captain===false &&  <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
@@ -93,15 +89,13 @@ const Players = () => {
     <div className="flex justify-center items-center py-4">
   <h1 className="text-slate-400 text-xl font-bold">Bowlers</h1>
   </div>
-  <div className="flex justify-center items-center flex-row flex-wrap gap-12">
+  <div className="w-full flex p-2 flex-wrap flex-row justify-center  gap-1">
     {items.map((i)=>{
     if(i.role=="Bowler")
       return(<>
    <Link to={`/profile?name=${i.name}&team=${i.team}`}>
-        <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black  hover:scale-105">
-    <div className="flex w-full justify-end"><img className="w-5 h-5" src={`Icons/${i.role}.png`} />
-    </div>
-     <div className="flex justify-center items-center"> <img className="w-36 h-36"src={i.image} /></div>
+        <div className="p-1 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+     <div className="flex justify-center items-center"> <img className="w-24 h-24"src={i.image} /></div>
    <div className="flex flex-col text-center my-2">
    {i.captain===false &&  <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&

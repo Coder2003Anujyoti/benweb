@@ -40,7 +40,7 @@ const get_data=async()=>{
   <img className="w-28 h-16" src={`Logos/Logo.webp`} />
 </div>
 <div className="w-full  flex flex-col justify-center">
-  <div id='about' className="w-full py-2 flex-col flex justify-center border-b border-b-slate-400
+  <div id='about' className="w-full py-2 flex-col flex justify-center border-b border-b-slate-600
   border-l-transparent border-r-transparent border-t-transparent items-center text-center">
     <h3 className="text-lg text-slate-400 font-bold">About</h3>
     <div className="w-full flex-row items-center flex-wrap flex text-center  justify-center"> <p className="text-xs text-slate-400 ml-2 mr-2 font-bold">The official IPL app is your go-to platform for tracking all the players in the Indian Premier League. This app offers an extensive list of all the players participating in the tournament, allowing fans to quickly find and explore their favourite stars.Whether you are looking for a specific player or just want to explore the talent in the IPL, the IPL app provides a simple and intuitive way to stay up-to-date with player information.
@@ -48,7 +48,7 @@ This version focuses purely on the display of player names, ideal for an app whe
 </div>
 </div>
 </div>
-<div id="services" className="w-full mt-2 flex justify-center flex-col text-center border-b border-b-slate-400">
+<div id="services" className="w-full mt-2 flex justify-center flex-col text-center border-b border-b-slate-600">
      <h3 className="text-lg text-slate-400 font-bold">Services</h3>
     <div className="w-full py-4 flex flex-wrap gap-x-6 gap-y-4 items-center justify-center    flex-col">
   <div className="flex w-full justify-center gap-x-6 flex-row flex-wrap">

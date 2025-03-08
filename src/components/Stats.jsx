@@ -1,15 +1,71 @@
 import React,{useState,useEffect} from "react";
 import {useSearchParams,Link} from "react-router-dom"
 import {HashLink} from 'react-router-hash-link'
+import { Bar, Pie } from "react-chartjs-2";
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement, ChartDataLabels);
 const Stats = () => {
   const [searchParams] = useSearchParams();
   const [load,setLoad]=useState(true);
   const [items,setItems]=useState([]);
+  const [histruns,setHistruns]=useState({});
+  const [histwickets,setHistwickets]=useState({});
   const teamId = searchParams.get("team"); 
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+  const histogramOptions = {
+  responsive: true,
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: { color: "rgb(148, 163, 184)", font: { weight: "bold" } },
+      grid: { color: "rgba(255, 255, 255, 0.2)" }, // Light grid lines
+    },
+    x: {
+      ticks: { color: "rgb(148, 163, 184)", font: { weight: "bold" } },
+      grid: { display: false }, // Hide vertical grid lines
+    },
+  },
+  plugins: {
+    legend: { display: false }, 
+        datalabels: {
+          color: "transparent",
+      font: { weight: "bold", size: 14 },
+    },
+          
+  },
+};
   const get_Players=async()=>{
     const res=await fetch(`https://intelligent-ailyn-handcricket-e8842259.koyeb.app/players?team=${teamId}`)
     const data=await res.json();
+    const filterruns=data.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
+    const filterwickets=data.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
+    const histogramRuns = {
+  labels: filterruns.map((batter)=> batter.name),
+  datasets: [
+    {
+      label: "Runs Scored",
+      data: filterruns.map((batter) => batter.runs),
+      backgroundColor: "#3b82f6", // Blue color
+      borderWidth: 1,
+      borderRadius: 5,
+    },
+  ],
+};
+const histogramWickets = {
+  labels: filterwickets.map((batter) => batter.name),
+  datasets: [
+    {
+      label: "Wickets Scored",
+      data: filterwickets.map((batter) => batter.wickets),
+      backgroundColor: "#3b82f6", // Blue color
+      borderWidth: 1,
+      borderRadius: 5,
+    },
+  ],
+};
+setHistruns(histogramRuns);
+  setHistwickets(histogramWickets);
     setItems(data);
     setLoad(false);
   }
@@ -47,16 +103,14 @@ const Stats = () => {
   <div className="flex justify-center items-center py-4">
   <h1 className="text-slate-400 text-xl font-bold">Top Batters</h1>
   </div>
-  <div className="flex justify-center items-center flex-row flex-wrap gap-12 border-b border-b-slate-400 p-2 border-t-transparent border-l-transparent border-r-transparent">
+  <div className="w-full flex p-2 flex-wrap flex-row justify-center  gap-1">
     {items.sort((a,b)=>b.runs-a.runs).map((i,ind)=>{
-    if(ind<=4)
+    if(ind<6)
       return(<>
       <Link to={`/profile?name=${i.name}&team=${i.team}`}>
-        <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black hover:scale-105">
-    <div className="flex w-full justify-end">
-      {i.role!=="Bowler" ? <img className="w-6 h-6" src={`Icons/${i.role}.png`} />:<img className="w-5 h-5" src={`Icons/${i.role}.png`} />}
-    </div>
-      <div className="flex justify-center items-center"><img className="w-36 h-36"src={i.image} /></div>
+        <div className="p-1 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+
+      <div className="flex justify-center items-center"><img className="w-24 h-24"src={i.image} /></div>
     <div className="my-2 w-full flex justify-center flex-col">
    {i.captain===false &&  <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
@@ -68,19 +122,20 @@ const Stats = () => {
       </>)
     })}
   </div>
+               <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
+      <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Batting Analysis</h2>
+      <Bar data={histruns} options={histogramOptions} />
+    </div>
     <div className="flex justify-center items-center py-4">
   <h1 className="text-slate-400 text-xl font-bold">Top Bowlers</h1>
   </div>
-  <div className="flex justify-center items-center flex-row flex-wrap gap-12  flex p-2 ">
+  <div className="w-full flex p-2 flex-wrap flex-row justify-center  gap-1">
     {items.sort((a,b)=>b.wickets-a.wickets).map((i,ind)=>{
-    if(ind<=4)
+    if(ind<6)
       return(<>
    <Link to={`/profile?name=${i.name}&team=${i.team}`}>
-        <div className="text-center rounded-sm bg-black  transition duration-300 ease-in-out transform hover:bg-black  hover:scale-105">
-    <div className="flex w-full justify-end">
-      {i.role!=="Bowler" ? <img className="w-6 h-6" src={`Icons/${i.role}.png`} />:<img className="w-5 h-5" src={`Icons/${i.role}.png`} />}
-    </div>
-     <div className="flex justify-center items-center"> <img className="w-36 h-36"src={i.image} /></div>
+        <div className="p-1 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+     <div className="flex justify-center items-center"> <img className="w-24 h-24"src={i.image} /></div>
   <div className="my-2 w-full flex justify-center flex-col">
    {i.captain===false && 
    <p className="text-sm font-bold text-slate-400">{i.name}</p>}
@@ -92,6 +147,10 @@ const Stats = () => {
       </>)
     })}
   </div>
+            <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
+      <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bowling Analysis</h2>
+      <Bar data={histwickets} options={histogramOptions} />
+    </div>
       <footer className="bg-black mt-2 text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>

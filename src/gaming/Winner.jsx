@@ -1,5 +1,10 @@
 import React,{useState,useEffect} from "react";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 const Winner = ({winner,yourteam,opposteam}) => {
+  const [histruns,setHistruns]=useState({});
+  const [histwickets,setHistwickets]=useState({});
   const [load,setLoad]=useState(true);
   const array=yourteam.concat(opposteam);
   const playerdata=yourteam;
@@ -59,6 +64,58 @@ const computerwickets=playerdata.reduce((total,i)=>{
   }
   
   },[])
+  const histogramOptions = {
+  responsive: true,
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: { color: "rgb(148, 163, 184)", font: { weight: "bold" } },
+      grid: { color: "rgba(255, 255, 255, 0.2)" }, // Light grid lines
+    },
+    x: {
+      ticks: { color: "rgb(148, 163, 184)", font: { weight: "bold" } },
+      grid: { display: false }, // Hide vertical grid lines
+    },
+  },
+  plugins: {
+    legend: { display: false }, 
+        datalabels: {
+          color: "transparent",
+      font: { weight: "bold", size: 14 },
+    },
+          
+  },
+};
+useEffect(()=>{
+    const filterruns=array.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
+    const filterwickets=array.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
+    const histogramRuns = {
+  labels: filterruns.map((batter)=> batter.name),
+  datasets: [
+    {
+      label: "Runs Scored",
+      data: filterruns.map((batter) => batter.runs),
+      backgroundColor: "#3b82f6", // Blue color
+      borderWidth: 1,
+      borderRadius: 5,
+    },
+  ],
+};
+const histogramWickets = {
+  labels: filterwickets.map((batter) => batter.name),
+  datasets: [
+    {
+      label: "Wickets Scored",
+      data: filterwickets.map((batter) => batter.wickets),
+      backgroundColor: "#3b82f6", // Blue color
+      borderWidth: 1,
+      borderRadius: 5,
+    },
+  ],
+};
+  setHistruns(histogramRuns);
+  setHistwickets(histogramWickets);
+},[])
   return (
     <>
    {
@@ -141,42 +198,48 @@ const computerwickets=playerdata.reduce((total,i)=>{
        })
      }
      </div>
-     <div className="w-full flex flex-col gap-4">
   <div className="w-full py-4 flex justify-center">
     <h1 className="text-xl font-extrabold text-slate-400">Top Batters</h1>
   </div>
-  <div className="w-full flex flex-col justify-center gap-4 ">
+  <div className="w-full flex flex-row flex-wrap justify-center gap-4 ">
     
     {
       array.sort((a,b)=>b.runs-a.runs).map((i,ind)=>{
-      if(ind<=2)
+      if(ind<6)
         return(<>
- <div className="w-full flex flex-row flex-wrap justify-evenly border-b p-4 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent">
-   <img src={i.image} className="w-20 h-20"/>
-  <div className="flex justify-center items-center"><h2 className="text-sm font-extrabold text-slate-400 ">{i.name}</h2></div>
-    <div className="flex justify-center items-center"> <h2 className="text-sm font-extrabold text-slate-400 ">Runs-:{i.runs}</h2></div>
+ <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+   <img src={i.image} className="w-16 h-16"/>
+  <div className="flex justify-center items-center"><h2 className="text-xs font-extrabold text-slate-400 ">{i.name}</h2></div>
+    <div className="flex justify-center items-center"> <h2 className="text-xs font-extrabold text-slate-400 ">Runs-:{i.runs}</h2></div>
    </div>
         </>)
       })
     }
+    </div>
+             <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
+      <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Batting Analysis</h2>
+      <Bar data={histruns} options={histogramOptions} />
     </div>
     <div className="w-full py-4 flex justify-center">
     <h1 className="text-xl font-extrabold text-slate-400">Top Bowlers</h1>
   </div>
-  <div className="w-full flex flex-col justify-center gap-4 ">
+  <div className="w-full flex flex-row flex-wrap justify-center gap-4 ">
     {
       array.sort((a,b)=>b.wickets-a.wickets).map((i,ind)=>{
-      if(ind<=2)
+      if(ind<6)
         return(<>
- <div className="w-full flex flex-row flex-wrap justify-evenly border-b p-4 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent">
-   <img src={i.image} className="w-20 h-20"/>
-  <div className="flex justify-center items-center"><h2 className="text-sm font-extrabold text-slate-400 ">{i.name}</h2></div>
-    <div className="flex justify-center items-center"> <h2 className="text-sm font-extrabold text-slate-400 ">Wickets-:{i.wickets}</h2></div>
+ <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+   <img src={i.image} className="w-16 h-16"/>
+  <div className="flex justify-center items-center"><h2 className="text-xs font-extrabold text-slate-400 ">{i.name}</h2></div>
+    <div className="flex justify-center items-center"> <h2 className="text-xs font-extrabold text-slate-400 ">Wickets-:{i.wickets}</h2></div>
    </div>
         </>)
       })
     }
     </div>
+          <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
+      <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bowling Analysis</h2>
+      <Bar data={histwickets} options={histogramOptions} />
     </div>
 </>
 }

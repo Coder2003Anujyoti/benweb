@@ -103,11 +103,11 @@ const Results = () => {
 </div>
   <div className="w-full flex flex-col justify-center">
      <div className="flex justify-center items-center py-8"><h1 className="text-lg text-slate-400 font-bold">Match Results</h1></div>
-   <div className="w-full flex flex-col justify-center gap-8">
+   <div className="ml-2 mr-2 flex flex-row flex-wrap justify-center gap-x-8 gap-y-8">
     {items.map((item,ind)=>{
       return(<>
         {item.map((i)=>{return(<>
-  <div className="w-full flex flex-row justify-center gap-16 py-2 border-b border-b-slate-400">
+  <div className=" flex flex-row justify-center gap-16 p-2 border-b border-b-slate-600">
     <Link to={`/history?team=${teamId}`} >  <img src={`Logos/${teamId}.webp`} className="w-16 h-16"/>
     </Link>
     <div className="flex justify-center items-center"><h1 className="text-base text-yellow-400 font-bold">{i.status}</h1></div>
@@ -119,7 +119,7 @@ const Results = () => {
         <div className="w-full flex justify-center">
         <button className="p-4 font-bold text-sm text-slate-400 bg-slate-800 rounded-lg" onClick={go}>More Items</button>
       </div>}
-     {loads==true && ind===items.length-1 && <div className="flex items-center justify-center text-center text-slate-400 text-base font-bold"><p>Loading...</p></div> }
+     {loads==true && ind===items.length-1 && <div className="w-full flex items-center justify-center text-center text-slate-400 text-base font-bold"><p>Loading...</p></div> }
       </>)
     })}
   </div>

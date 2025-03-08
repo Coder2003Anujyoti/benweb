@@ -44,8 +44,8 @@ const Tourstats = () => {
 };
   const go=(i)=>{
     if(i===playerteam){
-    const filterruns=player.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<5);
-    const filterwickets=player.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<5);
+    const filterruns=player.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
+    const filterwickets=player.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
     const histogramRuns = {
   labels: filterruns.map((batter)=> batter.name),
   datasets: [
@@ -76,8 +76,8 @@ const histogramWickets = {
       setData(player)
     }
     else{
-      const filterruns=computer.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<5);
-    const filterwickets=computer.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<5);
+      const filterruns=computer.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
+    const filterwickets=computer.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
     const histogramRuns = {
   labels: filterruns.map((batter)=> batter.name),
   datasets: [
@@ -147,7 +147,7 @@ const histogramWickets = {
      }
      </div>
           <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
-      <h2 className="text-slate-400 text-xl font-bold mb-4 text-center">Top Batters & Their Runs</h2>
+      <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Batting Analysis</h2>
       <Bar data={histruns} options={histogramOptions} />
     </div>
       <div className="w-full  flex justify-center">
@@ -168,7 +168,7 @@ const histogramWickets = {
      }
      </div>
      <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
-      <h2 className="text-slate-400 text-xl font-bold mb-4 text-center">Top Bowlers & Their Wickets</h2>
+      <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bowling Analysis</h2>
       <Bar data={histwickets} options={histogramOptions} />
     </div>
      </>

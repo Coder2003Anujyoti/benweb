@@ -59,7 +59,7 @@ const Site = ({player,computer,playerteam,computerteam,remove}) => {
  </div>
  </div>
  {team!='' && <>
-       <div className="flex p-4 flex-col justify-center items-center text-center border-t border-slate-600 gap-4 my-6">
+       <div className="flex p-4 flex-col justify-center items-center text-center border-t border-t-slate-600 gap-4 my-6">
       {team===playerteam && <h1 className="text-lg text-green-400 font-bold">Your Team</h1>}
      {team===computerteam && <h1 className="text-lg text-green-400 font-bold">Opposition Team</h1>}
        <img src={`Logos/${team}.webp`} className="w-24 h-24" />

@@ -158,7 +158,7 @@ const pieChartOptions = {
 </div>
   <div className="w-full flex flex-col justify-center items-center gap-y-4">
   <div className="w-full flex flex-row justify-center items-center">
-  <div className="flex justify-center items-center">
+  <div className="flex justify-center items-center my-2">
     <img src={items[0].image} className="w-64 h-64" />
     </div>
     </div>

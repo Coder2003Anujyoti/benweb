@@ -9,10 +9,34 @@ const TeamDetails = () => {
   const [searchParams] = useSearchParams();
   const [bar,setBar]=useState({});
   const [pie,setPie]=useState({});
+  const [histruns,setHistruns]=useState({});
+  const [histwickets,setHistwickets]=useState({});
   const teamId = searchParams.get("team"); 
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const [load,setLoad]=useState(true);
     const [item,setItem]=useState([]);
+    const histogramOptions = {
+  responsive: true,
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: { color: "rgb(148, 163, 184)", font: { weight: "bold" } },
+      grid: { color: "rgba(255, 255, 255, 0.2)" }, // Light grid lines
+    },
+    x: {
+      ticks: { color: "rgb(148, 163, 184)", font: { weight: "bold" } },
+      grid: { display: false }, // Hide vertical grid lines
+    },
+  },
+  plugins: {
+    legend: { display: false }, 
+        datalabels: {
+          color: "transparent",
+      font: { weight: "bold", size: 14 },
+    },
+          
+  },
+};
     const barChartOptions = {
   plugins: {
     legend: {
@@ -97,6 +121,32 @@ const pieChartOptions = {
     const response=await fetch('https://intelligent-ailyn-handcricket-e8842259.koyeb.app/');
     const data=await response.json();
     const pl=data.details.filter((i)=>i.teamid===teamId);
+    const filterruns=data.data.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
+    const filterwickets=data.data.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
+    const histogramRuns = {
+  labels: filterruns.map((batter)=> batter.name),
+  datasets: [
+    {
+      label: "Runs Scored",
+      data: filterruns.map((batter) => batter.runs),
+      backgroundColor: "#3b82f6", // Blue color
+      borderWidth: 1,
+      borderRadius: 5,
+    },
+  ],
+};
+const histogramWickets = {
+  labels: filterwickets.map((batter) => batter.name),
+  datasets: [
+    {
+      label: "Wickets Scored",
+      data: filterwickets.map((batter) => batter.wickets),
+      backgroundColor: "#3b82f6", // Blue color
+      borderWidth: 1,
+      borderRadius: 5,
+    },
+  ],
+};
     const barChartData = {
     labels: ["Matches", "Win", "Lose/Tie"],
     datasets: [
@@ -121,6 +171,8 @@ const pieChartOptions = {
   setBar(barChartData)
   setPie(pieChartData)
     setItem(data.data);
+    setHistruns(histogramRuns);
+  setHistwickets(histogramWickets);
     setLoad(false);
   }
   useEffect(()=>{
@@ -192,7 +244,7 @@ const pieChartOptions = {
     </Link>
 </div>
 <div className="w-full flex flex-col border-t border-b border-slate-600 p-4">
-      <div className="w-full flex justify-center"><p className="text-xl font-extrabold text-slate-400">Analytics</p></div>
+      <div className="w-full flex justify-center"><p className="text-xl font-extrabold text-slate-400">Analysis</p></div>
         <div className="grid  grid-cols-1 md:grid-cols-2 my-4 gap-6 text-center flex flex-row">
         <div className="text-black font-bold p-4 rounded ">
           <Bar data={bar} options={barChartOptions} />
@@ -207,41 +259,49 @@ const pieChartOptions = {
   <div className="w-full py-4 flex justify-center">
     <h1 className="text-lg font-extrabold text-slate-400">Top Batters</h1>
   </div>
-  <div className="w-full flex flex-col justify-center gap-4 ">
+  <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 ">
     
     {
       item.sort((a,b)=>b.runs-a.runs).map((i,ind)=>{
-      if(ind<=2)
+      if(ind<6)
         return(<>
- <div className="w-full flex flex-row flex-wrap justify-evenly border-b p-4 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent">
- <Link to={`/profile?name=${i.name}&team=${i.team}`}>
-   <img src={i.image} className="w-20 h-20"/>
-   </Link>
-  <div className="flex justify-center items-center"><h2 className="text-sm font-extrabold text-slate-400 ">{i.name}</h2></div>
-    <div className="flex justify-center items-center"> <h2 className="text-sm font-extrabold text-slate-400 ">Runs-:{i.runs}</h2></div>
-   </div>
+      <Link to={`/profile?name=${i.name}&team=${i.team}`}>
+            <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
+    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
+         <p className="text-slate-400 text-xs font-bold">Runs-:{i.runs}</p>
+           </div>
+           </Link>
         </>)
       })
     }
     </div>
+             <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
+      <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Batting Analysis</h2>
+      <Bar data={histruns} options={histogramOptions} />
+    </div>
     <div className="w-full py-4 flex justify-center">
     <h1 className="text-lg font-extrabold text-slate-400">Top Bowlers</h1>
   </div>
-  <div className="w-full flex flex-col justify-center gap-4 ">
+  <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2">
     {
       item.sort((a,b)=>b.wickets-a.wickets).map((i,ind)=>{
-      if(ind<=2)
+      if(ind<6)
         return(<>
- <div className="w-full flex flex-row flex-wrap justify-evenly border-b p-4 border-b-slate-400 border-t-transparent border-l-transparent border-r-transparent">
-      <Link to={`/profile?name=${i.name}&team=${i.team}`}>
-   <img src={i.image} className="w-20 h-20"/>
-   </Link>
-  <div className="flex justify-center items-center"><h2 className="text-sm font-extrabold text-slate-400 ">{i.name}</h2></div>
-    <div className="flex justify-center items-center"> <h2 className="text-sm font-extrabold text-slate-400 ">Wickets-:{i.wickets}</h2></div>
-   </div>
+       <Link to={`/profile?name=${i.name}&team=${i.team}`}>
+    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
+    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
+         <p className="text-slate-400 text-xs font-bold">Wickets-:{i.wickets}</p>
+           </div>
+        </Link>
         </>)
       })
     }
+    </div>
+          <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
+      <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bowling Analysis</h2>
+      <Bar data={histwickets} options={histogramOptions} />
     </div>
     </div>
     <footer className="bg-black text-white">

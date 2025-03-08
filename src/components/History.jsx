@@ -54,19 +54,18 @@ const History = () => {
       </>)
     })}
     </div>}
-   <div className="border-b border-b-slate-400 w-full border-l-transparent border-r-transparent border-t-transparent py-2 flex-col items-center flex-wrap flex gap-2  justify-center"><p className="text-sm text-slate-400 font-bold">Matches-: {items[0].matches}</p>
+   <div className="border-b border-b-slate-600 w-full border-l-transparent border-r-transparent border-t-transparent py-2 flex-col items-center flex-wrap flex gap-2  justify-center"><p className="text-sm text-slate-400 font-bold">Matches-: {items[0].matches}</p>
    <p className="text-sm text-slate-400 font-bold">Win-: {items[0].win}</p>
       <p className="text-sm text-slate-400 font-bold">Lose-: {items[0].lose}</p>
        <p className="text-sm text-slate-400 font-bold">Tie-: {items[0].matches-(items[0].win+items[0].lose)}</p>
     {items[0].win>0 &&   <p className="text-sm text-slate-400 font-bold">Win-Ratio-: {Math.round((items[0].win/items[0].matches).toFixed(2)*100)}%</p>}
     {items[0].win==0 &&   <p className="text-sm text-slate-400 font-bold">Win-Ratio-: 0%</p>}
    </div>
-  <div className="w-full py-2 flex-col flex justify-center border-b border-b-slate-400
-  border-l-transparent border-r-transparent border-t-transparent items-center text-center">
+  <div className="w-full py-2 flex-col flex justify-center border-b border-b-slate-600  border-l-transparent border-r-transparent border-t-transparent items-center text-center">
     <h3 className="text-lg text-slate-400 font-bold">About</h3>
     <div className="w-full py-2 flex-row items-center flex-wrap flex text-center  justify-center"> <p className="ml-2 mr-2 text-xs text-slate-400 font-bold">{items[0].about}</p></div>
   </div>
-    <div className="w-full border-b border-b-slate-400 py-2 my-4 flex-col flex justify-center  items-center text-center p-2 gap-2">
+    <div className="w-full  py-2 my-4 flex-col flex justify-center  items-center text-center p-2 gap-2">
     <h3 className="text-lg text-slate-400 font-bold">Gallery</h3>
     <div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center  p-4 lex-row ">
   {new Array(4).fill("").map((i,ind)=>{
@@ -130,4 +129,3 @@ const History = () => {
 
 
 export default History;
-

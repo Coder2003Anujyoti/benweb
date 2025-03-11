@@ -1,10 +1,20 @@
 import React,{useState,useEffect} from "react";
 import Winner from "./Winner.jsx"
+import { Line,Bar } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, PointElement, BarElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+
+// Register required Chart.js components
+ChartJS.register(CategoryScale,LinearScale, PointElement, BarElement, LineElement, Title, Tooltip, Legend,ArcElement);
+var bar=0;
+var cbar=0;
+var sbar=0;
 const ComputerFirst = ({players,oppositionplayers}) => {
   const [show,setShow]=useState(true);
   const [turn,setTurn]=useState("Computer");
   const [playeroption,setPlayeroption]=useState(0);
   const [computeroption,setComputeroption]=useState(0)
+  const [leader,setLeader]=useState("");
+  const [ids,setIds]=useState([]);
   const [id,setId]=useState([]);
   const [playerrun,setPlayerrun]=useState(0);
   const [playerwicket,setPlayerwicket]=useState(0);
@@ -36,6 +46,11 @@ const ComputerFirst = ({players,oppositionplayers}) => {
     setOpposteam(get_Opposition);
   },[])
   const add_Player=(i)=>{
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setIds([...ids,i.name])
+        setLeader(turn);
+    setPlayeroption(0);
+    setComputeroption(0)
     setImage(i);
     setId([...id,i.name])
     setPlayerstats(players);
@@ -43,6 +58,7 @@ const ComputerFirst = ({players,oppositionplayers}) => {
     setShow(false);
   }
   const check=(i)=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
   let value=Math.floor(Math.random()*6)+1;
    if(turn=="Player"){
      if(number==19 && overs%6==5){
@@ -566,6 +582,169 @@ const ComputerFirst = ({players,oppositionplayers}) => {
    }
   
   }
+  const gone=()=>{
+   if(leader==="Player"){
+   if(playeroption===computeroption && playeroption!=0){
+     bar=bar;
+   }
+   if(playeroption===0){
+     bar=0;
+   }
+   if(playeroption!==computeroption && playeroption!=0){
+     bar=bar+playeroption;
+   }
+   }
+ else if(leader==="Computer"){
+   if(playeroption===computeroption && computeroption!=0){
+     cbar=0;
+   }
+      if(computeroption===0){
+     cbar=cbar;
+   }
+   if(playeroption!==computeroption && computeroption!=0){
+     cbar=cbar+computeroption;
+   }
+   }
+   
+ }
+ gone();
+  const histwickets = Array.from({ length: 11}, (_, i) => i); 
+  const sub_runs=yourteam.filter((it)=>ids.includes(it.name))
+const teamA_runs = [0,...sub_runs.sort((a,b)=>ids.indexOf(a.name)-ids.indexOf(b.name)).map((i)=>i.runs)]; // Replace with real data
+  const teamB_runs = [0,...opposteam.map((i)=>i.runs)]; // Replace with real data
+ // alert(teamA_runs)
+const histdata = {
+  labels: histwickets, // Overs on X-axis
+  datasets: [
+    {
+      label: players[0].team.toUpperCase(),
+      data: teamA_runs,
+      borderColor: "rgba(54, 162, 235, 1)", // Blue color
+      backgroundColor: "rgba(54, 162, 235, 1)",
+      pointBackgroundColor: "rgba(54, 162, 235, 1)",
+      pointRadius: 5,
+      fill: false,
+      tension: 0.3 // Smooth curve effect
+    },
+    {
+      label:oppositionplayers[0].team.toUpperCase(),
+      data: teamB_runs,
+      borderColor: "rgba(255, 99, 132, 1)", // Red color
+      backgroundColor: "rgba(255, 99, 132, 1)",
+      pointBackgroundColor: "rgba(255, 99, 132, 1)",
+      pointRadius: 5,
+      fill: false,
+      tension: 0.3
+    }
+  ]
+};
+// Chart options
+const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: "Wickets Fallen",
+        color: "rgb(148, 163, 184)",
+        font: { weight: "bold" }
+      },
+      ticks: {
+        color: "rgb(148, 163, 184)",
+        font: { weight: "bold" }
+      },
+      grid: { color: "rgba(148, 163, 184, 0.2)" }
+    },
+    y: {
+      
+    title: {
+        display: true,
+        text: "Total Runs Scored",
+        color: "rgb(148, 163, 184)",
+        font: { weight: "bold" }
+      },
+      ticks: {
+        color: "rgb(148, 163, 184)",
+        font: { weight: "bold" }
+      },
+      grid: { color: "rgba(148, 163, 184, 0.2)" }
+    }
+  },
+  plugins: {
+    legend: {
+      labels: {
+        font: { weight: "bold" },
+        color: "rgb(148, 163, 184)"
+      }
+    },
+    datalabels:{
+      color:"transparent"
+    }
+  }
+};
+const bardata = {
+  labels: histwickets, // Wickets as labels
+  datasets: [
+    {
+      label: players[0].team.toUpperCase(),
+      data: teamA_runs,
+      backgroundColor: "rgba(54, 162, 235, 0.7)", // Blue color for Team A
+      borderWidth: 0
+    },
+    {
+      label: oppositionplayers[0].team.toUpperCase(),
+      data: teamB_runs,
+      backgroundColor: "rgba(255, 99, 132, 0.7)", // Red color for Team B
+      borderWidth: 0
+    }
+  ]
+};
+
+// Chart options
+const baroptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: "Wickets Fallen",
+        color: "rgb(148, 163, 184)",
+        font: { weight: "bold" }
+      },
+      ticks: {
+        color: "rgb(148, 163, 184)",
+        font: { weight: "bold" }
+      },
+      grid: { color: "rgba(148, 163, 184, 0.2)" }
+    },
+    y: {
+      title: {
+        display: true,
+        text: "Total Runs Scored",
+        color: "rgb(148, 163, 184)",
+        font: { weight: "bold" }
+      },
+      ticks: {
+        color: "rgb(148, 163, 184)",
+        font: { weight: "bold" }
+      },
+      grid: { color: "rgba(148, 163, 184, 0.2)" }
+    }
+  },
+  plugins: {
+    legend: {
+      labels: {
+        color: "rgb(148, 163, 184)",
+        font: { weight: "bold" }
+      }
+    },
+    datalabels:{
+      color:"transparent"
+    }
+  }
+};
   
   return (
 <>
@@ -637,6 +816,42 @@ const ComputerFirst = ({players,oppositionplayers}) => {
       <p className="text-slate-400 text-2xl font-bold shadow-slate-400">Target-: {target}</p>
     </div>
   </>}
+            <div className="w-full flex my-8 flex-row justify-center gap-x-16 gap-y-4 flex-wrap">
+  {turn==="Player" &&  <>
+    <div className="flex flex-col gap-y-4 justify-center text-center">
+    <h1 className="text-slate-400 text-xs font-bold">Current Batsman</h1>
+      <div className="w-full flex justify-center"><img className="w-24 h-24" src={players.filter((i)=>i.name===id[id.length-1])[0].image}></img></div>
+            <h1 className="text-slate-400 text-xs font-bold">{id[id.length-1]}</h1>
+      <h1 className="text-slate-400 text-xs font-bold">Runs-: {bar}</h1>
+    </div>
+  {wickets >0 && 
+   <div className="flex flex-col gap-y-4 justify-center text-center">
+         <h1 className="text-slate-400 text-xs font-bold">Last Dismissal</h1>
+      <div><img className="w-24 h-24" src={players.filter((i)=>i.name===id[id.length-2])[0].image}></img></div>
+                  <h1 className="text-slate-400 text-xs font-bold">{id[id.length-2]}</h1>
+      <h1 className="text-slate-400 text-xs font-bold">Runs-: {yourteam.filter((i)=>i.name===id[id.length-2]).map((i)=>i.runs)}</h1>
+    </div>
+  }
+  </>
+  }
+    {turn==="Computer" &&  <>
+    <div className="flex flex-col gap-y-4 justify-center text-center">
+    <h1 className="text-slate-400 text-xs font-bold">Current Batsman</h1>
+      <div className="w-full flex justify-center"><img className="w-24 h-24" src={oppositionstats[index].image}></img></div>
+       <h1 className="text-slate-400 text-xs font-bold">{oppositionstats[index].name}</h1>
+      <h1 className="text-slate-400 text-xs font-bold">Runs-: {cbar}</h1>
+    </div>
+  {wickets >0 && 
+   <div className="flex flex-col gap-y-4 justify-center text-center">
+         <h1 className="text-slate-400 text-xs font-bold">Last Dismissal</h1>
+      <div><img className="w-24 h-24" src={oppositionstats[index-1].image}></img></div>
+             <h1 className="text-slate-400 text-xs font-bold">{oppositionstats[index-1].name}</h1>
+      <h1 className="text-slate-400 text-xs font-bold">Runs-: {opposteam.filter((i)=>i.name===oppositionstats[index-1].name).map((i)=>i.runs)}</h1>
+    </div>
+  }
+  </>
+  }
+  </div>
   </>
     
   }
@@ -646,6 +861,14 @@ const ComputerFirst = ({players,oppositionplayers}) => {
       
       
   }
+            <div className="my-4 text-center text-xs" style={{ width: "100%", height: "500px" }} >
+     <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Scattering Analysis</h2>
+      <Line data={histdata} options={options} />
+    </div>
+        <div className="my-16 text-center text-xs" style={{ width: "100%", height: "500px" }}>
+    <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bar-Graph Analysis</h2>
+      <Bar data={bardata} options={baroptions} />
+    </div>
 </>
   );
 };

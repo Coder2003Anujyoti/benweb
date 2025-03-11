@@ -39,6 +39,7 @@ const Winner = ({winner,yourteam,opposteam}) => {
   const array=yourteam.concat(opposteam);
   const playerdata=yourteam;
 const computerdata= opposteam;
+const motm=array.sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets));
 const playertotal=playerdata.reduce((total,i)=>{
   total+=(i.runs);
   return total;
@@ -80,6 +81,23 @@ const computerwickets=playerdata.reduce((total,i)=>{
  const vals = await gess.json();
   }
   useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },[])
+  useEffect(()=>{
+  if(winner===yourteam[0].team){
+   send_data({data:array},{winner:yourteam,loser:opposteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Winner",oppstatus:"Loser"})
+   setLoad(false)
+  }
+ else if(winner===opposteam[0].team){
+   send_data({data:array},{winner:opposteam,loser:yourteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Loser",oppstatus:"Winner"})
+   setLoad(false)
+  }
+  else{
+    send_data({data:array},{winner:yourteam,loser:opposteam,draw:true},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Draw",oppstatus:"Draw"})
+    setLoad(false)
+  }
+  },[])
+  useEffect(()=>{
   if(winner===yourteam[0].team){
   const pl=pdata.map((i)=>{
     array.map((it)=>{
@@ -102,7 +120,6 @@ const computerwickets=playerdata.reduce((total,i)=>{
   localStorage.setItem('winarray',JSON.stringify([...wins,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
     localStorage.setItem('players',JSON.stringify(pl));
       localStorage.setItem('computers',JSON.stringify(cl));
-   send_data({data:array},{winner:yourteam,loser:opposteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Winner",oppstatus:"Loser"})
    setLoad(false)
   }
  else if(winner===opposteam[0].team){
@@ -127,7 +144,6 @@ const computerwickets=playerdata.reduce((total,i)=>{
     localStorage.setItem('players',JSON.stringify(pl));
       localStorage.setItem('computers',JSON.stringify(cl));
       localStorage.setItem('winarray',JSON.stringify([...wins,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
-   send_data({data:array},{winner:opposteam,loser:yourteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Loser",oppstatus:"Winner"})
    setLoad(false)
   }
   else{
@@ -152,7 +168,6 @@ const computerwickets=playerdata.reduce((total,i)=>{
     localStorage.setItem('players',JSON.stringify(pl));
       localStorage.setItem('computers',JSON.stringify(cl));
       localStorage.setItem('winarray',JSON.stringify([...wins,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
-    send_data({data:array},{winner:yourteam,loser:opposteam,draw:true},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Draw",oppstatus:"Draw"})
     setLoad(false)
   }
   
@@ -252,6 +267,11 @@ const histogramWickets = {
      <img src={`Logos/${computerdata[0].team}.webp`} className="w-16 h-16" />
      </div>
    </div>
+      <div className="w-full my-4 p-4 flex flex-col gap-y-4 justify-center text-center">
+          <h1 className="text-xs font-extrabold text-yellow-400">Man of the Match</h1> 
+     <div className="w-full flex justify-center"><img className="w-32 h-32" src={motm[0].image} /></div>
+     <h1 className="text-xs font-extrabold text-slate-400">{motm[0].name}</h1> 
+    </div>
      <div className="w-full flex justify-center items-center">
    <h1 className="text-lg font-bold text-slate-400">Performance</h1>
    </div>

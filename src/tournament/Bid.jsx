@@ -90,6 +90,7 @@ useEffect(()=>{
    localStorage.removeItem('team');
    localStorage.removeItem('oppos');
    localStorage.removeItem('winlist');
+   localStorage.removeItem('winnerlist');
    window.location.reload();
    setPlaying(false)
    setStore([]);

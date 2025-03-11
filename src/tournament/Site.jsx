@@ -14,13 +14,27 @@ const LocalData=()=>{
     return [];
 }
 }
+const LocalWin=()=>{
+  const lists=localStorage.getItem('winnerlist');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
 const Site = ({playerteam,store,localremove}) => {
   const [stores,setStores]=useState(store);
-  const [win,setWin]=useState(()=>LocalData()||[])
+  const [win,setWin]=useState(()=>LocalWin()||[])
+  const [match,setMatch]=useState(()=>LocalData()||[])
   const [bar,setBar]=useState({});
   const [pie,setPie]=useState({});
   const winners=win.filter((i)=>i.win===playerteam);
   const losers=win.filter((i)=>i.win!==playerteam);
+  const motms=store.map((i)=>{
+    return i.players.sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets)).filter((i,ind)=> ind===0)[0]
+  });
+  const potm=motms.sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets));
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const barChartOptions = {
   plugins: {
@@ -129,31 +143,47 @@ const barChartData = {
   <img className="w-24 h-24" src="Icons/stadium.png"/>
 </div>
   {
-    win.length===9 && <>
-      {winners.length>5 && <>
+    win.length>=9 && <>
+      {win[win.length-1].win===playerteam && win.length===11 && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
          <div className="w-full flex justify-center"><img className="w-36 h-36" src="Icons/trophy.png" /></div>
           <h1 className="font-bold text-yellow-500">Champions</h1>
         </div>
+      <div className="w-full my-6 flex flex-col gap-y-6 justify-center text-center">
+          <h1 className="text-sm font-extrabold text-yellow-400">Player of the Tournament</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={potm[0].image} /></div>
+     <h1 className="text-sm font-extrabold text-slate-400">{potm[0].name}</h1> 
+    </div>
       </>
       }
       {
-        winners.length<=5 && <>
+  ( ( win.length===9 && winners.length<=6) || (win.length===10 && win[win.length-1].win!==playerteam) || (win.length===11 && win[win.length-1].win!==playerteam)) && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
          <div className="w-full flex justify-center"><img className="w-36 h-36" src="Icons/loser.png" /></div>
           <h1 className="font-bold text-yellow-500">Loser</h1>
         </div>
+         <div className="w-full my-6  flex flex-col gap-y-6 justify-center text-center">
+          <h1 className="text-sm font-extrabold text-yellow-400">Player of the Tournament</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={potm[0].image} /></div>
+     <h1 className="text-sm font-extrabold text-slate-400">{potm[0].name}</h1> 
+    </div>
       </>
       }
     </>
   }
   { win.length<9 && <>
  <div className="w-full text-center my-2">
-  <h3 className="font-bold text-sm text-red-400">*Need to win more than 5 matches to become champions.</h3>
+  <h3 className="font-bold text-sm text-red-400 ml-2 mr-2">*Need to win more than 7 matches to reach knockouts.</h3>
 </div>
 </>}
+  { ((win.length===9 && winners.length>=7) || 
+ (win.length>=9 && win.length<=10)) && <>
+        <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
+          <h1 className="font-bold text-yellow-500">Welcome to Knockouts</h1>
+        </div>
+</>}
      <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row  p-2">
-  {win.length<9 && <>
+  {(win.length<9 || (win.length===9 && winners.length>=7) || (win.length===10 && win[win.length-1].win===playerteam))  && <>
      <HashLink to={`/game?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/crickets.png" className="w-24 h-24"></img>

@@ -20,6 +20,15 @@ const LocalWin=()=>{
     return [];
 }
 }
+const LocalWinner=()=>{
+  const lists=localStorage.getItem('winnerlist');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
 const LocalData=()=>{
   const lists=localStorage.getItem('oppos');
   if(lists){
@@ -33,12 +42,14 @@ const Winner = ({winner,yourteam,opposteam}) => {
   const [update,setUpdate]=useState(()=>LocalUser()||[]);
   const [histruns,setHistruns]=useState({});
   const [histwickets,setHistwickets]=useState({});
+  const [winnerarray,setWinnerarray]=useState(()=>LocalWinner()||[]);
   const [load,setLoad]=useState(true);
   const [winarray,setWinarray]=useState(()=>LocalWin()||[]);
   const [teams,setTeams]=useState(()=>LocalData()|| ["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"]);
   const array=yourteam.concat(opposteam);
   const playerdata=yourteam;
 const computerdata= opposteam;
+const motm=array.sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets));
 const playertotal=playerdata.reduce((total,i)=>{
   total+=(i.runs);
   return total;
@@ -80,6 +91,23 @@ const computerwickets=playerdata.reduce((total,i)=>{
  const vals = await gess.json();
   }
   useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },[])
+  useEffect(()=>{
+  if(winner===yourteam[0].team){
+   send_data({data:array},{winner:yourteam,loser:opposteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Winner",oppstatus:"Loser"})
+   setLoad(false)
+  }
+ else if(winner===opposteam[0].team){
+   send_data({data:array},{winner:opposteam,loser:yourteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Loser",oppstatus:"Winner"})
+   setLoad(false)
+  }
+  else{
+    send_data({data:array},{winner:yourteam,loser:opposteam,draw:true},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Draw",oppstatus:"Draw"})
+    setLoad(false)
+    }
+  },[])
+  useEffect(()=>{
   if(winner===yourteam[0].team){
     const m=teams.filter((i)=>i!=opposteam[0].team);
     const roy=update.map((i)=>{
@@ -98,8 +126,8 @@ const computerwickets=playerdata.reduce((total,i)=>{
   })
   localStorage.setItem('user',JSON.stringify(roy));
     localStorage.setItem('winlist',JSON.stringify([...winarray,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
+    localStorage.setItem('winnerlist',JSON.stringify([...winnerarray,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
     localStorage.setItem('oppos',JSON.stringify(m));
-   send_data({data:array},{winner:yourteam,loser:opposteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Winner",oppstatus:"Loser"})
    setLoad(false)
   }
  else if(winner===opposteam[0].team){
@@ -120,11 +148,12 @@ const computerwickets=playerdata.reduce((total,i)=>{
   })
   localStorage.setItem('user',JSON.stringify(roy));
     localStorage.setItem('winlist',JSON.stringify([...winarray,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
+    localStorage.setItem('winnerlist',JSON.stringify([...winnerarray,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
     localStorage.setItem('oppos',JSON.stringify(m));
-   send_data({data:array},{winner:opposteam,loser:yourteam,draw:false},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Loser",oppstatus:"Winner"})
    setLoad(false)
   }
   else{
+    if(winarray.length<9){
     const m=teams.filter((i)=>i!=opposteam[0].team);
     const roy=update.map((i)=>{
     if(i.team===yourteam[0].team || i.team===opposteam[0].team){
@@ -142,9 +171,31 @@ const computerwickets=playerdata.reduce((total,i)=>{
   })
   localStorage.setItem('user',JSON.stringify(roy));
     localStorage.setItem('winlist',JSON.stringify([...winarray,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
+    localStorage.setItem('winnerlist',JSON.stringify([...winnerarray,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
     localStorage.setItem('oppos',JSON.stringify(m));
-    send_data({data:array},{winner:yourteam,loser:opposteam,draw:true},{team:yourteam[0].team,opposteam:opposteam[0].team,yourstatus:"Draw",oppstatus:"Draw"})
     setLoad(false)
+    }
+    else{
+      const m=teams.filter((i)=>i!=opposteam[0].team);
+    const roy=update.map((i)=>{
+    if(i.team===yourteam[0].team || i.team===opposteam[0].team){
+    i.players.map((it)=>{
+      array.map((item)=>{
+    if(item.name===it.name){
+        it.matches+=item.matches;
+        it.runs+=item.runs;
+        it.wickets+=item.wickets;
+    }
+      })
+    })
+    }
+    return {...i}
+  })
+  localStorage.setItem('user',JSON.stringify(roy));
+    localStorage.setItem('winlist',JSON.stringify([...winarray,{win:winner,player:yourteam[0].team,computer:opposteam[0].team}]))
+    localStorage.setItem('oppos',JSON.stringify(m));
+    setLoad(false)
+    }
   }
   },[])
   const histogramOptions = {
@@ -209,6 +260,16 @@ const histogramWickets = {
   </>
 }
 { load==false && <>
+      { winnerarray.length===9 && <>
+        <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
+          <h1 className="font-bold text-yellow-500">Welcome to Semi-final</h1>
+        </div>
+</>}
+      { winnerarray.length===10 && <>
+        <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
+          <h1 className="font-bold text-yellow-500">Welcome to Final</h1>
+        </div>
+</>}
     {winner!=='Draw' && 
   <>
   <div className="w-full py-4 flex justify-center">
@@ -242,6 +303,11 @@ const histogramWickets = {
      <img src={`Logos/${computerdata[0].team}.webp`} className="w-16 h-16" />
      </div>
    </div>
+      <div className="w-full my-4 p-4 flex flex-col gap-y-4 justify-center text-center">
+          <h1 className="text-xs font-extrabold text-yellow-400">Man of the Match</h1> 
+     <div className="w-full flex justify-center"><img className="w-32 h-32" src={motm[0].image} /></div>
+     <h1 className="text-xs font-extrabold text-slate-400">{motm[0].name}</h1> 
+    </div>
      <div className="w-full flex justify-center items-center">
    <h1 className="text-lg font-bold text-slate-400">Performance</h1>
    </div>

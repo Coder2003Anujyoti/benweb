@@ -6,6 +6,7 @@ const Playgame = () => {
     const [toss,setToss]=useState("");
   const [playerfirst,setPlayerfirst]=useState(false);
   const [computerfirst,setComputerfirst]=useState(false);
+  const [toggle,setToggle]=useState("");
   const [players,setPlayers]=useState([]);
   const [id,setId]=useState([]);
   const location = useLocation();
@@ -15,6 +16,7 @@ const Playgame = () => {
   const playerteam = JSON.parse(decodeURIComponent(queryParams.get("playerteam"))) || "";
   const computerteam=JSON.parse(decodeURIComponent(queryParams.get("computerteam"))) || "";
   const add_Players=(i)=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setPlayers([...players,i]);
     setId([...id,i.name]);
   }
@@ -54,7 +56,46 @@ const Playgame = () => {
   </div>
 </>
 }
-{ id.length===10 && playerfirst===false && computerfirst===false && <>
+{ id.length===10 && toggle=="" && playerfirst===false && computerfirst===false && <>
+ <div className="flex p-4 flex-col justify-center items-center text-center gap-4">
+     <h1 className="text-lg text-green-400 font-bold">Your Team</h1>
+       <img src={`Logos/${playerteam}.webp`} className="w-24 h-24" />
+     </div>
+   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
+     {
+       players.map((i)=>{
+         return(<>
+    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
+    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
+           </div>
+         </>)
+       })
+     }
+     </div>
+      <div className="flex p-4 border-t border-t-slate-600 flex-col justify-center items-center text-center gap-4">
+     <h1 className="text-lg text-green-400 font-bold">Opposition Team</h1>
+       <img src={`Logos/${computerteam}.webp`} className="w-24 h-24" />
+     </div>
+   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
+     {
+      computer.slice(0,10).map((i)=>{
+         return(<>
+    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
+    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
+           </div>
+         </>)
+       })
+     }
+     </div>
+      <div className="w-full flex justify-center items-center">
+      <button className="p-4 font-extrabold text-slate-400 rounded-lg bg-slate-800" onClick={()=>{
+            window.scrollTo({ top: 0, behavior: "smooth" });
+      setToggle("Go")}}>Submit</button>
+    </div>
+     </>}
+{ id.length===10 && toggle==="Go" && playerfirst===false && computerfirst===false && <>
   {
     toss==='' &&  <>
     <div className="w-full py-8 flex justify-center">
@@ -71,7 +112,9 @@ const Playgame = () => {
       {computerteam.toUpperCase()} won toss and elected to Bat first 
       </h1></div>
     <div className="w-full flex justify-center items-center">
-      <button className="p-4 font-extrabold text-slate-400 rounded-lg bg-slate-800" onClick={()=>setComputerfirst(true)}>Submit</button>
+      <button className="p-4 font-extrabold text-slate-400 rounded-lg bg-slate-800" onClick={()=>{
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setComputerfirst(true)}}>Submit</button>
     </div>
     </>
   }
@@ -81,7 +124,9 @@ const Playgame = () => {
       {computerteam.toUpperCase()} won toss and elected to Bowl first 
       </h1></div>
     <div className="w-full flex justify-center items-center">
-      <button className="p-4 font-extrabold text-slate-400 rounded-lg bg-slate-800" onClick={()=>setPlayerfirst(true)}>Submit</button>
+      <button className="p-4 font-extrabold text-slate-400 rounded-lg bg-slate-800" onClick={()=>{
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setPlayerfirst(true)}}>Submit</button>
     </div>
     </>
   }
@@ -91,8 +136,12 @@ const Playgame = () => {
       {playerteam.toUpperCase()} won toss 
       </h1></div>
       <div className="w-full flex justify-center items-center flex-row gap-28">
-  <div className="text-center p-4 rounded-lg bg-slate-800" onClick={()=>setPlayerfirst(true)}> <img className="w-16 h-16" src="Icons/Batsman.png" /></div>
-  <div className="text-center p-4 rounded-lg bg-slate-800" onClick={()=>setComputerfirst(true)}> <img className="w-16 h-16" src="Icons/Bowler.png" /></div>
+  <div className="text-center p-4 rounded-lg bg-slate-800" onClick={()=>{
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setPlayerfirst(true)}}> <img className="w-16 h-16" src="Icons/Batsman.png" /></div>
+  <div className="text-center p-4 rounded-lg bg-slate-800" onClick={()=>{
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setComputerfirst(true)}}> <img className="w-16 h-16" src="Icons/Bowler.png" /></div>
       </div>
     </>
   }

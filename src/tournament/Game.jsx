@@ -139,18 +139,18 @@ const Game = () => {
 { id.length===10 && toggle=="" && playerfirst===false && computerfirst===false && <>
     { win.length===9 && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
-          <h1 className="font-bold text-yellow-500">Welcome to Semi-final</h1>
+          <h1 className="font-bold text-yellow-500 ml-2 mr-2">Semi-final</h1>
         </div>
 </>}
     { win.length===10 && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
-          <h1 className="font-bold text-yellow-500">Welcome to Final</h1>
+          <h1 className="font-bold text-yellow-500 ml-2 mr-2">Final</h1>
         </div>
 </>}
 
  <div className="flex p-4  flex-col justify-center items-center text-center gap-4">
      <h1 className="text-lg text-green-400 font-bold">Your Team</h1>
-       <img src={`Logos/${teamId}.webp`} className="w-24 h-24" />
+       <img src={`Logos/${team}.webp`} className="w-24 h-24" />
      </div>
    <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
      {

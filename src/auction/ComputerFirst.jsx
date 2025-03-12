@@ -46,6 +46,7 @@ const ComputerFirst = ({players,oppositionplayers}) => {
     setOpposteam(get_Opposition);
   },[])
   const add_Player=(i)=>{
+    if(turn==="Player"){
     window.scrollTo({ top: 0, behavior: "smooth" });
     setLeader(turn);
     setPlayeroption(0);
@@ -56,6 +57,19 @@ const ComputerFirst = ({players,oppositionplayers}) => {
     setPlayerstats(players);
     setOppositionstats(oppositionplayers)
     setShow(false);
+    }
+      if(turn==="Computer"){
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setImage(i);
+    setId([...id,i.name])
+    setIds(ids)
+    setPlayeroption(0);
+    setComputeroption(0)
+    setPlayerstats(players);
+    setOppositionstats(oppositionplayers)
+    setShow(false);
+    setLeader(turn);
+  }
   }
   const check=(i)=>{
     window.scrollTo({ top: 0, behavior: "smooth" });

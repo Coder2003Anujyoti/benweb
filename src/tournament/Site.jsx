@@ -179,7 +179,7 @@ const barChartData = {
   { ((win.length===9 && winners.length>=7) || 
  (win.length>=9 && win.length<=10)) && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
-          <h1 className="font-bold text-yellow-500">Welcome to Knockouts</h1>
+          <h1 className="font-bold text-sm ml-2 mr-2 text-yellow-500">Welcome to Knockouts</h1>
         </div>
 </>}
      <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row  p-2">

@@ -262,12 +262,12 @@ const histogramWickets = {
 { load==false && <>
       { winnerarray.length===9 && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
-          <h1 className="font-bold text-yellow-500">Welcome to Semi-final</h1>
+          <h1 className="font-bold text-yellow-500 ml-2 mr-2">Semi-final</h1>
         </div>
 </>}
       { winnerarray.length===10 && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
-          <h1 className="font-bold text-yellow-500">Welcome to Final</h1>
+          <h1 className="font-bold text-yellow-500 ml-2 mr-2">Final</h1>
         </div>
 </>}
     {winner!=='Draw' && 

@@ -836,7 +836,7 @@ const baroptions = {
     <h1 className="text-slate-400 text-xs font-bold">Current Batsman</h1>
       <div className="w-full flex justify-center"><img className="w-24 h-24" src={players.filter((i)=>i.name===id[id.length-1])[0].image}></img></div>
             <h1 className="text-slate-400 text-xs font-bold">{id[id.length-1]}</h1>
-      <h1 className="text-slate-400 text-xs font-bold">Runs-: {bar}</h1>
+      <h1 className="text-slate-400 text-xs font-bold">Runs-: {playerrun}</h1>
     </div>
   {wickets >0 && 
    <div className="flex flex-col gap-y-4 justify-center text-center">
@@ -853,7 +853,7 @@ const baroptions = {
     <h1 className="text-slate-400 text-xs font-bold">Current Batsman</h1>
       <div className="w-full flex justify-center"><img className="w-24 h-24" src={oppositionstats[index].image}></img></div>
        <h1 className="text-slate-400 text-xs font-bold">{oppositionstats[index].name}</h1>
-      <h1 className="text-slate-400 text-xs font-bold">Runs-: {cbar}</h1>
+      <h1 className="text-slate-400 text-xs font-bold">Runs-: {playerrun}</h1>
     </div>
   {wickets >0 && 
    <div className="flex flex-col gap-y-4 justify-center text-center">

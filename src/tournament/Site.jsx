@@ -145,18 +145,32 @@ const barChartData = {
   {
     win.length>=9 && <>
       {win[win.length-1].win===playerteam && win.length===11 && <>
-        <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
+    <div className="flex flex-row flex-wrap gap-x-12 gap-y-6 justify-center w-full">
+        <div className=" flex flex-col justify-center text-center gap-y-6">
          <div className="w-full flex justify-center"><img className="w-36 h-36" src="Icons/trophy.png" /></div>
           <h1 className="font-bold text-yellow-500">Champions</h1>
         </div>
+        <div className=" my-3 flex flex-col gap-y-4 justify-center text-center">
+          <h1 className="text-sm font-extrabold text-yellow-400">Player of the Tournament</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={potm[0].image} /></div>
+     <h1 className="text-sm font-extrabold text-slate-400">{potm[0].name}</h1> 
+    </div>
+    </div>
       </>
       }
       {
   ( ( win.length===9 && winners.length<=6) || (win.length===10 && win[win.length-1].win!==playerteam) || (win.length===11 && win[win.length-1].win!==playerteam)) && <>
-        <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
+     <div className="flex flex-row flex-wrap gap-x-12 gap-y-6 justify-center w-full ">
+        <div className=" flex flex-col justify-center text-center gap-y-6">
          <div className="w-full flex justify-center"><img className="w-36 h-36" src="Icons/loser.png" /></div>
           <h1 className="font-bold text-yellow-500">Loser</h1>
         </div>
+       <div className="my-3 flex flex-col gap-y-4 justify-center text-center">
+          <h1 className="text-sm font-extrabold text-yellow-400">Player of the Tournament</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={potm[0].image} /></div>
+     <h1 className="text-sm font-extrabold text-slate-400">{potm[0].name}</h1> 
+    </div>
+    </div>
       </>
       }
     </>
@@ -200,15 +214,7 @@ const barChartData = {
     </div>
     </HashLink>
     </div>
-        {win.length>=9 && <>
-  {      ( ( win.length===9 && winners.length<=6) || (win.length===10 && win[win.length-1].win!==playerteam) || (win.length===11 && win[win.length-1].win!==playerteam) || (win[win.length-1].win===playerteam && win.length===11)) && <>
-          <div className="w-full my-6 flex flex-col gap-y-6 justify-center text-center">
-          <h1 className="text-sm font-extrabold text-yellow-400">Player of the Tournament</h1> 
-     <div className="w-full flex justify-center"><img className="w-36 h-36" src={potm[0].image} /></div>
-     <h1 className="text-sm font-extrabold text-slate-400">{potm[0].name}</h1> 
-    </div>
-</>}
-    </>}
+
       <div className="flex p-4 flex-row justify-center border-t border-slate-600 gap-4">
        <img src={`Logos/${playerteam}.webp`} className="w-28 h-28" />
      </div>

@@ -56,6 +56,12 @@ This version focuses purely on the display of player names, ideal for an app whe
    <div className="w-full  flex justify-center"><img src="Icons/partners.png" className="w-20 h-20"></img></div>
     <h4 className="text-lg text-slate-400 font-bold">Teams</h4>
     </div>
+      <HashLink to='/iplsite'>
+    <div className="text-center w-36 h-36 flex justify-center rounded-lg  bg-slate-800 p-2 flex flex-col gap-y-2 ">
+   <div className="w-full  flex justify-center"><img src="Icons/bus.png" className="w-20 h-20"></img></div>
+    <h4 className="text-lg text-slate-400 font-bold">Road to IPL</h4>
+    </div>
+    </HashLink>
     </div>
     </div>
 { toggle===true && <> <div className="w-full mt-2 flex justify-center">

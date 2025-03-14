@@ -19,6 +19,11 @@ import Game from "./tournament/Game.jsx";
 import Team from "./tournament/Team.jsx";
 import Fixtures from "./tournament/Fixtures.jsx";
 import Playerstats from "./tournament/Playerstats.jsx";
+import Iplsite from "./road/Iplsite.jsx"
+import Iplgame from "./road/Iplgame.jsx";
+import Iplteam from "./road/Iplteam.jsx";
+import Iplfixtures from "./road/Iplfixtures.jsx";
+import Iplplayerstats from "./road/Iplplayerstats.jsx";
 const App = () => {
   useEffect(()=>{
     document.body.className="bg-gray-900"
@@ -45,6 +50,11 @@ const App = () => {
 <Route path="/team" element={<Team />} />
 <Route path="/fixtures" element={<Fixtures />} />
 <Route path="/playerstats" element={<Playerstats />} />
+      <Route path="/iplsite" element={<Iplsite />} />
+      <Route path="/iplgame" element={<Iplgame  />} />
+     <Route path="/iplteam" element={<Iplteam />} />
+    <Route path="/iplfixtures" element={<Iplfixtures />} />
+    <Route path="/iplplayerstats" element={<Iplplayerstats />} />
       </Routes>
     </Router>
   );

@@ -31,6 +31,8 @@ const Site = ({playerteam,store,localremove}) => {
   const [pie,setPie]=useState({});
   const winners=win.filter((i)=>i.win===playerteam);
   const losers=win.filter((i)=>i.win!==playerteam);
+  const totalwinners=match.filter((i)=>i.win===playerteam);
+  const totallosers=match.filter((i)=>i.win!==playerteam);
   const motms=store.sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets)).filter((i,ind)=> ind===0)
   const potm=motms[0];
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
@@ -119,7 +121,7 @@ const barChartData = {
     datasets: [
       {
         label: `Stats for ${playerteam.toUpperCase()}`,
-        data: [win.length,winners.length, losers.length],
+        data: [match.length,totalwinners.length, totallosers.length],
         backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
       },
     ],
@@ -129,7 +131,7 @@ const barChartData = {
     labels: ["Matches", "Win", "Lose/Tie"],
     datasets: [
       {
-        data: [win.length,winners.length, losers.length],
+        data: [match.length,totalwinners.length, totallosers.length],
         backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
         borderWidth: 0,
       },
@@ -193,13 +195,13 @@ const barChartData = {
     </div>
     </HashLink>
     </>}
-         <HashLink to={`/iplteam?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
+         <HashLink to={`/iplteam?matchesarray=${encodeURIComponent(JSON.stringify(match))}&&data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/team.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Teams</h4>
     </div>
     </HashLink>
-         <HashLink to={`/iplfixtures?data=${encodeURIComponent(JSON.stringify(win))}`}>
+         <HashLink to={`/iplfixtures?data=${encodeURIComponent(JSON.stringify(match))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/tournament.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Fixtures</h4>

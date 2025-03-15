@@ -2,16 +2,132 @@ import React,{useState,useEffect} from "react";
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link'
 import { useLocation } from "react-router-dom";
+import { Bar, Pie } from "react-chartjs-2";
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement, ChartDataLabels);
 const Iplteam = () => {
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const [value,setValue]=useState("")
+  const [pie,setPie]=useState({})
+  const [bar,setBar]=useState({})
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];
   const team=JSON.parse(decodeURIComponent(queryParams.get("team"))) || "";
+  const matches=JSON.parse(decodeURIComponent(queryParams.get("matchesarray"))) || [];
     useEffect(()=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
   },[])
+  const barChartOptions = {
+  plugins: {
+    legend: {
+      labels: {
+        color: "rgb(148, 163, 184)", // Legend text color
+        font: {
+          weight: "bold", // Make legend text bold
+        },
+      },
+    },
+    datalabels: {
+      formatter: (value, context) => {
+        const data = context.dataset.data;
+        if (!data || data.length === 0) return "0%"; // Prevent errors
+
+        const total = data.reduce((acc, val) => acc + (val || 0), 0); // Handle undefined values
+        if (total === 0) return "0%"; // Prevent division by zero
+
+        const percentage = Math.round(((value / total) * 100).toFixed(1)) + "%";
+        return percentage;
+      },
+      color: "transparent",
+      font: { weight: "bold", size: 14 },
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: "rgb(148, 163, 184)", // X-axis label color
+        font: {
+          weight: "bold", // Make X-axis labels bold
+        },
+      },
+      grid: {
+        color: "rgb(148, 163, 184)", // X-axis grid lines color
+                font: {
+          weight: "bold", // Make Y-axis labels bold
+        },
+      },
+    },
+    y: {
+      ticks: {
+        color: "rgb(148, 163, 184)", // Y-axis label color
+        font: {
+          weight: "bold", // Make Y-axis labels bold
+        },
+      },
+      grid: {
+        color: "rgb(148, 163, 184)", // Y-axis grid lines color
+        font: {
+          weight: "bold", // Make Y-axis labels bold
+        },
+      },
+    },
+  },
+};
+const pieChartOptions = {
+  plugins: {
+    legend: {
+      labels: {
+        color: "rgb(148,163,184)",
+        font: { weight: "bold" },
+      },
+    },
+    datalabels: {
+      formatter: (value, context) => {
+        const data = context.dataset.data;
+        if (!data || data.length === 0) return "0%"; // Prevent errors
+
+        const total = data.reduce((acc, val) => acc + (val || 0), 0); // Handle undefined values
+        if (total === 0) return "0%"; // Prevent division by zero
+
+        const percentage = Math.round(((value / total) * 100).toFixed(1)) + "%";
+        return percentage;
+      },
+      color: "white",
+      font: { weight: "bold", size: 14 },
+    },
+  },
+};
+  const go=(i)=>{
+    const match=matches.filter((it)=>it.player===i || it.computer===i)
+    const wins=match.filter((it)=>it.win===i)
+    const lose=match.filter((it)=>it.win!==i)
+    const barChartData = {
+    labels: ["Matches", "Win", "Lose/Tie"],
+    datasets: [
+      {
+        label: `Stats for ${i.toUpperCase()}`,
+        data: [match.length,wins.length, lose.length],
+        backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
+      },
+    ],
+  };
+
+  const pieChartData = {
+    labels: ["Matches", "Win", "Lose/Tie"],
+    datasets: [
+      {
+        data: [match.length,wins.length, lose.length],
+        backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
+        borderWidth: 0,
+      },
+    ],
+  };
+  setPie(pieChartData)
+  setBar(barChartData)
+    setValue(i);
+  }
   return (
   <>
   <div className="w-full bg-slate-800 p-1 flex ">
@@ -20,7 +136,7 @@ const Iplteam = () => {
 <div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center py-10 flex-row">
   {teams.map((i)=>{
   return(
-  <div className="text-center w-30 bg-slate-800 rounded-full" onClick={()=>setValue(i)}>
+  <div className="text-center w-30 bg-slate-800 rounded-full" onClick={()=>go(i)}>
     <div className="w-full p-2 flex justify-center">
     <img src={`Logos/${i}.webp`} className="w-14 h-14"></img>
     </div>
@@ -47,6 +163,14 @@ const Iplteam = () => {
        })
      }
      </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 my-4  gap-6">
+        <div className="text-black  font-bold p-4 rounded ">
+          <Bar data={bar} options={barChartOptions} />
+        </div>
+        <div className=" p-4 rounded ">
+          <Pie data={pie} options={pieChartOptions} />
+        </div>
+      </div>
      </>
 }
     <footer className="bg-black text-white">

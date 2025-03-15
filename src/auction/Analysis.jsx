@@ -17,6 +17,9 @@ const Analysis = () => {
   const winarray= JSON.parse(decodeURIComponent(queryParams.get("winarray"))) || [];
   const playerteam=JSON.parse(decodeURIComponent(queryParams.get("playerteam"))) || "";
   const computerteam=JSON.parse(decodeURIComponent(queryParams.get("computerteam"))) || "";
+  const player=JSON.parse(decodeURIComponent(queryParams.get("player"))) || [];
+  const computer=JSON.parse(decodeURIComponent(queryParams.get("computer"))) || [];
+  const details=player.concat(computer);
   useEffect(()=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
   },[])
@@ -101,14 +104,15 @@ const pieChartOptions = {
   },
 };
   const go=(i)=>{
-    const winners=winarray.filter((item)=>item.win===i);
-    const losers=winarray.filter((item)=>item.win!==i);
+    const matches=winarray.filter((it)=>it.player===i || it.computer===i)
+    const winners=matches.filter((item)=>item.win===i);
+    const losers=matches.filter((item)=>item.win!==i);
     const barChartData = {
     labels: ["Matches", "Win", "Lose/Tie"],
     datasets: [
       {
         label: `Stats for ${i.toUpperCase()}`,
-        data: [winarray.length,winners.length, losers.length],
+        data: [matches.length,winners.length, losers.length],
         backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
       },
     ],
@@ -118,7 +122,7 @@ const pieChartOptions = {
     labels: ["Matches", "Win", "Lose/Tie"],
     datasets: [
       {
-        data: [winarray.length,winners.length, losers.length],
+        data: [matches.length,winners.length, losers.length],
         backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
         borderWidth: 0,
       },
@@ -149,7 +153,21 @@ const pieChartOptions = {
     {value!==playerteam && <h1 className="text-lg text-green-400 font-bold">Opposition Team</h1>} 
        <img src={`Logos/${value}.webp`} className="w-24 h-24" />
      </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 my-4  gap-6">
+        <div className="w-full flex p-1 my-2 flex-wrap flex-row justify-center gap-2">
+     {
+       details.map((it)=>{
+       if(it.team===value)
+        return(<>
+    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+    <div className="flex justify-center items-center"><img src={it.image} className="w-16 h-16" /></div>
+    <p className="text-slate-400 text-xs font-bold">{it.name}</p>
+           </div>
+          
+         </>)
+       })
+     }
+     </div>
+     <div className="grid grid-cols-1 md:grid-cols-2 my-4  gap-6">
         <div className="text-black  font-bold p-4 rounded ">
           <Bar data={bar} options={barChartOptions} />
         </div>

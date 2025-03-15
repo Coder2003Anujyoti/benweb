@@ -31,6 +31,8 @@ const Site = ({playerteam,store,localremove}) => {
   const [pie,setPie]=useState({});
   const winners=win.filter((i)=>i.win===playerteam);
   const losers=win.filter((i)=>i.win!==playerteam);
+  const totalwinners=match.filter((i)=>i.win===playerteam);
+  const totallosers=match.filter((i)=>i.win!==playerteam);
   const motms=store.map((i)=>{
     return i.players.sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets)).filter((i,ind)=> ind===0)[0]
   });
@@ -121,7 +123,7 @@ const barChartData = {
     datasets: [
       {
         label: `Stats for ${playerteam.toUpperCase()}`,
-        data: [win.length,winners.length, losers.length],
+        data: [match.length,totalwinners.length, totallosers.length],
         backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
       },
     ],
@@ -131,7 +133,7 @@ const barChartData = {
     labels: ["Matches", "Win", "Lose/Tie"],
     datasets: [
       {
-        data: [win.length,winners.length, losers.length],
+        data: [match.length,totalwinners.length, totallosers.length],
         backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
         borderWidth: 0,
       },
@@ -195,13 +197,13 @@ const barChartData = {
     </div>
     </HashLink>
     </>}
-         <HashLink to={`/team?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
+         <HashLink to={`/team?matchesarray=${encodeURIComponent(JSON.stringify(match))}&&data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/team.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Teams</h4>
     </div>
     </HashLink>
-         <HashLink to={`/fixtures?data=${encodeURIComponent(JSON.stringify(win))}`}>
+         <HashLink to={`/fixtures?data=${encodeURIComponent(JSON.stringify(match))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/tournament.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Fixtures</h4>
@@ -226,6 +228,24 @@ const barChartData = {
           <Pie data={pieChartData} options={pieChartOptions} />
         </div>
       </div>
+        <div className="w-full  border-t border-slate-600 p-4 my-6 flex justify-center">
+    <h1 className="text-xl font-extrabold text-slate-400">Top Sellers</h1>
+  </div>
+   <div className="w-full flex  flex-wrap flex-row justify-center gap-2 my-4">
+     {
+     store.flatMap(team => team.players).sort((a,b)=>b.bid-a.bid).map((i,ind)=>{
+       if(ind<6)
+         return(<>
+    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
+    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
+    <div className="flex justify-center items-center"><img src={`Logos/${i.team}.webp`} className="w-8 h-8" /></div>
+           </div>
+          
+         </>)
+       })
+     }
+     </div>
        <div className="w-full py-2 flex-col flex justify-center items-center text-center">
     <div className="w-full py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={localremove} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">New Tournament</button></div>
   </div>

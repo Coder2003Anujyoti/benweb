@@ -177,7 +177,7 @@ const barChartData = {
   }
   { win.length<9 && <>
  <div className="w-full text-center my-2">
-  <h3 className="font-bold text-sm text-red-400 ml-2 mr-2">*Need to win more than 7 matches to reach knockouts.</h3>
+  <h3 className="font-bold text-sm text-red-400 ml-2 mr-2">*Need to win more than 6 matches to reach knockouts.</h3>
 </div>
 </>}
   { ((win.length===9 && winners.length>=7) || 
@@ -186,7 +186,7 @@ const barChartData = {
           <h1 className="font-bold text-sm ml-2 mr-2 text-yellow-500">Welcome to Knockouts</h1>
         </div>
 </>}
-     <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row  p-2">
+     <div className="w-full my-10 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row  p-2">
   {(win.length<9 || (win.length===9 && winners.length>=7) || (win.length===10 && win[win.length-1].win===playerteam))  && <>
      <HashLink to={`/game?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">

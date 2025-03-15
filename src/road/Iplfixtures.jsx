@@ -13,7 +13,7 @@ const Iplfixtures = () => {
   return (
    <>
     <div className="w-full bg-slate-800 p-1 flex ">
-  <img className="w-32 h-20" src="Logos/Logo.webp"/>
+  <img className="w-28 h-16" src="Logos/Logo.webp"/>
 </div>
 <div className="w-full flex flex-row py-6 justify-center gap-12">
    <div className="w-full flex  justify-center  gap-12" >

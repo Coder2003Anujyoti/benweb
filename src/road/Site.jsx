@@ -153,7 +153,7 @@ const barChartData = {
         <div className=" my-3 flex flex-col gap-y-6 justify-center text-center">
           <h1 className="text-sm font-extrabold text-yellow-400">Player of the Tournament</h1> 
      <div className="w-full flex justify-center"><img className="w-36 h-36" src={potm.image} /></div>
-     <h1 className="text-sm font-extrabold text-slate-400">{potm.name}</h1> 
+     <h1 className="text-sm font-extrabold text-yellow-400">{potm.name}</h1> 
     </div>
     </div>
       </>
@@ -168,7 +168,7 @@ const barChartData = {
        <div className="my-3 flex flex-col gap-y-6 justify-center text-center">
           <h1 className="text-sm font-extrabold text-yellow-400">Player of the Tournament</h1> 
      <div className="w-full flex justify-center"><img className="w-36 h-36" src={potm.image} /></div>
-     <h1 className="text-sm font-extrabold text-slate-400">{potm.name}</h1> 
+     <h1 className="text-sm font-extrabold text-yellow-400">{potm.name}</h1> 
     </div>
     </div>
       </>

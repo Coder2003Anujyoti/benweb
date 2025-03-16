@@ -193,7 +193,8 @@ useEffect(()=>{
 
     let newPlayers = [...team.players];
 
-    value.sort().forEach((player) => {
+    value.sort((a,b)=>(Math.random() > 0.5 ? a.name.localeCompare(b.name) :
+  b.name.localeCompare(a.name))).forEach((player) => {
       if (!names.includes(player.name) && !assigned.includes(player.name) && newPlayers.length < 15) {
         newPlayers.push({
           name: player.name,

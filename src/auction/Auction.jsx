@@ -191,7 +191,7 @@ const localremove=()=>{
  }
  const play=()=>{
    if(computers.length<15){
-   let r= value.sort((a,b)=>a.name-b.name).map((i)=>{
+   let r= value.sort().map((i)=>{
          setComputers((prev)=>prev.length<15 && !names.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:amount,runs:0,wickets:0,team:computerteam}]:prev); 
     });
     setPlaying(true)

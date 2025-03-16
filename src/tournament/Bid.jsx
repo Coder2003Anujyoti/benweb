@@ -193,7 +193,7 @@ useEffect(()=>{
 
     let newPlayers = [...team.players];
 
-    value.sort((a,b)=>a.name-b.name).forEach((player) => {
+    value.sort().forEach((player) => {
       if (!names.includes(player.name) && !assigned.includes(player.name) && newPlayers.length < 15) {
         newPlayers.push({
           name: player.name,

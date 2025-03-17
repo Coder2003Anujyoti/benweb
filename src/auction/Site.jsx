@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import Fire from './Fire';
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link'
 import { Bar, Pie } from "react-chartjs-2";
@@ -14,13 +15,25 @@ const LocalWinner=()=>{
     return [];
 }
 }
+const LocalMatch=()=>{
+  const lists=localStorage.getItem('auctionmatch');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return 0;
+}
+}
 const Site = ({player,computer,playerteam,computerteam,remove}) => {
   const [team,setTeam]=useState(playerteam);
   const [win,setWin]=useState(()=>LocalWinner()||[])
+  const [matches,setMatches]=useState(()=>LocalMatch()||0)
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const jeet=win.filter((i)=>i.win===playerteam)
+  const lose=win.filter((i)=>i.win===computerteam)
   const haar=win.filter((i)=>i.win!==playerteam)
   const details=player.concat(computer);
+  const potm=details.sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets)).filter((i,ind)=>ind===0)
   useEffect(()=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
   },[])
@@ -125,19 +138,93 @@ const barChartData = {
       },
     ],
   };
+  const update=(i)=>{
+    localStorage.setItem('auctionmatch', 
+      JSON.stringify(i));
+      setMatches(i);
+  }
   return (
    <>
      <div className="w-full bg-slate-800 p-2 flex ">
   <img className="w-16 h-16" src="Icons/auction.png"/>
 </div>
+{
+  matches===0 && <>
+     <div className="flex p-4 flex-col justify-center items-center text-center gap-4">
+     <h1 className="text-lg text-green-400 font-bold">Choose Number of Series</h1>
+     </div>
+    <div className="w-full flex flex-row flex-wrap gap-6 justify-center ">
+      <button className="w-24 h-12 rounded-lg bg-indigo-400 p-2 text-white font-bold text-2xl" onClick={()=>update(1)}>1</button>
+      <button className="w-24 h-12 rounded-lg bg-indigo-400 p-2 text-white font-bold text-2xl" onClick={()=>update(3)}>3</button>
+      <button className="w-24 h-12 rounded-lg bg-indigo-400 p-2 text-white font-bold text-2xl" onClick={()=>update(5)}>5</button>
+      <button className="w-24 h-12 rounded-lg bg-indigo-400 p-2 text-white font-bold text-2xl" onClick={()=>update(7)}>7</button>
+    </div>
+  </>
+}
+  {
+    win.length===matches && matches>0 && <>
+      { jeet.length>lose.length && <>
+    <div className="flex flex-row flex-wrap gap-x-12 gap-y-6 justify-center w-full">
+        <div className=" flex flex-col justify-center text-center gap-y-6">
+         <div className="w-full flex justify-center mt-14"><img className="w-32 h-32" src="Icons/trophy.png" /></div>
+          <h1 className="font-bold text-yellow-500">Champions</h1>
+        </div>
+        <div className=" my-3 flex flex-col gap-y-6 justify-center text-center">
+          <h1 className="text-sm font-extrabold text-yellow-400">Player of the Tournament</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={potm[0].image} /></div>
+     <h1 className="text-sm font-extrabold text-yellow-400">{potm[0].name}</h1> 
+    </div>
+    </div>
+    <Fire  show={true} />
+      </>
+      }
+      {
+   jeet.length<lose.length && <>
+     <div className="flex flex-row flex-wrap gap-x-12 gap-y-6 justify-center w-full ">
+        <div className=" flex flex-col justify-center text-center gap-y-6">
+         <div className="w-full flex justify-center mt-14"><img className="w-32 h-32" src="Icons/loser.png" /></div>
+          <h1 className="font-bold text-yellow-500">Loser</h1>
+        </div>
+       <div className="my-3 flex flex-col gap-y-6 justify-center text-center">
+          <h1 className="text-sm font-extrabold text-yellow-400">Player of the Tournament</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={potm[0].image} /></div>
+     <h1 className="text-sm font-extrabold text-yellow-400">{potm[0].name}</h1> 
+    </div>
+    </div>
+      </>
+      }
+            {
+   jeet.length===lose.length && <>
+     <div className="flex flex-row flex-wrap gap-x-12 gap-y-6 justify-center w-full ">
+        <div className=" flex flex-col justify-center text-center gap-y-6">
+         <div className="w-full flex justify-center mt-14"><img className="w-32 h-32" src="Logos/Draw.png" /></div>
+          <h1 className="font-bold text-yellow-500">Draw</h1>
+        </div>
+       <div className="my-3 flex flex-col gap-y-6 justify-center text-center">
+          <h1 className="text-sm font-extrabold text-yellow-400">Player of the Tournament</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={potm[0].image} /></div>
+     <h1 className="text-sm font-extrabold text-yellow-400">{potm[0].name}</h1> 
+    </div>
+    </div>
+      </>
+      }
+    </>
+  }
+  { win.length!==matches && matches>0 && <>
+ <div className="w-full text-center my-2">
+  <h3 className="font-bold text-sm text-red-400 ml-2 mr-2">*Need to win {Math.round(matches/2)} match(s) to win series.</h3>
+</div>
+</>}
 
      <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row  p-2">
+  {matches>0 && matches!==win.length && <>
       <HashLink to={`/playgame?player=${encodeURIComponent(JSON.stringify(player))}&&computer=${encodeURIComponent(JSON.stringify(computer))}&&playerteam=${encodeURIComponent(JSON.stringify(playerteam))}&&computerteam=${encodeURIComponent(JSON.stringify(computerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/crickets.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Play</h4>
     </div>
     </HashLink>
+    </>}
      <HashLink to={`/tourstats?player=${encodeURIComponent(JSON.stringify(player))}&&computer=${encodeURIComponent(JSON.stringify(computer))}&&playerteam=${encodeURIComponent(JSON.stringify(playerteam))}&&computerteam=${encodeURIComponent(JSON.stringify(computerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/stats.png" className="w-24 h-24"></img>

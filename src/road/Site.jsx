@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import {HashLink} from 'react-router-hash-link'
+import Fire from './Fire';
 import {Link} from 'react-router-dom';
 import { Bar, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement } from "chart.js";
@@ -156,6 +157,7 @@ const barChartData = {
      <h1 className="text-sm font-extrabold text-yellow-400">{potm.name}</h1> 
     </div>
     </div>
+      <Fire  show={true} />
       </>
       }
       {

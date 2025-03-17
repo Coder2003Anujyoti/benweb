@@ -72,6 +72,7 @@ const localremove=()=>{
    localStorage.removeItem('playerteam');
    localStorage.removeItem('computerteam');
    localStorage.removeItem('winarray');
+   localStorage.removeItem('auctionmatch');
    window.location.reload();
    setPlaying(false);
    setPlayerteam("");

@@ -132,6 +132,24 @@ const Game = () => {
       )
     })}
   </div>
+    {id.length>0 && <>
+     <div className="flex my-6 p-2 border-t border-t-slate-600 flex-col justify-center items-center text-center gap-4">
+     <h1 className="text-lg text-green-400 font-bold">Your Team</h1>
+       <img src={`Logos/${team}.webp`} className="w-24 h-24" />
+     </div>
+   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 ">
+     {
+       players.map((i)=>{
+         return(<>
+    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
+    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
+           </div>
+         </>)
+       })
+     }
+     </div>
+  </>}
 </>
 }
   </>

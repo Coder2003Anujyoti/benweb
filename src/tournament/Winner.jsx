@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import Fire from './Fire';
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -390,6 +391,7 @@ const histogramWickets = {
       <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bowling Analysis</h2>
       <Bar data={histwickets} options={histogramOptions} />
     </div>
+     {winner!='Draw' && <Fire  show={true} />}
 </>
 }
   </>

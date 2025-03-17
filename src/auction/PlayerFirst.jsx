@@ -71,44 +71,9 @@ const PlayerFirst = ({players,oppositionplayers}) => {
     setLeader(turn);
   }
   }
-  const generateCommentary = (playerMove, computerMove) => {
-    if(turn==="Player"){
-    if (playerMove === computerMove && playerMove!=0) {
-      return `Wicket! ${image.name} OUT!`;
-    }
-    if (playerMove === 6) {
-      return `What a massive SIX!`;
-    }
-    if (playerMove === 4) {
-      return `Brilliant FOUR!`;
-    }
-    }
-    else{
-          if (playerMove === computerMove && playerMove!=0) {
-      return `Wicket! ${oppositionstats[index].name} OUT!`;
-    }
-    if (computerMove === 6) {
-      return `What a massive SIX!`;
-    }
-    if (computerMove === 4) {
-      return `Brilliant FOUR!`;
-    }
-    }
-  };
-  const playAudioCommentary = (text) => {
-  const  speechInstance = new SpeechSynthesisUtterance(text);
-    speechInstance.lang = "en-IN"; // English (Indian accent)
-    speechInstance.rate = 1;
-
-
-    window.speechSynthesis.speak(speechInstance);
-  };
   const check=(i)=>{
-    window.speechSynthesis.cancel(); 
     window.scrollTo({ top: 0, behavior: "smooth" });
 let value=Math.floor(Math.random()*6)+1;
-  const newComment = generateCommentary(i,value);
-    playAudioCommentary(newComment);
    if(turn=="Player"){
      if(overs%6==5 && number==19){
        if(i!=value){

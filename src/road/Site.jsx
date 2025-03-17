@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {HashLink} from 'react-router-hash-link'
 import Fire from './Fire';
 import {Link} from 'react-router-dom';

@@ -167,7 +167,7 @@ const histogramWickets = {
       <div className="w-full my-4 p-4 flex flex-col gap-y-4 justify-center text-center">
           <h1 className="text-xs font-extrabold text-yellow-400">Man of the Match</h1> 
      <div className="w-full flex justify-center"><img className="w-32 h-32" src={motm[0].image} /></div>
-     <h1 className="text-xs font-extrabold text-slate-400">{motm[0].name}</h1> 
+     <h1 className="text-xs font-extrabold text-yellow-400">{motm[0].name}</h1> 
     </div>
      <div className="w-full flex justify-center items-center">
    <h1 className="text-lg font-bold text-slate-400">Performance</h1>
@@ -251,7 +251,7 @@ const histogramWickets = {
       <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bowling Analysis</h2>
       <Bar data={histwickets} options={histogramOptions} />
     </div>
- {winner!='Draw' && <Fire  show={true} />}
+  <Fire  show={true} />
 </>
 }
   </>

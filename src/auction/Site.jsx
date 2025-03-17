@@ -212,7 +212,7 @@ const barChartData = {
   }
   { win.length!==matches && matches>0 && <>
  <div className="w-full text-center my-2">
-  <h3 className="font-bold text-sm text-red-400 ml-2 mr-2">*Need to win {Math.round(matches/2)} match(s) to win series.</h3>
+  <h3 className="font-bold text-sm text-red-400 ml-2 mr-2">*Need to win {Math.round(matches/2)} matches to win the series.</h3>
 </div>
 </>}
 

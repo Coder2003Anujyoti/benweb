@@ -28,6 +28,7 @@ const Iplsite = () => {
   const response=await fetch("https://intelligent-ailyn-handcricket-e8842259.koyeb.app/");
   const item= await response.json();
   const updated=item.data.map((i)=>{
+    i.matches=0;
     i.runs=0;
     i.wickets=0;
     return {...i}

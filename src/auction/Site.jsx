@@ -28,12 +28,66 @@ const Site = ({player,computer,playerteam,computerteam,remove}) => {
   const [team,setTeam]=useState(playerteam);
   const [win,setWin]=useState(()=>LocalWinner()||[])
   const [matches,setMatches]=useState(()=>LocalMatch()||0)
+  const [sno,setSno]=useState(0)
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   const jeet=win.filter((i)=>i.win===playerteam)
   const lose=win.filter((i)=>i.win===computerteam)
   const haar=win.filter((i)=>i.win!==playerteam)
   const details=player.concat(computer);
-  const potm=details.sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets)).filter((i,ind)=>ind===0)
+  const potm=details.slice().sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets)).filter((i,ind)=>ind===0)
+  const batters=details.slice().sort((a,b)=>b.runs-a.runs)
+  const bowlers=details.slice().sort((a,b)=>b.wickets-a.wickets)
+  const allrounders=details.slice().sort((a,b)=>(b.runs*b.wickets)-(a.wickets*a.runs))
+  const topstriker=details.filter((i)=>i.matches>0 && i.runs>0).slice().sort((a,b)=>Math.round(b.runs/b.matches)-Math.round(a.runs/a.matches));
+  const economy=details.filter((i)=>i.matches>0 && i.wickets>0).slice().sort((a,b)=>Math.round(b.wickets/b.matches)-Math.round(a.wickets/a.matches));
+   const emerging=details.filter((i)=>i.matches>0 && i.runs>0 && i.wickets>0).slice().sort((a, b) => {
+  if (a.matches !== b.matches) {
+    return a.matches - b.matches; 
+  }
+  return (b.runs + b.wickets) - (a.runs + a.wickets); 
+});
+  const sellers=details.slice().sort((a,b)=>(b.bid)-(a.bid)).filter((i,ind)=>ind<5)
+const selldata = {
+    labels: sellers.map(() => ""), // Hide y-axis text
+    datasets: [
+      {
+        data:sellers.map((i)=>i.bid),
+        backgroundColor: "Dodgerblue",
+        borderColor: "Dodgerblue",
+        borderWidth: 1,
+        borderRadius:20,
+        barPercentage: 0.5,// Reduce bar thickness
+        categoryPercentage:0.5, // Increase spacing between bars
+      },
+    ],
+  };
+
+  // Chart options
+  const selloptions = {
+    indexAxis: "y", // Horizontal bar chart
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false }, // Hide legend
+      tooltip: {
+        titleFont: { weight: "bold" },
+        bodyFont: { weight: "bold" },
+      },
+      datalabels:{
+        color:"white",
+        font: { weight: "bold", size: 12 },
+      }
+    },
+    scales: {
+      x: { display: false }, // Hide x-axis labels
+      y: { display: false }, // Hide y-axis labels (we are using images instead)
+    },
+    elements: {
+      bar: { maxBarThickness: 0, 
+      borderRadius:20// Reduce bar thickness for more spacing
+      }
+    },
+  };
   useEffect(()=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
   },[])
@@ -216,7 +270,7 @@ const barChartData = {
 </div>
 </>}
 
-     <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row  p-2">
+     <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row ">
   {matches>0 && matches!==win.length && <>
       <HashLink to={`/playgame?player=${encodeURIComponent(JSON.stringify(player))}&&computer=${encodeURIComponent(JSON.stringify(computer))}&&playerteam=${encodeURIComponent(JSON.stringify(playerteam))}&&computerteam=${encodeURIComponent(JSON.stringify(computerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
@@ -244,6 +298,48 @@ const barChartData = {
     </div>
     </HashLink>
     </div>
+  {win.length>0 && <>
+     <div className="flex flex-row flex-wrap gap-x-12 gap-y-6 p-2 justify-center w-full ">
+  <div  className="flex justify-start items-center">
+      <img onClick={()=>sno>0?setSno(sno-1):setSno(sno)} src="Icons/before.png" className="w-12 h-12"/>
+    </div>
+    <div className="flex flex-col  gap-y-4 justify-center text-center">
+  {sno==0 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Top Batter</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={batters[0].image} loading="lazy" /></div>
+   <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${batters[0].team}.webp`} loading="lazy" /></div>
+     <h1 className="text-sm font-extrabold text-yellow-400">{batters[0].name}</h1> 
+     </>}
+       {sno==1 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Top Bowler</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={bowlers[0].image} loading="lazy"/></div>
+     <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${bowlers[0].team}.webp`} loading="lazy" /></div>
+     <h1 className="text-sm font-extrabold text-yellow-400">{bowlers[0].name}</h1> 
+     </>}
+       {sno==2 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Top All-rounder</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={allrounders[0].image} loading="lazy" /></div>
+    <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${allrounders[0].team}.webp`} loading="lazy" /></div>
+     <h1 className="text-sm font-extrabold text-yellow-400">{allrounders[0].name}</h1> 
+     </>}
+    {sno==3 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Top Striker</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={topstriker[0].image} loading="lazy"/></div>
+    <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${topstriker[0].team}.webp`} loading="lazy" /></div>
+     <h1 className="text-sm font-extrabold text-yellow-400">{topstriker[0].name}</h1> 
+     </>}
+     {sno==4 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Best Economy</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={economy[0].image} loading="lazy" /></div>
+      <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${economy[0].team}.webp`} loading="lazy" /></div>
+     <h1 className="text-sm font-extrabold text-yellow-400">{economy[0].name}</h1> 
+     </>}
+            {sno==5 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Emerging Star</h1> 
+     <div className="w-full flex justify-center"><img className="w-36 h-36" src={emerging[0].image} loading="lazy" /></div>
+          <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${emerging[0].team}.webp`} loading="lazy" /></div>
+     <h1 className="text-sm font-extrabold text-yellow-400">{emerging[0].name}</h1> 
+     </>}
+    </div>
+        <div className="flex justify-center items-center">
+      <img src="Icons/next.png" onClick={()=>sno<5?setSno(sno+1):setSno(sno)} className="w-12 h-12"/>
+    </div>
+        </div>
+      </>}
           <div className="flex p-4 flex-row justify-center border-t border-slate-600 gap-4">
        <img src={`Logos/${playerteam}.webp`} className="w-28 h-28" />
      </div>
@@ -255,24 +351,33 @@ const barChartData = {
           <Pie data={pieChartData} options={pieChartOptions} />
         </div>
       </div>
-        <div className="w-full my-6 border-t border-slate-600 p-4 flex justify-center">
-    <h1 className="text-xl font-extrabold text-slate-400">Top Sellers</h1>
-  </div>
-   <div className="w-full flex  flex-wrap flex-row justify-center gap-2 my-4">
-     {
-     details.sort((a,b)=>b.bid-a.bid).map((i,ind)=>{
-       if(ind<6)
-         return(<>
-    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
-    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
-    <div className="flex justify-center items-center"><img src={`Logos/${i.team}.webp`} className="w-8 h-8" /></div>
-           </div>
-          
-         </>)
-       })
-     }
-     </div>
+       <h1 className="text-xs font-extrabold text-slate-400 text-center">Top Sellers(In Lakhs)</h1>
+ <div className="w-full text-center flex mx-auto p-4  gap-2 overflow-hidden">
+
+      {/* Left Side: Team Images */}
+      <div className="flex flex-col justify-between my-5 gap-7 h-full ">
+        {sellers.map((team) => (
+          <div key={team.name} className="flex items-center justify-center">
+            <img src={team.image} alt={team.name} className="w-14 h-14 object-contain" />
+          </div>
+        ))}
+      </div>
+
+      {/* Chart */}
+      <div className="flex-grow overflow-hidden ">
+          <Bar data={selldata} options={selloptions} />
+
+      </div>
+
+      {/* Right Side: Team Images */}
+                <div className="flex flex-col justify-between  h-full my-4  gap-8">
+        {sellers.map((team) => (
+          <div key={team.name} className="flex items-center justify-center">
+            <img src={`Logos/${team.team}.webp`} alt={team.name} className="w-14 h-14 object-contain" />
+          </div>
+        ))}
+      </div>
+    </div>
     <div className="w-full py-2 my-8 flex-col flex justify-center items-center text-center">
     <div className="w-full py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={remove} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">New Team</button></div>
   </div>

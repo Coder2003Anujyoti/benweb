@@ -121,7 +121,7 @@ const localremove=()=>{
        const store=value.find((i,ind)=>{
          return ind==index
        });
-    setComputers([...computers,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:computerteam}])
+    setComputers([...computers,{name:store.name,image:store.image,bid:bid>0?bid:amount,matches:0,runs:0,wickets:0,team:computerteam}])
       setNames([...names,store.name])
       setSold(computerteam)
       setOff(true)
@@ -140,7 +140,7 @@ const localremove=()=>{
       const store=value.find((i,ind)=>{
       return ind==index
       });
-    setComputers([...computers,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:computerteam}])
+    setComputers([...computers,{name:store.name,image:store.image,bid:bid>0?bid:amount,matches:0,runs:0,wickets:0,team:computerteam}])
       setNames([...names,store.name])
       setSold(computerteam)
       setOff(true)
@@ -191,10 +191,11 @@ const localremove=()=>{
    }
  }
  const play=()=>{
+   window.scrollTo({ top: 0, behavior: "smooth" });
    if(computers.length<15){
    let r= value.sort((a,b)=>(Math.random() > 0.5 ? a.name.localeCompare(b.name) :
   b.name.localeCompare(a.name))).map((i)=>{
-         setComputers((prev)=>prev.length<15 && !names.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:amount,runs:0,wickets:0,team:computerteam}]:prev); 
+         setComputers((prev)=>prev.length<15 && !names.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:amount,matches:0,runs:0,wickets:0,team:computerteam}]:prev); 
     });
     setPlaying(true)
    }
@@ -211,7 +212,7 @@ const localremove=()=>{
     if(rand%7==0){
     const store=value.find((i,ind)=>{
       return ind==index});
-    setPlayers([...players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:playerteam}])
+    setPlayers([...players,{name:store.name,image:store.image,bid:bid>0?bid:amount,matches:0,runs:0,wickets:0,team:playerteam}])
     setNames([...names,store.name])
       setSold(playerteam);
       setPurse(purse-bid);
@@ -241,7 +242,7 @@ const localremove=()=>{
     setTimeout(function() {
     const store=value.find((i,ind)=>{
       return ind==index});
-    setPlayers([...players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:playerteam}])
+    setPlayers([...players,{name:store.name,image:store.image,bid:bid>0?bid:amount,matches:0,runs:0,wickets:0,team:playerteam}])
     setNames([...names,store.name])
       setSold(playerteam);
       setPurse(purse-bid);
@@ -439,7 +440,7 @@ const localremove=()=>{
 }
 {
   load===false && playing===true && <>
-    <Site player={players} computer={computers} playerteam={playerteam} computerteam={computerteam} remove={localremove} />
+    <Site player={players} computer={computers} playerteam={playerteam} computerteam={computerteam} remove={localremove}/>
   </>
 }
   </>

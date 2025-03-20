@@ -18,7 +18,19 @@ const Localget=()=>{
     return "";
 }
 }
+const LocalPlayers=()=>{
+  const lists=localStorage.getItem('retain');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return "";
+}
+}
 const Bid= () => {
+  const [retains,setRetains]=useState(()=>LocalPlayers()||[]);
+  const [open,setOpen]=useState(false)
+  const [retaincount,setRetaincount]=useState(0);
   const [load,setLoad]=useState(true);
   const [value,setValue]=useState([]);
   const [playerteam,setPlayerteam]=useState(()=>Localget()||"");
@@ -104,7 +116,7 @@ useEffect(()=>{
      setComputers((prevTeams) =>
       prevTeams.map((team) =>
         team.team === computerteam
-          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:computerteam}] }
+          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,matches:0,runs:0,wickets:0,team:computerteam}] }
           : team
       )
     );
@@ -127,7 +139,7 @@ useEffect(()=>{
       setComputers((prevTeams) =>
       prevTeams.map((team) =>
         team.team === k
-          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:k}] }
+          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,matches:0,runs:0,wickets:0,team:k}] }
           : team
       )
     );
@@ -182,6 +194,7 @@ useEffect(()=>{
    }
  }
  const play=()=>{
+   window.scrollTo({ top: 0, behavior: "smooth" });
  const k=computers.filter((i)=>i.team!==playerteam)
    const empty=k.every((i)=>i.players.length===15);
    if(empty===false){
@@ -200,6 +213,7 @@ useEffect(()=>{
           name: player.name,
           image: player.image,
           bid: amount,
+          matches:0,
           runs: 0,
           wickets: 0,
           team: team.team,
@@ -235,14 +249,14 @@ useEffect(()=>{
   if(turn!='' && empty==false){
   if(turn===playerteam){
     setTimeout(function() {
-  let rand=Math.floor(Math.random()*100);
+let rand=Math.floor(Math.random()*100);
     if(rand%7==0){
     const store=value.find((i,ind)=>{
       return ind==index});
       setComputers((prevTeams) =>
       prevTeams.map((team) =>
         team.team === playerteam
-          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:playerteam}] }
+          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,matches:0,runs:0,wickets:0,team:playerteam}] }
           : team
       )
     );
@@ -282,7 +296,7 @@ useEffect(()=>{
        setComputers((prevTeams) =>
       prevTeams.map((team) =>
         team.team === playerteam
-          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,runs:0,wickets:0,team:playerteam}] }
+          ? { ...team, players: [...team.players,{name:store.name,image:store.image,bid:bid>0?bid:amount,matches:0,runs:0,wickets:0,team:playerteam}] }
           : team
       )
     );
@@ -299,9 +313,82 @@ useEffect(()=>{
   useEffect(()=>{
     get_data();
   },[])
+  const add_retain=(x)=>{
+    if(retaincount<2){
+    const drdata=value.filter((i)=>i.name!=x.name)
+    setComputers((prevTeams) =>
+      prevTeams.map((team) =>
+        team.team === x.team
+          ? { ...team, players: [...team.players,{name:x.name,image:x.image,bid:x.bid,matches:0,runs:0,wickets:0,team:x.team}] }
+          : team
+      )
+    );
+    setValue(drdata);
+    setPlayers([...players,x.name])
+    setAmount(Math.floor(Math.random()*100)+1)
+  setIndex(Math.floor(Math.random()*drdata.length))
+  setRetaincount(retaincount+1)
+    }
+    else{
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      const drdata=value.filter((i)=>i.name!=x.name)
+setComputers((prevTeams) =>
+      prevTeams.map((team) =>
+        team.team === x.team
+          ? { ...team, players: [...team.players,{name:x.name,image:x.image,bid:x.bid,matches:0,runs:0,wickets:0,team:x.team}] }
+          : team
+      )
+    );
+    setValue(drdata);
+    setPlayers([...players,x.name])
+    setAmount(Math.floor(Math.random()*100)+1)
+  setIndex(Math.floor(Math.random()*drdata.length))
+  setRetaincount(retaincount+1)
+    }
+  }
+  
+  useEffect(()=>{
+    if(retaincount==1){
+      setComputers((prevTeams) => {
+  let assigned = []; // Keep track of assigned players globally
+
+  let updatedTeams = prevTeams.map((team) => {
+    if (team.team === playerteam) return team; // Skip player's team
+
+    let newPlayers = [...team.players];
+
+    retains.flatMap((i)=>i.players).sort((a,b)=>(Math.random() > 0.5 ? a.name.localeCompare(b.name) :
+  b.name.localeCompare(a.name))).forEach((player) => {
+      if (!players.includes(player.name) && player.team===team.team && newPlayers.length < 3) {
+        newPlayers.push({
+          name: player.name,
+          image: player.image,
+          bid: amount,
+          matches:0,
+          runs: 0,
+          wickets: 0,
+          team:player.team,
+        });
+        assigned.push(player.name); // Track assigned players globally
+      }
+    });
+
+    return { ...team, players: newPlayers };
+  });
+
+  // Remove assigned players **after** teams are updated
+  setValue(value.filter((player) => !assigned.includes(player.name)));
+
+  return updatedTeams;
+});
+}
+  },[retaincount])
   useEffect(()=>{
     const empty=computers.every((i)=>i.players.length===15);
     if(empty===true){
+      localStorage.removeItem('retain');
+      localStorage.setItem('retain', 
+      JSON.stringify(computers));
       localStorage.setItem('user', 
       JSON.stringify(computers));
       localStorage.setItem('team',JSON.stringify(playerteam));
@@ -347,7 +434,55 @@ useEffect(()=>{
 </div>
 </div>
 </>}
-{ playerteam!==''  && <>
+{
+  playerteam!='' && retaincount<3 && retains.length>0  && <>
+     <div className="flex p-4  flex-col justify-center items-center text-center gap-4">
+     <h1 className="text-lg text-green-400 font-bold">Pick 3 players as Retention</h1>
+       <img src={`Logos/${playerteam}.webp`} className="w-24 h-24" />
+     </div>
+   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
+     {
+       retains.flatMap((i)=>i.players).map((i)=>{
+       if(i.team===playerteam && !players.includes(i.name))
+         return(<>
+    <div onClick={()=>add_retain(i)} className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
+    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
+           </div>
+         </>)
+       })
+     }
+     </div>
+     {retaincount==0 && retains.length>0 && <>
+         <div className="w-full py-2 flex-col  flex justify-center items-center text-center">
+    <div className="py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setRetaincount(3)}} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">No Retention</button></div>
+  </div>
+  </>}
+  { computers.filter((i)=>i.team===playerteam)[0].players.length>0 && <>
+         <div className="flex my-6 p-2 border-t border-t-slate-600 flex-col justify-center items-center text-center gap-4">
+     <h1 className="text-lg text-green-400 font-bold">Retained Players</h1>
+       <img src={`Logos/${playerteam}.webp`} className="w-24 h-24" />
+     </div>
+   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 ">
+     {
+       computers.flatMap((i)=>i.players).map((i)=>{
+       if(i.team===playerteam)
+         return(<>
+    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
+    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
+    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
+           </div>
+         </>)
+       })
+     }
+     </div>
+    </>
+  }
+  </>
+}
+{ playerteam!=='' && (retaincount==3 || retains.length===0)  && <>
 <div className="w-full flex flex-row items-center gap-y-2 my-2 justify-end">
    <img src="Icons/digital-money.png" className="w-10 h-10"/>
      <p className="text-base font-bold text-slate-300">{purse+""+"L"}</p>
@@ -416,7 +551,7 @@ useEffect(()=>{
     </div>
 </>
 }
-{playerteam!='' && <>
+{playerteam!='' && (retaincount==3 || retains.length===0) && <>
 <div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center py-10 flex-row">
   {teams.map((i)=>{
   return(

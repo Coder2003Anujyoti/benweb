@@ -105,6 +105,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
       if(i.team===it.team && i.name===it.name){
         i.runs+=it.runs;
         i.wickets+=it.wickets;
+        i.matches+=1;
       }
     })
     return {...i};
@@ -114,6 +115,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
       if(i.team===it.team && i.name===it.name){
         i.runs+=it.runs;
         i.wickets+=it.wickets;
+        i.matches+=1;
       }
     })
     return {...i};
@@ -129,6 +131,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
       if(i.team===it.team && i.name===it.name){
         i.runs+=it.runs;
         i.wickets+=it.wickets;
+        i.matches+=1;
       }
     })
     return {...i};
@@ -138,6 +141,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
       if(i.team===it.team && i.name===it.name){
         i.runs+=it.runs;
         i.wickets+=it.wickets;
+        i.matches+=1;
       }
     })
     return {...i};
@@ -153,6 +157,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
       if(i.team===it.team && i.name===it.name){
         i.runs+=it.runs;
         i.wickets+=it.wickets;
+        i.matches+=1;
       }
     })
     return {...i};
@@ -162,6 +167,7 @@ const computerwickets=playerdata.reduce((total,i)=>{
       if(i.team===it.team && i.name===it.name){
         i.runs+=it.runs;
         i.wickets+=it.wickets;
+        i.matches+=1;
       }
     })
     return {...i};

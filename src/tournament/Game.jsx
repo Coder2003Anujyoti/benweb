@@ -98,7 +98,7 @@ const Game = () => {
   },[matches])
   return (
     <>
-      {oppositionteam==='' && 
+      {oppositionteam==='' && win.length<=8 &&
       <>
 <div className="w-full py-8 flex justify-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select Opposition Team</h1></div>
 <div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center flex-row ">
@@ -114,7 +114,7 @@ const Game = () => {
 </div>
 </>
 }
-{ oppositionteam!=''&&<>
+{ oppositionteam!='' && <>
 {load==false && id.length<10 && <>
   <div className="w-full py-8 flex justify-center">
     <h1 className="text-green-400 text-2xl font-bold shadow-green-400">Choose Your Playing X</h1>

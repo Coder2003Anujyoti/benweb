@@ -225,7 +225,7 @@ useEffect(()=>{
         newPlayers.push({
           name: player.name,
           image: player.image,
-          bid: amount,
+          bid: Math.floor(Math.random()*50)+1,
           matches:0,
           runs: 0,
           wickets: 0,
@@ -262,7 +262,7 @@ useEffect(()=>{
   if(turn!='' && empty==false){
   if(turn===playerteam){
     setTimeout(function() {
-let rand=Math.floor(Math.random()*100);
+ let rand=Math.floor(Math.random()*100);
     if(rand%7==0){
     const store=value.find((i,ind)=>{
       return ind==index});

@@ -221,7 +221,7 @@ const localremove=()=>{
    if(computers.length<15){
    let r= value.slice().sort((a,b)=>(Math.random() > 0.5 ? a.name.localeCompare(b.name) :
   b.name.localeCompare(a.name))).map((i)=>{
-         setComputers((prev)=>prev.length<15 && !names.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:amount,matches:0,runs:0,wickets:0,team:computerteam}]:prev); 
+         setComputers((prev)=>prev.length<15 && !names.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:Math.floor(Math.random()*50)+1,matches:0,runs:0,wickets:0,team:computerteam}]:prev); 
     });
     setPlaying(true)
    }

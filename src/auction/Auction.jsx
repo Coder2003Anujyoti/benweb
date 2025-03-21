@@ -284,7 +284,7 @@ const localremove=()=>{
   const add_retain=(x)=>{
     if(retaincount<2){
     const drdata=value.filter((i)=>i.name!=x.name)
-      setPlayers([...players,{name:x.name,image:x.image,bid:x.bid,matches:0,runs:0,wickets:0,team:x.team}])
+      setPlayers([...players,{name:x.name,image:x.image,bid:0,matches:0,runs:0,wickets:0,team:x.team}])
     setValue(drdata);
     setAllp([...allp,x.name])
     setAmount(Math.floor(Math.random()*100)+1)
@@ -294,7 +294,7 @@ const localremove=()=>{
     else{
       window.scrollTo({ top: 0, behavior: "smooth" });
       const drdata=value.filter((i)=>i.name!=x.name)
-     setPlayers([...players,{name:x.name,image:x.image,bid:x.bid,matches:0,runs:0,wickets:0,team:x.team}])
+     setPlayers([...players,{name:x.name,image:x.image,bid:0,matches:0,runs:0,wickets:0,team:x.team}])
     setValue(drdata);
     setAllp([...allp,x.name])
     setAmount(Math.floor(Math.random()*100)+1)
@@ -308,7 +308,7 @@ const localremove=()=>{
       const k=Math.floor(Math.random()*3)+1
    const y= retains.flatMap((i)=>i.players).filter((i)=>i.team===computerteam).slice().sort((a,b)=>(Math.random() > 0.5 ? a.name.localeCompare(b.name) :
   b.name.localeCompare(a.name))).map((i)=>{
-         setComputers((prev)=>prev.length<k && !allp.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:amount,matches:0,runs:0,wickets:0,team:computerteam}]:prev);
+         setComputers((prev)=>prev.length<k && !allp.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:0,matches:0,runs:0,wickets:0,team:computerteam}]:prev);
     });
 
 }
@@ -316,7 +316,7 @@ if(retaincount===1 && original==true){
   const k=Math.floor(Math.random()*3)+1
    const y= retains.filter((i)=>i.team===computerteam).slice().sort((a,b)=>(Math.random() > 0.5 ? a.name.localeCompare(b.name) :
   b.name.localeCompare(a.name))).map((i)=>{
-         setComputers((prev)=>prev.length<k && !allp.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:amount,matches:0,runs:0,wickets:0,team:computerteam}]:prev); 
+         setComputers((prev)=>prev.length<k && !allp.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:0,matches:0,runs:0,wickets:0,team:computerteam}]:prev); 
     });
 }
 if(retaincount===3){

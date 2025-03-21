@@ -332,7 +332,7 @@ let rand=Math.floor(Math.random()*100);
     setComputers((prevTeams) =>
       prevTeams.map((team) =>
         team.team === x.team
-          ? { ...team, players: [...team.players,{name:x.name,image:x.image,bid:x.bid,matches:0,runs:0,wickets:0,team:x.team}] }
+          ? { ...team, players: [...team.players,{name:x.name,image:x.image,bid:0,matches:0,runs:0,wickets:0,team:x.team}] }
           : team
       )
     );
@@ -348,7 +348,7 @@ let rand=Math.floor(Math.random()*100);
 setComputers((prevTeams) =>
       prevTeams.map((team) =>
         team.team === x.team
-          ? { ...team, players: [...team.players,{name:x.name,image:x.image,bid:x.bid,matches:0,runs:0,wickets:0,team:x.team}] }
+          ? { ...team, players: [...team.players,{name:x.name,image:x.image,bid:0,matches:0,runs:0,wickets:0,team:x.team}] }
           : team
       )
     );
@@ -376,7 +376,7 @@ setComputers((prevTeams) =>
         newPlayers.push({
           name: player.name,
           image: player.image,
-          bid: amount,
+          bid: 0,
           matches:0,
           runs: 0,
           wickets: 0,
@@ -410,7 +410,7 @@ if(retaincount===1 && original==true){
         newPlayers.push({
           name: player.name,
           image: player.image,
-          bid: amount,
+          bid: 0,
           matches:0,
           runs: 0,
           wickets: 0,

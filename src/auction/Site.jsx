@@ -205,7 +205,7 @@ const barChartData = {
 {
   matches===0 && <>
      <div className="flex p-4 flex-col justify-center items-center text-center gap-4">
-     <h1 className="text-lg text-green-400 font-bold">Choose Number of Series</h1>
+     <h1 className="text-lg text-green-400 font-bold">Choose Number of Matches</h1>
      </div>
     <div className="w-full flex flex-row flex-wrap gap-6 justify-center ">
       <button className="w-24 h-12 rounded-lg bg-indigo-400 p-2 text-white font-bold text-2xl" onClick={()=>update(1)}>1</button>

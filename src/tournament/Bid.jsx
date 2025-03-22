@@ -523,7 +523,7 @@ if(retaincount===3){
 {
   playerteam!='' && retaincount<3 && retains.length>0  && open==true && original==false && <>
      <div className="flex p-4  flex-col justify-center items-center text-center gap-4">
-     <h1 className="text-lg text-green-400 font-bold">Pick  3 players as Retention</h1>
+     <h1 className="text-lg text-green-400 font-bold">Pick max 3 players as Retention</h1>
        <img src={`Logos/${playerteam}.webp`} className="w-24 h-24" />
      </div>
    <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">

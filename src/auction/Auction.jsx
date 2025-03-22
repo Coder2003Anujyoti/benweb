@@ -37,20 +37,7 @@ const LocalComputers=()=>{
     return [];
 }
 }
-const LocalRetain=()=>{
-  const lists=localStorage.getItem('retain');
-  if(lists){
-    return JSON.parse(lists);
-  }
-  else{
-    return "";
-}
-}
 const Auction = () => {
-  const [retains,setRetains]=useState(()=>LocalRetain()||[]);
-  const [allp,setAllp]=useState([])
-  const [original,setOriginal]=useState(false)
-  const [open,setOpen]=useState(false)
   const [retaincount,setRetaincount]=useState(0);
   const [toggle,setToggle]=useState(()=>LocalPlayerTeam()||"")
   const [load,setLoad]=useState(true);
@@ -96,24 +83,12 @@ const localremove=()=>{
    setLoad(true);
 }
   const get_data=async()=>{
-  if(retains.length>0){
   const response=await fetch("https://intelligent-ailyn-handcricket-e8842259.koyeb.app/");
   const item= await response.json();
   setValue(item.data)
   setLoad(false)
   setAmount(Math.floor(Math.random()*100)+1)
   setIndex(Math.floor(Math.random()*150))
-  }
-  else{
-    const response=await fetch("https://intelligent-ailyn-handcricket-e8842259.koyeb.app/");
-  const item= await response.json();
-  setValue(item.data)
-  setRetains(item.data)
-  setLoad(false)
-  setOriginal(true)
-  setAmount(Math.floor(Math.random()*100)+1)
-  setIndex(Math.floor(Math.random()*150))
-  }
 }
  const add=()=>{
    if(bid==0){
@@ -281,50 +256,6 @@ const localremove=()=>{
   useEffect(()=>{
     get_data();
   },[])
-  const add_retain=(x)=>{
-    if(retaincount<2){
-    const drdata=value.filter((i)=>i.name!=x.name)
-      setPlayers([...players,{name:x.name,image:x.image,bid:0,matches:0,runs:0,wickets:0,team:x.team}])
-    setValue(drdata);
-    setAllp([...allp,x.name])
-    setAmount(Math.floor(Math.random()*100)+1)
-  setIndex(Math.floor(Math.random()*drdata.length))
-  setRetaincount(retaincount+1)
-    }
-    else{
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      const drdata=value.filter((i)=>i.name!=x.name)
-     setPlayers([...players,{name:x.name,image:x.image,bid:0,matches:0,runs:0,wickets:0,team:x.team}])
-    setValue(drdata);
-    setAllp([...allp,x.name])
-    setAmount(Math.floor(Math.random()*100)+1)
-  setIndex(Math.floor(Math.random()*drdata.length))
-  setRetaincount(retaincount+1)
-    }
-  }
-  
-  useEffect(()=>{
-    if(retaincount==1 && original===false){
-      const k=Math.floor(Math.random()*3)+1
-   const y= retains.flatMap((i)=>i.players).filter((i)=>i.team===computerteam).slice().sort((a,b)=>(Math.random() > 0.5 ? a.name.localeCompare(b.name) :
-  b.name.localeCompare(a.name))).map((i)=>{
-         setComputers((prev)=>prev.length<k && !allp.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:0,matches:0,runs:0,wickets:0,team:computerteam}]:prev);
-    });
-
-}
-if(retaincount===1 && original==true){
-  const k=Math.floor(Math.random()*3)+1
-   const y= retains.filter((i)=>i.team===computerteam).slice().sort((a,b)=>(Math.random() > 0.5 ? a.name.localeCompare(b.name) :
-  b.name.localeCompare(a.name))).map((i)=>{
-         setComputers((prev)=>prev.length<k && !allp.includes(i.name)?[...prev,{name:i.name,image:i.image,bid:0,matches:0,runs:0,wickets:0,team:computerteam}]:prev); 
-    });
-}
-if(retaincount===3){
-  const ph=players.concat(computers).map((i)=>i.name);
-    const ival=value.filter((i)=>!ph.includes(i.name))
-    setValue(ival)
-}
-  },[retaincount])
   useEffect(()=>{
     if(playing===true){
       localStorage.setItem('players', 
@@ -335,23 +266,25 @@ if(retaincount===3){
       localStorage.setItem('computerteam',JSON.stringify(computerteam));
     }
   },[playing])
-  const clears=()=>{
-   window.scrollTo({ top: 0, behavior: "smooth" });
-   localStorage.removeItem('players');
-   localStorage.removeItem('computers');
-   localStorage.removeItem('playerteam');
-   localStorage.removeItem('computerteam');
-   localStorage.removeItem('winarray');
-   localStorage.removeItem('auctionmatch');
-   localStorage.removeItem('retain');
-   window.location.reload();
-   setPlaying(false);
-   setPlayerteam("");
-   setComputerteam("");
-   setPlayers([]);
-   setRetains([]);
-   setComputers([]);
-   setLoad(true);
+  const make_team=()=>{
+    const pl=value.filter((i)=>i.team===playerteam).map((i)=>{
+      i.matches=0;
+      i.runs=0;
+      i.wickets=0;
+      i.bid=-1;
+      return {...i}
+    })
+    const co=value.filter((i)=>i.team===computerteam).map((i)=>{
+      i.matches=0;
+      i.runs=0;
+      i.wickets=0;
+      i.bid=-1;
+      return {...i}
+    })
+    setPlayers(pl)
+    setComputers(co)
+    setPlaying(true)
+    setRetaincount(3)
   }
   return (
   <>
@@ -410,118 +343,21 @@ if(retaincount===3){
 </div>
 </>}
 {
-  playerteam!='' && computerteam!='' && retains.length>0 && retaincount===0 && open==false && <>
+  playerteam!='' && computerteam!='' && retaincount===0  && <>
          <div className="flex p-4 my-24 flex-col justify-center items-center text-center gap-4">
-     <h1 className="text-lg text-green-400 font-bold">Mode of Auction</h1>
+     <h1 className="text-lg text-green-400 font-bold">Mode of Play</h1>
            <div className="w-full py-2 flex-row flex-wrap gap-x-8 flex justify-center items-center text-center">
-    <div className="py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={()=>{
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setOpen(true)}} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Mini Auction</button></div>
+    <div className="py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={make_team} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Start Game</button></div>
         <div className="py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={()=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
-      setRetaincount(3)}} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Mega Auction</button></div>
+      setRetaincount(3)}} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Auction Mode</button></div>
   </div>
-    <h2 className="font-bold text-sm text-yellow-400">*In Mega Auction you need to buy all 15 players and there is no chance to retain any player.</h2>
-   <h2 className="font-bold text-sm text-yellow-400">*In Mini Auction you need to buy players and there is having chance to retain 3 or less than 3 players.</h2>
- <div className="py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={clears} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Restart Game</button></div>
+    <h2 className="font-bold text-sm text-yellow-400">*In Start Game there is predefined set of players and you need not participate in auction.</h2>
+   <h2 className="font-bold text-sm text-yellow-400">*In Auction Mode you need to buy players and you need to buy players from auction.</h2>
   </div>
   </>
 }
-{
-  playerteam!='' && computerteam!='' && retaincount<3 && retains.length>0  && open==true && original==false && <>
-     <div className="flex p-4  flex-col justify-center items-center text-center gap-4">
-     <h1 className="text-lg text-green-400 font-bold">Pick  3 players as Retention</h1>
-       <img src={`Logos/${playerteam}.webp`} className="w-24 h-24" />
-     </div>
-   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
-     {
-       retains.flatMap((i)=>i.players).map((i)=>{
-       if(i.team===playerteam && !allp.includes(i.name))
-         return(<>
-    <div onClick={()=>add_retain(i)} className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
-    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
-           </div>
-         </>)
-       })
-     }
-     </div>
-     {retaincount>0 && retaincount<3 && retains.length>0 && <>
-         <div className="w-full py-2 flex-col  flex justify-center items-center text-center">
-    <div className="rounded-lg p-2 w-24 bg-slate-800 flex items-center justify-center"><button onClick={()=>{
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setRetaincount(3)}} className="font-bold text-base text-slate-400">Submit</button></div>
-  </div>
-  </>}
-  { players.length>0 && <>
-         <div className="flex my-6 p-2 border-t border-t-slate-600 flex-col justify-center items-center text-center gap-4">
-     <h1 className="text-lg text-green-400 font-bold">Retained Players</h1>
-       <img src={`Logos/${playerteam}.webp`} className="w-24 h-24" />
-     </div>
-   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 ">
-     {
-       players.map((i)=>{
-         return(<>
-    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
-    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
-           </div>
-         </>)
-       })
-     }
-     </div>
-    </>
-  }
-  </>
-}
-{
-  playerteam!='' && computerteam!='' && retaincount<3 && retains.length>0  && open==true && original==true && <>
-     <div className="flex p-4  flex-col justify-center items-center text-center gap-4">
-     <h1 className="text-lg text-green-400 font-bold">Pick  3 players as Retention</h1>
-       <img src={`Logos/${playerteam}.webp`} className="w-24 h-24" />
-     </div>
-   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
-     {
-       retains.map((i)=>{
-       if(i.team===playerteam && !allp.includes(i.name))
-         return(<>
-    <div onClick={()=>add_retain(i)} className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
-    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
-           </div>
-         </>)
-       })
-     }
-     </div>
-     {retaincount>0 && retaincount<3 && retains.length>0 && <>
-         <div className="w-full py-2 flex-col  flex justify-center items-center text-center">
-    <div className="rounded-lg p-2 w-24 bg-slate-800 flex items-center justify-center"><button onClick={()=>{
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setRetaincount(3)}} className="font-bold text-base text-slate-400">Submit</button></div>
-  </div>
-  </>}
-  { players.length>0 && <>
-         <div className="flex my-6 p-2 border-t border-t-slate-600 flex-col justify-center items-center text-center gap-4">
-     <h1 className="text-lg text-green-400 font-bold">Retained Players</h1>
-       <img src={`Logos/${playerteam}.webp`} className="w-24 h-24" />
-     </div>
-   <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 ">
-     {
-       players.map((i)=>{
-         return(<>
-    <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
-    <div className="flex justify-center items-center"><img src={i.image} className="w-16 h-16" /></div>
-    <p className="text-slate-400 text-xs font-bold">{i.name}</p>
-           </div>
-         </>)
-       })
-     }
-     </div>
-    </>
-  }
-  </>
-}
-{ playerteam!=='' && computerteam!='' && (retaincount==3 || retains.length===0) && <>
+{ playerteam!=='' && computerteam!='' && retaincount===3 && <>
 <div className="w-full flex flex-row items-center gap-y-2 my-2 justify-end">
    <img src="Icons/digital-money.png" className="w-10 h-10"/>
      <p className="text-base font-bold text-slate-300">{purse+""+"L"}</p>
@@ -588,7 +424,7 @@ if(retaincount===3){
     </div>
 </>
 }
-{ playerteam!='' && computerteam!='' && (retaincount==3 || retains.length===0) && <>
+{ playerteam!='' && computerteam!='' && retaincount===3 &&  <>
   <div className="w-full flex my-16 gap-x-12 justify-center">
    <div className="p-2 w-30 rounded-full bg-slate-800 flex items-center justify-center" onClick={()=>setTeam(playerteam)}>
    <img src={`Logos/${playerteam}.webp`} className="w-14 h-14" />
@@ -638,7 +474,7 @@ if(retaincount===3){
 }
 {
   load===false && playing===true && <>
-    <Site player={players} computer={computers} playerteam={playerteam} computerteam={computerteam} remove={localremove}/>
+    <Site player={players} computer={computers} playerteam={playerteam} computerteam={computerteam} remove={localremove} />
   </>
 }
   </>

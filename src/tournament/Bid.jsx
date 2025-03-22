@@ -28,6 +28,7 @@ const LocalPlayers=()=>{
 }
 }
 const Bid= () => {
+  const [going,setGoing]=useState(false)
   const [retains,setRetains]=useState(()=>LocalPlayers()||[]);
   const [original,setOriginal]=useState(false)
   const [open,setOpen]=useState(false)
@@ -429,6 +430,12 @@ if(retaincount===1 && original==true){
   return updatedTeams;
 });
 }
+if(retaincount===3){
+    setAmount(Math.floor(Math.random()*100)+1)
+  setIndex(Math.floor(Math.random()*value .length))
+  setValue(value)
+  setGoing(true)
+}
   },[retaincount])
   useEffect(()=>{
     const empty=computers.every((i)=>i.players.length===15);
@@ -509,7 +516,7 @@ if(retaincount===1 && original==true){
   </div>
     <h2 className="font-bold text-sm text-yellow-400">*In Mega Auction you need to buy all 15 players and there is no chance to retain any player.</h2>
    <h2 className="font-bold text-sm text-yellow-400">*In Mini Auction you need to buy players and there is having chance to retain 3 or less than 3 players.</h2>
-   <div className="py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={clears} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Restart Game</button></div>
+{original===false && <> <div className="py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={clears} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Restart Game</button></div> </>}
   </div>
   </>
 }
@@ -609,7 +616,8 @@ if(retaincount===1 && original==true){
   }
   </>
 }
-{ playerteam!=='' && (retaincount==3 || retains.length===0)  && <>
+{ playerteam!=='' && retaincount==3 && going===true && <>
+  {alert(value.length)}
 <div className="w-full flex flex-row items-center gap-y-2 my-2 justify-end">
    <img src="Icons/digital-money.png" className="w-10 h-10"/>
      <p className="text-base font-bold text-slate-300">{purse+""+"L"}</p>
@@ -678,7 +686,7 @@ if(retaincount===1 && original==true){
     </div>
 </>
 }
-{playerteam!='' && (retaincount==3 || retains.length===0) && <>
+{playerteam!='' && retaincount==3 && going==true  && <>
 <div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center py-10 flex-row">
   {teams.map((i)=>{
   return(

@@ -351,6 +351,7 @@ const barChartData = {
           <Pie data={pieChartData} options={pieChartOptions} />
         </div>
       </div>
+{sellers.find((i)=>i.bid===-1)==undefined && <>
        <h1 className="text-xs font-extrabold text-slate-400 text-center">Top Sellers(In Lakhs)</h1>
  <div className="w-full text-center flex mx-auto p-4  gap-2 overflow-hidden">
 
@@ -378,6 +379,7 @@ const barChartData = {
         ))}
       </div>
     </div>
+    </>}
     <div className="w-full py-2 my-8 flex-col flex justify-center items-center text-center">
     <div className="w-full py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={remove} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">New Team</button></div>
   </div>

@@ -215,7 +215,7 @@ const barChartData = {
   return (
    <>
   {showCelebration===true && (win.length<matches || win.length===0) && <>
-    <div className="flex py-2 flex-col items-center justify-center text-white text-center">
+    <div className="flex py-2 overflow-hidden flex-col items-center justify-center text-white text-center">
       {/* Fireworks */}
       {showCelebration && <Confetti width={width} height={height} />}
       {/* Trophy Animation */}
@@ -252,12 +252,12 @@ const barChartData = {
         ))}
        <div className="w-full flex-col items-center flex-wrap flex  justify-center my-12"> <button onClick={()=>setShowCelebration(false)} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Start Playing</button></div>
       </div>
-    </div>
     <Fire show={true} />
+    </div>
   </>}
   {
     showCelebration===true && win.length===matches && win.length!=0 && jeet.length>lose.length &&  <>
-         <div className="flex py-2 flex-col items-center justify-center  text-white text-center">
+         <div className="flex py-2 overflow-hidden flex-col items-center justify-center  text-white text-center">
       {/* Fireworks */}
       {showCelebration && <Confetti width={width} height={height} />}
       

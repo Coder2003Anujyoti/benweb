@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useRef} from "react";
+import { motion } from "framer-motion";
 import Winner from "./Winner.jsx"
 import { Line,Bar } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, PointElement, BarElement, LineElement, Title, Tooltip, Legend } from "chart.js";
@@ -30,6 +31,9 @@ const PlayerFirst = ({players,oppositionplayers}) => {
   const [runs,setRuns]=useState(0);
   const [winner,setWinner]=useState("");
   const [wickets,setWickets]=useState(0);
+  const [event, setEvent] = useState(null);
+  const [showButtons, setShowButtons] = useState(true);
+  const timeoutRef = useRef(null); 
   const buttons=[1,2,3,4,5,6];
   useEffect(()=>{
     const get_Player=players.map((i)=>{
@@ -72,8 +76,45 @@ const PlayerFirst = ({players,oppositionplayers}) => {
   }
   }
   const check=(i)=>{
-     window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   let value=Math.floor(Math.random()*6)+1;
+ if (timeoutRef.current) 
+ clearTimeout(timeoutRef.current);
+  if(turn==="Player"){
+    if((i==4 || i==6) && i!=value){
+    setShowButtons(false)
+    setEvent(i);
+    timeoutRef.current = setTimeout(() => {
+      setShowButtons(true);
+    }, 1000);
+    }
+  if(i!=0 && i===value){
+    setShowButtons(false)
+    setEvent(0)
+    timeoutRef.current = setTimeout(() => {
+      setShowButtons(true);
+    }, 1000);
+    }
+  }
+    if(turn==="Computer"){
+    if((value==4 || value==6) && i!=value){
+    setShowButtons(false)
+    setEvent(value);
+    timeoutRef.current = setTimeout(() => {
+      setShowButtons(true);
+    }, 1000);
+    }
+  if(i!=0 && i===value){
+    setShowButtons(false)
+    setEvent(0)
+    timeoutRef.current = setTimeout(() => {
+      setShowButtons(true);
+    }, 1000);
+    }
+  }
+  and(i,value)
+  }
+  const and=(i,value)=>{
    if(turn=="Player"){
      if(overs%6==5 && number==19){
        if(i!=value){
@@ -760,6 +801,39 @@ const baroptions = {
 };
   return (
 <>
+        {showButtons==false && (
+        <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white pointer-events-none">
+          {/* Fireworks Effect */}
+          <motion.div
+            className="absolute w-full h-full bg-black opacity-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          />
+
+          {/* Celebration Text */}
+          <motion.div
+            className="text-5xl font-bold text-yellow-400 glow-effect"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            {event === 4 && "Fantastic Four!"}
+            {event === 6 && "Super Six!"}
+            {event === 0 && "Wicket Down!"}
+          </motion.div>
+
+          {/* Glowing Effect */}
+          <motion.div
+            className="w-32 h-32 rounded-full bg-yellow-500 opacity-50 absolute"
+            initial={{ scale: 0 }}
+            animate={{ scale: 3, opacity: 0 }}
+            transition={{ duration: 1.5, repeat: 2 }}
+          />
+        </div>
+      )}
+{showButtons===true && <>
   {winner=='' &&
   <>
   {show===true && <>
@@ -866,11 +940,7 @@ const baroptions = {
   </div>
   </>
   }
-  </>}
-  {
-    winner!='' && <Winner winner={winner} yourteam={yourteam} opposteam={opposteam} />
-  }
-          <div className="my-8 text-center text-xs" style={{ width: "100%", height: "500px" }} >
+            <div className="my-8 text-center text-xs" style={{ width: "100%", height: "500px" }} >
      <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Scattering Analysis</h2>
       <Line data={histdata} options={options} />
     </div>
@@ -878,6 +948,21 @@ const baroptions = {
     <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bar-Graph Analysis</h2>
       <Bar data={bardata} options={baroptions} />
     </div>
+  </>}
+  {
+    winner!='' && <> <Winner winner={winner} yourteam={yourteam} opposteam={opposteam} />
+              <div className="my-8 text-center text-xs" style={{ width: "100%", height: "500px" }} >
+     <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Scattering Analysis</h2>
+      <Line data={histdata} options={options} />
+    </div>
+        <div className="my-16 text-center text-xs" style={{ width: "100%", height: "500px" }}>
+    <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bar-Graph Analysis</h2>
+      <Bar data={bardata} options={baroptions} />
+    </div>
+    </>
+  }
+  </>
+}
 </>
   );
 };

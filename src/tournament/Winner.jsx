@@ -253,13 +253,6 @@ const histogramWickets = {
 },[])
   return (
     <>
-   {
-  load==true && <>
-      <div className="flex justify-center items-center py-60">
-  <h1 className="text-slate-400 text-xl font-bold">Loading...</h1>
-</div>
-  </>
-}
 { load==false && <>
       { winnerarray.length===9 && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">

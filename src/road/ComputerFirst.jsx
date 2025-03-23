@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useRef} from "react";
+import { motion } from "framer-motion";
 import Winner from "./Winner.jsx"
 import { Line,Bar } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, PointElement, BarElement, LineElement, Title, Tooltip, Legend } from "chart.js";
@@ -12,10 +13,10 @@ const ComputerFirst = ({players,oppositionplayers}) => {
   const [show,setShow]=useState(true);
   const [turn,setTurn]=useState("Computer");
   const [playeroption,setPlayeroption]=useState(0);
-  const [computeroption,setComputeroption]=useState(0)
   const [leader,setLeader]=useState("");
-  const [ids,setIds]=useState([]);
+  const [computeroption,setComputeroption]=useState(0)
   const [id,setId]=useState([]);
+  const [ids,setIds]=useState([]);
   const [playerrun,setPlayerrun]=useState(0);
   const [playerwicket,setPlayerwicket]=useState(0);
   const [yourteam,setYourteam]=useState([]);
@@ -30,6 +31,9 @@ const ComputerFirst = ({players,oppositionplayers}) => {
   const [runs,setRuns]=useState(0);
   const [winner,setWinner]=useState("");
   const [wickets,setWickets]=useState(0);
+  const [event, setEvent] = useState(null);
+  const [showButtons, setShowButtons] = useState(true);
+  const timeoutRef = useRef(null); 
   const buttons=[1,2,3,4,5,6];
   useEffect(()=>{
     const get_Player=players.map((i)=>{
@@ -47,18 +51,18 @@ const ComputerFirst = ({players,oppositionplayers}) => {
   },[])
   const add_Player=(i)=>{
     if(turn==="Player"){
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        setIds([...ids,i.name])
-        setLeader(turn);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setLeader(turn);
     setPlayeroption(0);
     setComputeroption(0)
     setImage(i);
     setId([...id,i.name])
+    setIds([...ids,i.name])
     setPlayerstats(players);
     setOppositionstats(oppositionplayers)
     setShow(false);
     }
-      if(turn==="Computer"){
+   if(turn==="Computer"){
     window.scrollTo({ top: 0, behavior: "smooth" });
     setImage(i);
     setId([...id,i.name])
@@ -74,6 +78,43 @@ const ComputerFirst = ({players,oppositionplayers}) => {
   const check=(i)=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
   let value=Math.floor(Math.random()*6)+1;
+ if (timeoutRef.current) 
+ clearTimeout(timeoutRef.current);
+  if(turn==="Player"){
+    if((i==4 || i==6) && i!=value){
+    setShowButtons(false)
+    setEvent(i);
+    timeoutRef.current = setTimeout(() => {
+      setShowButtons(true);
+    }, 1000);
+    }
+  if(i!=0 && i===value){
+    setShowButtons(false)
+    setEvent(0)
+    timeoutRef.current = setTimeout(() => {
+      setShowButtons(true);
+    }, 1000);
+    }
+  }
+    if(turn==="Computer"){
+    if((value==4 || value==6) && i!=value){
+    setShowButtons(false)
+    setEvent(value);
+    timeoutRef.current = setTimeout(() => {
+      setShowButtons(true);
+    }, 1000);
+    }
+  if(i!=0 && i===value){
+    setShowButtons(false)
+    setEvent(0)
+    timeoutRef.current = setTimeout(() => {
+      setShowButtons(true);
+    }, 1000);
+    }
+  }
+  and(i,value)
+  }
+  const and=(i,value)=>{
    if(turn=="Player"){
      if(number==19 && overs%6==5){
        if(runs+i>=target && value!=i){
@@ -759,9 +800,41 @@ const baroptions = {
     }
   }
 };
-  
   return (
 <>
+          {showButtons==false && (
+        <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white pointer-events-none">
+          {/* Fireworks Effect */}
+          <motion.div
+            className="absolute w-full h-full bg-black opacity-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          />
+
+          {/* Celebration Text */}
+          <motion.div
+            className="text-5xl font-bold text-yellow-400 glow-effect"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            {event === 4 && "Fantastic Four!"}
+            {event === 6 && "Super Six!"}
+            {event === 0 && "Wicket Down!"}
+          </motion.div>
+
+          {/* Glowing Effect */}
+          <motion.div
+            className="w-32 h-32 rounded-full bg-yellow-500 opacity-50 absolute"
+            initial={{ scale: 0 }}
+            animate={{ scale: 3, opacity: 0 }}
+            transition={{ duration: 1.5, repeat: 2 }}
+          />
+        </div>
+      )}
+  { showButtons===true && <>
   {winner=='' &&
   <>
   {show===true && <>
@@ -830,7 +903,7 @@ const baroptions = {
       <p className="text-slate-400 text-2xl font-bold shadow-slate-400">Target-: {target}</p>
     </div>
   </>}
-            <div className="w-full flex my-8 flex-row justify-center gap-x-16 gap-y-4 flex-wrap">
+          <div className="w-full flex my-8 flex-row justify-center gap-x-16 gap-y-4 flex-wrap">
   {turn==="Player" &&  <>
     <div className="flex flex-col gap-y-4 justify-center text-center">
     <h1 className="text-slate-400 text-xs font-bold">Current Batsman</h1>
@@ -866,16 +939,12 @@ const baroptions = {
   </>
   }
   </div>
+  
+  
   </>
     
   }
-  </>}
-  {
-    winner!='' && <Winner winner={winner} yourteam={yourteam} opposteam={opposteam} />
-      
-      
-  }
-            <div className="my-4 text-center text-xs" style={{ width: "100%", height: "500px" }} >
+              <div className="my-4 text-center text-xs" style={{ width: "100%", height: "500px" }} >
      <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Scattering Analysis</h2>
       <Line data={histdata} options={options} />
     </div>
@@ -883,6 +952,22 @@ const baroptions = {
     <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bar-Graph Analysis</h2>
       <Bar data={bardata} options={baroptions} />
     </div>
+  </>}
+  {
+    winner!='' && <>
+      <Winner winner={winner} yourteam={yourteam} opposteam={opposteam} />
+                <div className="my-4 text-center text-xs" style={{ width: "100%", height: "500px" }} >
+     <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Scattering Analysis</h2>
+      <Line data={histdata} options={options} />
+    </div>
+        <div className="my-16 text-center text-xs" style={{ width: "100%", height: "500px" }}>
+    <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bar-Graph Analysis</h2>
+      <Bar data={bardata} options={baroptions} />
+    </div>
+    </>
+  }
+    </>
+  }
 </>
   );
 };

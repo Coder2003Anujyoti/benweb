@@ -340,7 +340,7 @@ const barChartData = {
   }
   { win.length<9 && <>
  <div className="w-full text-center my-2">
-  <h3 className="font-bold text-sm text-red-400 ml-2 mr-2">*Need to win more than 6 matches to reach knockouts.</h3>
+  <h3 className="font-bold text-sm text-red-400 ml-2 mr-2">*Need to win 7 matches to reach knockouts.</h3>
 </div>
 </>}
   { ((win.length===9 && winners.length>=7) || 

@@ -233,13 +233,6 @@ const histogramWickets = {
 },[])
   return (
     <>
-   {
-  load==true && <>
-      <div className="flex justify-center items-center py-60">
-  <h1 className="text-slate-400 text-xl font-bold">Loading...</h1>
-</div>
-  </>
-}
 { load==false && <>
     {winner!=='Draw' && 
   <>

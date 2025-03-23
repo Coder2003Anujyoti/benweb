@@ -8,20 +8,20 @@ const Fire = ({ show }) => {
   useEffect(() => {
     if (show && containerRef.current) {
       const fw = new Fireworks(containerRef.current, {
-        speed: 3,
+        speed: 5,
         intensity: 6,
         friction: 0.96,
-        gravity: 1.5,
+        gravity: 2.5,
         particles: 200, // More particles for a richer effect
-        traceLength: 8,
-        explosion: 8,
+        traceLength: 4,
+        explosion: 15,
         colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff", "#ff8800"], // Added more vibrant colors
       });
       fw.start();
       setFireworks(fw);
 
       // Stop fireworks after 5 seconds
-    setTimeout(() => fw.stop(),20000);
+    //setTimeout(() => fw.stop(),20000);
     }
   }, [show]);
 

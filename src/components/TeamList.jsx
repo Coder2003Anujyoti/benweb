@@ -83,8 +83,8 @@ This version focuses purely on the display of player names, ideal for an app whe
   <div className="flex w-full justify-center gap-x-6 flex-row flex-wrap">
    <HashLink to='/auction'>
    <div className="text-center rounded-lg  bg-slate-800 p-4 flex w-36 h-36 flex flex-col justify-center text-center gap-y-2 ">
-   <div className="w-full p-2 flex justify-center"><img src="Icons/auction.png" className="w-16 h-16"></img></div>
-    <h4 className="text-lg text-slate-400 font-bold">Auction</h4>
+   <div className="w-full p-2 flex justify-center"><img src="Icons/V.png" className="w-16 h-16"></img></div>
+    <h4 className="text-lg text-slate-400 font-bold">One Vs One</h4>
     </div>
     </HashLink>
        <HashLink to='/bid'>

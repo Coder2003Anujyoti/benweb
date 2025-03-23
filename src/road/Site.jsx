@@ -1,6 +1,10 @@
 import React,{useState,useEffect} from "react";
 import {HashLink} from 'react-router-hash-link'
 import Fire from './Fire';
+import Confetti from "react-confetti";
+import { motion } from "framer-motion";
+import teamLogos from "./teamLogos"; 
+import useWindowSize from "./useWindowSize";
 import {Link} from 'react-router-dom';
 import { Bar, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, ArcElement } from "chart.js";
@@ -31,6 +35,8 @@ const Site = ({playerteam,store,localremove}) => {
   const [match,setMatch]=useState(()=>LocalData()||[])
   const [bar,setBar]=useState({});
   const [pie,setPie]=useState({});
+  const { width, height } = useWindowSize();
+  const [showCelebration, setShowCelebration] = useState(null);
   const winners=win.filter((i)=>i.win===playerteam);
   const losers=win.filter((i)=>i.win!==playerteam);
   const totalwinners=match.filter((i)=>i.win===playerteam);
@@ -150,8 +156,107 @@ const barChartData = {
       },
     ],
   };
+  useEffect(() => {
+    if  ( ( win.length===9 && winners.length<=6) || (win.length===10 && win[win.length-1].win!==playerteam) || (win.length===11 && win[win.length-1].win!==playerteam)) {
+    setShowCelebration(false)
+    }
+    else{
+      setTimeout(() => setShowCelebration(true), 100);
+    }
+  }, [win]);
   return (
    <>
+       {showCelebration===true && win.length<=10 && <>
+    <div className="flex py-6 flex-col items-center justify-center text-white text-center">
+      {/* Fireworks */}
+      {showCelebration && <Confetti width={width} height={height} />}
+      {/* Trophy Animation */}
+      <motion.img
+        src="Icons/trophy.png"
+        alt="Trophy"
+        className="w-40 h-40 md:w-60 md:h-60"
+        initial={{ scale: 0, rotate: -180 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ duration: 2, type: "spring", stiffness: 100 }}
+      />
+
+      {/* Title */}
+      <motion.h1
+        className="text-lg md:text-xl font-bold mt-4 text-yellow-400"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        Welcome to the Ultimate Cricket League!
+      </motion.h1>
+      {/* Team Logos */}
+      <div className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-1 my-6">
+        {teamLogos.map((logo, index) => (
+          <motion.img
+            key={index}
+            src={logo}
+            alt={`Team ${index + 1}`}
+            className="w-16 h-16 md:w-24 md:h-24"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1, delay: index * 0.2 }}
+          />
+        ))}
+       <div className="w-full flex-col items-center flex-wrap flex  justify-center my-12"> <button onClick={()=>setShowCelebration(false)} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Start Playing</button></div>
+      </div>
+    </div>
+    <Fire show={true} />
+  </>}
+  {
+    showCelebration===true && win.length===11 && win[win.length-1].win===playerteam &&  <>
+         <div className="flex py-8 flex-col items-center justify-center  text-white text-center">
+      {/* Fireworks */}
+      {showCelebration && <Confetti width={width} height={height} />}
+      
+      {/* Trophy Animation */}
+      <motion.img
+        src="Icons/trophy.png"
+        alt="Trophy"
+        className="w-40 h-40 md:w-60 md:h-60"
+        initial={{ scale: 0, rotate: -180 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ duration: 2, type: "spring", stiffness: 100 }}
+      />
+
+      {/* Title */}
+      <motion.h1
+        className="text-lg md:text-xl font-bold mt-4 text-yellow-400"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        Congratulations to the Champions!
+      </motion.h1>
+
+      {/* Champion Team Logo */}
+      <motion.img
+        src={`Logos/${playerteam}.webp`}
+        alt="Champion Team"
+        className="w-32 h-32 md:w-40 md:h-40 mt-6"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+      />
+      {/* Champion Text */}
+      <motion.p
+        className="text-lg md:text-xl font-semibold mt-4 text-green-400"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
+      >
+        The Ultimate Cricket League Winners!
+      </motion.p>
+    <div className="w-full flex-col items-center flex-wrap flex my-12 justify-center"> <button onClick={()=>setShowCelebration(false)} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Start Playing</button></div>
+      <Fire show={true} />
+    </div>
+    </>
+  }
+  {showCelebration===false && <>
      <div className="w-full bg-slate-800 p-1 flex ">
   <img className="w-28 h-16" src="Logos/Logo.webp"/>
 </div>
@@ -320,6 +425,8 @@ const barChartData = {
       © 2025 Coder2003Anujyoti All rights reserved.
     </div>
 </footer>
+</>
+}
    </>
   );
 };

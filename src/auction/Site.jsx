@@ -1,5 +1,9 @@
 import React,{useState,useEffect} from "react";
 import Fire from './Fire';
+import Confetti from "react-confetti";
+import { motion } from "framer-motion";
+import teamLogos from "./teamLogos"; 
+import useWindowSize from "./useWindowSize";
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link'
 import { Bar, Pie } from "react-chartjs-2";
@@ -25,11 +29,14 @@ const LocalMatch=()=>{
 }
 }
 const Site = ({player,computer,playerteam,computerteam,remove}) => {
+  
   const [team,setTeam]=useState(playerteam);
   const [win,setWin]=useState(()=>LocalWinner()||[])
   const [matches,setMatches]=useState(()=>LocalMatch()||0)
   const [sno,setSno]=useState(0)
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+  const { width, height } = useWindowSize();
+  const [showCelebration, setShowCelebration] = useState(null);
   const jeet=win.filter((i)=>i.win===playerteam)
   const lose=win.filter((i)=>i.win===computerteam)
   const haar=win.filter((i)=>i.win!==playerteam)
@@ -197,8 +204,107 @@ const barChartData = {
       JSON.stringify(i));
       setMatches(i);
   }
+  useEffect(() => {
+    if(win.length<matches || win.length===0|| (win.length===matches && win.length!=0 && jeet.length>lose.length)){
+    setTimeout(() => setShowCelebration(true), 100);
+    }
+    else{
+      setShowCelebration(false)
+    }
+  }, [win]);
   return (
    <>
+  {showCelebration===true && (win.length<matches || win.length===0) && <>
+    <div className="flex py-6 flex-col items-center justify-center text-white text-center">
+      {/* Fireworks */}
+      {showCelebration && <Confetti width={width} height={height} />}
+      {/* Trophy Animation */}
+      <motion.img
+        src="Icons/trophy.png"
+        alt="Trophy"
+        className="w-40 h-40 md:w-60 md:h-60"
+        initial={{ scale: 0, rotate: -180 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ duration: 2, type: "spring", stiffness: 100 }}
+      />
+
+      {/* Title */}
+      <motion.h1
+        className="text-lg md:text-xl font-bold mt-4 text-yellow-400"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        Welcome to the Ultimate Cricket League!
+      </motion.h1>
+      {/* Team Logos */}
+      <div className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-1 my-6">
+        {teamLogos.map((logo, index) => (
+          <motion.img
+            key={index}
+            src={logo}
+            alt={`Team ${index + 1}`}
+            className="w-16 h-16 md:w-24 md:h-24"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1, delay: index * 0.2 }}
+          />
+        ))}
+       <div className="w-full flex-col items-center flex-wrap flex  justify-center my-12"> <button onClick={()=>setShowCelebration(false)} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Start Playing</button></div>
+      </div>
+    </div>
+    <Fire show={true} />
+  </>}
+  {
+    showCelebration===true && win.length===matches && win.length!=0 && jeet.length>lose.length &&  <>
+         <div className="flex py-8 flex-col items-center justify-center  text-white text-center">
+      {/* Fireworks */}
+      {showCelebration && <Confetti width={width} height={height} />}
+      
+      {/* Trophy Animation */}
+      <motion.img
+        src="Icons/trophy.png"
+        alt="Trophy"
+        className="w-40 h-40 md:w-60 md:h-60"
+        initial={{ scale: 0, rotate: -180 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ duration: 2, type: "spring", stiffness: 100 }}
+      />
+
+      {/* Title */}
+      <motion.h1
+        className="text-lg md:text-xl font-bold mt-4 text-yellow-400"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        Congratulations to the Champions!
+      </motion.h1>
+
+      {/* Champion Team Logo */}
+      <motion.img
+        src={`Logos/${playerteam}.webp`}
+        alt="Champion Team"
+        className="w-32 h-32 md:w-40 md:h-40 mt-6"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+      />
+      {/* Champion Text */}
+      <motion.p
+        className="text-lg md:text-xl font-semibold mt-4 text-green-400"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
+      >
+        The Ultimate Cricket League Winners!
+      </motion.p>
+    <div className="w-full flex-col items-center flex-wrap flex my-12 justify-center"> <button onClick={()=>setShowCelebration(false)} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Start Playing</button></div>
+      <Fire show={true} />
+    </div>
+    </>
+  }
+  { showCelebration===false && <>
      <div className="w-full bg-slate-800 p-2 flex ">
   <img className="w-16 h-16" src="Icons/auction.png"/>
 </div>
@@ -381,7 +487,7 @@ const barChartData = {
     </div>
     </>}
     <div className="w-full py-2 my-8 flex-col flex justify-center items-center text-center">
-    <div className="w-full py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={remove} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">New Team</button></div>
+    <div className="w-full py-4 flex-col items-center flex-wrap flex  justify-center"><button onClick={remove} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">New Tournament</button></div>
   </div>
       <footer className="bg-black text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
@@ -419,7 +525,9 @@ const barChartData = {
       © 2025 Coder2003Anujyoti All rights reserved.
     </div>
 </footer>
-   </>
+</>
+}
+</>
   );
 };
 

@@ -167,7 +167,7 @@ const barChartData = {
   return (
    <>
        {showCelebration===true && win.length<=10 && <>
-    <div className="flex py-2  flex-col items-center justify-center text-white text-center overflow-hidden">
+    <div className="flex py-2 my-4 flex-col items-center justify-center text-white text-center overflow-hidden">
       {/* Fireworks */}
       {showCelebration && <Confetti width={width} height={height} />}
       {/* Trophy Animation */}
@@ -209,7 +209,7 @@ const barChartData = {
   </>}
   {
     showCelebration===true && win.length===11 && win[win.length-1].win===playerteam &&  <>
-         <div className="flex py-2 flex-col items-center justify-center  text-white overflow-hidden text-center">
+         <div className="flex py-2 my-4 flex-col items-center justify-center  text-white overflow-hidden text-center">
       {/* Fireworks */}
       {showCelebration && <Confetti width={width} height={height} />}
       

@@ -406,45 +406,17 @@ const barChartData = {
     </div>
   {win.length>0 && <>
      <div className="flex flex-row flex-wrap gap-x-12 gap-y-6 p-2 justify-center w-full ">
-  <div  className="flex justify-start items-center">
-      <img onClick={()=>sno>0?setSno(sno-1):setSno(sno)} src="Icons/before.png" className="w-12 h-12"/>
-    </div>
     <div className="flex flex-col  gap-y-4 justify-center text-center">
-  {sno==0 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Top Batter</h1> 
+  <h1 className="text-sm font-extrabold text-yellow-400 ">Top Batter</h1> 
      <div className="w-full flex justify-center"><img className="w-36 h-36" src={batters[0].image} loading="lazy" /></div>
-   <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${batters[0].team}.webp`} loading="lazy" /></div>
-     <h1 className="text-sm font-extrabold text-yellow-400">{batters[0].name}</h1> 
-     </>}
-       {sno==1 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Top Bowler</h1> 
+     <h1 className="text-sm font-extrabold text-yellow-400">{batters[0].name}</h1>
+     </div>
+    <div className="flex flex-col  gap-y-4 justify-center text-center">
+        <h1 className="text-sm font-extrabold text-yellow-400 ">Top Bowler</h1> 
      <div className="w-full flex justify-center"><img className="w-36 h-36" src={bowlers[0].image} loading="lazy"/></div>
-     <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${bowlers[0].team}.webp`} loading="lazy" /></div>
-     <h1 className="text-sm font-extrabold text-yellow-400">{bowlers[0].name}</h1> 
-     </>}
-       {sno==2 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Top All-rounder</h1> 
-     <div className="w-full flex justify-center"><img className="w-36 h-36" src={allrounders[0].image} loading="lazy" /></div>
-    <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${allrounders[0].team}.webp`} loading="lazy" /></div>
-     <h1 className="text-sm font-extrabold text-yellow-400">{allrounders[0].name}</h1> 
-     </>}
-    {sno==3 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Top Striker</h1> 
-     <div className="w-full flex justify-center"><img className="w-36 h-36" src={topstriker[0].image} loading="lazy"/></div>
-    <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${topstriker[0].team}.webp`} loading="lazy" /></div>
-     <h1 className="text-sm font-extrabold text-yellow-400">{topstriker[0].name}</h1> 
-     </>}
-     {sno==4 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Best Economy</h1> 
-     <div className="w-full flex justify-center"><img className="w-36 h-36" src={economy[0].image} loading="lazy" /></div>
-      <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${economy[0].team}.webp`} loading="lazy" /></div>
-     <h1 className="text-sm font-extrabold text-yellow-400">{economy[0].name}</h1> 
-     </>}
-            {sno==5 && <>  <h1 className="text-sm font-extrabold text-yellow-400 ">Emerging Star</h1> 
-     <div className="w-full flex justify-center"><img className="w-36 h-36" src={emerging[0].image} loading="lazy" /></div>
-          <div className="w-full flex justify-center"><img className="w-14 h-14" src={`Logos/${emerging[0].team}.webp`} loading="lazy" /></div>
-     <h1 className="text-sm font-extrabold text-yellow-400">{emerging[0].name}</h1> 
-     </>}
-    </div>
-        <div className="flex justify-center items-center">
-      <img src="Icons/next.png" onClick={()=>sno<5?setSno(sno+1):setSno(sno)} className="w-12 h-12"/>
-    </div>
-        </div>
+     <h1 className="text-sm font-extrabold text-yellow-400">{bowlers[0].name}</h1>
+     </div>
+     </div>
       </>}
           <div className="flex p-4 flex-row justify-center border-t border-slate-600 gap-4">
        <img src={`Logos/${playerteam}.webp`} className="w-28 h-28" />

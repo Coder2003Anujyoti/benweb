@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Winner from "./Winner.jsx"
 import { Line,Bar } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, PointElement, BarElement, LineElement, Title, Tooltip, Legend } from "chart.js";
@@ -33,6 +33,8 @@ const PlayerFirst = ({players,oppositionplayers}) => {
   const [wickets,setWickets]=useState(0);
   const [event, setEvent] = useState(null);
   const [showButtons, setShowButtons] = useState(true);
+  const [playerover,setPlayerover]=useState([])
+  const [computerover,setComputerover]=useState([])
   const timeoutRef = useRef(null); 
   const buttons=[1,2,3,4,5,6];
   useEffect(()=>{
@@ -81,8 +83,12 @@ const PlayerFirst = ({players,oppositionplayers}) => {
  if (timeoutRef.current) 
  clearTimeout(timeoutRef.current);
   if(turn==="Player"){
+  if(i!=value && i!=4 && i!=6){
+    setPlayerover([...playerover,i])
+  }
     if((i==4 || i==6) && i!=value){
     setShowButtons(false)
+    setPlayerover([...playerover,i])
     setEvent(i);
     timeoutRef.current = setTimeout(() => {
       setShowButtons(true);
@@ -90,6 +96,7 @@ const PlayerFirst = ({players,oppositionplayers}) => {
     }
   if(i!=0 && i===value){
     setShowButtons(false)
+    setPlayerover([...playerover,"W"])
     setEvent(0)
     timeoutRef.current = setTimeout(() => {
       setShowButtons(true);
@@ -97,8 +104,12 @@ const PlayerFirst = ({players,oppositionplayers}) => {
     }
   }
     if(turn==="Computer"){
+      if(i!=value && value!=4 && value!=6){
+    setComputerover([...computerover,value])
+  }
     if((value==4 || value==6) && i!=value){
     setShowButtons(false)
+    setComputerover([...computerover,value])
     setEvent(value);
     timeoutRef.current = setTimeout(() => {
       setShowButtons(true);
@@ -106,6 +117,7 @@ const PlayerFirst = ({players,oppositionplayers}) => {
     }
   if(i!=0 && i===value){
     setShowButtons(false)
+    setComputerover([...computerover,"W"])
     setEvent(0)
     timeoutRef.current = setTimeout(() => {
       setShowButtons(true);
@@ -799,6 +811,18 @@ const baroptions = {
     }
   }
 };
+useEffect(()=>{
+  if(playerover.length>6 && turn=="Player"){
+   const um=playerover.filter((i,ind)=>ind!=0);
+   setPlayerover(um)
+  }
+},[playerover])
+useEffect(()=>{
+  if(computerover.length>6 && turn=="Computer"){
+   const um=computerover.filter((i,ind)=>ind!=0);
+   setComputerover(um)
+  }
+},[computerover])
   return (
 <>
         {showButtons==false && (
@@ -902,6 +926,44 @@ const baroptions = {
       <p className="text-slate-400 text-2xl font-bold shadow-slate-400">Target-: {target}</p>
     </div>
   </>}
+  {turn=="Player" && playerover.length>0 && <>
+ <div className="flex flex-col items-center mt-10">
+ <h2 className="text-xs  text-slate-400 font-bold mb-4">Last Six balls</h2>
+ <div className=" gap-x-1 text-white rounded-lg  flex items-center px-2">
+ <AnimatePresence>
+ {playerover.map((ball, index) => 
+  {
+if(index<6)
+return (<>
+<motion.div  key={index}  className={`w-12 h-12 flex items-center justify-center rounded-full text-lg font-bold ${  ball === "W" ? "bg-red-500" : (ball === 4 || ball===6) ? "bg-green-500" : "bg-blue-500"  }`}
+   initial={{ opacity: 0, scale: 0.5, y: -20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0, y: 20 }} transition={{ duration: 0.4 }}>
+{ball}
+</motion.div>
+</>)})}
+</AnimatePresence>
+</div>
+</div>
+  </>
+  }
+    {turn=="Computer" && computerover.length>0 && <>
+ <div className="flex flex-col items-center mt-10">
+ <h2 className="text-xs text-slate-400 font-bold mb-4">Last Six balls</h2>
+ <div className=" gap-x-1 text-white rounded-lg  flex items-center px-2">
+ <AnimatePresence>
+ {computerover.map((ball, index) => 
+  {
+ if(index<6)
+return (<>
+<motion.div  key={index}  className={`w-12 h-12 flex items-center justify-center rounded-full text-lg font-bold ${  ball === "W" ? "bg-red-500" : (ball == 4||ball==6) ? "bg-green-500" : "bg-blue-500"  }`}
+   initial={{ opacity: 0, scale: 0.5, y: -20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0, y: 20 }} transition={{ duration: 0.4 }}>
+{ball}
+</motion.div>
+</>)})}
+</AnimatePresence>
+</div>
+</div>
+  </>
+  }
         <div className="w-full flex my-8 flex-row justify-center gap-x-16 gap-y-4 flex-wrap">
   {turn==="Player" &&  <>
     <div className="flex flex-col gap-y-4 justify-center text-center">

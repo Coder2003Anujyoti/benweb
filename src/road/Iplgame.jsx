@@ -9,7 +9,7 @@ const LocalData=()=>{
     return JSON.parse(lists);
   }
   else{
-    return ["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+    return [];
 }
 }
 const LocalWin=()=>{
@@ -30,9 +30,19 @@ const LocalMatch=()=>{
     return [];
 }
 }
+const LocalStand=()=>{
+  const lists=localStorage.getItem('iplstandings');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
 const Iplgame = () => {
   const [searchParams] = useSearchParams();
   const [oppositionteam,setOppositionteam]=useState("")
+  const [standing,setStanding]=useState(()=>LocalStand()||[])
   const [toggle,setToggle]=useState("");
   const [win,setWin]=useState(()=>LocalWin()||[])
   const [matches,setMatches]=useState(()=>LocalMatch()||[])
@@ -45,7 +55,7 @@ const Iplgame = () => {
   const [playerfirst,setPlayerfirst]=useState(false);
   const [computerfirst,setComputerfirst]=useState(false);
   const teamId = searchParams.get("team"); 
-  const [teams,setTeams]=useState(()=>LocalData()||["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"])
+  const [teams,setTeams]=useState(()=>LocalData()||[])
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];
@@ -53,6 +63,7 @@ const Iplgame = () => {
   const playerteam=data.filter((i)=>i.team===team);
   const computerteam=data.filter((i)=>i.team===oppositionteam)
   const add_Players=(i)=>{
+      window.scrollTo({ top: 0, behavior: "smooth" });
     setPlayers([...players,i]);
     setId([...id,i.name]);
   }
@@ -77,9 +88,20 @@ const Iplgame = () => {
   useEffect(()=>{
     if(win.length===9){
       if(matches.length===9){
-      const mainteam=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
-      const knock=mainteam.filter((i)=>i!=team);
-      setOppositionteam(knock[Math.floor(Math.random()*knock.length)]);
+      const knockteam=standing.slice().sort((a,b)=>b.win-a.win).filter((i,ind)=>ind<4);
+      const pos_team=knockteam.findIndex((i)=>i.name===team);
+      if(pos_team==0){
+        setOppositionteam(knockteam[3].name)
+      }
+   if(pos_team==1){
+        setOppositionteam(knockteam[2].name)
+      }
+      if(pos_team==2){
+        setOppositionteam(knockteam[1].name)
+      }
+      if(pos_team==3){
+        setOppositionteam(knockteam[0].name)
+      }
       }
       if(matches.length>9){
               setOppositionteam(matches[matches.length-1].computer)
@@ -87,35 +109,58 @@ const Iplgame = () => {
     }
         if(win.length===10){
           if(matches[matches.length-1].win!=="Draw"){
-      const mainteam=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
-      const knock=mainteam.filter((i)=>i!=team && i!=win[win.length-1].computer);
-      setOppositionteam(knock[Math.floor(Math.random()*knock.length)]);
+      const knockteam=standing.slice().sort((a,b)=>b.win-a.win).filter((i,ind)=>ind<4);
+      const pos_team=knockteam.findIndex((i)=>i.name===team);
+      if(pos_team==0){
+        setOppositionteam(knockteam[1].name)
+      }
+   if(pos_team==1){
+        setOppositionteam(knockteam[3].name)
+      }
+      if(pos_team==2){
+        setOppositionteam(knockteam[0].name)
+      }
+      if(pos_team==3){
+        setOppositionteam(knockteam[2].name)
+      }
           }
            if(matches[matches.length-1].win==="Draw"){
               setOppositionteam(matches[matches.length-1].computer)
       }
     }
   },[matches])
+  useEffect(()=>{
+    if(win.length>=0 && win.length<9){
+      setOppositionteam(teams[0])
+    }
+  },[win])
   return (
     <>
-      {oppositionteam==='' && win.length<=8 && 
-      <>
-<div className="w-full py-8 flex justify-center"><h1 className="text-green-400 text-2xl font-bold shadow-green-400">Select Opposition Team</h1></div>
-<div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center flex-row ">
-  {teams.map((i)=>{
-  if(i!=team)
-  return(
-  <div className="text-center rounded-lg  bg-slate-800" onClick={()=>setOppositionteam(i)}>
-    <img src={`Logos/${i}.webp`} className="w-24 h-24"></img>
-    <h4 className="text-lg text-slate-400 font-bold">{i.toUpperCase()}</h4>
-    </div>
-    )
-  })}
-</div>
-</>
-}
+
 { oppositionteam!='' && <>
 {load==false && id.length<10 && <>
+    { win.length===9 && <>
+        <div className="w-full flex flex-col justify-center text-center gap-y-6 my-2">
+          <h1 className="font-bold text-yellow-500 ml-2 mr-2">Semi-final</h1>
+        </div>
+</>}
+    { win.length===10 && <>
+        <div className="w-full flex flex-col justify-center text-center gap-y-6 my-2">
+          <h1 className="font-bold text-yellow-500 ml-2 mr-2">Final</h1>
+        </div>
+</>}
+    <div className="flex justify-center items-center text-white gap-x-10">
+        <div className="flex flex-col items-center">
+          <img src={`Logos/${team}.webp`} className="w-24 h-24" />
+           </div>
+        <div className="text-2xl  font-extrabold transition-all duration-1000 scale-110 animate-glow">
+          VS
+        </div>
+        <div className="flex flex-col items-center">
+          <img src={`Logos/${oppositionteam}.webp`} className="w-24 h-24" />
+
+        </div>
+    </div>
   <div className="w-full py-8 flex justify-center">
     <h1 className="text-green-400 text-2xl font-bold shadow-green-400">Choose Your Playing X</h1>
   </div>

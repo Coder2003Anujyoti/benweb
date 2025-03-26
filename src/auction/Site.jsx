@@ -205,16 +205,13 @@ const barChartData = {
       setMatches(i);
   }
   useEffect(() => {
-    if(win.length<matches || win.length===0|| (win.length===matches && win.length!=0 && jeet.length>lose.length)){
+    
     setTimeout(() => setShowCelebration(true), 100);
-    }
-    else{
-      setShowCelebration(false)
-    }
+  
   }, [win]);
   return (
    <>
-  {showCelebration===true && (win.length<matches || win.length===0) && <>
+  {showCelebration===true && (win.length<matches || win.length===0 || (win.length===matches && win.length!=0 && jeet.length<=lose.length) ) && <>
     <div className="flex py-2 my-4 overflow-hidden flex-col items-center justify-center text-white text-center">
       {/* Fireworks */}
       {showCelebration && <Confetti width={width} height={height} />}

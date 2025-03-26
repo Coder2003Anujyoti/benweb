@@ -15,6 +15,14 @@ const Matchfixtures = () => {
   <div className="w-full bg-slate-800 p-2 flex ">
   <img className="w-16 h-16" src="Icons/auction.png"/>
 </div>
+{
+  data.length===0 && <>
+        <div className="flex justify-center items-center py-60">
+  <h1 className="text-slate-400 text-xl font-bold">No Matches</h1>
+</div>
+</>
+}
+{data.length>0  && <>
 <div className="w-full flex flex-row py-6 justify-center gap-12">
    <div className="w-full flex  justify-center  gap-12" >
 
@@ -36,6 +44,8 @@ const Matchfixtures = () => {
       </>)
     })}
   </div>
+  </>
+  }
       <footer className="bg-black text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>

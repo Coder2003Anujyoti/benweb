@@ -38,6 +38,18 @@ const Playgame = () => {
   return (
     <>
       {id.length<10 && <>
+          <div className="flex justify-center items-center text-white gap-x-10">
+        <div className="flex flex-col items-center">
+          <img src={`Logos/${playerteam}.webp`} className="w-24 h-24" />
+           </div>
+        <div className="text-2xl  font-extrabold transition-all duration-1000 scale-110 animate-glow">
+          VS
+        </div>
+        <div className="flex flex-col items-center">
+          <img src={`Logos/${computerteam}.webp`} className="w-24 h-24" />
+
+        </div>
+    </div>
   <div className="w-full py-8 flex justify-center">
     <h1 className="text-green-400 text-2xl font-bold shadow-green-400">Choose Your Playing X</h1>
   </div>

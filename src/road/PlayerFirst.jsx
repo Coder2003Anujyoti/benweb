@@ -79,7 +79,7 @@ const PlayerFirst = ({players,oppositionplayers}) => {
   }
   const check=(i)=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
-  let value=Math.floor(Math.random()*6)+1;
+ let value=Math.floor(Math.random()*6)+1;
  if (timeoutRef.current) 
  clearTimeout(timeoutRef.current);
   if(turn==="Player"){

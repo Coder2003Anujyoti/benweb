@@ -18,8 +18,28 @@ const Localget=()=>{
     return "";
 }
 }
+const LocalFixtures=()=>{
+  const lists=localStorage.getItem('iplfixtures');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
+const LocalVersus=()=>{
+  const lists=localStorage.getItem('iploppos');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
 const Iplsite = () => {
   const [load,setLoad]=useState(true);
+  const [fixture,setFixture]=useState(()=>LocalFixtures()||[])
+  const [versus,setVersus]=useState(()=>LocalVersus()||[])
   const [value,setValue]=useState(()=>LocalData()||[]);
   const [playerteam,setPlayerteam]=useState(()=>Localget()||"");
   const teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
@@ -45,11 +65,56 @@ const Iplsite = () => {
 useEffect(()=>{
   get_data();
 },[])
-const sets=(i)=>{
-  setPlayerteam(i);
+const sets=(it)=>{
+const matches=generateMatches(teams).map((i)=>{
+  if(i.player===it || i.computer===it){
+    i.winner=""
+  }
+  return {...i}
+});
+const firstIndex=matches.findIndex((i)=>i.winner==="");
+const updatedValue=value.map((i)=>{
+  matches.map((item,ind)=>{
+    if(i.team!=it && (item.player===i.team || item.computer===i.team)){
+ i.matches+=1;
+ i.runs+=Math.floor(Math.random()*30);
+ i.wickets+=Math.floor(Math.random()*5);
+    }
+  })
+  return {...i}
+})
+const vs=matches.filter((i)=>i.winner==="").map((i)=>{
+  if(i.player===it){
+    return i.computer
+  }
+  if(i.computer===it){
+    return i.player;
+  }
+})
+  setFixture(matches)
+  setValue(updatedValue)
+  setVersus(vs)
+  setPlayerteam(it);
 }
+const generateMatches = (teams) => {
+  let matches = [];
+  for (let i = 0; i < teams.length; i++) {
+    for (let j = i + 1; j < teams.length; j++) {
+      matches.push({
+        player: teams[i],
+        computer: teams[j],
+        winner: Math.random() < 0.5 ? teams[i] : teams[j], 
+      });
+    }
+  }
+  matches = matches.sort(() => Math.random() - 0.5);
+  return matches;
+};
+
 const localremove=()=>{
+localStorage.removeItem('iplstandings');
    localStorage.removeItem('iplteams');
+   localStorage.removeItem('iplfixtures');
    localStorage.removeItem('iplplayerteam');
    localStorage.removeItem('iploppos');
    localStorage.removeItem('iplwinlist');
@@ -61,6 +126,10 @@ const localremove=()=>{
  }
 useEffect(()=>{
   if(playerteam!==''){
+  localStorage.setItem('iplfixtures', 
+      JSON.stringify(fixture));
+      localStorage.setItem('iploppos', 
+      JSON.stringify(versus));
     localStorage.setItem('iplteams', 
       JSON.stringify(value));
       localStorage.setItem('iplplayerteam',JSON.stringify(playerteam));
@@ -107,7 +176,7 @@ useEffect(()=>{
   }
     {
     load===false && playerteam!=='' && <>
-      <Site store={value} localremove={localremove} playerteam={playerteam} />
+      <Site store={value} localremove={localremove} playerteam={playerteam} fixture={fixture} />
       </>
     }
   </>

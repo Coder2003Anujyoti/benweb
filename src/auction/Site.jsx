@@ -311,7 +311,6 @@ const barChartData = {
      <h1 className="text-lg text-green-400 font-bold">Choose Number of Matches</h1>
      </div>
     <div className="w-full flex flex-row flex-wrap gap-6 justify-center ">
-      <button className="w-24 h-12 rounded-lg bg-indigo-400 p-2 text-white font-bold text-2xl" onClick={()=>update(1)}>1</button>
       <button className="w-24 h-12 rounded-lg bg-indigo-400 p-2 text-white font-bold text-2xl" onClick={()=>update(3)}>3</button>
       <button className="w-24 h-12 rounded-lg bg-indigo-400 p-2 text-white font-bold text-2xl" onClick={()=>update(5)}>5</button>
       <button className="w-24 h-12 rounded-lg bg-indigo-400 p-2 text-white font-bold text-2xl" onClick={()=>update(7)}>7</button>

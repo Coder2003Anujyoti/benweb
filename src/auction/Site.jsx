@@ -394,12 +394,14 @@ const barChartData = {
     <h4 className="text-lg text-slate-400 font-bold">Analysis</h4>
     </div>
     </HashLink>
-             <HashLink to={`/matchfixtures?data=${encodeURIComponent(JSON.stringify(win))}`}>
+  { matches>0 && <>
+ <HashLink to={`/matchfixtures?data=${encodeURIComponent(JSON.stringify(win))}&&player=${encodeURIComponent(JSON.stringify(playerteam))}&&computer=${encodeURIComponent(JSON.stringify(computerteam))}&&matchnumber=${encodeURIComponent(JSON.stringify(matches))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/tournament.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Fixtures</h4>
     </div>
     </HashLink>
+    </>}
     </div>
   {win.length>0 && <>
      <div className="flex flex-row flex-wrap gap-x-12 gap-y-6 p-2 justify-center w-full ">

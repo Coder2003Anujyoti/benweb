@@ -28,8 +28,19 @@ const LocalWin=()=>{
     return [];
 }
 }
-const Site = ({playerteam,store,localremove}) => {
+const LocalStand=()=>{
+  const lists=localStorage.getItem('standings');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
+const Site = ({playerteam,store,localremove,fixture}) => {
   const [stores,setStores]=useState(store);
+  const [fixtures,setFixtures]=useState(fixture)
+  const [standings,setStandings]=useState(()=>LocalStand()||[])
   const [win,setWin]=useState(()=>LocalWin()||[])
   const [sno,setSno]=useState(0)
   const [match,setMatch]=useState(()=>LocalData()||[])
@@ -47,15 +58,6 @@ const Site = ({playerteam,store,localremove}) => {
   const potm=motms.sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets));
   const batters=store.flatMap((i)=>i.players).slice().sort((a,b)=>b.runs-a.runs)
   const bowlers=store.flatMap((i)=>i.players).slice().sort((a,b)=>b.wickets-a.wickets)
-  const allrounders=store.flatMap((i)=>i.players).slice().sort((a,b)=>(b.runs*b.wickets)-(a.wickets*a.runs))
-  const topstriker=store.flatMap((i)=>i.players).filter((i)=>i.matches>0 && i.runs>0).slice().sort((a,b)=>Math.round(b.runs/b.matches)-Math.round(a.runs/a.matches));
-  const economy=store.flatMap((i)=>i.players).filter((i)=>i.matches>0 && i.wickets>0).slice().sort((a,b)=>Math.round(b.wickets/b.matches)-Math.round(a.wickets/a.matches));
-   const emerging=store.flatMap((i)=>i.players).filter((i)=>i.matches>0 && i.runs>0 && i.wickets>0).slice().sort((a, b) => {
-  if (a.matches !== b.matches) {
-    return a.matches - b.matches; 
-  }
-  return (b.runs + b.wickets) - (a.runs + a.wickets); 
-});
   const sellers=store.flatMap((i)=>i.players).slice().sort((a,b)=>(b.bid)-(a.bid)).filter((i,ind)=>ind<5)
 const selldata = {
     labels: sellers.map(() => ""), // Hide y-axis text
@@ -201,16 +203,74 @@ const barChartData = {
     ],
   };
   useEffect(() => {
-    if  ( ( win.length===9 && winners.length<=6) || (win.length===10 && win[win.length-1].win!==playerteam) || (win.length===11 && win[win.length-1].win!==playerteam)) {
-    setShowCelebration(false)
-    }
-    else{
       setTimeout(() => setShowCelebration(true), 100);
-    }
   }, [win]);
+  useEffect(()=>{
+ if(win.length===0){
+   const lastindex=fixtures.findIndex((i)=>i.winner==="");
+   let stand=[]
+   const m=teams.map((i)=>{
+    const matches= fixtures.filter((it,indx)=> indx<lastindex && (it.player===i || it.computer===i) && i.winner!='').length
+    const wins=fixtures.filter((it,indx)=> indx<lastindex && it.winner===i).length
+    const draw=fixtures.filter((it,indx)=> indx<lastindex &&  (it.player===i || it.computer===i) && it.winner==="Draw").length
+ stand.push({name:i,matches:matches,win:wins,lose:matches-(wins+draw),draw:draw})
+   return stand
+   })
+   localStorage.setItem('standings', 
+      JSON.stringify(stand));
+      setStandings(stand)
+   
+ }
+    if(win.length>0 && win.length<9){
+      const k=fixtures.map((i)=>{
+        if(i.winner=="" && ((i.player===win[win.length-1].player && i.computer===win[win.length-1].computer)||(i.computer===win[win.length-1].player && i.player===win[win.length-1].computer))){
+          i.winner=win[win.length-1].win;
+        }
+        return {...i}
+      })
+
+ const lastindex=k.findIndex((i)=>i.winner==="");
+   let stand=[]
+   const m=teams.map((i)=>{
+    const matches= k.filter((it,indx)=> indx<lastindex && (it.player===i || it.computer===i) && i.winner!='').length
+    const wins=fixtures.filter((it,indx)=> indx<lastindex && it.winner===i).length
+    const draw=fixtures.filter((it,indx)=> indx<lastindex &&  (it.player===i || it.computer===i) && it.winner==="Draw").length
+ stand.push({name:i,matches:matches,win:wins,lose:matches-(wins+draw),draw:draw})
+   return stand
+   })
+   localStorage.setItem('standings', 
+      JSON.stringify(stand));
+      localStorage.setItem('fixtures', 
+      JSON.stringify(k));
+      setStandings(stand)
+      setFixtures(k)
+    }
+    if(win.length==9){
+      const k=fixtures.map((i)=>{
+        if(i.winner=="" && ((i.player===win[win.length-1].player && i.computer===win[win.length-1].computer)||(i.computer===win[win.length-1].player && i.player===win[win.length-1].computer))){
+          i.winner=win[win.length-1].win;
+        }
+        return {...i}
+      })
+   let stand=[]
+   const m=teams.map((i)=>{
+    const matches= k.filter((it,indx)=> (it.player===i || it.computer===i) && i.winner!='').length
+    const wins=fixtures.filter((it,indx)=>  it.winner===i).length
+    const draw=fixtures.filter((it,indx)=>  (it.player===i || it.computer===i) &&  it.winner==="Draw").length
+ stand.push({name:i,matches:matches,win:wins,lose:matches-(wins+draw),draw:draw})
+   return stand
+   })
+   localStorage.setItem('standings', 
+      JSON.stringify(stand));
+      localStorage.setItem('fixtures', 
+      JSON.stringify(k));
+      setStandings(stand)
+      setFixtures(k)
+    }
+  },[win])
   return (
    <>
-            {showCelebration===true && win.length<=10 && <>
+   {showCelebration===true && (win.length<=10 || (win.length===11 && win[win.length-1].win!==playerteam)) && <>
     <div className="flex py-2 my-4 overflow-hidden flex-col items-center justify-center text-white text-center">
       {/* Fireworks */}
       {showCelebration && <Confetti width={width} height={height} />}
@@ -322,7 +382,7 @@ const barChartData = {
       </>
       }
       {
-  ( ( win.length===9 && winners.length<=6) || (win.length===10 && win[win.length-1].win!==playerteam) || (win.length===11 && win[win.length-1].win!==playerteam)) && <>
+  ( ( win.length===9 && !standings.slice().sort((a,b)=>b.win-a.win).filter((i,ind)=>ind<4).map((i)=>i.name).includes(playerteam)) || (win.length===10 && win[win.length-1].win!==playerteam) || (win.length===11 && win[win.length-1].win!==playerteam)) && <>
      <div className="flex flex-row flex-wrap gap-x-12 gap-y-6 justify-center w-full ">
         <div className=" flex flex-col justify-center text-center gap-y-6">
          <div className="w-full flex justify-center mt-14"><img className="w-32 h-32" src="Icons/loser.png" /></div>
@@ -340,17 +400,17 @@ const barChartData = {
   }
   { win.length<9 && <>
  <div className="w-full text-center my-2">
-  <h3 className="font-bold text-sm text-red-400 ml-2 mr-2">*Need to win 7 matches to reach knockouts.</h3>
+  <h3 className="font-bold text-sm text-red-400 ml-2 mr-2">*Need to become top 4 to reach knockouts.</h3>
 </div>
 </>}
-  { ((win.length===9 && winners.length>=7) || 
+  { ((win.length===9 && standings.slice().sort((a,b)=>b.win-a.win).filter((i,ind)=>ind<4).map((i)=>i.name).includes(playerteam)) || 
  (win.length===10 && win[win.length-1].win===playerteam)) && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 py-6">
           <h1 className="font-bold text-sm ml-2 mr-2 text-yellow-500">Welcome to Knockouts</h1>
         </div>
 </>}
      <div className="w-full my-16 flex flex-wrap gap-x-12 gap-y-12 items-center justify-center flex-row">
-  {(win.length<9 || (win.length===9 && winners.length>=7) || (win.length===10 && win[win.length-1].win===playerteam))  && <>
+  {(win.length<9 || (win.length===9 && standings.slice().sort((a,b)=>b.win-a.win).filter((i,ind)=>ind<4).map((i)=>i.name).includes(playerteam)) || (win.length===10 && win[win.length-1].win===playerteam))  && <>
      <HashLink to={`/game?data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/crickets.png" className="w-24 h-24"></img>
@@ -358,13 +418,13 @@ const barChartData = {
     </div>
     </HashLink>
     </>}
-         <HashLink to={`/team?matchesarray=${encodeURIComponent(JSON.stringify(match))}&&data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
+         <HashLink to={`/team?matchesarray=${encodeURIComponent(JSON.stringify(fixtures))}&&data=${encodeURIComponent(JSON.stringify(stores))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/team.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Teams</h4>
     </div>
     </HashLink>
-         <HashLink to={`/fixtures?data=${encodeURIComponent(JSON.stringify(match))}`}>
+         <HashLink to={`/fixtures?data=${encodeURIComponent(JSON.stringify(fixtures))}&&team=${encodeURIComponent(JSON.stringify(playerteam))}`}>
      <div className="text-center p-4 rounded-lg  bg-slate-800">
     <img src="Icons/tournament.png" className="w-24 h-24"></img>
     <h4 className="text-lg text-slate-400 font-bold">Fixtures</h4>
@@ -377,7 +437,40 @@ const barChartData = {
     </div>
     </HashLink>
     </div>
-      {match.length>0 && <>
+            <div className="max-w-2xl mx-auto p-4 bg-gray-900 text-white">
+      <h2 className="text-center text-2xl font-bold mb-4">UCL 2025 Points Table</h2>
+      
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="border-b border-gray-600 text-gray-400">
+            <th className="p-2 text-left">#</th>
+            <th className="p-2 text-left">Team</th>
+            <th className="p-2">M</th>
+            <th className="p-2">W</th>
+            <th className="p-2">L</th>
+            
+            <th className="p-2">Pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          {standings.slice().sort((a,b)=>b.win-a.win).map((team, index) => (
+            <tr key={team.id} className="border-b border-gray-700 text-center font-bold">
+              <td className="p-2">{index + 1}</td>
+              <td className="p-2 flex items-center font-bold">
+                <img src={`Logos/${team.name}.webp`} alt={team.name} className="w-6 h-6 mr-2" />
+                {team.name.toUpperCase()}
+              </td>
+              <td className="p-2">{team.matches}</td>
+              <td className="p-2">{team.win}</td>
+              <td className="p-2">{team.lose}</td>
+              
+        <td className="p-2">{2*(team.win) +1*(team.draw)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+      { win.length>=9 && (( win.length===9 && !standings.slice().sort((a,b)=>b.win-a.win).filter((i,ind)=>ind<4).map((i)=>i.name).includes(playerteam)) || (win.length===10 && win[win.length-1].win!==playerteam) || (win.length===11 && win[win.length-1].win!==playerteam) || (win[win.length-1].win===playerteam && win.length===11)) && <>
      <div className="flex flex-row flex-wrap gap-x-12 gap-y-6 p-2 justify-center w-full ">
     <div className="flex flex-col  gap-y-4 justify-center text-center">
     <h1 className="text-sm font-extrabold text-yellow-400 ">Top Batter</h1> 

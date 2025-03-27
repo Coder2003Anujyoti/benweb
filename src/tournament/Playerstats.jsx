@@ -14,8 +14,7 @@ const Playerstats = () => {
   const queryParams = new URLSearchParams(location.search);
   const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];
   const team=JSON.parse(decodeURIComponent(queryParams.get("team"))) || "";
-  const go=(it)=>{
-    const fil=data.filter((i)=>i.team===it);
+    const fil=data.filter((i)=>i.team===team);
     const filterruns=fil[0].players.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
     const filterwickets=fil[0].players.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
     const histogramRuns = {
@@ -42,10 +41,6 @@ const histogramWickets = {
     },
   ],
 };
-  setHistruns(histogramRuns);
-  setHistwickets(histogramWickets);
-    setValue(it);
-  }
 const histogramOptions = {
   responsive: true,
   scales: {
@@ -76,30 +71,14 @@ const histogramOptions = {
   <div className="w-full bg-slate-800 p-1 flex ">
   <img className="w-24 h-24" src="Icons/stadium.png"/>
 </div>
-<div className="w-full  flex flex-wrap gap-x-6 gap-y-4 items-center justify-center py-10 flex-row">
-  {teams.map((i)=>{
-  return(
-  <div className="text-center w-30 bg-slate-800 rounded-full" onClick={()=>go(i)}>
-    <div className="w-full p-2 flex justify-center">
-    <img src={`Logos/${i}.webp`} className="w-14 h-14"></img>
-    </div>
-    </div>
-    )
-  })}
-</div>
-{value!='' && <>
-  <div className="flex p-4 flex-col justify-center items-center text-center border-t border-slate-600 gap-4">
-    {value===team && <h1 className="text-lg text-green-400 font-bold">Your Team</h1>}
-   {value!==team && <h1 className="text-lg text-green-400 font-bold">Opposition Team</h1>} 
-       <img src={`Logos/${value}.webp`} className="w-24 h-24" />
-     </div>
-  <div className="w-full  flex justify-center">
+
+  <div className="w-full  my-6 flex justify-center">
     <h1 className="text-xl font-extrabold text-slate-400">Top Batters</h1>
   </div>
    <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
      {
        data.map((it)=>{
-       if(it.team===value)
+       if(it.team===team)
          return(<>
       {it.players.sort((a,b)=>b.runs-a.runs).map((i,ind)=>{
         if(ind<6)
@@ -118,7 +97,7 @@ const histogramOptions = {
      </div>
          <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
       <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Batting Analysis</h2>
-      <Bar data={histruns} options={histogramOptions} />
+      <Bar data={histogramRuns} options={histogramOptions} />
     </div>
       <div className="w-full  flex justify-center">
     <h1 className="text-xl font-extrabold text-slate-400">Top Bowlers</h1>
@@ -126,7 +105,7 @@ const histogramOptions = {
    <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
      {
        data.map((it)=>{
-       if(it.team===value)
+       if(it.team===team)
          return(<>
       {it.players.sort((a,b)=>b.wickets-a.wickets).map((i,ind)=>{
         if(ind<6)
@@ -145,10 +124,8 @@ const histogramOptions = {
      </div>
      <div className="bg-gray-900 p-6  w-full md:w-3/4 lg:w-1/2 mx-auto">
       <h2 className="text-slate-400 text-xs font-bold mb-4 text-center">Bowling Analysis</h2>
-      <Bar data={histwickets} options={histogramOptions} />
+      <Bar data={histogramWickets} options={histogramOptions} />
     </div>
-     </>
-}
     <footer className="bg-black text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>

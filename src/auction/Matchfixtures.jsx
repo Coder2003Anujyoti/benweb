@@ -7,6 +7,9 @@ const Matchfixtures = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];
+const player = JSON.parse(decodeURIComponent(queryParams.get("player"))) || "";
+const computer = JSON.parse(decodeURIComponent(queryParams.get("computer"))) || "";
+const matchnumber = JSON.parse(decodeURIComponent(queryParams.get("matchnumber"))) || 0;
     useEffect(()=>{
     window.scrollTo({ top: 0, behavior: "smooth" });
   },[])
@@ -17,9 +20,26 @@ const Matchfixtures = () => {
 </div>
 {
   data.length===0 && <>
-        <div className="flex justify-center items-center py-60">
-  <h1 className="text-slate-400 text-xl font-bold">No Matches</h1>
-</div>
+ <div className="w-full flex flex-row py-6 justify-center gap-12">
+   <div className="w-full flex  justify-center  gap-12" >
+
+       <div className="flex w-16 justify-center items-center border-b border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Player</p></div>
+      <div className="flex w-24  justify-center items-center border-b border-b-slate-400 "><p className="text-sm font-bold text-slate-400">Computer</p></div>
+    <div className="flex w-16 justify-center items-center border-b border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Result</p></div>
+   </div>
+   </div>
+  <div className="w-full flex flex-row flex-wrap justify-center items-center my-4 gap-y-8 gap-x-8">
+    {new Array(matchnumber).fill(0).map((i,ind)=>{
+      return(<>
+    <div className="flex flex-row flex-wrap justify-center items-center gap-x-16 border-b border-b-slate-600 p-5">
+
+      <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${player}.webp`} className="w-16 h-16" /></div>
+      <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${computer}.webp`} className="w-16 h-16" /></div>
+   <div className="w-16 flex text-center justify-center items-center">   <img src="Icons/faq.png" className="invisible w-16 h-16" /></div>
+      </div>
+      </>)
+    })}
+  </div>
 </>
 }
 {data.length>0  && <>

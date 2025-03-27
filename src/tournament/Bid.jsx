@@ -27,7 +27,29 @@ const LocalPlayers=()=>{
     return "";
 }
 }
+const LocalFixtures=()=>{
+  const lists=localStorage.getItem('fixtures');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
+const LocalVersus=()=>{
+  const lists=localStorage.getItem('oppos');
+  if(lists){
+    return JSON.parse(lists);
+  }
+  else{
+    return [];
+}
+}
 const Bid= () => {
+const [fixture,setFixture]=useState(()=>LocalFixtures()||[])
+const [venue,setVenue]=useState([])
+const [start,setStart]=useState(false)
+  const [versus,setVersus]=useState(()=>LocalVersus()||[])
   const [going,setGoing]=useState(false)
   const [retains,setRetains]=useState(()=>LocalPlayers()||[]);
   const [original,setOriginal]=useState(false)
@@ -53,6 +75,7 @@ const Bid= () => {
   const [store,setStore]=useState(()=>LocalData()||[]);
   const [computers,setComputers]=useState([{team:"Mi",players:[]},{team:"Csk",players:[]},{team:"Rr",players:[]},{team:"Kkr",players:[]},{team:"Gt",players:[]},{team:"Pbks",players:[]},{team:"Rcb",players:[]},{team:"Lsg",players:[]},{team:"Dc",players:[]},{team:"Srh",players:[]}])
   var teams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
+  var setteams=["Mi","Csk","Rr","Kkr","Gt","Pbks","Rcb","Lsg","Dc","Srh"];
   var details=[{team:"Mi",players:[]},{team:"Csk",players:[]},{team:"Rr",players:[]},{team:"Kkr",players:[]},{team:"Gt",players:[]},{team:"Pbks",players:[]},{team:"Rcb",players:[]},{team:"Lsg",players:[]},{team:"Dc",players:[]},{team:"Srh",players:[]}]
   const get_data=async()=>{
   if(retains.length>0){
@@ -113,11 +136,15 @@ useEffect(()=>{
  }
  const localremove=()=>{
    localStorage.removeItem('user');
+   localStorage.removeItem('standings');
+   localStorage.removeItem('fixtures');
    localStorage.removeItem('team');
    localStorage.removeItem('oppos');
    localStorage.removeItem('winlist');
    localStorage.removeItem('winnerlist');
    window.location.reload();
+   setVersus([])
+   setFixture([])
    setPlaying(false)
    setStore([]);
    setLoad(true);
@@ -246,16 +273,35 @@ useEffect(()=>{
 });
     setPlaying(true)
     setStore([...store,computers]);
+    setStart(true)
    }
    else{
      setComputers(computers)
      setPlaying(true);
      setStore([...store,computers]);
+     setStart(true)
    }
  }
- const sets=(i)=>{
-  teams=teams.filter((it)=>it!=i);
-   setPlayerteam(i);
+ const sets=(tea)=>{
+  teams=teams.filter((it)=>it!=tea);
+   const matches=generateMatches(setteams).map((i)=>{
+  if(i.player===tea || i.computer===tea){
+    i.winner=""
+  }
+  return {...i}
+});
+  const vs=matches.filter((i)=>i.winner==="").map((i)=>{
+  if(i.player===tea){
+    return i.computer
+  }
+  if(i.computer===tea){
+    return i.player;
+  }
+})
+setFixture(matches)
+      setVenue(matches)
+      setVersus(vs)
+   setPlayerteam(tea);
  }
  useEffect(()=>{
   const k=computers.filter((i)=>i.team!==playerteam)
@@ -263,7 +309,7 @@ useEffect(()=>{
   if(turn!='' && empty==false){
   if(turn===playerteam){
     setTimeout(function() {
- let rand=Math.floor(Math.random()*100);
+let rand=Math.floor(Math.random()*100);
     if(rand%7==0){
     const store=value.find((i,ind)=>{
       return ind==index});
@@ -437,12 +483,51 @@ if(retaincount===3){
   setGoing(true)
 }
   },[retaincount])
+  const generateMatches = (teams) => {
+  let matches = [];
+  for (let i = 0; i < teams.length; i++) {
+    for (let j = i + 1; j < teams.length; j++) {
+      matches.push({
+        player: teams[i],
+        computer: teams[j],
+        winner: Math.random() < 0.5 ? teams[i] : teams[j], 
+      });
+    }
+  }
+  matches = matches.sort(() => Math.random() - 0.5);
+  return matches;
+};
+useEffect(()=>{
+  if(start===true){
+const updatedValue=computers.map((it)=>{
+if(it.team!=playerteam){
+it.players.map((i)=>{
+ fixture.map((item,ind)=>{
+    if(it.team!=playerteam && (item.player===it.team || item.computer===it.team)){
+ i.matches+=1;
+ i.runs+=Math.floor(Math.random()*30);
+ i.wickets+=Math.floor(Math.random()*5);
+    }
+  })
+  })
+  }
+  return {...it}
+})
+      setComputers(updatedValue)
+      setStore(updatedValue)
+      
+  }
+},[start])
   useEffect(()=>{
     const empty=computers.every((i)=>i.players.length===15);
     if(empty===true){
       localStorage.removeItem('retain');
       localStorage.setItem('retain', 
       JSON.stringify(computers));
+      localStorage.setItem('fixtures', 
+      JSON.stringify(fixture));
+      localStorage.setItem('oppos', 
+      JSON.stringify(versus));
       localStorage.setItem('user', 
       JSON.stringify(computers));
       localStorage.setItem('team',JSON.stringify(playerteam));
@@ -452,12 +537,16 @@ if(retaincount===3){
    window.scrollTo({ top: 0, behavior: "smooth" });
    localStorage.removeItem('user');
    localStorage.removeItem('team');
+   localStorage.removeItem('standings');
+   localStorage.removeItem('fixtures');
    localStorage.removeItem('oppos');
    localStorage.removeItem('winlist');
    localStorage.removeItem('winnerlist');
    localStorage.removeItem('retain');
    window.location.reload();
    setPlaying(false)
+   setVersus([])
+   setFixture([])
    setStore([]);
    setRetains([]);
    setLoad(true);
@@ -728,7 +817,7 @@ if(retaincount===3){
 }
 {
   playing==true && load===false && <>{
-    names.length>0 ?     <Site store={computers} localremove={localremove} playerteam={playerteam}/> :    <Site store={store} localremove={localremove} playerteam={playerteam}/>
+    names.length>0  ?     <Site store={computers} localremove={localremove} playerteam={playerteam} fixture={fixture} /> :    <Site store={store} localremove={localremove} playerteam={playerteam} fixture={fixture} />
   }
 
     </>

@@ -16,6 +16,7 @@ const Team = () => {
   const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];
   const team=JSON.parse(decodeURIComponent(queryParams.get("team"))) || "";
   const matches=JSON.parse(decodeURIComponent(queryParams.get("matchesarray"))) || [];
+  const ind=matches.findIndex((i)=>i.winner==='')
   const barChartOptions = {
   plugins: {
     legend: {
@@ -97,9 +98,17 @@ const pieChartOptions = {
   },
 };
   const go=(i)=>{
-    const match=matches.filter((it)=>it.player===i || it.computer===i)
-    const wins=match.filter((it)=>it.win===i)
-    const lose=match.filter((it)=>it.win!==i)
+    const m=matches.filter((i,index)=>{
+    if(ind==-1){
+      return {...i}
+    }
+    else{
+      return index<ind
+    }
+  })
+    const match=m.filter((it)=>it.player===i || it.computer===i)
+    const wins=match.filter((it)=>it.winner===i)
+    const lose=match.filter((it)=>it.winner!==i)
     const barChartData = {
     labels: ["Matches", "Win", "Lose/Tie"],
     datasets: [
@@ -168,14 +177,7 @@ const pieChartOptions = {
        })
      }
      </div>
-     <div className="grid grid-cols-1 md:grid-cols-2 my-4  gap-6">
-        <div className="text-black  font-bold p-4 rounded ">
-          <Bar data={bar} options={barChartOptions} />
-        </div>
-        <div className=" p-4 rounded ">
-          <Pie data={pie} options={pieChartOptions} />
-        </div>
-      </div>
+
      </>
 }
     <footer className="bg-black text-white">

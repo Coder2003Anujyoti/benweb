@@ -250,7 +250,7 @@ const barChartData = {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        Welcome to the Ultimate Cricket League!
+        Welcome to the Indian Premier League!
       </motion.h1>
       {/* Team Logos */}
       <div className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-1 my-6">
@@ -312,7 +312,7 @@ const barChartData = {
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
       >
-        The Ultimate Cricket League Winners!
+        The Indian Premier League Winners!
       </motion.p>
     <div className="w-full flex-col items-center flex-wrap flex my-12 justify-center"> <button onClick={()=>setShowCelebration(false)} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Start Playing</button></div>
       <Fire show={true} />

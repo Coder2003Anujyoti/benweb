@@ -19,7 +19,7 @@ const matchnumber = JSON.parse(decodeURIComponent(queryParams.get("matchnumber")
   <img className="w-16 h-16" src="Icons/auction.png"/>
 </div>
 {
-  data.length===0 && <>
+  data.length>=0 && <>
  <div className="w-full flex flex-row py-6 justify-center gap-12">
    <div className="w-full flex  justify-center  gap-12" >
 
@@ -35,37 +35,21 @@ const matchnumber = JSON.parse(decodeURIComponent(queryParams.get("matchnumber")
 
       <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${player}.webp`} className="w-16 h-16" /></div>
       <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${computer}.webp`} className="w-16 h-16" /></div>
+    {
+      (ind<=data.length-1 && data.length>0) && <>
+      <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${data[ind].win}.png`} className="w-16 h-16" /></div>
+      </>
+    }
+    { (ind>data.length-1 && data.length>=0) && <>
    <div className="w-16 flex text-center justify-center items-center">   <img src="Icons/faq.png" className="invisible w-16 h-16" /></div>
+      </>
+      }
       </div>
       </>)
     })}
   </div>
 </>
 }
-{data.length>0  && <>
-<div className="w-full flex flex-row py-6 justify-center gap-12">
-   <div className="w-full flex  justify-center  gap-12" >
-
-       <div className="flex w-16 justify-center items-center border-b border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Player</p></div>
-      <div className="flex w-24  justify-center items-center border-b border-b-slate-400 "><p className="text-sm font-bold text-slate-400">Computer</p></div>
-    <div className="flex w-16 justify-center items-center border-b border-b-slate-400"> <p className="text-sm font-bold text-slate-400">Result</p></div>
-   </div>
-   </div>
-  <div className="w-full flex flex-row flex-wrap justify-center items-center my-4 gap-y-8 gap-x-8">
-    {data.map((i,ind)=>{
-      return(<>
-    <div className="flex flex-row flex-wrap justify-center items-center gap-x-16 border-b border-b-slate-600 p-5">
-
-      <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.player}.webp`} className="w-16 h-16" /></div>
-      <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.computer}.webp`} className="w-16 h-16" /></div>
-   {i.win!='Draw' && <> <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.win}.webp`} className="w-16 h-16" /></div> </>}
-    {i.win==='Draw' && <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${i.win}.png`} className="w-16 h-16" /></div>}
-      </div>
-      </>)
-    })}
-  </div>
-  </>
-  }
       <footer className="bg-black text-white">
       <div className="w-full flex justify-center  text-center flex-col p-4 mt-4">
         <h2 className="text-xl font-semibold">Quick Links</h2>

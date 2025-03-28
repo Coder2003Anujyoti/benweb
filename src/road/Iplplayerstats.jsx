@@ -15,8 +15,8 @@ const Iplplayerstats = () => {
   const data = JSON.parse(decodeURIComponent(queryParams.get("data"))) || [];
   const team=JSON.parse(decodeURIComponent(queryParams.get("team"))) || "";
     const fil=data.filter((i)=>i.team===team);
-    const filterruns=fil.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
-    const filterwickets=fil.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
+    const filterruns=fil.slice().sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
+    const filterwickets=fil.slice().sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
     const histogramRuns = {
   labels: filterruns.map((batter)=> batter.name),
   datasets: [
@@ -77,7 +77,7 @@ const histogramOptions = {
   </div>
    <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
      {
-       data.sort((a,b)=>b.runs-a.runs).filter((i)=>i.team===team).map((i,ind)=>{
+       data.slice().sort((a,b)=>b.runs-a.runs).filter((i)=>i.team===team).map((i,ind)=>{
        if(ind<6)
          return(<>
     <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
@@ -98,7 +98,7 @@ const histogramOptions = {
   </div>
    <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
      {
-       data.sort((a,b)=>b.wickets-a.wickets).filter((i)=>i.team===team).map((i,ind)=>{
+       data.slice().sort((a,b)=>b.wickets-a.wickets).filter((i)=>i.team===team).map((i,ind)=>{
        if(ind<6)
          return(<>
     <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">

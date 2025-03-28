@@ -44,8 +44,8 @@ const Tourstats = () => {
 };
   const go=(i)=>{
     if(i===playerteam){
-    const filterruns=player.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
-    const filterwickets=player.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
+    const filterruns=player.slice().sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
+    const filterwickets=player.slice().sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
     const histogramRuns = {
   labels: filterruns.map((batter)=> batter.name),
   datasets: [
@@ -76,8 +76,8 @@ const histogramWickets = {
       setData(player)
     }
     else{
-      const filterruns=computer.sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
-    const filterwickets=computer.sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
+      const filterruns=computer.slice().sort((a,b)=>b.runs-a.runs).filter((i,ind)=>ind<6);
+    const filterwickets=computer.slice().sort((a,b)=>b.wickets-a.wickets).filter((i,ind)=>ind<6);
     const histogramRuns = {
   labels: filterruns.map((batter)=> batter.name),
   datasets: [
@@ -134,7 +134,7 @@ const histogramWickets = {
   </div>
    <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
      {
-       data.sort((a,b)=>b.runs-a.runs).map((it,ind)=>{
+       data.slice().sort((a,b)=>b.runs-a.runs).map((it,ind)=>{
        if(it.team===value && ind<6)
          return(<>
     <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">
@@ -155,7 +155,7 @@ const histogramWickets = {
   </div>
    <div className="w-full flex p-4 flex-wrap flex-row justify-center gap-2 my-4">
      {
-       data.sort((a,b)=>b.wickets-a.wickets).map((it,ind)=>{
+       data.slice().sort((a,b)=>b.wickets-a.wickets).map((it,ind)=>{
        if(it.team===value && ind<6)
          return(<>
     <div className="p-4 flex flex-col gap-1 rounded-lg bg-slate-800 text-center justify-center items-center transition duration-300 ease-in-out transform hover:bg-slate-800  hover:scale-105">

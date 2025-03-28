@@ -53,9 +53,9 @@ const Site = ({playerteam,store,localremove,fixture}) => {
   const totalwinners=match.filter((i)=>i.win===playerteam);
   const totallosers=match.filter((i)=>i.win!==playerteam);
   const motms=store.map((i)=>{
-    return i.players.sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets)).filter((i,ind)=> ind===0)[0]
+    return i.players.slice().sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets)).filter((i,ind)=> ind===0)[0]
   });
-  const potm=motms.sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets));
+  const potm=motms.slice().sort((a,b)=>(b.runs+b.wickets)-(a.runs+a.wickets));
   const batters=store.flatMap((i)=>i.players).slice().sort((a,b)=>b.runs-a.runs)
   const bowlers=store.flatMap((i)=>i.players).slice().sort((a,b)=>b.wickets-a.wickets)
   const sellers=store.flatMap((i)=>i.players).slice().sort((a,b)=>(b.bid)-(a.bid)).filter((i,ind)=>ind<5)

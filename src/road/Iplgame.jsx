@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import { motion } from "framer-motion";
 import {useSearchParams} from "react-router-dom"
 import PlayerFirst from './PlayerFirst.jsx';
 import ComputerFirst from './ComputerFirst.jsx';
@@ -42,6 +43,7 @@ const LocalStand=()=>{
 const Iplgame = () => {
   const [searchParams] = useSearchParams();
   const [oppositionteam,setOppositionteam]=useState("")
+  const [choose,setChoose]=useState(false)
   const [standing,setStanding]=useState(()=>LocalStand()||[])
   const [toggle,setToggle]=useState("");
   const [win,setWin]=useState(()=>LocalWin()||[])
@@ -136,9 +138,46 @@ const Iplgame = () => {
   },[win])
   return (
     <>
-
 { oppositionteam!='' && <>
-{load==false && id.length<10 && <>
+     {
+      id.length<10 && choose===false && <>
+      { win.length===9 && <>
+        <div className="w-full flex flex-col justify-center text-center gap-y-6 my-2">
+          <h1 className="font-bold text-yellow-500 ml-2 mr-2">Semi-final</h1>
+        </div>
+</>}
+    { win.length===10 && <>
+        <div className="w-full flex flex-col justify-center text-center gap-y-6 my-2">
+          <h1 className="font-bold text-yellow-500 ml-2 mr-2">Final</h1>
+        </div>
+</>}
+  <div className="flex flex-col gap-y-6 my-32">
+   <div className="w-full flex flex-col justify-center text-center gap-y-6 my-2">
+   <h1 className="font-bold text-yellow-400 ml-2 mr-2">Welcome to IPL 2024</h1>
+        </div>
+<div className="flex flex-wrap gap-y-14  justify-center items-center text-white gap-x-10">
+<div className="flex flex-col items-center gap-y-4">
+  <img src={playerteam.filter((i,ind)=>ind===0).map((i)=>i.image)}  className="w-28 h-28" />
+ <img src={`Logos/${team}.webp`} className="w-16 h-16" />
+</div>
+<motion.span
+  animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
+  transition={{ repeat: Infinity, duration: 1.2 }}
+  className="text-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent"
+>
+  V/S
+</motion.span>
+  <div className="flex flex-col items-center gap-y-4">
+ <img src={computerteam.filter((i,ind)=>ind===0).map((i)=>i.image)} loading="lazy"  className="w-28 h-28" />
+  <img src={`Logos/${oppositionteam}.webp`}  className="w-16 h-16" />
+ </div>
+  <button onClick={()=>setChoose(true)} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Start Playing</button>
+ </div>
+ </div>
+      </>
+    }
+
+{load==false && id.length<10 && choose===true && <>
     { win.length===9 && <>
         <div className="w-full flex flex-col justify-center text-center gap-y-6 my-2">
           <h1 className="font-bold text-yellow-500 ml-2 mr-2">Semi-final</h1>
@@ -149,18 +188,6 @@ const Iplgame = () => {
           <h1 className="font-bold text-yellow-500 ml-2 mr-2">Final</h1>
         </div>
 </>}
-    <div className="flex justify-center items-center text-white gap-x-10">
-        <div className="flex flex-col items-center">
-          <img src={`Logos/${team}.webp`} className="w-24 h-24" />
-           </div>
-        <div className="text-2xl  font-extrabold transition-all duration-1000 scale-110 animate-glow">
-          VS
-        </div>
-        <div className="flex flex-col items-center">
-          <img src={`Logos/${oppositionteam}.webp`} className="w-24 h-24" />
-
-        </div>
-    </div>
   <div className="w-full py-8 flex justify-center">
     <h1 className="text-green-400 text-2xl font-bold shadow-green-400">Choose Your Playing X</h1>
   </div>

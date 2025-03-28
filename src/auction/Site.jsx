@@ -402,7 +402,7 @@ const barChartData = {
     </HashLink>
     </>}
     </div>
-  {win.length>0 && <>
+  {win.length===matches && matches!=0 && <>
      <div className="flex flex-row flex-wrap gap-x-12 gap-y-6 p-2 justify-center w-full ">
     <div className="flex flex-col  gap-y-4 justify-center text-center">
   <h1 className="text-sm font-extrabold text-yellow-400 ">Top Batter</h1> 

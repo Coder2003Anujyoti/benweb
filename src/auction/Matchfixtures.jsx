@@ -37,7 +37,7 @@ const matchnumber = JSON.parse(decodeURIComponent(queryParams.get("matchnumber")
       <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${computer}.webp`} className="w-16 h-16" /></div>
     {
       (ind<=data.length-1 && data.length>0) && <>
-      <div className="w-16 flex text-center justify-center items-center">   <img src={`Logos/${data[ind].win}.png`} className="w-16 h-16" /></div>
+      <div className="w-16 flex text-center justify-center items-center">   <img src={data[ind].win!='Draw'?`Logos/${data[ind].win}.webp`:`Logos/${data[ind].win}.png`} className="w-16 h-16" /></div>
       </>
     }
     { (ind>data.length-1 && data.length>=0) && <>

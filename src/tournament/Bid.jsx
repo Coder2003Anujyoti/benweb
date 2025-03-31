@@ -24,7 +24,7 @@ const LocalPlayers=()=>{
     return JSON.parse(lists);
   }
   else{
-    return "";
+    return [];
 }
 }
 const LocalFixtures=()=>{

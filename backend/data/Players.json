@@ -139,6 +139,66 @@
     "wickets":0
   },
   {
+     "name":"M.Choudhary",
+    "image":"Csk/Choudhary.webp",
+    "role":"Bowler",
+    "team":"Csk",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Simarjeet",
+    "image":"Csk/Simarjeet.webp",
+    "role":"Batsman",
+    "team":"Csk",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Gleeson",
+    "image":"Csk/Gleeson.webp",
+    "role":"Bowler",
+    "team":"Csk",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Rahane",
+    "image":"Csk/Rahane.webp",
+    "role":"Batsman",
+    "team":"Csk",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Hangargekar",
+    "image":"Csk/Hangargekar.webp",
+    "role":"All-rounder",
+    "team":"Csk",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Mustafizur",
+    "image":"Csk/Mustafizur.webp",
+    "role":"Bowler",
+    "team":"Csk",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
     "name":"Pant",
     "image":"Dc/Pant.webp",
     "role":"Wicket-Keeper",
@@ -271,6 +331,86 @@
      "name":"J.Freaser",
     "image":"Dc/J.Freaser.webp",
     "role":"All-rounder",
+    "team":"Dc",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"J.Richardson",
+    "image":"Dc/Richardson.webp",
+    "role":"Bowler",
+    "team":"Dc",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Rasikh",
+    "image":"Dc/Rasikh.webp",
+    "role":"Bowler",
+    "team":"Dc",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"S.Hope",
+    "image":"Dc/Hope.webp",
+    "role":"Batsman",
+    "team":"Dc",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Lizaad",
+    "image":"Dc/Lizzad.webp",
+    "role":"Bowler",
+    "team":"Dc",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Pravin",
+    "image":"Dc/Pravin.webp",
+    "role":"Bowler",
+    "team":"Dc",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Chhikara",
+    "image":"Dc/Chhikara.webp",
+    "role":"Batsman",
+    "team":"Dc",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Gulbadin",
+    "image":"Dc/Gulbadin.webp",
+    "role":"All-rounder",
+    "team":"Dc",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"R.Bhui",
+    "image":"Dc/Bhui.webp",
+    "role":"Batsman",
     "team":"Dc",
     "captain":false,
     "matches":0,
@@ -417,6 +557,66 @@
     "wickets":0
   },
   {
+     "name":"Vaibhav",
+    "image":"Kkr/Vaibhav.webp",
+    "role":"Bowler",
+    "team":"Kkr",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"C.Sakariya",
+    "image":"Kkr/Sakariya.webp",
+    "role":"Bowler",
+    "team":"Kkr",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"K.S.Bharat",
+    "image":"Kkr/Bharat.webp",
+    "role":"Batsman",
+    "team":"Kkr",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"D.Chameera",
+    "image":"Kkr/Chameera.webp",
+    "role":"Bowler",
+    "team":"Kkr",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Anukul",
+    "image":"Kkr/Anukul.webp",
+    "role":"Bowler",
+    "team":"Kkr",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"S.Rutherford",
+    "image":"Kkr/Rutherford.webp",
+    "role":"Batsman",
+    "team":"Kkr",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
     "name":"Hardik",
     "image":"Mi/Hardik.webp",
     "role":"All-rounder",
@@ -554,7 +754,68 @@
     "matches":0,
     "runs":0,
     "wickets":0
-  },{
+  },
+  {
+     "name":"L.Wood",
+    "image":"Mi/Luke.webp",
+    "role":"Bowler",
+    "team":"Mi",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"N.Thushara",
+    "image":"Mi/Thushara.webp",
+    "role":"Bowler",
+    "team":"Mi",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"K.Kartikeya",
+    "image":"Mi/Kartikeya.webp",
+    "role":"Bowler",
+    "team":"Mi",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"P.Chawla",
+    "image":"Mi/Chawla.webp",
+    "role":"Bowler",
+    "team":"Mi",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Maphaka",
+    "image":"Mi/Maphaka.webp",
+    "role":"Bowler",
+    "team":"Mi",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"N.Dhir",
+    "image":"Mi/Dhir.webp",
+    "role":"All-rounder",
+    "team":"Mi",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
     "name":"Samson",
     "image":"Rr/Samson.webp",
     "role":"Wicket-Keeper",
@@ -694,6 +955,56 @@
     "wickets":0
   },
   {
+     "name":"N.Burger",
+    "image":"Rr/Burger.webp",
+    "role":"Bowler",
+    "team":"Rr",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Avesh",
+    "image":"Rr/Avesh.webp",
+    "role":"Bowler",
+    "team":"Rr",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Abid",
+    "image":"Rr/Abid.webp",
+    "role":"All-rounder",
+    "team":"Rr",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"T.Kotian",
+    "image":"Rr/Kotian.webp",
+    "role":"All-rounder",
+    "team":"Rr",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Shubham",
+    "image":"Rr/Shubham.webp",
+    "role":"Batsman",
+    "team":"Rr",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
     "name":"Gill",
     "image":"Gt/Gill.webp",
     "role":"Batsman",
@@ -825,6 +1136,86 @@
   },{
      "name":"Mohit",
     "image":"Gt/Mohit Sharma.webp",
+    "role":"Bowler",
+    "team":"Gt",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Umesh",
+    "image":"Gt/Umesh.webp",
+    "role":"Bowler",
+    "team":"Gt",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"J.Little",
+    "image":"Gt/Little.webp",
+    "role":"Bowler",
+    "team":"Gt",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"S.Warrier",
+    "image":"Gt/Warrier.webp",
+    "role":"Bowler",
+    "team":"Gt",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Jayant",
+    "image":"Gt/Jayant.webp",
+    "role":"Bowler",
+    "team":"Gt",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Shahrukh",
+    "image":"Gt/Shahrukh.webp",
+    "role":"Batsman",
+    "team":"Gt",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"D.Nalkande",
+    "image":"Gt/Nalkande.webp",
+    "role":"All-rounder",
+    "team":"Gt",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"K.Tyagi",
+    "image":"Gt/Kartik.webp",
+    "role":"Bowler",
+    "team":"Gt",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Spencer",
+    "image":"Gt/Spencer.webp",
     "role":"Bowler",
     "team":"Gt",
     "captain":false,
@@ -972,6 +1363,46 @@
     "wickets":0
   },
   {
+     "name":"R.Rossouw",
+    "image":"Pbks/Rossouw.webp",
+    "role":"Batsman",
+    "team":"Pbks",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"C.Woakes",
+    "image":"Pbks/Woakes.webp",
+    "role":"All-rounder",
+    "team":"Pbks",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Rishi",
+    "image":"Pbks/Rishi.webp",
+    "role":"All-rounder",
+    "team":"Pbks",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"A.Taide",
+    "image":"Pbks/Taide.webp",
+    "role":"Batsman",
+    "team":"Pbks",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
     "name":"Duplesis",
     "image":"Rcb/Duplesis.webp",
     "role":"Batsman",
@@ -1104,6 +1535,66 @@
      "name":"Y.Dayal",
     "image":"Rcb/Yash Dayal.webp",
     "role":"Bowler",
+    "team":"Rcb",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Vyshak",
+    "image":"Rcb/Vyshak.webp",
+    "role":"Bowler",
+    "team":"Rcb",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"R.Topley",
+    "image":"Rcb/Topley.webp",
+    "role":"Bowler",
+    "team":"Rcb",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"K.Sharma",
+    "image":"Rcb/Karn.webp",
+    "role":"Bowler",
+    "team":"Rcb",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"M.Dagar",
+    "image":"Rcb/Dagar.webp",
+    "role":"All-rounder",
+    "team":"Rcb",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Swapnil",
+    "image":"Rcb/Swapnil.webp",
+    "role":"All-rounder",
+    "team":"Rcb",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"Prabhudessai",
+    "image":"Rcb/Prabhudessai.webp",
+    "role":"Batsman",
     "team":"Rcb",
     "captain":false,
     "matches":0,
@@ -1250,6 +1741,56 @@
     "wickets":0
   },
   {
+     "name":"Anmolpreet",
+    "image":"Srh/Anmolpreet.webp",
+    "role":"Batsman",
+    "team":"Srh",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"J.Unadkat",
+    "image":"Srh/Unadkat.webp",
+    "role":"Bowler",
+    "team":"Srh",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"R.Tripathi",
+    "image":"Srh/Tripathi.webp",
+    "role":"Batsman",
+    "team":"Srh",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"F.Farooqi",
+    "image":"Srh/Farooqi.webp",
+    "role":"Bowler",
+    "team":"Srh",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"M.Agarwal",
+    "image":"Srh/Mayank.webp",
+    "role":"Batsman",
+    "team":"Srh",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
     "name":"KL Rahul",
     "image":"Lsg/KL Rahul.webp",
     "role":"Wicket-Keeper",
@@ -1382,6 +1923,56 @@
      "name":"D.Hooda",
     "image":"Lsg/Hooda.webp",
     "role":"Batsman",
+    "team":"Lsg",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"D.Paddikal",
+    "image":"Lsg/Paddikal.webp",
+    "role":"Batsman",
+    "team":"Lsg",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"K.Gowtham",
+    "image":"Lsg/Gowtham.webp",
+    "role":"All-rounder",
+    "team":"Lsg",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"K.Mayers",
+    "image":"Lsg/Mayers.webp",
+    "role":"Batsman",
+    "team":"Lsg",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"A.Mishra",
+    "image":"Lsg/Mishra.webp",
+    "role":"Bowler",
+    "team":"Lsg",
+    "captain":false,
+    "matches":0,
+    "runs":0,
+    "wickets":0
+  },
+  {
+     "name":"S.Mavi",
+    "image":"Lsg/Mavi.webp",
+    "role":"Bowler",
     "team":"Lsg",
     "captain":false,
     "matches":0,

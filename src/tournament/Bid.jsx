@@ -84,7 +84,7 @@ const [start,setStart]=useState(false)
   setValue(item.data)
   setLoad(false)
   setAmount(Math.floor(Math.random()*100)+1)
-  setIndex(Math.floor(Math.random()*150))
+  setIndex(Math.floor(Math.random()*item.data.length))
   }
   else{
     const response=await fetch("https://intelligent-ailyn-handcricket-e8842259.koyeb.app/");
@@ -94,7 +94,7 @@ const [start,setStart]=useState(false)
   setLoad(false)
   setOriginal(true)
   setAmount(Math.floor(Math.random()*100)+1)
-  setIndex(Math.floor(Math.random()*150))
+  setIndex(Math.floor(Math.random()*item.data.length))
   }
 }
   useEffect(()=>{

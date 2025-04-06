@@ -88,7 +88,7 @@ const localremove=()=>{
   setValue(item.data)
   setLoad(false)
   setAmount(Math.floor(Math.random()*100)+1)
-  setIndex(Math.floor(Math.random()*150))
+  setIndex(Math.floor(Math.random()*item.data.length))
 }
  const add=()=>{
    if(bid==0){

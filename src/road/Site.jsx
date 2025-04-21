@@ -129,7 +129,7 @@ const pieChartOptions = {
         const total = data.reduce((acc, val) => acc + (val || 0), 0); // Handle undefined values
         if (total === 0) return "0%"; // Prevent division by zero
 
-        const percentage = Math.round(((value / total) * 100).toFixed(1)) + "%";
+        const percentage = Math.round(((value / total) * 100)) + "%";
         return percentage;
       },
       color: "white",

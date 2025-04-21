@@ -190,11 +190,11 @@ const barChartData = {
   };
 
   const pieChartData = {
-    labels: ["Matches", "Win", "Lose/Tie"],
+    labels: [ "Win", "Lose/Tie"],
     datasets: [
       {
-        data: [win.length,jeet.length,haar.length],
-        backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
+        data: [jeet.length,haar.length],
+        backgroundColor: ["Dodgerblue", "#ef4444"],
         borderWidth: 0,
       },
     ],

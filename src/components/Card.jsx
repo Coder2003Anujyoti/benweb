@@ -109,11 +109,11 @@ const pieChartOptions = {
   };
 
   const pieChartData = {
-    labels: ["Matches", "Runs", "Wickets"],
+    labels: ["Runs", "Wickets"],
     datasets: [
       {
-        data: [data[0].matches,data[0].runs, data[0].wickets],
-        backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
+        data: [data[0].runs, data[0].wickets],
+        backgroundColor: ["Dodgerblue", "#ef4444"],
         borderWidth: 0,
       },
     ],
@@ -187,9 +187,6 @@ const pieChartOptions = {
         <div className="grid grid-cols-1 md:grid-cols-2 my-4 gap-6">
         <div className="text-black font-bold p-4 rounded ">
           <Bar data={bar} options={barChartOptions} />
-        </div>
-        <div className=" p-4 rounded ">
-          <Pie data={pie} options={pieChartOptions} />
         </div>
       </div>
               <footer className="bg-black text-white">

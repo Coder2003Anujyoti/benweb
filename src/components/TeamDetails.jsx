@@ -159,11 +159,11 @@ const histogramWickets = {
   };
 
   const pieChartData = {
-    labels: ["Matches", "Win", "Lose/Tie"],
+    labels: [ "Win", "Lose/Tie"],
     datasets: [
       {
-        data: [pl[0].matches,pl[0].win,pl[0].matches-pl[0].win],
-        backgroundColor:  ["#10b981", "Dodgerblue", "#ef4444"],
+        data: [pl[0].win,pl[0].matches-pl[0].win],
+        backgroundColor:  ["Dodgerblue", "#ef4444"],
         borderWidth: 0,
       },
     ],

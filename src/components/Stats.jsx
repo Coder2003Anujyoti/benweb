@@ -116,6 +116,9 @@ setHistruns(histogramRuns);
     {i.captain===true &&
       <p className=" text-sm font-bold text-slate-400">{i.name} (C)</p>
     }
+          <div className=" w-full flex justify-center flex-col">
+  <p className="text-sm font-bold text-slate-400">Runs-:{i.runs}</p>
+        </div>
         </div>
         </div>
         </Link>
@@ -141,6 +144,9 @@ setHistruns(histogramRuns);
    <p className="text-sm font-bold text-slate-400">{i.name}</p>}
     {i.captain===true &&
       <p className="text-sm font-bold text-slate-400">{i.name} (C)</p>}
+              <div className=" w-full flex justify-center flex-col">
+  <p className="text-sm font-bold text-slate-400">Wickets-:{i.wickets}</p>
+        </div>
    </div>
         </div>
         </Link>

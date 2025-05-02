@@ -95,7 +95,7 @@ const pieChartOptions = {
         const total = data.reduce((acc, val) => acc + (val || 0), 0); // Handle undefined values
         if (total === 0) return "0%"; // Prevent division by zero
 
-        const percentage = Math.round(((value / total) * 100).toFixed(1)) + "%";
+        const percentage = Math.round(((value / total) * 100)) + "%";
         return percentage;
       },
       color: "white",
@@ -119,11 +119,11 @@ const pieChartOptions = {
   };
 
   const pieChartData = {
-    labels: ["Matches", "Win", "Lose/Tie"],
+    labels: [ "Win", "Lose/Tie"],
     datasets: [
       {
-        data: [matches.length,winners.length, losers.length],
-        backgroundColor: ["#10b981", "Dodgerblue", "#ef4444"],
+        data: [winners.length, losers.length],
+        backgroundColor: ["Dodgerblue", "#ef4444"],
         borderWidth: 0,
       },
     ],

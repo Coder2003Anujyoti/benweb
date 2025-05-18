@@ -171,8 +171,10 @@ const Iplgame = () => {
  <img src={computerteam.filter((i,ind)=>ind===0).map((i)=>i.image)} loading="lazy"  className="w-28 h-28" />
   <img src={`Logos/${oppositionteam}.webp`}  className="w-16 h-16" />
  </div>
-  <button onClick={()=>setChoose(true)} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Start Playing</button>
  </div>
+  <div className="w-full flex justify-center items-center">
+  <button onClick={()=>setChoose(true)} className="text-sm text-white font-extrabold p-4 bg-orange-600 rounded-bl-lg rounded-tl-lg rounded-tr-lg">Start Playing</button>
+  </div>
  </div>
       </>
     }

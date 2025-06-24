@@ -360,7 +360,7 @@ const localremove=()=>{
 { playerteam!=='' && computerteam!='' && retaincount===3 && <>
 <div className="w-full flex flex-row items-center gap-y-2 my-2 justify-end">
    <img src="Icons/digital-money.png" className="w-10 h-10"/>
-     <p className="text-base font-bold text-slate-300">{purse+""+"L"}</p>
+     <p className="text-base font-bold text-slate-300">{purse.toLocaleString("en-IN")+""+"L"}</p>
   </div>
 <div className="w-full flex flex-col items-center gap-y-2 justify-center">
   {value.map((i,ind)=>{

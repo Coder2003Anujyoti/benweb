@@ -63,7 +63,7 @@ const selldata = {
     labels: sellers.map(() => ""), // Hide y-axis text
     datasets: [
       {
-        data:sellers.map((i)=>i.bid),
+        data:sellers.map((i)=>i.bid.toLocaleString("en-IN")),
         backgroundColor: "Dodgerblue",
         borderColor: "Dodgerblue",
         borderWidth: 1,
